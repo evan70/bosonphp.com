@@ -24,6 +24,7 @@ abstract readonly class SlugGenerator implements SlugGeneratorInterface
      */
     protected function createSlugByString(string $title): string
     {
+        /** @var non-empty-lowercase-string */
         return $this->slugger->slug($title)
             ->lower()
             ->trim('-')

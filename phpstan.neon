@@ -1,0 +1,25 @@
+includes:
+  - phar://phpstan.phar/conf/bleedingEdge.neon
+  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+parameters:
+  level: max
+  phpVersion:
+    min: 80400
+    max: 80400
+  strictRules:
+    allRules: true
+  paths:
+    - app
+  tmpDir: vendor/.cache.phpstan
+  tipsOfTheDay: false
+  checkMissingCallableSignature: true
+  ignoreErrors:
+    # Do not report DbC invariants and preconditions
+    - identifier: function.alreadyNarrowedType
+    - identifier: instanceof.alwaysTrue
+  excludePaths:
+    # Exclude testing and dev directories and files
+    - app/Infrastructure/Persistence/Doctrine/Fixture
+    - app/Infrastructure/Persistence/Doctrine/Migration
+    - app/Presentation/Console/TestCommand.php (?)

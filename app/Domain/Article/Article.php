@@ -38,7 +38,11 @@ class Article implements
     public string $title {
         get => $this->title;
         set (string|\Stringable $value) {
-            $this->title = (string) $value;
+            $title = (string) $value;
+
+            assert($title !== '', 'Article title cannot be empty');
+
+            $this->title = $title;
             $this->slug = $this->slugGenerator->createSlug($this);
         }
     }
@@ -53,6 +57,7 @@ class Article implements
     public Content $content {
         get => $this->content;
         set (string|\Stringable $value) {
+            /** @phpstan-ignore-next-line : PHPStan false-positive in isset() */
             if (!isset($this->content) && $value instanceof Content) {
                 $this->content = $value;
                 return;
@@ -78,7 +83,7 @@ class Article implements
         ?ArticleId $id = null,
     ) {
         $this->category = $category;
-        $this->title = (string) $title;
+        $this->title = $title;
         $this->content = new Content($content, $contentRenderer);
         $this->id = $id ?? ArticleId::new();
     }

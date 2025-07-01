@@ -39,7 +39,11 @@ class Category implements
     public string $title {
         get => $this->title;
         set (string|\Stringable $value) {
-            $this->title = (string) $value;
+            $title = (string) $value;
+
+            assert($title !== '', 'Category title cannot be empty');
+
+            $this->title = $title;
             $this->slug = $this->slugGenerator->createSlug($this);
         }
     }
@@ -50,6 +54,9 @@ class Category implements
     #[ORM\Column(name: 'slug')]
     public private(set) string $slug;
 
+    /**
+     * @var iterable<array-key, Article>
+     */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'category', cascade: ['all'])]
     public private(set) iterable $articles;
 
@@ -61,7 +68,7 @@ class Category implements
         private readonly CategorySlugGeneratorInterface $slugGenerator,
         ?CategoryId $id = null,
     ) {
-        $this->title = (string) $title;
+        $this->title = $title;
         $this->articles = new ArrayCollection();
         $this->id = $id ?? CategoryId::new();
     }

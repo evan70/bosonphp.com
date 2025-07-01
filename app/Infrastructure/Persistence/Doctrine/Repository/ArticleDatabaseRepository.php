@@ -22,10 +22,14 @@ final class ArticleDatabaseRepository extends ServiceEntityRepository implements
         parent::__construct($registry, Article::class);
     }
 
+    /**
+     * @return Paginator<Article>
+     */
     public function getAllAsPaginator(
         int $page = self::DEFAULT_PAGE,
         int $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
-    ): iterable {
+    ): Paginator {
+        /** @var Paginator<Article> */
         return new Paginator(
             query: $this->createQueryBuilder('a')
                 ->orderBy('a.createdAt', 'DESC')

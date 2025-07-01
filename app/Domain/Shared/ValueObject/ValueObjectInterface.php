@@ -14,8 +14,6 @@ interface ValueObjectInterface extends \Stringable
 
     /**
      * Returns a string representation of the object.
-     *
-     * @return non-empty-string
      */
     public function __toString(): string;
 }
