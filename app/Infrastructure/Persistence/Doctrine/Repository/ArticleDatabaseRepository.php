@@ -9,6 +9,7 @@ use App\Domain\Article\ArticleRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\String\UnicodeString;
 
 /**
  * @template-extends ServiceEntityRepository<Article>
@@ -33,5 +34,14 @@ final class ArticleDatabaseRepository extends ServiceEntityRepository implements
                 ->getQuery(),
             fetchJoinCollection: true,
         );
+    }
+
+    public function findBySlug(string $slug): ?Article
+    {
+        return $this->findOneBy([
+            'slug' => new UnicodeString($slug)
+                ->lower()
+                ->toString(),
+        ]);
     }
 }

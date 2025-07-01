@@ -9,3 +9,6 @@ services:
 
   App\Domain\Article\Repository\ArticlePaginateProviderInterface:
     alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
+
+  App\Domain\Article\Repository\ArticleBySlugProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
