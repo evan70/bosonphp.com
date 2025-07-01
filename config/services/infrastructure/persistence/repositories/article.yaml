@@ -1,0 +1,11 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Domain\Article\ArticleRepositoryInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
+
+  App\Domain\Article\Repository\ArticlePaginateProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository

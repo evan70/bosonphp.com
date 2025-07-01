@@ -16,5 +16,8 @@ interface UpdatedDateProviderInterface
      *
      * Returns {@see null} if the object has never been updated.
      */
-    public ?\DateTimeImmutable $updatedAt { get; set; }
+    public ?\DateTimeImmutable $updatedAt {
+        get;
+        set;
+    }
 }

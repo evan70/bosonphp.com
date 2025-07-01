@@ -13,5 +13,7 @@ interface CreatedDateProviderInterface
     /**
      * Returns the creation date of the object.
      */
-    public \DateTimeImmutable $createdAt { get; }
+    public \DateTimeImmutable $createdAt {
+        get;
+    }
 }

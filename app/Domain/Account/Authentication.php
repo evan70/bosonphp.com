@@ -16,13 +16,8 @@ final readonly class Authentication implements
     \Stringable
 {
     public function __construct(
-        private Account $account,
+        public Account $account,
     ) {}
-
-    public function getAccount(): Account
-    {
-        return $this->account;
-    }
 
     public function isEqualTo(UserInterface $user): bool
     {

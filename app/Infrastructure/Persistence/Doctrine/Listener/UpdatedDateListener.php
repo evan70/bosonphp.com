@@ -25,14 +25,18 @@ final readonly class UpdatedDateListener
     ) {}
 
     /**
+     * @api
+     *
      * @param LifecycleEventArgs<ObjectManager> $event
      */
     public function preUpdate(LifecycleEventArgs $event): void
     {
         $target = $event->getObject();
 
-        if ($target instanceof UpdatedDateProviderInterface) {
-            $target->updatedAt = $this->clock->now();
+        if (!$target instanceof UpdatedDateProviderInterface) {
+            return;
         }
+
+        $target->updatedAt = $this->clock->now();
     }
 }

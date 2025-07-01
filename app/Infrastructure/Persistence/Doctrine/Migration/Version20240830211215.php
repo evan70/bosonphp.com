@@ -47,6 +47,14 @@ final class Version20240830211215 extends AbstractMigration
                     ON DELETE CASCADE
                     NOT DEFERRABLE INITIALLY IMMEDIATE
             SQL);
+
+        $this->addSql(<<<'SQL'
+            COMMENT ON COLUMN account_integrations.created_at IS '(DC2Type:datetimetz_immutable)'
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            COMMENT ON COLUMN account_integrations.updated_at IS '(DC2Type:datetimetz_immutable)'
+            SQL);
     }
 
     public function down(Schema $schema): void

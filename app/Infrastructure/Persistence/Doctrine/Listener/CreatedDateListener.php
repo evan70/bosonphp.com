@@ -27,6 +27,8 @@ final readonly class CreatedDateListener
     ) {}
 
     /**
+     * @api
+     *
      * @param LifecycleEventArgs<ObjectManager> $event
      *
      * @throws \ReflectionException
@@ -35,10 +37,11 @@ final readonly class CreatedDateListener
     {
         $target = $event->getObject();
 
-        if ($target instanceof CreatedDateProviderInterface) {
-            $reflection = new \ReflectionProperty($target, 'createdAt');
-
-            $reflection->setValue($target, $this->clock->now());
+        if (!$target instanceof CreatedDateProviderInterface) {
+            return;
         }
+
+        new \ReflectionProperty($target, 'createdAt')
+            ->setValue($target, $this->clock->now());
     }
 }

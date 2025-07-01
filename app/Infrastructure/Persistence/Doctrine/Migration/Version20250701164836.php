@@ -11,23 +11,22 @@ use Doctrine\Migrations\AbstractMigration;
  * @api
  *
  * @internal this is an internal library class, please do not use it in your code.
- * @psalm-internal App\Database\Migrations
+ * @psalm-internal App\Infrastructure\Persistence\Doctrine\Migration
  */
-final class Version20240603184220 extends AbstractMigration
+final class Version20250701164836 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'Create accounts table';
+        return 'Add articles table';
     }
 
     public function up(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
-            CREATE TABLE accounts (
+            CREATE TABLE articles (
                 id UUID NOT NULL,
-                login VARCHAR(255) NOT NULL CHECK(login <> ''),
-                password VARCHAR(255) DEFAULT NULL,
-                roles VARCHAR(255)[] DEFAULT '{}' NOT NULL,
+                title VARCHAR(255) NOT NULL CHECK (title <> ''),
+                slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
                 created_at TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP(0) WITH TIME ZONE DEFAULT NULL,
                 PRIMARY KEY(id)
@@ -35,22 +34,22 @@ final class Version20240603184220 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE UNIQUE INDEX login_unique ON accounts (login)
+            CREATE UNIQUE INDEX slug_unique ON articles (slug)
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN accounts.created_at IS '(DC2Type:datetimetz_immutable)'
+            COMMENT ON COLUMN articles.created_at IS '(DC2Type:datetimetz_immutable)'
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN accounts.updated_at IS '(DC2Type:datetimetz_immutable)'
+            COMMENT ON COLUMN articles.updated_at IS '(DC2Type:datetimetz_immutable)'
             SQL);
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
-            DROP TABLE accounts
+            DROP TABLE articles
             SQL);
     }
 }
