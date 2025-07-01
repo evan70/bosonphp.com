@@ -27,6 +27,8 @@ final class Version20250701164836 extends AbstractMigration
                 id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
                 slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
+                content_raw TEXT NOT NULL DEFAULT '',
+                content_rendered TEXT NOT NULL DEFAULT '',
                 created_at TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP(0) WITH TIME ZONE DEFAULT NULL,
                 PRIMARY KEY(id)

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Article;
 
+use App\Domain\Article\Content\Content;
+use App\Domain\Article\Content\RendererInterface;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -46,14 +48,34 @@ class Article implements
         );
     }
 
+    #[ORM\Embedded(class: Content::class, columnPrefix: 'content_')]
+    public Content $content {
+        get => $this->content;
+        set (string|\Stringable $value) {
+            if (!isset($this->content)) {
+                if ($value instanceof Content) {
+                    $this->content = $value;
+                    return;
+                }
+
+                throw new \LogicException('Could not initialize content instance');
+            }
+
+            $this->content->value = $value;
+        }
+    }
+
     /**
-     * @param non-empty-string $title
+     * @param non-empty-string|\Stringable $title
      */
     public function __construct(
-        string $title,
+        string|\Stringable $title,
+        string|\Stringable $content,
+        RendererInterface $renderer,
         ?ArticleId $id = null,
     ) {
-        $this->title = $title;
+        $this->title = (string) $title;
+        $this->content = new Content($content, $renderer);
         $this->id = $id ?? ArticleId::new();
     }
 }

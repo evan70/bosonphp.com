@@ -8,3 +8,6 @@ when@dev:
     App\Infrastructure\Persistence\Doctrine\Fixture\:
       resource: '%kernel.project_dir%/app/Infrastructure/Persistence/Doctrine/Fixture'
       tags: ['doctrine.fixture.odm']
+
+    Faker\Generator:
+      factory: ['Faker\Factory', 'create']

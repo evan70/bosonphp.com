@@ -13,6 +13,7 @@
         "doctrine/doctrine-fixtures-bundle": "^4.1",
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^3.4",
+        "league/commonmark": "^2.7",
         "local/set": "^1.0",
         "ramsey/uuid": "^4.9",
         "symfony/clock": "7.3.*",
@@ -30,6 +31,7 @@
         }
     },
     "require-dev": {
+        "fakerphp/faker": "*",
         "friendsofphp/php-cs-fixer": "^3.76",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
