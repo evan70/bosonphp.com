@@ -1,0 +1,17 @@
+
+when@test:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
+    DateTimeInterface:
+      class: DateTimeImmutable
+      arguments:
+        - '2000-01-01T00:00:00.05Z'
+
+    Psr\Clock\ClockInterface:
+      class: Symfony\Component\Clock\MockClock
+      arguments:
+        $now: '@DateTimeInterface'
+

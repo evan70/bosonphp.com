@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Infrastructure\Persistence\Doctrine\Fixture;
+
+use App\Domain\Account\Account;
+use App\Domain\Account\Password\Password;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
+class AccountFixture extends Fixture
+{
+    public function __construct(
+        private readonly UserPasswordHasherInterface $hasher,
+    ) {}
+
+    public function load(ObjectManager $manager): void
+    {
+        $account = new Account('admin');
+        $account->password = Password::createForAccount('admin', $account, $this->hasher);
+
+        $manager->persist($account);
+
+        $manager->flush();
+    }
+}

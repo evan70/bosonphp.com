@@ -1,0 +1,108 @@
+x-environment: &environment
+  env_file:
+    - path: ./.env.example
+      required: true
+    - path: ./.env
+      required: false
+
+services:
+  angie:
+    <<: *environment
+    build:
+      context: .
+      dockerfile: docker/angie/Dockerfile
+    container_name: phpdoc-angie
+    volumes:
+      - ./:/home/phpdoc/phpdoc.app:ro
+    ports:
+      - "${APP_HTTP_PUBLIC_PORT:-80}:80"
+      - "${APP_HTTPS_PUBLIC_PORT:-443}:443"
+    depends_on:
+      - php
+    profiles:
+      - ''
+      - backend
+    networks:
+      frontend:
+        ipv4_address: 172.16.0.100
+
+  php:
+    <<: *environment
+    image: ghcr.io/phpdoc-app/app:${APP_VERSION:-0.0.1}
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+      target: dev
+    container_name: phpdoc-php
+    restart: on-failure
+    volumes:
+      - composer:/home/phpdoc/.composer:rw
+      - ./:/home/phpdoc/phpdoc.app:rw
+    profiles:
+      - ''
+      - backend
+      - build
+    networks:
+      - frontend
+      - database
+
+  postgres:
+    <<: *environment
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    container_name: phpdoc-postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_DATABASE:-phpdoc}
+      - POSTGRES_USER=${DB_USERNAME:-user}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-password}
+    ports:
+      - "${APP_DATABASE_PUBLIC_PORT:-5432}:5432"
+    profiles:
+      - ''
+      - backend
+    networks:
+      - database
+
+###> doctrine/doctrine-bundle ###
+  database:
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app}
+      # You should definitely change the password in production
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
+      POSTGRES_USER: ${POSTGRES_USER:-app}
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "${POSTGRES_DB:-app}", "-U", "${POSTGRES_USER:-app}"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+      # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
+      # - ./docker/db/data:/var/lib/postgresql/data:rw
+###< doctrine/doctrine-bundle ###
+
+networks:
+  frontend:
+    name: phpdoc_org
+    driver: bridge
+    ipam:
+      config:
+        # RFC1918
+        - subnet: 172.16.0.0/24
+  database:
+
+volumes:
+  postgres:
+  composer:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: "uid=${UID:-1000}"
+
+###> doctrine/doctrine-bundle ###
+  database_data:
+###< doctrine/doctrine-bundle ###

@@ -1,0 +1,65 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Prompt for code generation
+
+You are an experienced PHP developer who strictly follows SOLID principles and
+clean architecture in the context of a PHP 8.4 project. Your task is to generate
+code that conforms to the following architectural principles and coding standards:
+
+## General Principles and Conventions
+
+1. **Strict typing**: Always use types for method parameters and return values.
+2. **Immutable objects**: Prefer immutable objects in the domain model.
+3. **FQN-optimisations**: Every PHP function call must use FQN optimizations.
+4. **Strict encapsulation**: Do not expose internal implementation details.
+5. **Strict comparison**: Always use `===` for comparisons.
+6. **Single quotes**: Use single quotes for strings, except for interpolation
+7. **No unused code**: Never leave commented or unused code.
+8. **Use properties instead of methods**: Any data retrieval must use properties (PHP property hooks), getters and setters are not allowed.
+9. **Do not use functional programming techniques**: (e.g., `array_map()`, `array_filter`) whenever applicable.
+10. **PER-2 CS**: Code must follow PER-2 code style convention.
+
+## General Type Annotations
+
+**English only**: All documentation, docblocks, comments and other MUST be in English.
+
+We encourage the use of advanced PHP types to enhance type safety
+(use PHPStan/Psalm type descriptions).
+
+This includes:
+
+ - non-empty-string – a string that is guaranteed to be non-empty.
+ - int<1, max> – an integer greater than zero.
+ - int<0, max> – an integer that is zero or greater.
+ - list<T> – an array where the keys are sequential integers starting from 0.
+ - non-empty-list<T> - NOT EMPTY array where the keys are sequential integers starting from 0.
+ - array<array-key, T> – an array where the keys are integers or strings.
+ - class-string<T> – a valid class name string.
+ - literal-string – a string that is a literal value, useful for SQL queries or other static values.
+
+A docblock with a description is required for:
+- Any PHP `array` type.
+- Any PHP `iterable` type.
+- Any PHP `\Traversable` type.
+- Any PHP `callable` type.
+- Any PHP `Closure` type.
+
+Any "null", "true", "false" and other type references must be defined
+as "{@see null}", "{@see true}", "{@see false}" etc.
+
+## Tests
+
+- The root directory for unit tests is located in the `tests/Unit` directory.
+- The root directory for functional tests is located in the `tests/Functional` directory.
+- Each unit and functional test case class must contain attribute "#[Group('boson-php/runtime')]".
+- All assertions should be called via `self::assert()` instead of `$this->assert()`.
+  For example, `self::assertEquals()` instead of `$this->assertEquals()`.
+- Each test must inherit from the base unit test, according to the hierarchy.
+  For example, a test for a class in namespace `Foo\Bar\Baz` must be named as
+  `BazTest` inherit from class `BarTestCase`, that extends `FooTestCase`,
+  that extends `Boson\Tests\Unit\TestCase`.
+
+

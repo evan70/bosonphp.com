@@ -1,0 +1,83 @@
+parameters:
+  env(DB_DATABASE): phpdoc
+  env(DB_HOST): postgres
+  env(DB_PORT): 5432
+  env(DB_USERNAME): user
+  env(DB_PASSWORD): password
+
+  db.main.database: '%env(DB_DATABASE)%'
+  db.main.host: '%env(DB_HOST)%'
+  db.main.port: '%env(int:DB_PORT)%'
+  db.main.username: '%env(DB_USERNAME)%'
+  db.main.password: '%env(DB_PASSWORD)%'
+
+doctrine:
+  dbal:
+    default_connection: default
+    connections:
+      default:
+        dbname: '%db.main.database%'
+        host: '%db.main.host%'
+        port: '%db.main.port%'
+        user: '%db.main.username%'
+        password: '%db.main.password%'
+        server_version: '17.2'
+        driver: pdo_pgsql
+        logging: "%kernel.debug%"
+        profiling: "%kernel.debug%"
+        profiling_collect_backtrace: '%kernel.debug%'
+        use_savepoints: true
+        mapping_types:
+          # ...
+
+    types:
+      # Account
+      App\Domain\Account\Integration\IntegrationId: App\Infrastructure\Persistence\Doctrine\Type\IntegrationIdType
+      App\Domain\Account\AccountId: App\Infrastructure\Persistence\Doctrine\Type\AccountIdType
+      # Shared
+      string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
+
+  orm:
+    auto_generate_proxy_classes: true
+    enable_lazy_ghost_objects: true
+    report_fields_where_declared: true
+    validate_xml_mapping: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    identity_generation_preferences:
+      Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+    auto_mapping: true
+    controller_resolver:
+      auto_mapping: false
+    mappings:
+      App:
+        type: attribute
+        is_bundle: false
+        dir: '%kernel.project_dir%/app/Domain'
+        prefix: 'App\Domain'
+        alias: app
+
+when@test:
+  doctrine:
+    dbal:
+      # "TEST_TOKEN" is typically set by ParaTest
+      dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+  doctrine:
+    orm:
+      auto_generate_proxy_classes: false
+      proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+      query_cache_driver:
+        type: pool
+        pool: doctrine.system_cache_pool
+      result_cache_driver:
+        type: pool
+        pool: doctrine.result_cache_pool
+
+  framework:
+    cache:
+      pools:
+        doctrine.result_cache_pool:
+          adapter: cache.app
+        doctrine.system_cache_pool:
+          adapter: cache.system

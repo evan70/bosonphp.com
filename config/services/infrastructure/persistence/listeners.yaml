@@ -1,0 +1,12 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Infrastructure\Persistence\Doctrine\Listener\CreatedDateListener:
+    tags:
+      - { name: 'doctrine_mongodb.odm.event_listener', event: 'prePersist' }
+
+  App\Infrastructure\Persistence\Doctrine\Listener\UpdatedDateListener:
+    tags:
+      - { name: 'doctrine_mongodb.odm.event_listener', event: 'prePersist' }
