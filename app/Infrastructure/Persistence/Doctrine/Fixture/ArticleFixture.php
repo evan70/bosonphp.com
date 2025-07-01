@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
 use App\Domain\Article\Article;
-use App\Domain\Article\Content\RendererInterface;
+use App\Domain\Article\ArticleContentRendererInterface;
+use App\Domain\Article\ArticleSlugGeneratorInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;
@@ -13,7 +14,8 @@ use Faker\Generator;
 class ArticleFixture extends Fixture
 {
     public function __construct(
-        private readonly RendererInterface $renderer,
+        private readonly ArticleContentRendererInterface $contentRenderer,
+        private readonly ArticleSlugGeneratorInterface $slugGenerator,
         private readonly Generator $faker,
     ) {}
 
@@ -22,8 +24,9 @@ class ArticleFixture extends Fixture
         for ($i = 0; $i < 100; ++$i) {
             $manager->persist(new Article(
                 title: $this->faker->sentence(\random_int(1, 6)),
+                slugGenerator: $this->slugGenerator,
                 content: $this->faker->text(),
-                renderer: $this->renderer,
+                contentRenderer: $this->contentRenderer,
             ));
         }
 

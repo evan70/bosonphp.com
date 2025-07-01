@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Article;
 
-use App\Domain\Article\Content\Content;
-use App\Domain\Article\Content\RendererInterface;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -36,29 +34,27 @@ class Article implements
      * @var non-empty-string
      */
     #[ORM\Column(name: 'title')]
-    public string $title;
+    public string $title {
+        get => $this->title;
+        set (string|\Stringable $value) {
+            $this->title = (string) $value;
+            $this->slug = $this->slugGenerator->createSlug($this);
+        }
+    }
 
     /**
      * @var non-empty-string
      */
     #[ORM\Column(name: 'slug')]
-    public private(set) string $slug {
-        get => $this->slug ?? throw new \LogicException(
-            message: 'Сan\'t access to a "slug" property before persist an entity',
-        );
-    }
+    public private(set) string $slug;
 
     #[ORM\Embedded(class: Content::class, columnPrefix: 'content_')]
     public Content $content {
         get => $this->content;
         set (string|\Stringable $value) {
-            if (!isset($this->content)) {
-                if ($value instanceof Content) {
-                    $this->content = $value;
-                    return;
-                }
-
-                throw new \LogicException('Could not initialize content instance');
+            if (!isset($this->content) && $value instanceof Content) {
+                $this->content = $value;
+                return;
             }
 
             $this->content->value = $value;
@@ -70,12 +66,13 @@ class Article implements
      */
     public function __construct(
         string|\Stringable $title,
+        public readonly ArticleSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,
-        RendererInterface $renderer,
+        ArticleContentRendererInterface $contentRenderer,
         ?ArticleId $id = null,
     ) {
         $this->title = (string) $title;
-        $this->content = new Content($content, $renderer);
+        $this->content = new Content($content, $contentRenderer);
         $this->id = $id ?? ArticleId::new();
     }
 }

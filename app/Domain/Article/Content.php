@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Article\Content;
+namespace App\Domain\Article;
 
 use App\Domain\Shared\ValueObject\StringValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,25 +27,25 @@ final class Content implements StringValueObjectInterface
         get => $this->value;
         set (string|\Stringable $value) {
             $this->value = (string) $value;
-            $this->rendered = $this->renderer->render($this->value);
+            $this->rendered = $this->contentRenderer->renderContent($this);
         }
     }
 
     public function __construct(
         string|\Stringable $value,
-        private readonly RendererInterface $renderer,
+        private readonly ArticleContentRendererInterface $contentRenderer,
     ) {
         $this->value = $value;
     }
 
-    public static function empty(RendererInterface $renderer): self
+    public static function empty(ArticleContentRendererInterface $contentRenderer): self
     {
-        return new self('', $renderer);
+        return new self('', $contentRenderer);
     }
 
     public function toString(): string
     {
-        return $this->rendered ?? $this->value;
+        return $this->value;
     }
 
     public function equals(mixed $object): bool
@@ -56,6 +56,6 @@ final class Content implements StringValueObjectInterface
 
     public function __toString(): string
     {
-        return $this->toString();
+        return $this->rendered;
     }
 }
