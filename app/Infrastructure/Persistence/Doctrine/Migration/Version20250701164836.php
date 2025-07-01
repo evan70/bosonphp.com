@@ -25,6 +25,7 @@ final class Version20250701164836 extends AbstractMigration
         $this->addSql(<<<'SQL'
             CREATE TABLE articles (
                 id UUID NOT NULL,
+                category_id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
                 slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
                 content_raw TEXT NOT NULL DEFAULT '',
@@ -36,7 +37,17 @@ final class Version20250701164836 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE UNIQUE INDEX slug_unique ON articles (slug)
+            CREATE UNIQUE INDEX article_slug_unique ON articles (slug)
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            ALTER TABLE articles ADD CONSTRAINT FK_BFDD316812469DE2
+                FOREIGN KEY (category_id)
+                REFERENCES article_categories (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            CREATE INDEX IDX_BFDD316812469DE2 ON articles (category_id)
             SQL);
 
         $this->addSql(<<<'SQL'
@@ -50,6 +61,14 @@ final class Version20250701164836 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $this->addSql(<<<'SQL'
+            ALTER TABLE articles DROP CONSTRAINT FK_BFDD316812469DE2
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            DROP INDEX IDX_BFDD316812469DE2
+            SQL);
+
         $this->addSql(<<<'SQL'
             DROP TABLE articles
             SQL);

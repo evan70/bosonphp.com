@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Article;
 
+use App\Domain\Article\Category\Category;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'articles')]
-#[ORM\UniqueConstraint(name: 'slug_unique', columns: ['slug'])]
+#[ORM\UniqueConstraint(name: 'article_slug_unique', columns: ['slug'])]
 class Article implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
@@ -61,16 +62,22 @@ class Article implements
         }
     }
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
+    #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    public private(set) Category $category;
+
     /**
      * @param non-empty-string|\Stringable $title
      */
     public function __construct(
+        Category $category,
         string|\Stringable $title,
-        public readonly ArticleSlugGeneratorInterface $slugGenerator,
+        private readonly ArticleSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,
         ArticleContentRendererInterface $contentRenderer,
         ?ArticleId $id = null,
     ) {
+        $this->category = $category;
         $this->title = (string) $title;
         $this->content = new Content($content, $contentRenderer);
         $this->id = $id ?? ArticleId::new();

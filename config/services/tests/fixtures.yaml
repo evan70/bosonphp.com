@@ -1,5 +1,9 @@
+parameters:
+  env(TEST_FAKER_LOCALE): 'en_US'
 
-when@dev:
+  test.faker.locale: '%env(TEST_FAKER_LOCALE)%'
+
+when@dev: &dev
   services:
     _defaults:
       autowire: true
@@ -11,3 +15,7 @@ when@dev:
 
     Faker\Generator:
       factory: ['Faker\Factory', 'create']
+      arguments:
+        $locale: '%test.faker.locale%'
+
+when@test: *dev

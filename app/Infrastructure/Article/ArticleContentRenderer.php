@@ -8,7 +8,7 @@ use App\Domain\Article\ArticleContentRendererInterface;
 use App\Domain\Article\Content;
 use League\CommonMark\ConverterInterface;
 
-final readonly class ArticleContentContentRenderer implements ArticleContentRendererInterface
+final readonly class ArticleContentRenderer implements ArticleContentRendererInterface
 {
     public function __construct(
         private ConverterInterface $converter,

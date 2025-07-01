@@ -7,11 +7,13 @@ namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 use App\Domain\Article\Article;
 use App\Domain\Article\ArticleContentRendererInterface;
 use App\Domain\Article\ArticleSlugGeneratorInterface;
+use App\Domain\Article\Category\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;
 
-class ArticleFixture extends Fixture
+class ArticleFixture extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
         private readonly ArticleContentRendererInterface $contentRenderer,
@@ -21,15 +23,36 @@ class ArticleFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $categories = $manager
+            ->getRepository(Category::class)
+            ->findAll();
+
         for ($i = 0; $i < 100; ++$i) {
             $manager->persist(new Article(
-                title: $this->faker->sentence(\random_int(1, 6)),
+                category: $this->faker->randomElement(
+                    $categories,
+                ),
+                title: $this->faker->sentence(
+                    $this->faker->numberBetween(1, 10),
+                ),
                 slugGenerator: $this->slugGenerator,
-                content: $this->faker->text(),
+                content: $this->faker->text(
+                    $this->faker->numberBetween(100, 1000),
+                ),
                 contentRenderer: $this->contentRenderer,
             ));
         }
 
         $manager->flush();
+    }
+
+    /**
+     * @return list<class-string<Fixture>>
+     */
+    public function getDependencies(): array
+    {
+        return [
+            ArticleCategoryFixture::class,
+        ];
     }
 }

@@ -34,8 +34,9 @@ doctrine:
       # Account
       App\Domain\Account\Integration\IntegrationId: App\Infrastructure\Persistence\Doctrine\Type\IntegrationIdType
       App\Domain\Account\AccountId: App\Infrastructure\Persistence\Doctrine\Type\AccountIdType
-      # Account
+      # Article
       App\Domain\Article\ArticleId: App\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
+      App\Domain\Article\Category\CategoryId: App\Infrastructure\Persistence\Doctrine\Type\CategoryIdType
       # Shared
       string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 
