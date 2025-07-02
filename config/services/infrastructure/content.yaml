@@ -7,6 +7,8 @@ services:
   League\CommonMark\ConverterInterface:
     class: League\CommonMark\CommonMarkConverter
 
+  # Blog
+
   App\Domain\Blog\ArticleContentRendererInterface:
     class: App\Infrastructure\Content\ArticleContentRenderer
 
@@ -15,6 +17,11 @@ services:
 
   App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface:
     class: App\Infrastructure\Content\ArticleCategorySlugGenerator
+
+  # Documentation
+
+  App\Domain\Documentation\PageDocumentContentRendererInterface:
+    class: App\Infrastructure\Content\PageDocumentContentRenderer
 
   App\Domain\Documentation\PageSlugGeneratorInterface:
     class: App\Infrastructure\Content\PageSlugGenerator

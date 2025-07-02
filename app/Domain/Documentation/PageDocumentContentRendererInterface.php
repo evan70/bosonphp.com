@@ -7,9 +7,9 @@ namespace App\Domain\Documentation;
 use App\Domain\Shared\Content\ContentRendererInterface;
 
 /**
- * Defines contract for content renderers in the {@see ArticleContent} VO.
+ * Defines contract for content renderers in the {@see PageDocumentContent} VO.
  *
- * @template-extends ContentRendererInterface<Content>
+ * @template-extends ContentRendererInterface<PageDocumentContent>
  */
 interface PageDocumentContentRendererInterface extends
     ContentRendererInterface {}
