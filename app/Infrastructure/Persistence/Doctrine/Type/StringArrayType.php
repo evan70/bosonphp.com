@@ -88,4 +88,9 @@ class StringArrayType extends Type
 
         return $result;
     }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
+    }
 }

@@ -69,4 +69,9 @@ abstract class StringEnumType extends Type
 
         return $class::tryFrom($value);
     }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
+    }
 }

@@ -51,6 +51,14 @@ final class Version20250701164836 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
+            COMMENT ON COLUMN articles.id IS '(DC2Type:App\Domain\Article\ArticleId)'
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            COMMENT ON COLUMN articles.category_id IS '(DC2Type:App\Domain\Article\Category\CategoryId)'
+            SQL);
+
+        $this->addSql(<<<'SQL'
             COMMENT ON COLUMN articles.created_at IS '(DC2Type:datetimetz_immutable)'
             SQL);
 

@@ -85,4 +85,9 @@ abstract class StringEnumArrayType extends StringArrayType
 
         return $result;
     }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
+    }
 }

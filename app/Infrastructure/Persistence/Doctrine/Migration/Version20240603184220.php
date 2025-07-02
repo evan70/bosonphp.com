@@ -39,6 +39,14 @@ final class Version20240603184220 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
+            COMMENT ON COLUMN accounts.id IS '(DC2Type:App\Domain\Account\AccountId)'
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            COMMENT ON COLUMN accounts.roles IS '(DC2Type:string[])'
+            SQL);
+
+        $this->addSql(<<<'SQL'
             COMMENT ON COLUMN accounts.created_at IS '(DC2Type:datetimetz_immutable)'
             SQL);
 

@@ -72,4 +72,9 @@ abstract class UniversalUniqueIdType extends Type
          */
         return new $class($value);
     }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
+    }
 }
