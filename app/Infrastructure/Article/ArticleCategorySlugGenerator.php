@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Article;
 
-use App\Domain\Article\Category\Category;
-use App\Domain\Article\Category\CategorySlugGeneratorInterface;
+use App\Domain\Article\Category\ArticleCategory;
+use App\Domain\Article\Category\ArticleCategorySlugGeneratorInterface;
 
 /**
- * @template-extends SlugGenerator<Category>
+ * @template-extends SlugGenerator<ArticleCategory>
  */
 final readonly class ArticleCategorySlugGenerator extends SlugGenerator implements
-    CategorySlugGeneratorInterface
+    ArticleCategorySlugGeneratorInterface
 {
     public function createSlug(object $entity): string
     {
-        assert($entity instanceof Category);
+        assert($entity instanceof ArticleCategory);
 
         return $this->createSlugByString($entity->title);
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Article;
 
-use App\Domain\Article\Category\Category;
+use App\Domain\Article\Category\ArticleCategory;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -68,15 +68,15 @@ class Article implements
         }
     }
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
+    #[ORM\ManyToOne(targetEntity: ArticleCategory::class, inversedBy: 'articles')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    public private(set) Category $category;
+    public private(set) ArticleCategory $category;
 
     /**
      * @param non-empty-string|\Stringable $title
      */
     public function __construct(
-        Category $category,
+        ArticleCategory $category,
         string|\Stringable $title,
         private readonly ArticleSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,

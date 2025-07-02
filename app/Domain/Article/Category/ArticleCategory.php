@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: 'article_categories')]
 #[ORM\UniqueConstraint(name: 'article_category_slug_unique', columns: ['slug'])]
-class Category implements
+class ArticleCategory implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
@@ -29,8 +29,8 @@ class Category implements
     use UpdatedDateProvider;
 
     #[ORM\Id]
-    #[ORM\Column(type: CategoryId::class)]
-    public private(set) CategoryId $id;
+    #[ORM\Column(type: ArticleCategoryId::class)]
+    public private(set) ArticleCategoryId $id;
 
     /**
      * @var non-empty-string
@@ -65,11 +65,11 @@ class Category implements
      */
     public function __construct(
         string|\Stringable $title,
-        private readonly CategorySlugGeneratorInterface $slugGenerator,
-        ?CategoryId $id = null,
+        private readonly ArticleCategorySlugGeneratorInterface $slugGenerator,
+        ?ArticleCategoryId $id = null,
     ) {
         $this->title = $title;
         $this->articles = new ArrayCollection();
-        $this->id = $id ?? CategoryId::new();
+        $this->id = $id ?? ArticleCategoryId::new();
     }
 }

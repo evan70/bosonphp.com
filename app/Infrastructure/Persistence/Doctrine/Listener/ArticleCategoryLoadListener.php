@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Listener;
 
-use App\Domain\Article\Category\Category;
-use App\Domain\Article\Category\CategorySlugGeneratorInterface;
+use App\Domain\Article\Category\ArticleCategory;
+use App\Domain\Article\Category\ArticleCategorySlugGeneratorInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 
 /**
  * @api
  */
-#[AsEntityListener(event: Events::postLoad, entity: Category::class)]
+#[AsEntityListener(event: Events::postLoad, entity: ArticleCategory::class)]
 final readonly class ArticleCategoryLoadListener
 {
     public function __construct(
-        private CategorySlugGeneratorInterface $slugGenerator,
+        private ArticleCategorySlugGeneratorInterface $slugGenerator,
     ) {}
 
     /**
@@ -24,7 +24,7 @@ final readonly class ArticleCategoryLoadListener
      *
      * @throws \ReflectionException
      */
-    public function postLoad(Category $category): void
+    public function postLoad(ArticleCategory $category): void
     {
         $this->bootSlugGenerator($category);
     }
@@ -32,7 +32,7 @@ final readonly class ArticleCategoryLoadListener
     /**
      * @throws \ReflectionException
      */
-    private function bootSlugGenerator(Category $category): void
+    private function bootSlugGenerator(ArticleCategory $category): void
     {
         $slugGenerator = new \ReflectionProperty($category, 'slugGenerator');
 

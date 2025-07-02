@@ -7,7 +7,7 @@ namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 use App\Domain\Article\Article;
 use App\Domain\Article\ArticleContentRendererInterface;
 use App\Domain\Article\ArticleSlugGeneratorInterface;
-use App\Domain\Article\Category\Category;
+use App\Domain\Article\Category\ArticleCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -24,7 +24,7 @@ class ArticleFixture extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $categories = $manager
-            ->getRepository(Category::class)
+            ->getRepository(ArticleCategory::class)
             ->findAll();
 
         for ($i = 0; $i < 100; ++$i) {

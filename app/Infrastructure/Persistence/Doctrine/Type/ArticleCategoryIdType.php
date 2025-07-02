@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Type;
 
-use App\Domain\Article\Category\CategoryId;
+use App\Domain\Article\Category\ArticleCategoryId;
 
 /**
  * @api
@@ -12,12 +12,12 @@ use App\Domain\Article\Category\CategoryId;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Type
  *
- * @template-extends UniversalUniqueIdType<CategoryId>
+ * @template-extends UniversalUniqueIdType<ArticleCategoryId>
  */
-final class CategoryIdType extends UniversalUniqueIdType
+final class ArticleCategoryIdType extends UniversalUniqueIdType
 {
     protected static function getClass(): string
     {
-        return CategoryId::class;
+        return ArticleCategoryId::class;
     }
 }

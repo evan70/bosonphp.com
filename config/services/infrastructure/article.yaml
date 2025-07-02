@@ -13,5 +13,5 @@ services:
   App\Domain\Article\ArticleSlugGeneratorInterface:
     class: App\Infrastructure\Article\ArticleSlugGenerator
 
-  App\Domain\Article\Category\CategorySlugGeneratorInterface:
+  App\Domain\Article\Category\ArticleCategorySlugGeneratorInterface:
     class: App\Infrastructure\Article\ArticleCategorySlugGenerator

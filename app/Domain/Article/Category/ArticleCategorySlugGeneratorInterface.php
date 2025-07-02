@@ -7,7 +7,7 @@ namespace App\Domain\Article\Category;
 use App\Domain\Shared\Title\SlugGeneratorInterface;
 
 /**
- * @template-extends SlugGeneratorInterface<Category>
+ * @template-extends SlugGeneratorInterface<ArticleCategory>
  */
-interface CategorySlugGeneratorInterface extends
+interface ArticleCategorySlugGeneratorInterface extends
     SlugGeneratorInterface {}
