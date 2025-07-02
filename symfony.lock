@@ -59,6 +59,12 @@
             ".php-cs-fixer.dist.php"
         ]
     },
+    "local/http-factory-bundle": {
+        "version": "1.0.0"
+    },
+    "local/type-lang-mapper-bundle": {
+        "version": "1.0.0"
+    },
     "phpstan/phpstan": {
         "version": "2.1",
         "recipe": {

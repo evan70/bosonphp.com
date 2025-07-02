@@ -2,23 +2,27 @@
     "type": "project",
     "license": "proprietary",
     "repositories": [
-        {"type": "path", "url": "libs/*"}
+        {"type": "path", "url": "libs/bridge/*"},
+        {"type": "path", "url": "libs/component/*"}
     ],
     "require": {
         "php": "^8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "doctrine/dbal": "^3.0",
+        "doctrine/dbal": "^3.9",
         "doctrine/doctrine-bundle": "^2.15",
         "doctrine/doctrine-fixtures-bundle": "^4.1",
         "doctrine/doctrine-migrations-bundle": "^3.4",
-        "doctrine/orm": "^3.4",
+        "doctrine/orm": "^3.5",
         "league/commonmark": "^2.7",
+        "local/http-factory-bundle": "^1.0",
         "local/set": "^1.0",
+        "local/type-lang-mapper-bundle": "^1.0",
         "ramsey/uuid": "^4.9",
         "symfony/clock": "7.3.*",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
+        "symfony/expression-language": "7.3.*",
         "symfony/framework-bundle": "7.3.*",
         "symfony/monolog-bundle": "^3.10",
         "symfony/runtime": "7.3.*",
@@ -31,7 +35,7 @@
         }
     },
     "require-dev": {
-        "fakerphp/faker": "*",
+        "fakerphp/faker": "^1.24",
         "friendsofphp/php-cs-fixer": "^3.76",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-deprecation-rules": "^2.0",
@@ -40,7 +44,7 @@
         "symfony/browser-kit": "7.3.*",
         "symfony/css-selector": "7.3.*",
         "symfony/debug-bundle": "7.3.*",
-        "symfony/flex": "^2.0",
+        "symfony/flex": "^2.7",
         "symfony/stopwatch": "7.3.*",
         "symfony/web-profiler-bundle": "7.3.*"
     },

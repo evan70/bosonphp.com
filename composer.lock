@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "093aad757a6ac4e215f39434d08cc4be",
+    "content-hash": "2b4c925aa17aa7ea0188c53d3348ce78",
     "packages": [
         {
             "name": "brick/math",
@@ -1289,16 +1289,16 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "3.4.3",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/orm.git",
-                "reference": "ef607f26c2965fe460c55733cc7c031fb7e1f2fa"
+                "reference": "6deec3655ba3e8f15280aac11e264225854d2369"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/orm/zipball/ef607f26c2965fe460c55733cc7c031fb7e1f2fa",
-                "reference": "ef607f26c2965fe460c55733cc7c031fb7e1f2fa",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/6deec3655ba3e8f15280aac11e264225854d2369",
+                "reference": "6deec3655ba3e8f15280aac11e264225854d2369",
                 "shasum": ""
             },
             "require": {
@@ -1373,9 +1373,9 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/orm/issues",
-                "source": "https://github.com/doctrine/orm/tree/3.4.3"
+                "source": "https://github.com/doctrine/orm/tree/3.5.0"
             },
-            "time": "2025-06-27T12:14:15+00:00"
+            "time": "2025-07-01T17:40:53+00:00"
         },
         {
             "name": "doctrine/persistence",
@@ -1717,11 +1717,94 @@
             "time": "2022-12-11T20:36:23+00:00"
         },
         {
+            "name": "local/http-factory-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "libs/bridge/http-factory-bundle",
+                "reference": "9b42928685589f24d5d399aad13195261d4fba6a"
+            },
+            "require": {
+                "local/http-factory-component": "^1.0",
+                "php": "^8.4",
+                "symfony/http-kernel": "^6.4|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Local\\Bridge\\HttpFactory\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Local\\Bridge\\HttpFactory\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "local/http-factory-component",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "libs/component/http-factory",
+                "reference": "3e608b497acb10de02ef285ad32531895daea9c0"
+            },
+            "require": {
+                "php": "^8.4",
+                "symfony/http-foundation": "^6.4|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0",
+                "rybakit/msgpack": "^0.9|^1.0",
+                "symfony/yaml": "^7.0"
+            },
+            "suggest": {
+                "ext-json": "Adds JSON decoder and encoder",
+                "rybakit/msgpack": "Adds MSGPACK decoder and encoder",
+                "symfony/yaml": "Adds YAML decoder and encoder"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Local\\Component\\HttpFactory\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Local\\Component\\HttpFactory\\Tests\\": "tests"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "local/set",
             "version": "1.0.0",
             "dist": {
                 "type": "path",
-                "url": "libs/set",
+                "url": "libs/component/set",
                 "reference": "13600071b91f9c424a1add1d3850aaecd929ad9b"
             },
             "require": {
@@ -1748,6 +1831,47 @@
                     "Local\\Component\\Set\\Tests\\": "tests"
                 }
             },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "local/type-lang-mapper-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "libs/bridge/type-lang-mapper-bundle",
+                "reference": "6fe961043447658270987671ee7f2ae1c666269d"
+            },
+            "require": {
+                "php": "^8.4",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "type-lang/mapper": "^0.4",
+                "type-lang/phpdoc-standard-tags": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Local\\Bridge\\TypeLang\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Local\\Bridge\\TypeLang\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
             "transport-options": {
                 "relative": true
             }
@@ -2004,6 +2128,825 @@
             "time": "2025-06-03T04:55:08+00:00"
         },
         {
+            "name": "phplrt/ast-contracts",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/ast-contracts.git",
+                "reference": "0c65772e5ad95de8d7f232c6005acca4ec03d8ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/ast-contracts/zipball/0c65772e5ad95de8d7f232c6005acca4ec03d8ec",
+                "reference": "0c65772e5ad95de8d7f232c6005acca4ec03d8ec",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Contracts\\Ast\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "A set of phplrt ast abstractions",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "abstractions",
+                "ast",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "standards",
+                "tree"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/ast-contracts"
+            },
+            "time": "2024-09-11T01:16:26+00:00"
+        },
+        {
+            "name": "phplrt/buffer",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/buffer.git",
+                "reference": "f20dbd94da04a657723c16c7ca9d502f9bbf33e4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/buffer/zipball/f20dbd94da04a657723c16c7ca9d502f9bbf33e4",
+                "reference": "f20dbd94da04a657723c16c7ca9d502f9bbf33e4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-spl": "*",
+                "php": "^8.1",
+                "phplrt/lexer": "^3.7"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Buffer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "The phplrt buffer library",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "Buffer",
+                "stream",
+                "token"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/buffer"
+            },
+            "time": "2025-01-23T22:02:37+00:00"
+        },
+        {
+            "name": "phplrt/exception",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/exception.git",
+                "reference": "b6427f77fe4240ddce3e23b8f9ff6d99996131dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/exception/zipball/b6427f77fe4240ddce3e23b8f9ff6d99996131dc",
+                "reference": "b6427f77fe4240ddce3e23b8f9ff6d99996131dc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-pcre": "*",
+                "ext-spl": "*",
+                "php": "^8.1",
+                "phplrt/exception-contracts": "^3.7",
+                "phplrt/position": "^3.7",
+                "phplrt/source": "^3.7"
+            },
+            "provide": {
+                "phplrt/exception-contracts-implementation": "^3.7"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Exception\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "The phplrt exception package",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "errors",
+                "exception",
+                "helpers",
+                "parsing"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/exception"
+            },
+            "time": "2024-09-11T01:18:13+00:00"
+        },
+        {
+            "name": "phplrt/exception-contracts",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/exception-contracts.git",
+                "reference": "4915be23e28139d702932f86bbbdd361f73f5aae"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/exception-contracts/zipball/4915be23e28139d702932f86bbbdd361f73f5aae",
+                "reference": "4915be23e28139d702932f86bbbdd361f73f5aae",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phplrt/lexer-contracts": "^3.7",
+                "phplrt/source-contracts": "^3.7"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Contracts\\Exception\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "A set of phplrt exception abstractions",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "exception",
+                "interfaces",
+                "interoperability",
+                "standards"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/exception-contracts"
+            },
+            "time": "2024-09-11T01:16:31+00:00"
+        },
+        {
+            "name": "phplrt/lexer",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/lexer.git",
+                "reference": "537fd0ee5a0b3c37ad7e2624413ae0612b6b60e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/lexer/zipball/537fd0ee5a0b3c37ad7e2624413ae0612b6b60e9",
+                "reference": "537fd0ee5a0b3c37ad7e2624413ae0612b6b60e9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-pcre": "*",
+                "ext-spl": "*",
+                "php": "^8.1",
+                "phplrt/exception": "^3.7",
+                "phplrt/lexer-contracts": "^3.7",
+                "phplrt/source": "^3.7",
+                "symfony/deprecation-contracts": "^2.5|^3.0"
+            },
+            "provide": {
+                "phplrt/lexer-contracts-implementation": "^3.7"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/polyfill.php"
+                ],
+                "psr-4": {
+                    "Phplrt\\Lexer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "The phplrt lexer library that can be used for scanners implementation using PCRE",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "lexer",
+                "parsing",
+                "regex",
+                "scanner",
+                "stream",
+                "token",
+                "tokenizer"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/lexer"
+            },
+            "time": "2024-11-06T20:35:46+00:00"
+        },
+        {
+            "name": "phplrt/lexer-contracts",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/lexer-contracts.git",
+                "reference": "efb35cc7ba10687acc8647a10a2f44db4d4006fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/lexer-contracts/zipball/efb35cc7ba10687acc8647a10a2f44db4d4006fe",
+                "reference": "efb35cc7ba10687acc8647a10a2f44db4d4006fe",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phplrt/source-contracts": "^3.7"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/polyfill.php"
+                ],
+                "psr-4": {
+                    "Phplrt\\Contracts\\Lexer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "A set of phplrt lexer abstractions",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "abstractions",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "lexer",
+                "parsing",
+                "regex",
+                "standards",
+                "stream",
+                "token",
+                "tokenizer"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/lexer-contracts"
+            },
+            "time": "2024-09-11T01:16:31+00:00"
+        },
+        {
+            "name": "phplrt/parser",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/parser.git",
+                "reference": "3edccb47e53e31c9ccfda007e4bf6b115bb13120"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/parser/zipball/3edccb47e53e31c9ccfda007e4bf6b115bb13120",
+                "reference": "3edccb47e53e31c9ccfda007e4bf6b115bb13120",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phplrt/ast-contracts": "^3.7",
+                "phplrt/buffer": "^3.7",
+                "phplrt/exception": "^3.7",
+                "phplrt/lexer-contracts": "^3.7",
+                "phplrt/parser-contracts": "^3.7",
+                "phplrt/source": "^3.7",
+                "symfony/deprecation-contracts": "^2.5|^3.0"
+            },
+            "provide": {
+                "phplrt/parser-contracts-implementation": "^3.7"
+            },
+            "replace": {
+                "phplrt/grammar": "<=3.1",
+                "phplrt/grammar-contracts": "<=3.1"
+            },
+            "require-dev": {
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "phplrt/lexer": "^3.7",
+                "phplrt/visitor": "^3.7",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/polyfill.php"
+                ],
+                "psr-4": {
+                    "Phplrt\\Parser\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "The phplrt Parser package.",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "language",
+                "ll1",
+                "llk",
+                "lr",
+                "parser",
+                "php",
+                "slr"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/parser"
+            },
+            "time": "2024-11-06T20:16:08+00:00"
+        },
+        {
+            "name": "phplrt/parser-contracts",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/parser-contracts.git",
+                "reference": "43b2fb0bee173728ab6a4df9da56061ed3de4258"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/parser-contracts/zipball/43b2fb0bee173728ab6a4df9da56061ed3de4258",
+                "reference": "43b2fb0bee173728ab6a4df9da56061ed3de4258",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phplrt/source-contracts": "^3.7"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Contracts\\Parser\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "A set of phplrt parser abstractions",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "abstractions",
+                "analysis",
+                "contracts",
+                "decoupling",
+                "interfaces",
+                "interoperability",
+                "language",
+                "parser",
+                "php",
+                "standards",
+                "syntax"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/parser-contracts"
+            },
+            "time": "2024-09-11T01:17:45+00:00"
+        },
+        {
+            "name": "phplrt/position",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/position.git",
+                "reference": "58a0bb38663f48806297087054661c438caf29ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/position/zipball/58a0bb38663f48806297087054661c438caf29ec",
+                "reference": "58a0bb38663f48806297087054661c438caf29ec",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phplrt/position-contracts": "^3.7",
+                "phplrt/source-contracts": "^3.7",
+                "symfony/deprecation-contracts": "^2.5|^3.0"
+            },
+            "provide": {
+                "phplrt/position-contracts-implementation": "^3.7"
+            },
+            "require-dev": {
+                "phplrt/source": "^3.7",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Position\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "The phplrt position package.",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "analyzing",
+                "column",
+                "input",
+                "line",
+                "offset",
+                "position",
+                "utils",
+                "visualization"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/position"
+            },
+            "time": "2024-09-11T01:19:30+00:00"
+        },
+        {
+            "name": "phplrt/position-contracts",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/position-contracts.git",
+                "reference": "bd9661dd96a06c7f2f26eecae064fa0fa5bc30f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/position-contracts/zipball/bd9661dd96a06c7f2f26eecae064fa0fa5bc30f2",
+                "reference": "bd9661dd96a06c7f2f26eecae064fa0fa5bc30f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Contracts\\Position\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "A set of phplrt position abstractions",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "abstractions",
+                "analyzing",
+                "column",
+                "contracts",
+                "decoupling",
+                "input",
+                "interfaces",
+                "interoperability",
+                "line",
+                "offset",
+                "position",
+                "standards",
+                "utils",
+                "visualization"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/position-contracts"
+            },
+            "time": "2024-09-11T01:18:04+00:00"
+        },
+        {
+            "name": "phplrt/source",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/source.git",
+                "reference": "6ec0933b509fef1d0ab59a9f2104403f67475d71"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/source/zipball/6ec0933b509fef1d0ab59a9f2104403f67475d71",
+                "reference": "6ec0933b509fef1d0ab59a9f2104403f67475d71",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phplrt/source-contracts": "^3.7",
+                "symfony/deprecation-contracts": "^2.5|^3.0"
+            },
+            "provide": {
+                "phplrt/source-contracts-implementation": "^3.7"
+            },
+            "require-dev": {
+                "httpsoft/http-message": "^1.1",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0",
+                "psr/http-message": "^1.0|^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Source\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "The phplrt sources package",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "abstraction",
+                "directory",
+                "file",
+                "file system",
+                "fs",
+                "reader"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/source"
+            },
+            "time": "2024-09-11T01:19:33+00:00"
+        },
+        {
+            "name": "phplrt/source-contracts",
+            "version": "3.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplrt/source-contracts.git",
+                "reference": "4ee40e2661811d25c00e826c04b237e9b35d83bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplrt/source-contracts/zipball/4ee40e2661811d25c00e826c04b237e9b35d83bf",
+                "reference": "4ee40e2661811d25c00e826c04b237e9b35d83bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^1.11",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "3.x-dev",
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phplrt\\Contracts\\Source\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kirill Nesmeyanov",
+                    "email": "nesk@xakep.ru"
+                }
+            ],
+            "description": "A set of phplrt source abstractions",
+            "homepage": "https://github.com/phplrt",
+            "keywords": [
+                "disk",
+                "file",
+                "io",
+                "read",
+                "source"
+            ],
+            "support": {
+                "issues": "https://github.com/phplrt/phplrt/issues",
+                "source": "https://github.com/phplrt/source-contracts"
+            },
+            "time": "2024-09-11T01:19:24+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "3.0.0",
             "source": {
@@ -2252,6 +3195,57 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.2"
             },
             "time": "2024-09-11T13:17:53+00:00"
+        },
+        {
+            "name": "psr/simple-cache",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/simple-cache.git",
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/764e0b3939f5ca87cb904f570ef9be2d78a07865",
+                "reference": "764e0b3939f5ca87cb904f570ef9be2d78a07865",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\SimpleCache\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "https://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interfaces for simple caching",
+            "keywords": [
+                "cache",
+                "caching",
+                "psr",
+                "psr-16",
+                "simple-cache"
+            ],
+            "support": {
+                "source": "https://github.com/php-fig/simple-cache/tree/3.0.0"
+            },
+            "time": "2021-10-29T13:26:27+00:00"
         },
         {
             "name": "ramsey/collection",
@@ -3386,6 +4380,70 @@
                 }
             ],
             "time": "2024-09-25T14:21:43+00:00"
+        },
+        {
+            "name": "symfony/expression-language",
+            "version": "v7.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/expression-language.git",
+                "reference": "26f4884a455e755e630a5fc372df124a3578da2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/expression-language/zipball/26f4884a455e755e630a5fc372df124a3578da2e",
+                "reference": "26f4884a455e755e630a5fc372df124a3578da2e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/cache": "^6.4|^7.0",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/service-contracts": "^2.5|^3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\ExpressionLanguage\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides an engine that can compile and evaluate expressions",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/expression-language/tree/v7.3.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-10-15T11:52:45+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -5551,6 +6609,314 @@
                 }
             ],
             "time": "2025-06-03T06:57:57+00:00"
+        },
+        {
+            "name": "type-lang/mapper",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-type-language/mapper.git",
+                "reference": "fb412cac33b2dd69bc82515f6e630ae44ed417ff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-type-language/mapper/zipball/fb412cac33b2dd69bc82515f6e630ae44ed417ff",
+                "reference": "fb412cac33b2dd69bc82515f6e630ae44ed417ff",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "psr/log": "^1.0|^2.0|^3.0",
+                "psr/simple-cache": "^1.0|^2.0|^3.0",
+                "type-lang/parser": "^1.4",
+                "type-lang/printer": "^1.3"
+            },
+            "require-dev": {
+                "behat/behat": "^3.14",
+                "friendsofphp/php-cs-fixer": "^3.53",
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "justinrainbow/json-schema": "^6.0",
+                "monolog/monolog": "^3.7",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10.5|^11.0",
+                "symfony/cache": "^5.4|^6.0|^7.0",
+                "symfony/expression-language": "^5.4|^6.0|^7.0",
+                "symfony/property-access": "^5.4|^6.0|^7.0",
+                "symfony/stopwatch": "^5.4|^6.0|^7.0",
+                "symfony/var-dumper": "^5.4|^6.0|^7.0",
+                "type-lang/phpdoc": "^1.0",
+                "type-lang/phpdoc-standard-tags": "^1.0"
+            },
+            "suggest": {
+                "justinrainbow/json-schema": "(^5.3|^6.0) Required for configuration drivers validation",
+                "type-lang/phpdoc-standard-tags": "(^1.0) Required for DocBlockDriver mapping driver support"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev",
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TypeLang\\Mapper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for mapping variable types to other types",
+            "keywords": [
+                "Marshal",
+                "denormalizer",
+                "hydrator",
+                "mapper",
+                "normalizer",
+                "serializer",
+                "transformer",
+                "types",
+                "unmarshal"
+            ],
+            "support": {
+                "issues": "https://github.com/php-type-language/mapper/issues",
+                "source": "https://github.com/php-type-language/mapper"
+            },
+            "time": "2025-01-14T03:45:30+00:00"
+        },
+        {
+            "name": "type-lang/parser",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-type-language/parser.git",
+                "reference": "643e7d2361bca99f273d5837dcccd1ed673ebb41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-type-language/parser/zipball/643e7d2361bca99f273d5837dcccd1ed673ebb41",
+                "reference": "643e7d2361bca99f273d5837dcccd1ed673ebb41",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "phplrt/lexer": "^3.7",
+                "phplrt/parser": "^3.7",
+                "phplrt/source": "^3.7"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.70",
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "phplrt/compiler": "^3.7",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10.5|^11.0|^12.0",
+                "symfony/var-dumper": "^5.4|^6.0|^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev",
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TypeLang\\Parser\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for parsing and validating TypeLang syntax and converting it into AST nodes",
+            "keywords": [
+                "language",
+                "parser",
+                "php",
+                "phpdoc"
+            ],
+            "support": {
+                "issues": "https://github.com/php-type-language/parser/issues",
+                "source": "https://github.com/php-type-language/parser"
+            },
+            "time": "2025-03-10T12:10:35+00:00"
+        },
+        {
+            "name": "type-lang/phpdoc",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-type-language/phpdoc.git",
+                "reference": "1a3beda4599656af586974b90cbfb206bbb68ec8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-type-language/phpdoc/zipball/1a3beda4599656af586974b90cbfb206bbb68ec8",
+                "reference": "1a3beda4599656af586974b90cbfb206bbb68ec8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.53",
+                "jetbrains/phpstorm-attributes": "^1.0",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10.5|^11.0",
+                "type-lang/parser": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev",
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TypeLang\\PHPDoc\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for recognizing PHPDoc annotations in PHP DocBlock comments",
+            "keywords": [
+                "dictionary",
+                "docblock",
+                "language",
+                "php",
+                "phpdoc",
+                "tags"
+            ],
+            "support": {
+                "issues": "https://github.com/php-type-language/phpdoc/issues",
+                "source": "https://github.com/php-type-language/phpdoc"
+            },
+            "time": "2025-01-11T00:11:49+00:00"
+        },
+        {
+            "name": "type-lang/phpdoc-standard-tags",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-type-language/phpdoc-standard-tags.git",
+                "reference": "657629df01713aa58c6b2b82be9fa5b852bde386"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-type-language/phpdoc-standard-tags/zipball/657629df01713aa58c6b2b82be9fa5b852bde386",
+                "reference": "657629df01713aa58c6b2b82be9fa5b852bde386",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "type-lang/parser": "^1.0",
+                "type-lang/phpdoc": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.53",
+                "nikic/php-parser": "^4.19|^5.0",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10.5|^11.0",
+                "symfony/finder": "^5.4|^6.0|^7.0",
+                "type-lang/printer": ">=1.0.0-beta2 <2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev",
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TypeLang\\PHPDoc\\Standard\\": "src"
+                },
+                "exclude-from-classmap": [
+                    "tests/Functional/LinterStubs/cache",
+                    "tests/Functional/LinterStubs/phpstan",
+                    "tests/Functional/LinterStubs/phpstorm",
+                    "tests/Functional/LinterStubs/psalm"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Adds support for standard PHPDoc tags",
+            "keywords": [
+                "dictionary",
+                "docblock",
+                "language",
+                "php",
+                "phpdoc",
+                "tags"
+            ],
+            "support": {
+                "issues": "https://github.com/php-type-language/phpdoc-standard-tags/issues",
+                "source": "https://github.com/php-type-language/phpdoc-standard-tags"
+            },
+            "time": "2025-01-11T00:11:49+00:00"
+        },
+        {
+            "name": "type-lang/printer",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-type-language/printer.git",
+                "reference": "6f3fbf1b13d65b62d90bce5204e091d0cc58e3f1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-type-language/printer/zipball/6f3fbf1b13d65b62d90bce5204e091d0cc58e3f1",
+                "reference": "6f3fbf1b13d65b62d90bce5204e091d0cc58e3f1",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "type-lang/parser": "^1.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.53",
+                "phpstan/phpstan": "^2.1",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^10.5|^11.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.x-dev",
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TypeLang\\Printer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for rendering TypeLange AST nodes into it's string representation",
+            "keywords": [
+                "language",
+                "php",
+                "printer",
+                "render"
+            ],
+            "support": {
+                "issues": "https://github.com/php-type-language/printer/issues",
+                "source": "https://github.com/php-type-language/printer"
+            },
+            "time": "2025-01-11T00:42:17+00:00"
         }
     ],
     "packages-dev": [

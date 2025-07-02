@@ -30,6 +30,9 @@ return new PhpCsFixer\Config()
         'array_syntax' => [
             'syntax' => 'short',
         ],
+        'new_expression_parentheses' => [
+            'use_parentheses' => false,
+        ],
         'backtick_to_shell_exec' => true,
         'binary_operator_spaces' => true,
         'blank_line_before_statement' => [
