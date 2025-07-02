@@ -1,5 +1,8 @@
-controllers:
+api:
   resource:
     path: ../app/Presentation/Api/Controller/
     namespace: App\Presentation\Api\Controller
   type: attribute
+  prefix: v1
+  defaults:
+    api: v1
