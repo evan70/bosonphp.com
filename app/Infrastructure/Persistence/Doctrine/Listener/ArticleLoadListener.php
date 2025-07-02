@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Listener;
 
 use App\Domain\Blog\Article;
+use App\Domain\Blog\ArticleContent;
 use App\Domain\Blog\ArticleContentRendererInterface;
 use App\Domain\Blog\ArticleSlugGeneratorInterface;
-use App\Domain\Blog\ArticleContent;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 
