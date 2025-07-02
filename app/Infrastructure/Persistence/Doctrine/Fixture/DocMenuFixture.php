@@ -9,7 +9,13 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;
 
-class DocMenuFixture extends Fixture
+/**
+ * @api
+ *
+ * @internal this is an internal library class, please do not use it in your code.
+ * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
+ */
+final class DocMenuFixture extends Fixture
 {
     public function __construct(
         private readonly Generator $faker,

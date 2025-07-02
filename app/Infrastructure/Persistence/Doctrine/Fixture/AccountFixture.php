@@ -10,7 +10,13 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AccountFixture extends Fixture
+/**
+ * @api
+ *
+ * @internal this is an internal library class, please do not use it in your code.
+ * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
+ */
+final class AccountFixture extends Fixture
 {
     public function __construct(
         private readonly UserPasswordHasherInterface $hasher,
