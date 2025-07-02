@@ -1,0 +1,15 @@
+{% extends 'layout/master.html.twig' %}
+
+{% block title %}
+    {{ article.title }} :: {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>{{ article.title }}</h2>
+
+    <div style="padding: 20px 0">
+        {{ article.content | raw }}
+    </div>
+
+{% endblock %}

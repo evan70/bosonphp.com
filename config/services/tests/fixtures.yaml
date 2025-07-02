@@ -1,7 +1,3 @@
-parameters:
-  env(TEST_FAKER_LOCALE): 'en_US'
-
-  test.faker.locale: '%env(TEST_FAKER_LOCALE)%'
 
 when@dev: &dev
   services:
@@ -12,10 +8,5 @@ when@dev: &dev
     App\Infrastructure\Persistence\Doctrine\Fixture\:
       resource: '%kernel.project_dir%/app/Infrastructure/Persistence/Doctrine/Fixture'
       tags: ['doctrine.fixture.odm']
-
-    Faker\Generator:
-      factory: ['Faker\Factory', 'create']
-      arguments:
-        $locale: '%test.faker.locale%'
 
 when@test: *dev

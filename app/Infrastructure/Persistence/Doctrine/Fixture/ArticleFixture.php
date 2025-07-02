@@ -38,12 +38,12 @@ final class ArticleFixture extends Fixture implements DependentFixtureInterface
                 category: $this->faker->randomElement(
                     $categories,
                 ),
-                title: $this->faker->sentence(
+                title: \rtrim($this->faker->sentence(
                     $this->faker->numberBetween(1, 10),
-                ),
+                ), '.'),
                 slugGenerator: $this->slugGenerator,
-                content: $this->faker->text(
-                    $this->faker->numberBetween(100, 1000),
+                content: $this->faker->markdownContent(
+                    $this->faker->numberBetween(5, 50),
                 ),
                 contentRenderer: $this->contentRenderer,
             ));

@@ -35,22 +35,24 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
 
         /** @var Menu $item */
         foreach ($items as $item) {
-            if (\random_int(0, 16) === 0) {
+            if ($this->faker->numberBetween(0, 16) === 0) {
                 continue;
             }
 
-            $manager->persist(match (\random_int(0, 8)) {
+            $manager->persist(match ($this->faker->numberBetween(0, 8)) {
                 0 => new PageLink(
                     menu: $item,
-                    title: $this->faker->sentence(\random_int(1, 8)),
+                    title: $this->faker->sentence($this->faker->numberBetween(1, 8)),
                     slugGenerator: $this->slugGenerator,
                 ),
                 default => new PageDocument(
                     menu: $item,
-                    title: $this->faker->sentence(\random_int(1, 8)),
+                    title: \rtrim($this->faker->sentence(
+                        $this->faker->numberBetween(1, 8),
+                    ), '.'),
                     slugGenerator: $this->slugGenerator,
-                    content: $this->faker->text(
-                        $this->faker->numberBetween(100, 1000),
+                    content: $this->faker->markdownContent(
+                        $this->faker->numberBetween(5, 50),
                     ),
                     contentRenderer: $this->renderer,
                 ),
