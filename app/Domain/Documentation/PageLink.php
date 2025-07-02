@@ -11,6 +11,4 @@ use Doctrine\ORM\Mapping as ORM;
  *        to a Doctrine bug https://github.com/doctrine/orm/issues/7598
  */
 #[ORM\Entity]
-class PageLink extends Page
-{
-}
+class PageLink extends Page {}

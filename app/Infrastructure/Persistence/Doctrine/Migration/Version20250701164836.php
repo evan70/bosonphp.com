@@ -23,7 +23,7 @@ final class Version20250701164836 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
-            CREATE TABLE articles (
+            CREATE TABLE blog_articles (
                 id UUID NOT NULL,
                 category_id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
@@ -37,48 +37,48 @@ final class Version20250701164836 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE UNIQUE INDEX article_slug_unique ON articles (slug)
+            CREATE UNIQUE INDEX blog_article_slug_unique ON blog_articles (slug)
             SQL);
 
         $this->addSql(<<<'SQL'
-            ALTER TABLE articles ADD CONSTRAINT FK_BFDD316812469DE2
+            ALTER TABLE blog_articles ADD CONSTRAINT FK_BFDD316812469DE2
                 FOREIGN KEY (category_id)
-                REFERENCES article_categories (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
+                REFERENCES blog_article_categories (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE INDEX IDX_BFDD316812469DE2 ON articles (category_id)
+            CREATE INDEX IDX_CB80154F12469DE2 ON blog_articles (category_id)
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN articles.id IS '(DC2Type:App\Domain\Article\ArticleId)'
+            COMMENT ON COLUMN blog_articles.id IS '(DC2Type:App\Domain\Blog\ArticleId)'
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN articles.category_id IS '(DC2Type:App\Domain\Article\Category\CategoryId)'
+            COMMENT ON COLUMN blog_articles.category_id IS '(DC2Type:App\Domain\Blog\Category\ArticleCategoryId)'
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN articles.created_at IS '(DC2Type:datetimetz_immutable)'
+            COMMENT ON COLUMN blog_articles.created_at IS '(DC2Type:datetimetz_immutable)'
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN articles.updated_at IS '(DC2Type:datetimetz_immutable)'
+            COMMENT ON COLUMN blog_articles.updated_at IS '(DC2Type:datetimetz_immutable)'
             SQL);
     }
 
     public function down(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
-            ALTER TABLE articles DROP CONSTRAINT FK_BFDD316812469DE2
+            ALTER TABLE blog_articles DROP CONSTRAINT FK_BFDD316812469DE2
             SQL);
 
         $this->addSql(<<<'SQL'
-            DROP INDEX IDX_BFDD316812469DE2
+            DROP INDEX IDX_CB80154F12469DE2
             SQL);
 
         $this->addSql(<<<'SQL'
-            DROP TABLE articles
+            DROP TABLE blog_articles
             SQL);
     }
 }

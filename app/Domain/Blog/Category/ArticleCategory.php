@@ -18,8 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
  *        to a Doctrine bug https://github.com/doctrine/orm/issues/7598
  */
 #[ORM\Entity]
-#[ORM\Table(name: 'article_categories')]
-#[ORM\UniqueConstraint(name: 'article_category_slug_unique', columns: ['slug'])]
+#[ORM\Table(name: 'blog_article_categories')]
+#[ORM\UniqueConstraint(name: 'blog_article_category_slug_unique', columns: ['slug'])]
 class ArticleCategory implements
     IdentifiableInterface,
     CreatedDateProviderInterface,

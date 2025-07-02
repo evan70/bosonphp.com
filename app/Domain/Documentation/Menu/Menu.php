@@ -13,8 +13,8 @@ use App\Domain\Shared\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name: 'doc_menu')]
-#[ORM\Index(name: 'doc_menu_sorting_order_idx', columns: ['sorting_order'])]
+#[ORM\Table(name: 'doc_page_menus')]
+#[ORM\Index(name: 'doc_page_menus_sorting_order_idx', columns: ['sorting_order'])]
 class Menu implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
