@@ -21,7 +21,6 @@ use Doctrine\ORM\Mapping as ORM;
     'link' => PageLink::class,
 ])]
 #[ORM\Index(name: 'doc_pages_url_idx', columns: ['slug'])]
-#[ORM\Index(name: 'doc_pages_sorting_order_idx', columns: ['sorting_order'])]
 abstract class Page implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
@@ -55,21 +54,6 @@ abstract class Page implements
      */
     #[ORM\Column(name: 'slug', length: 255)]
     public private(set) string $slug;
-
-    /**
-     * @var int<0, 32767>
-     */
-    #[ORM\Column(name: 'sorting_order', type: 'smallint')]
-    public int $order = 0 {
-        get => $this->order;
-        set {
-            if ($value < 0 || $value > 32767) {
-                throw new \InvalidArgumentException('Order must be in range [0 ... 32767]');
-            }
-
-            $this->order = $value;
-        }
-    }
 
     #[ORM\ManyToOne(targetEntity: Menu::class, inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'menu_id', referencedColumnName: 'id')]

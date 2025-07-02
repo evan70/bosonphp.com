@@ -12,3 +12,11 @@ services:
 
   App\Domain\Blog\Repository\ArticleBySlugProviderInterface:
     alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
+
+
+
+  App\Domain\Blog\Category\ArticleCategoryRepositoryInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleCategoryDatabaseRepository
+
+  App\Domain\Blog\Category\Repository\ArticleCategoryListProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleCategoryDatabaseRepository

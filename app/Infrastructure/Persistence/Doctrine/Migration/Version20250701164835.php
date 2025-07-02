@@ -27,6 +27,7 @@ final class Version20250701164835 extends AbstractMigration
                 id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
                 slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
+                sorting_order SMALLINT NOT NULL DEFAULT 0,
                 created_at TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP(0) WITH TIME ZONE DEFAULT NULL,
                 PRIMARY KEY(id)
@@ -34,7 +35,11 @@ final class Version20250701164835 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE UNIQUE INDEX blog_article_category_slug_unique ON blog_article_categories (slug)
+            CREATE UNIQUE INDEX blog_article_categories_slug_unique ON blog_article_categories (slug)
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            CREATE INDEX blog_article_categories_sorting_order_idx ON blog_article_categories (sorting_order)
             SQL);
 
         $this->addSql(<<<'SQL'

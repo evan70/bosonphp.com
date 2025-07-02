@@ -34,25 +34,16 @@ class Menu implements
     public string $title;
 
     /**
-     * @var int<0, 32767>
+     * @var int<-32768, 32767>
      */
-    #[ORM\Column(name: 'sorting_order', type: 'smallint')]
-    public int $order = 0 {
-        get => $this->order;
-        set {
-            if ($value < 0 || $value > 32767) {
-                throw new \InvalidArgumentException('Order must be in range [0 ... 32767]');
-            }
-
-            $this->order = $value;
-        }
-    }
+    #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
+    public int $order = 0;
 
     /**
      * @var MenuSet
      */
     #[ORM\OneToMany(targetEntity: Page::class, mappedBy: 'menu', cascade: ['ALL'], fetch: 'EAGER')]
-    #[ORM\OrderBy(['order' => 'ASC'])]
+    #[ORM\OrderBy(['id' => 'ASC'])]
     public iterable $pages {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
         get => MenuSet::for($this, $this->pages);

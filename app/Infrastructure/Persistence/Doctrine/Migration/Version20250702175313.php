@@ -28,7 +28,6 @@ final class Version20250702175313 extends AbstractMigration
                 menu_id UUID DEFAULT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
                 slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
-                sorting_order SMALLINT NOT NULL CHECK (sorting_order >= 0),
                 type VARCHAR(255) NOT NULL CHECK (type <> ''),
                 content_rendered TEXT DEFAULT '',
                 content_raw TEXT DEFAULT '',
@@ -44,10 +43,6 @@ final class Version20250702175313 extends AbstractMigration
 
         $this->addSql(<<<'SQL'
             CREATE INDEX doc_pages_url_idx ON doc_pages (slug)
-            SQL);
-
-        $this->addSql(<<<'SQL'
-            CREATE INDEX doc_pages_sorting_order_idx ON doc_pages (sorting_order)
             SQL);
 
         $this->addSql(<<<'SQL'

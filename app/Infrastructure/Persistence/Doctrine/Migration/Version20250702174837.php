@@ -26,7 +26,7 @@ final class Version20250702174837 extends AbstractMigration
             CREATE TABLE doc_page_menus (
                 id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
-                sorting_order SMALLINT NOT NULL CHECK (sorting_order >= 0),
+                sorting_order SMALLINT NOT NULL DEFAULT 0,
                 created_at TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP(0) WITH TIME ZONE DEFAULT NULL,
                 PRIMARY KEY(id)

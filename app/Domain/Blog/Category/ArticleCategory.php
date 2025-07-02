@@ -19,7 +19,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'blog_article_categories')]
-#[ORM\UniqueConstraint(name: 'blog_article_category_slug_unique', columns: ['slug'])]
+#[ORM\Index(name: 'blog_article_categories_sorting_order_idx', columns: ['sorting_order'])]
+#[ORM\UniqueConstraint(name: 'blog_article_categories_slug_unique', columns: ['slug'])]
 class ArticleCategory implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
@@ -53,6 +54,12 @@ class ArticleCategory implements
      */
     #[ORM\Column(name: 'slug')]
     public private(set) string $slug;
+
+    /**
+     * @var int<-32768, 32767>
+     */
+    #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
+    public int $order = 0;
 
     /**
      * @var iterable<array-key, Article>

@@ -8,15 +8,40 @@
 
     <h1>Blog</h1>
 
-    {% for article in articles %}
+    <div style="display: grid; grid-template-columns: 2fr 1fr;">
+        <section>
+        {% for article in articles %}
+            <article>
+                <h2>
+                    <a href="{{ path('blog.show', {slug: article.slug}) }}">
+                        {{ article.title }}
+                    </a>
+                </h2>
+            </article>
+        {% endfor %}
+        </section>
+        <aside>
+            <nav>
+                <ul>
+                    {% for cateegory in categories %}
+                    <li>{{ cateegory.title }}</li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </aside>
+    </div>
 
-        <h2>
-            <a href="{{ path('blog.show', {slug: article.slug}) }}">
-                {{ article.title }}
-            </a>
-        </h2>
-
-        <hr />
-    {% endfor %}
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+        <span>
+            {% if page > 1 %}
+            <a style="float: left"
+               href="{{ path('blog.index', {page: page - 1}) }}">&lt;&lt; newest posts</a>
+            {% endif %}
+        </span>
+        <span>
+            <a style="float: right"
+                href="{{ path('blog.index', {page: page + 1}) }}">older posts &gt;&gt;</a>
+        </span>
+    </div>
 
 {% endblock %}
