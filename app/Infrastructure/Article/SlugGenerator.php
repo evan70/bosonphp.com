@@ -9,7 +9,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
  * @template T of object
- *
  * @template-implements SlugGeneratorInterface<T>
  */
 abstract readonly class SlugGenerator implements SlugGeneratorInterface
@@ -20,6 +19,7 @@ abstract readonly class SlugGenerator implements SlugGeneratorInterface
 
     /**
      * @param non-empty-string $title
+     *
      * @return non-empty-lowercase-string
      */
     protected function createSlugByString(string $title): string

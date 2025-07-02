@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * @api
  *
- * @internal this is an internal library class, please do not use it in your code.
+ * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Migration
  */
 final class Version20240830211215 extends AbstractMigration

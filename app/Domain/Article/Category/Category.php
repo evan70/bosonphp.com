@@ -38,7 +38,7 @@ class Category implements
     #[ORM\Column(name: 'title')]
     public string $title {
         get => $this->title;
-        set (string|\Stringable $value) {
+        set(string|\Stringable $value) {
             $title = (string) $value;
 
             assert($title !== '', 'Category title cannot be empty');

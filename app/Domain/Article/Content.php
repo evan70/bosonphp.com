@@ -25,7 +25,7 @@ final class Content implements StringValueObjectInterface
     #[ORM\Column(name: 'raw', type: 'text', options: ['default' => ''])]
     public string $value {
         get => $this->value;
-        set (string|\Stringable $value) {
+        set(string|\Stringable $value) {
             $this->value = (string) $value;
             $this->rendered = $this->contentRenderer->renderContent($this);
         }

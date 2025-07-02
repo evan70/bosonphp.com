@@ -37,7 +37,7 @@ class Article implements
     #[ORM\Column(name: 'title')]
     public string $title {
         get => $this->title;
-        set (string|\Stringable $value) {
+        set(string|\Stringable $value) {
             $title = (string) $value;
 
             assert($title !== '', 'Article title cannot be empty');
@@ -56,10 +56,11 @@ class Article implements
     #[ORM\Embedded(class: Content::class, columnPrefix: 'content_')]
     public Content $content {
         get => $this->content;
-        set (string|\Stringable $value) {
+        set(string|\Stringable $value) {
             /** @phpstan-ignore-next-line : PHPStan false-positive in isset() */
             if (!isset($this->content) && $value instanceof Content) {
                 $this->content = $value;
+
                 return;
             }
 

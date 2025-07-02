@@ -9,7 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 /**
  * @api
  *
- * @internal this is an internal library class, please do not use it in your code.
+ * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Type
  */
 abstract class StringEnumArrayType extends StringArrayType
