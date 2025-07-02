@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
-use App\Domain\Article\Category\ArticleCategory;
-use App\Domain\Article\Category\ArticleCategorySlugGeneratorInterface;
+use App\Domain\Blog\Category\ArticleCategory;
+use App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Article\Category;
+namespace App\Domain\Blog\Category;
 
 use App\Domain\Shared\Id\UniversalUniqueId;
 

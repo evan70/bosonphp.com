@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Type;
 
-use App\Domain\Article\Category\ArticleCategoryId;
+use App\Domain\Blog\Category\ArticleCategoryId;
 
 /**
  * @api

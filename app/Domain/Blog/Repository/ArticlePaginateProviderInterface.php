@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Article\Repository;
+namespace App\Domain\Blog\Repository;
 
-use App\Domain\Article\Article;
+use App\Domain\Blog\Article;
 
 interface ArticlePaginateProviderInterface
 {

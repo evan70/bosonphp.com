@@ -7,11 +7,11 @@ services:
   League\CommonMark\ConverterInterface:
     class: League\CommonMark\CommonMarkConverter
 
-  App\Domain\Article\ArticleContentRendererInterface:
-    class: App\Infrastructure\Article\ArticleContentRenderer
+  App\Domain\Blog\ArticleContentRendererInterface:
+    class: App\Infrastructure\Blog\ArticleContentRenderer
 
-  App\Domain\Article\ArticleSlugGeneratorInterface:
-    class: App\Infrastructure\Article\ArticleSlugGenerator
+  App\Domain\Blog\ArticleSlugGeneratorInterface:
+    class: App\Infrastructure\Blog\ArticleSlugGenerator
 
-  App\Domain\Article\Category\ArticleCategorySlugGeneratorInterface:
-    class: App\Infrastructure\Article\ArticleCategorySlugGenerator
+  App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface:
+    class: App\Infrastructure\Blog\ArticleCategorySlugGenerator

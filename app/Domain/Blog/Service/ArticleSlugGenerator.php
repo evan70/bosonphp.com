@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Article\Service;
+namespace App\Domain\Blog\Service;
 
-use App\Domain\Article\Article;
+use App\Domain\Blog\Article;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 final readonly class ArticleSlugGenerator

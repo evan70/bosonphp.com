@@ -35,8 +35,8 @@ doctrine:
       App\Domain\Account\Integration\IntegrationId: App\Infrastructure\Persistence\Doctrine\Type\IntegrationIdType
       App\Domain\Account\AccountId: App\Infrastructure\Persistence\Doctrine\Type\AccountIdType
       # Article
-      App\Domain\Article\ArticleId: App\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
-      App\Domain\Article\Category\ArticleCategoryId: App\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
+      App\Domain\Blog\ArticleId: App\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
+      App\Domain\Blog\Category\ArticleCategoryId: App\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
       # Shared
       string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Article;
+namespace App\Infrastructure\Blog;
 
-use App\Domain\Article\ArticleContentRendererInterface;
-use App\Domain\Article\Content;
+use App\Domain\Blog\ArticleContentRendererInterface;
+use App\Domain\Blog\Content;
 use League\CommonMark\ConverterInterface;
 
 final readonly class ArticleContentRenderer implements ArticleContentRendererInterface

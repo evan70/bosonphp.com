@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Article;
+namespace App\Domain\Blog;
 
-use App\Domain\Article\Repository\ArticleBySlugProviderInterface;
-use App\Domain\Article\Repository\ArticlePaginateProviderInterface;
+use App\Domain\Blog\Repository\ArticleBySlugProviderInterface;
+use App\Domain\Blog\Repository\ArticlePaginateProviderInterface;
 use Doctrine\Persistence\ObjectRepository;
 
 /**

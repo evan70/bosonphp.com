@@ -4,11 +4,11 @@ services:
     autowire: true
     autoconfigure: true
 
-  App\Domain\Article\ArticleRepositoryInterface:
+  App\Domain\Blog\ArticleRepositoryInterface:
     alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
 
-  App\Domain\Article\Repository\ArticlePaginateProviderInterface:
+  App\Domain\Blog\Repository\ArticlePaginateProviderInterface:
     alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
 
-  App\Domain\Article\Repository\ArticleBySlugProviderInterface:
+  App\Domain\Blog\Repository\ArticleBySlugProviderInterface:
     alias: App\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository

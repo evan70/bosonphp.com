@@ -4,5 +4,5 @@ services:
     autowire: true
     autoconfigure: true
 
-  App\Domain\Article\Service\:
-    resource: '%kernel.project_dir%/app/Domain/Article/Service'
+  App\Domain\Blog\Service\:
+    resource: '%kernel.project_dir%/app/Domain/Blog/Service'

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
-use App\Domain\Article\Article;
-use App\Domain\Article\ArticleContentRendererInterface;
-use App\Domain\Article\ArticleSlugGeneratorInterface;
-use App\Domain\Article\Category\ArticleCategory;
+use App\Domain\Blog\Article;
+use App\Domain\Blog\ArticleContentRendererInterface;
+use App\Domain\Blog\ArticleSlugGeneratorInterface;
+use App\Domain\Blog\Category\ArticleCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;

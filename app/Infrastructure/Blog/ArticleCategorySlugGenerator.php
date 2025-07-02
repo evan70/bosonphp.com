@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Article;
+namespace App\Infrastructure\Blog;
 
-use App\Domain\Article\Category\ArticleCategory;
-use App\Domain\Article\Category\ArticleCategorySlugGeneratorInterface;
+use App\Domain\Blog\Category\ArticleCategory;
+use App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface;
 
 /**
  * @template-extends SlugGenerator<ArticleCategory>

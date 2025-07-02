@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Article;
+namespace App\Domain\Blog;
 
 use App\Domain\Shared\Id\UniversalUniqueId;
 

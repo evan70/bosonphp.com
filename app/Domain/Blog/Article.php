@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Article;
+namespace App\Domain\Blog;
 
-use App\Domain\Article\Category\ArticleCategory;
+use App\Domain\Blog\Category\ArticleCategory;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
