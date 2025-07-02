@@ -60,7 +60,7 @@ abstract class Page implements
      * @var int<0, 32767>
      */
     #[ORM\Column(name: 'sorting_order', type: 'smallint')]
-    private int $order = 0 {
+    public int $order = 0 {
         get => $this->order;
         set {
             if ($value < 0 || $value > 32767) {

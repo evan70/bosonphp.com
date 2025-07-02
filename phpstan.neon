@@ -18,6 +18,9 @@ parameters:
     # Do not report DbC invariants and preconditions
     - identifier: function.alreadyNarrowedType
     - identifier: instanceof.alwaysTrue
+    - identifier: smaller.alwaysFalse
+    - identifier: greater.alwaysFalse
+    - identifier: booleanOr.alwaysFalse
   excludePaths:
     # Exclude testing and dev directories and files
     - app/Infrastructure/Persistence/Doctrine/Fixture
