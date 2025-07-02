@@ -42,7 +42,9 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
             $manager->persist(match ($this->faker->numberBetween(0, 8)) {
                 0 => new PageLink(
                     menu: $item,
-                    title: $this->faker->sentence($this->faker->numberBetween(1, 8)),
+                    title: \rtrim($this->faker->sentence(
+                        $this->faker->numberBetween(1, 8)
+                    ), '.'),
                     slugGenerator: $this->slugGenerator,
                 ),
                 default => new PageDocument(

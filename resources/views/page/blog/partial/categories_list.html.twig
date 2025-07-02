@@ -1,0 +1,19 @@
+<aside>
+    <nav>
+        <ul>
+            {% for current in categories %}
+                <li>
+                    {% if category is defined and category.id.equals(current.id) %}
+                        <strong>
+                            {{ current.title }}
+                        </strong>
+                    {% else %}
+                        <a href="{{ path('blog.index_by_category', {slug: current.slug}) }}">
+                            {{ current.title }}
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+</aside>

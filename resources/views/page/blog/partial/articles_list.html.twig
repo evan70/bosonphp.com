@@ -1,0 +1,15 @@
+<section>
+    {% for article in articles %}
+        <article>
+            <h2>
+                <a href="{{ path('blog.show', {slug: article.slug}) }}">
+                    {{ article.title }}
+                </a>
+            </h2>
+        </article>
+    {% endfor %}
+
+    {% if articles|length == 0 %}
+        <h1>Nothing found</h1>
+    {% endif %}
+</section>

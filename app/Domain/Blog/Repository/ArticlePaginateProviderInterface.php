@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Blog\Repository;
 
 use App\Domain\Blog\Article;
+use App\Domain\Blog\Category\ArticleCategory;
 
 interface ArticlePaginateProviderInterface
 {
@@ -27,5 +28,6 @@ interface ArticlePaginateProviderInterface
     public function getAllAsPaginator(
         int $page = self::DEFAULT_PAGE,
         int $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
+        ?ArticleCategory $category = null,
     ): iterable;
 }

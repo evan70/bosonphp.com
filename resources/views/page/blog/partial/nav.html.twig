@@ -1,0 +1,12 @@
+<footer style="display: grid; grid-template-columns: 1fr 1fr;">
+    <span>
+        {% if page > 1 %}
+            <a style="float: left"
+               href="{{ path('blog.index', {page: page - 1}) }}">&lt;&lt; newest posts</a>
+        {% endif %}
+    </span>
+    <span>
+        <a style="float: right"
+           href="{{ path('blog.index', {page: page + 1}) }}">older posts &gt;&gt;</a>
+    </span>
+</footer>

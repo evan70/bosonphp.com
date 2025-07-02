@@ -25,7 +25,9 @@ final class DocMenuFixture extends Fixture
     {
         for ($i = 0; $i < 32; ++$i) {
             $manager->persist(new Menu(
-                title: $this->faker->sentence($this->faker->numberBetween(1, 3)),
+                title: \rtrim($this->faker->sentence(
+                    $this->faker->numberBetween(1, 3)
+                ), '.'),
             ));
         }
 

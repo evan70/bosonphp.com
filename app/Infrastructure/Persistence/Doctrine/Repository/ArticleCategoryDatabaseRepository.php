@@ -8,6 +8,7 @@ use App\Domain\Blog\Category\ArticleCategory;
 use App\Domain\Blog\Category\ArticleCategoryRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\String\UnicodeString;
 
 /**
  * @template-extends ServiceEntityRepository<ArticleCategory>
@@ -18,6 +19,15 @@ final class ArticleCategoryDatabaseRepository extends ServiceEntityRepository im
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ArticleCategory::class);
+    }
+
+    public function findBySlug(string $slug): ?ArticleCategory
+    {
+        return $this->findOneBy([
+            'slug' => new UnicodeString($slug)
+                ->lower()
+                ->toString(),
+        ]);
     }
 
     public function getAll(): iterable

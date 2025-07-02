@@ -1,37 +1,43 @@
 {% extends 'layout/master.html.twig' %}
 
 {% block title %}
-    Boson Blog :: {{ parent() }}
+    {{ category.title }} :: {{ parent() }}
 {% endblock %}
 
 {% block body %}
 
-    <h1>Blog</h1>
+    <h1>&laquo; {{ category.title }} &raquo; blog posts</h1>
 
     <nav>
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
             <li>&rarr;</li>
-            <li>Blog</li>
+            <li><a href="{{ path('blog.index') }}">Blog</a> </li>
+            <li>&rarr;</li>
+            <li>{{ category.title }}</li>
         </ul>
     </nav>
 
     <div style="display: grid; grid-template-columns: 2fr 1fr;">
         {% include 'page/blog/partial/articles_list.html.twig' with {articles: articles} %}
-        {% include 'page/blog/partial/categories_list.html.twig' with {categories: categories} %}
+        {% include 'page/blog/partial/categories_list.html.twig' with {categories: categories, category: category} %}
     </div>
 
     <footer style="display: grid; grid-template-columns: 1fr 1fr;">
         <span>
             {% if page > 1 %}
                 <a style="float: left"
-                   href="{{ path('blog.index', {page: page - 1}) }}">&lt;&lt; newest posts</a>
+                   href="{{ path('blog.index_by_category', {slug: category.slug, page: page - 1}) }}">
+                    &lt;&lt; newest posts
+                </a>
             {% endif %}
         </span>
         <span>
             {% if articles|length >= 10 %}
             <a style="float: right"
-               href="{{ path('blog.index', {page: page + 1}) }}">older posts &gt;&gt;</a>
+               href="{{ path('blog.index_by_category', {slug: category.slug, page: page + 1}) }}">
+                older posts &gt;&gt;
+            </a>
             {% endif %}
         </span>
     </footer>
