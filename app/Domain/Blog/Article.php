@@ -34,7 +34,7 @@ class Article implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title')]
+    #[ORM\Column(name: 'title', length: 255)]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -50,15 +50,15 @@ class Article implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug')]
+    #[ORM\Column(name: 'slug', length: 255)]
     public private(set) string $slug;
 
-    #[ORM\Embedded(class: Content::class, columnPrefix: 'content_')]
-    public Content $content {
+    #[ORM\Embedded(class: ArticleContent::class, columnPrefix: 'content_')]
+    public ArticleContent $content {
         get => $this->content;
         set(string|\Stringable $value) {
             /** @phpstan-ignore-next-line : PHPStan false-positive in isset() */
-            if (!isset($this->content) && $value instanceof Content) {
+            if (!isset($this->content) && $value instanceof ArticleContent) {
                 $this->content = $value;
 
                 return;
@@ -85,7 +85,7 @@ class Article implements
     ) {
         $this->category = $category;
         $this->title = $title;
-        $this->content = new Content($content, $contentRenderer);
+        $this->content = new ArticleContent($content, $contentRenderer);
         $this->id = $id ?? ArticleId::new();
     }
 }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Blog;
+namespace App\Domain\Documentation;
 
 use App\Domain\Shared\Content\ContentRendererInterface;
 
 /**
  * Defines contract for content renderers in the {@see ArticleContent} VO.
  *
- * @template-extends ContentRendererInterface<ArticleContent>
+ * @template-extends ContentRendererInterface<Content>
  */
-interface ArticleContentRendererInterface extends
+interface PageDocumentContentRendererInterface extends
     ContentRendererInterface {}

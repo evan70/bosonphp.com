@@ -7,7 +7,7 @@ namespace App\Infrastructure\Persistence\Doctrine\Listener;
 use App\Domain\Blog\Article;
 use App\Domain\Blog\ArticleContentRendererInterface;
 use App\Domain\Blog\ArticleSlugGeneratorInterface;
-use App\Domain\Blog\Content;
+use App\Domain\Blog\ArticleContent;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 
@@ -36,7 +36,7 @@ final readonly class ArticleLoadListener
     /**
      * @throws \ReflectionException
      */
-    private function bootContentRenderer(Content $content): void
+    private function bootContentRenderer(ArticleContent $content): void
     {
         $contentRenderer = new \ReflectionProperty($content, 'contentRenderer');
 

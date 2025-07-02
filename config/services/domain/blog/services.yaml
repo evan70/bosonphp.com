@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # App\Domain\Blog\Service\:
+  #   resource: '%kernel.project_dir%/app/Domain/Blog/Service'

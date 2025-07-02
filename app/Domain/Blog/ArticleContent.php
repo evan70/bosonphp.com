@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Value object representing the content of an {@see Article}.
  */
 #[ORM\Embeddable]
-final class Content implements StringValueObjectInterface
+final class ArticleContent implements StringValueObjectInterface
 {
     /**
      * Rendered content string value.

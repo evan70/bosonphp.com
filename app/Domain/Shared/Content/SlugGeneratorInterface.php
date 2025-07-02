@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Shared\Title;
+namespace App\Domain\Shared\Content;
 
 /**
  * @template T  of object

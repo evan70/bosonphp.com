@@ -1,6 +1,6 @@
 
 imports:
-  - { resource: article/*.yaml }
+  - { resource: blog/*.yaml }
 
 services:
   _defaults:

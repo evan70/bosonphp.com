@@ -8,10 +8,13 @@ services:
     class: League\CommonMark\CommonMarkConverter
 
   App\Domain\Blog\ArticleContentRendererInterface:
-    class: App\Infrastructure\Blog\ArticleContentRenderer
+    class: App\Infrastructure\Content\ArticleContentRenderer
 
   App\Domain\Blog\ArticleSlugGeneratorInterface:
-    class: App\Infrastructure\Blog\ArticleSlugGenerator
+    class: App\Infrastructure\Content\ArticleSlugGenerator
 
   App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface:
-    class: App\Infrastructure\Blog\ArticleCategorySlugGenerator
+    class: App\Infrastructure\Content\ArticleCategorySlugGenerator
+
+  App\Domain\Documentation\PageSlugGeneratorInterface:
+    class: App\Infrastructure\Content\PageSlugGenerator

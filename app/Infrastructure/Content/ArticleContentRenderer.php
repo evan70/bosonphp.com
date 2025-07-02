@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Blog;
+namespace App\Infrastructure\Content;
 
 use App\Domain\Blog\ArticleContentRendererInterface;
-use App\Domain\Blog\Content;
+use App\Domain\Blog\ArticleContent;
 use League\CommonMark\ConverterInterface;
 
 final readonly class ArticleContentRenderer implements ArticleContentRendererInterface
@@ -16,7 +16,7 @@ final readonly class ArticleContentRenderer implements ArticleContentRendererInt
 
     public function renderContent(object $entity): string
     {
-        assert($entity instanceof Content);
+        assert($entity instanceof ArticleContent);
 
         return $this->converter->convert($entity->value)
             ->getContent();

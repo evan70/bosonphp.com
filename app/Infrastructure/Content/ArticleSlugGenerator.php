@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Blog;
+namespace App\Infrastructure\Content;
 
 use App\Domain\Blog\Article;
 use App\Domain\Blog\ArticleSlugGeneratorInterface;
