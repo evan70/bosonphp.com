@@ -26,12 +26,18 @@ final class ArticleCategoryFixture extends Fixture
     public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < 16; ++$i) {
-            $manager->persist(new ArticleCategory(
+            $category = new ArticleCategory(
                 title: \rtrim($this->faker->sentence(
                     $this->faker->numberBetween(1, 6)
                 ), '.'),
                 slugGenerator: $this->slugGenerator,
-            ));
+            );
+
+            if ($i > 0) {
+                $category->order = $this->faker->numberBetween(0, $i);
+            }
+
+            $manager->persist($category);
         }
 
         $manager->flush();

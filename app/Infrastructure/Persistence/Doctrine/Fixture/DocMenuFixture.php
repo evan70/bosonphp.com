@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
-use App\Domain\Documentation\Menu\Menu;
+use App\Domain\Documentation\Menu\PageMenu;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;
@@ -23,12 +23,18 @@ final class DocMenuFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 32; ++$i) {
-            $manager->persist(new Menu(
+        for ($i = 0; $i < 6; ++$i) {
+            $menu = new PageMenu(
                 title: \rtrim($this->faker->sentence(
                     $this->faker->numberBetween(1, 3)
                 ), '.'),
-            ));
+            );
+
+            if ($i > 0) {
+                $menu->order = $this->faker->numberBetween(0, $i);
+            }
+
+            $manager->persist($menu);
         }
 
         $manager->flush();
