@@ -9,4 +9,6 @@ enum Status: string
     case Stable = 'stable';
     case Dev = 'dev';
     case Hidden = 'hidden';
+
+    public const Status DEFAULT = Status::Stable;
 }

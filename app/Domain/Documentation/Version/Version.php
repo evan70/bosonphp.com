@@ -35,7 +35,7 @@ class Version implements
     public string $title;
 
     #[ORM\Column(name: 'status', type: Status::class)]
-    public Status $status = Status::Stable;
+    public Status $status = Status::DEFAULT;
 
     /**
      * @var PageMenuSet
@@ -59,9 +59,11 @@ class Version implements
      */
     public function __construct(
         string $title,
+        Status $status = Status::DEFAULT,
         ?VersionId $id = null,
     ) {
         $this->title = $title;
+        $this->status = $status;
         $this->id = $id ?? VersionId::new();
     }
 }
