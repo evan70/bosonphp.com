@@ -68,7 +68,7 @@ class Article implements
         }
     }
 
-    #[ORM\ManyToOne(targetEntity: ArticleCategory::class, inversedBy: 'articles')]
+    #[ORM\ManyToOne(targetEntity: ArticleCategory::class, fetch: 'EAGER', inversedBy: 'articles')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     public private(set) ArticleCategory $category;
 

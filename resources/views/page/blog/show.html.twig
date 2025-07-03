@@ -12,7 +12,9 @@
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
             <li>&rarr;</li>
-            <li><a href="{{ path('blog.index') }}">Blog</a> </li>
+            <li><a href="{{ path('blog.index') }}">Blog</a></li>
+            <li>&rarr;</li>
+            <li><a href="{{ path('blog.index_by_category', {slug: article.category.slug}) }}">{{ article.category.title }}</a></li>
             <li>&rarr;</li>
             <li>{{ article.title }}</li>
         </ul>
