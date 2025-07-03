@@ -51,7 +51,7 @@ class PageMenu implements
         get => PageSet::for($this, $this->pages);
     }
 
-    #[ORM\ManyToOne(targetEntity: Version::class, fetch: 'EAGER', inversedBy: 'menu')]
+    #[ORM\ManyToOne(targetEntity: Version::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'menu')]
     #[ORM\JoinColumn(name: 'version_id', referencedColumnName: 'id')]
     public private(set) Version $version;
 

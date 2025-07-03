@@ -37,7 +37,7 @@ final class Version20250702174835 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN doc_page_versions.id IS '(DC2Type:App\Domain\Documentation\PageId)'
+            COMMENT ON COLUMN doc_page_versions.id IS '(DC2Type:App\Domain\Documentation\Version\VersionId)'
             SQL);
 
         $this->addSql(<<<'SQL'

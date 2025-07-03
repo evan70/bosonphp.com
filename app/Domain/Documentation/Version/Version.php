@@ -34,6 +34,9 @@ class Version implements
     #[ORM\Column(name: 'title', type: 'string')]
     public string $title;
 
+    #[ORM\Column(name: 'status', type: Status::class)]
+    public Status $status = Status::Stable;
+
     /**
      * @var PageMenuSet
      */
@@ -42,6 +45,13 @@ class Version implements
     public iterable $menu {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
         get => PageMenuSet::for($this, $this->menu);
+    }
+
+    /**
+     * Returns {@see true} in case of version is visible
+     */
+    public bool $isVisible {
+        get => $this->status !== Status::Hidden;
     }
 
     /**

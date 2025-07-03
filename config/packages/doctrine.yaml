@@ -41,6 +41,7 @@ doctrine:
       App\Domain\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Type\PageIdType
       App\Domain\Documentation\Menu\PageMenuId: App\Infrastructure\Persistence\Doctrine\Type\PageMenuIdType
       App\Domain\Documentation\Version\VersionId: App\Infrastructure\Persistence\Doctrine\Type\VersionIdType
+      App\Domain\Documentation\Version\Status: App\Infrastructure\Persistence\Doctrine\Type\VersionStatusType
       # Shared
       string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 
