@@ -8,9 +8,9 @@ use App\Domain\Documentation\Page;
 use Local\Component\Set\RelationSet;
 
 /**
- * @template-extends RelationSet<Menu, Page>
+ * @template-extends RelationSet<PageMenu, Page>
  */
-final class MenuSet extends RelationSet
+final class PageMenuSet extends RelationSet
 {
     protected function shouldAdd(mixed $entry): bool
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Documentation;
 
-use App\Domain\Documentation\Menu\Menu;
+use App\Domain\Documentation\Menu\PageMenu;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,7 +30,7 @@ class PageDocument extends Page
     }
 
     public function __construct(
-        Menu $menu,
+        PageMenu $menu,
         string $title,
         PageSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,

@@ -1,0 +1,32 @@
+{% extends 'layout/master.html.twig' %}
+
+{% block title %}
+    Documentation :: {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h1>Documentation</h1>
+
+    <nav>
+        <ul>
+            <li><a href="{{ path('home') }}">Home</a></li>
+            <li>&rarr;</li>
+            <li>Documentation</li>
+        </ul>
+    </nav>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;" class="grid">
+        {% for item in menu %}
+        <article>
+            <h2>{{ item.title }}</h2>
+            <ul>
+                {% for ref in item.pages %}
+                <li>{{ ref.title }}</li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endfor %}
+    </div>
+
+{% endblock %}

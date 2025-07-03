@@ -6,4 +6,4 @@ namespace App\Domain\Documentation\Menu;
 
 use App\Domain\Shared\Id\UniversalUniqueId;
 
-final readonly class MenuId extends UniversalUniqueId {}
+final readonly class PageMenuId extends UniversalUniqueId {}

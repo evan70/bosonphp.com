@@ -39,7 +39,7 @@ doctrine:
       App\Domain\Blog\Category\ArticleCategoryId: App\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
       # Documentation
       App\Domain\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Type\PageIdType
-      App\Domain\Documentation\Menu\MenuId: App\Infrastructure\Persistence\Doctrine\Type\MenuIdType
+      App\Domain\Documentation\Menu\PageMenuId: App\Infrastructure\Persistence\Doctrine\Type\PageMenuIdType
       # Shared
       string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 

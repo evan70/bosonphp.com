@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Documentation;
 
-use App\Domain\Documentation\Menu\Menu;
+use App\Domain\Documentation\Menu\PageMenu;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -55,17 +55,17 @@ abstract class Page implements
     #[ORM\Column(name: 'slug', length: 255)]
     public private(set) string $slug;
 
-    #[ORM\ManyToOne(targetEntity: Menu::class, inversedBy: 'pages')]
+    #[ORM\ManyToOne(targetEntity: PageMenu::class, fetch: 'EAGER', inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'menu_id', referencedColumnName: 'id')]
-    public private(set) Menu $menu;
+    public private(set) PageMenu $menu;
 
     /**
      * @param non-empty-string $title
      */
     public function __construct(
-        Menu $menu,
+        PageMenu $menu,
         string $title,
-        private readonly PageSlugGeneratorInterface $slugGenerator,
+        protected readonly PageSlugGeneratorInterface $slugGenerator,
         ?PageId $id = null,
     ) {
         $this->title = $title;

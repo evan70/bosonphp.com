@@ -30,10 +30,14 @@ final class ArticleCategoryDatabaseRepository extends ServiceEntityRepository im
         ]);
     }
 
-    public function getAll(): iterable
+    /**
+     * @return list<ArticleCategory>
+     */
+    public function getAll(): array
     {
         return $this->findBy([], [
             'order' => 'ASC',
+            'createdAt' => 'DESC',
         ]);
     }
 }

@@ -1,0 +1,11 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Domain\Documentation\Menu\PageMenuRepositoryInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageMenuDatabaseRepository
+
+  App\Domain\Documentation\Menu\Repository\PageMenuListProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageMenuDatabaseRepository

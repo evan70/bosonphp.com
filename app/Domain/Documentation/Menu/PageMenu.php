@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: 'doc_page_menus')]
 #[ORM\Index(name: 'doc_page_menus_sorting_order_idx', columns: ['sorting_order'])]
-class Menu implements
+class PageMenu implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
@@ -24,8 +24,8 @@ class Menu implements
     use UpdatedDateProvider;
 
     #[ORM\Id]
-    #[ORM\Column(type: MenuId::class)]
-    public private(set) MenuId $id;
+    #[ORM\Column(type: PageMenuId::class)]
+    public private(set) PageMenuId $id;
 
     /**
      * @var non-empty-string
@@ -40,13 +40,13 @@ class Menu implements
     public int $order = 0;
 
     /**
-     * @var MenuSet
+     * @var PageMenuSet
      */
     #[ORM\OneToMany(targetEntity: Page::class, mappedBy: 'menu', cascade: ['ALL'], fetch: 'EAGER')]
     #[ORM\OrderBy(['id' => 'ASC'])]
     public iterable $pages {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => MenuSet::for($this, $this->pages);
+        get => PageMenuSet::for($this, $this->pages);
     }
 
     /**
@@ -54,10 +54,10 @@ class Menu implements
      */
     public function __construct(
         string $title,
-        ?MenuId $id = null,
+        ?PageMenuId $id = null,
     ) {
         $this->title = $title;
-        $this->pages = new MenuSet($this);
-        $this->id = $id ?? MenuId::new();
+        $this->pages = new PageMenuSet($this);
+        $this->id = $id ?? PageMenuId::new();
     }
 }
