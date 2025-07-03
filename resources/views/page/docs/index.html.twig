@@ -8,10 +8,42 @@
 
     <h1>Documentation</h1>
 
-    <nav aria-label="breadcrumb">
+    <nav>
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
-            <li>Documentation</li>
+            <li style="color: #5d6b89">&gt;</li>
+            <li>
+                <details class="dropdown">
+                    <summary role="button" class="outline secondary">
+                        Documentation ({{ version.name }})
+                    </summary>
+                    <ul>
+                        {% for ver in versions %}
+                            {% if ver.status.value != 'deprecated' %}
+                                <li>
+                                    <a href="{{ path('doc.index_by_version', {
+                                        version: ver.name
+                                    }) }}">{{ ver.name }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        <li>
+                            <strong>Unmaintained Versions</strong>
+                        </li>
+
+                        {% for ver in versions %}
+                            {% if ver.status.value == 'deprecated' %}
+                            <li>
+                                <a href="{{ path('doc.index_by_version', {
+                                    version: ver.name
+                                }) }}">{{ ver.name }}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </details>
+            </li>
         </ul>
     </nav>
 

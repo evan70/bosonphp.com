@@ -31,8 +31,8 @@ class Version implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string')]
-    public string $title;
+    #[ORM\Column(name: 'name', type: 'string')]
+    public string $name;
 
     #[ORM\Column(name: 'status', type: Status::class)]
     public Status $status = Status::DEFAULT;
@@ -40,7 +40,7 @@ class Version implements
     /**
      * @var PageMenuSet
      */
-    #[ORM\OneToMany(targetEntity: PageMenu::class, mappedBy: 'version', cascade: ['ALL'], fetch: 'EAGER')]
+    #[ORM\OneToMany(targetEntity: PageMenu::class, mappedBy: 'version', cascade: ['ALL'])]
     #[ORM\OrderBy(['id' => 'ASC'])]
     public iterable $menu {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
@@ -48,21 +48,14 @@ class Version implements
     }
 
     /**
-     * Returns {@see true} in case of version is visible
-     */
-    public bool $isVisible {
-        get => $this->status !== Status::Hidden;
-    }
-
-    /**
-     * @param non-empty-string $title
+     * @param non-empty-string $name
      */
     public function __construct(
-        string $title,
+        string $name,
         Status $status = Status::DEFAULT,
         ?VersionId $id = null,
     ) {
-        $this->title = $title;
+        $this->name = $name;
         $this->status = $status;
         $this->id = $id ?? VersionId::new();
     }

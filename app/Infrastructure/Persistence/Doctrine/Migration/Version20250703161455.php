@@ -23,7 +23,12 @@ final class Version20250703161455 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
-            CREATE TYPE app_domain_documentation_version_status AS ENUM ('stable', 'dev', 'hidden');
+            CREATE TYPE app_domain_documentation_version_status AS ENUM (
+                'stable',
+                'dev',
+                'deprecated',
+                'hidden'
+            );
             SQL);
 
         $this->addSql(<<<'SQL'

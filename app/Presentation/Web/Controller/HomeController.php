@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presentation\Web\Controller;
 
-use App\Domain\Documentation\Menu\Repository\PageMenuListProviderInterface;
+use App\Domain\Documentation\Version\Repository\CurrentVersionProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,13 +13,16 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     public function __construct(
-        private readonly PageMenuListProviderInterface $menus,
+        private readonly CurrentVersionProviderInterface $versions,
     ) {}
 
     public function __invoke(): Response
     {
+        $version = $this->versions->findLatest();
+
         return $this->render('page/home.html.twig', [
-            'menu' => $this->menus->getAll(),
+            'version' => $version,
+            'menu' => $version?->menu ?? null,
         ]);
     }
 }

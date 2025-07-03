@@ -25,7 +25,7 @@ final class DocVersionFixture extends Fixture
     public function load(ObjectManager $manager): void
     {
         for ($major = 0; $major < 7; ++$major) {
-            $maxMinorValue = $this->faker->numberBetween(1, 20);
+            $maxMinorValue = $this->faker->numberBetween(1, 5);
 
             for ($minor = 0; $minor < $maxMinorValue; ++$minor) {
                 if ($major === 0 && $minor === 0) {
@@ -33,10 +33,11 @@ final class DocVersionFixture extends Fixture
                 }
 
                 $manager->persist(new Version(
-                    title: \sprintf('%d.%d', $major, $minor),
-                    status: match ($this->faker->numberBetween(0, 6)) {
+                    name: \sprintf('%d.%d', $major, $minor),
+                    status: match ($this->faker->numberBetween(0, 8)) {
                         1 => Status::Hidden,
                         2 => Status::Dev,
+                        3,4,5 => Status::Deprecated,
                         default => Status::Stable,
                     }),
                 );

@@ -6,6 +6,7 @@ namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Domain\Documentation\Menu\PageMenu;
 use App\Domain\Documentation\Menu\PageMenuRepositoryInterface;
+use App\Domain\Documentation\Version\Version;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -23,9 +24,11 @@ final class DocumentationPageMenuDatabaseRepository extends ServiceEntityReposit
     /**
      * @return list<PageMenu>
      */
-    public function getAll(): array
+    public function getAll(Version $version): array
     {
-        return $this->findBy([], [
+        return $this->findBy([
+            'version' => $version,
+        ], [
             'order' => 'ASC',
             'createdAt' => 'DESC',
         ]);

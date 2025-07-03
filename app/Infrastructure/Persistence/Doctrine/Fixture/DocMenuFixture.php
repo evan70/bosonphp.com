@@ -26,7 +26,7 @@ final class DocMenuFixture extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $versions = $manager->getRepository(Version::class)
-            ->findBy([], ['title' => 'ASC']); // Reverse order
+            ->findBy([], ['name' => 'ASC']); // Reverse order
 
         for ($i = 0; $i < 10; ++$i) {
             $title = \rtrim($this->faker->sentence(

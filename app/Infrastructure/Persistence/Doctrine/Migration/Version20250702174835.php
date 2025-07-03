@@ -25,7 +25,7 @@ final class Version20250702174835 extends AbstractMigration
         $this->addSql(<<<'SQL'
             CREATE TABLE doc_page_versions (
                 id UUID NOT NULL,
-                title VARCHAR(255) NOT NULL CHECK ( title <> '' ),
+                name VARCHAR(255) COLLATE numeric NOT NULL CHECK ( name <> '' ),
                 created_at TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP(0) WITH TIME ZONE DEFAULT NULL,
                 PRIMARY KEY(id)
@@ -33,7 +33,7 @@ final class Version20250702174835 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE UNIQUE INDEX doc_page_versions_unique_idx ON doc_page_versions (title)
+            CREATE UNIQUE INDEX doc_page_versions_unique_idx ON doc_page_versions (name)
             SQL);
 
         $this->addSql(<<<'SQL'

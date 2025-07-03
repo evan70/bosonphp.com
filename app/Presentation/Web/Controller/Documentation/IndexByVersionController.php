@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('doc/{version}/{page}', name: 'doc.show', methods: 'GET')]
-final class ShowController extends AbstractController
+#[Route('doc/{version}', name: 'doc.index_by_version', methods: 'GET')]
+final class IndexByVersionController extends AbstractController
 {
     public function __construct(
         private readonly CurrentVersionProviderInterface $currentVersions,
@@ -21,7 +21,7 @@ final class ShowController extends AbstractController
         private readonly VersionsListProviderInterface $versionsList,
     ) {}
 
-    public function __invoke(string $version, string $page): Response
+    public function __invoke(string $version): Response
     {
         $instance = $version === 'current'
             ? $this->currentVersions->findLatest()
@@ -31,7 +31,7 @@ final class ShowController extends AbstractController
             throw new NotFoundHttpException(\sprintf('Version "%s" not found', $version));
         }
 
-        return $this->render('page/docs/show.html.twig', [
+        return $this->render('page/docs/index.html.twig', [
             'versions' => $this->versionsList->getAll(),
             'version' => $instance,
             'menu' => $instance?->menu ?? [],

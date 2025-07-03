@@ -3,13 +3,18 @@
 {% block body %}
     <nav>
         <ul>
+            <li>
+                <h1>Logo</h1>
+            </li>
+        </ul>
+        <ul>
             <li>Home</li>
             <li>
                 <details class="dropdown">
-                    <summary>
+                    <summary role="button" class="outline secondary">
                         <a href="{{ path('doc.index') }}">References</a>
                     </summary>
-                    <ul>
+                    <ul dir="rtl">
                         {% for item in menu %}
                         <li><a href="#">{{ item.title }}</a></li>
                         {% endfor %}

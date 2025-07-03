@@ -4,6 +4,25 @@ services:
     autowire: true
     autoconfigure: true
 
+  # App\Domain\Documentation\PageRepositoryInterface:
+  #   alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageDatabaseRepository
+
+
+
+  App\Domain\Documentation\Version\VersionRepositoryInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+
+  App\Domain\Documentation\Version\Repository\CurrentVersionProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+
+  App\Domain\Documentation\Version\Repository\VersionByNameProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+
+  App\Domain\Documentation\Version\Repository\VersionsListProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+
+
+
   App\Domain\Documentation\Menu\PageMenuRepositoryInterface:
     alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageMenuDatabaseRepository
 

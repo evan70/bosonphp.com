@@ -46,6 +46,9 @@ doctrine:
       string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 
   orm:
+    dql:
+      string_functions:
+        cast: App\Infrastructure\Persistence\Doctrine\Fun\CastFunction
     auto_generate_proxy_classes: true
     enable_lazy_ghost_objects: true
     report_fields_where_declared: true
