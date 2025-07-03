@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
+use App\Domain\Documentation\Version\Status;
 use App\Domain\Documentation\Version\Version;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -33,7 +34,12 @@ final class DocVersionFixture extends Fixture
 
                 $manager->persist(new Version(
                     title: \sprintf('%d.%d', $major, $minor),
-                ));
+                    status: match ($this->faker->numberBetween(0, 6)) {
+                        1 => Status::Hidden,
+                        2 => Status::Dev,
+                        default => Status::Stable,
+                    }),
+                );
             }
         }
 
