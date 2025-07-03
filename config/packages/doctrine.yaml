@@ -40,6 +40,7 @@ doctrine:
       # Documentation
       App\Domain\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Type\PageIdType
       App\Domain\Documentation\Menu\PageMenuId: App\Infrastructure\Persistence\Doctrine\Type\PageMenuIdType
+      App\Domain\Documentation\Version\VersionId: App\Infrastructure\Persistence\Doctrine\Type\VersionIdType
       # Shared
       string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 
@@ -51,10 +52,8 @@ doctrine:
     naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
     identity_generation_preferences:
       Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
-    auto_mapping: true
+    auto_mapping: false
     enable_native_lazy_objects: true
-    controller_resolver:
-      auto_mapping: false
     mappings:
       App:
         type: attribute

@@ -50,7 +50,7 @@ final class Version20250702175313 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN doc_pages.menu_id IS '(DC2Type:App\Domain\Documentation\Menu\MenuId)'
+            COMMENT ON COLUMN doc_pages.menu_id IS '(DC2Type:App\Domain\Documentation\Menu\PageMenuId)'
             SQL);
 
         $this->addSql(<<<'SQL'

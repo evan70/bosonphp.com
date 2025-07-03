@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
 use App\Domain\Documentation\Menu\PageMenu;
+use App\Domain\Documentation\Version\Version;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;
 
@@ -15,7 +17,7 @@ use Faker\Generator;
  * @internal this is an internal library class, please do not use it in your code.
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
-final class DocMenuFixture extends Fixture
+final class DocMenuFixture extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
         private readonly Generator $faker,
@@ -23,20 +25,41 @@ final class DocMenuFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 6; ++$i) {
-            $menu = new PageMenu(
-                title: \rtrim($this->faker->sentence(
-                    $this->faker->numberBetween(1, 3)
-                ), '.'),
-            );
+        $versions = $manager->getRepository(Version::class)
+            ->findBy([], ['title' => 'ASC']); // Reverse order
 
-            if ($i > 0) {
-                $menu->order = $this->faker->numberBetween(0, $i);
+        for ($i = 0; $i < 10; ++$i) {
+            $title = \rtrim($this->faker->sentence(
+                $this->faker->numberBetween(1, 3)
+            ), '.');
+
+            if ($this->faker->numberBetween(0, 10) === 0) {
+                continue;
             }
 
-            $manager->persist($menu);
+            foreach ($versions as $version) {
+                $menu = new PageMenu(
+                    version: $version,
+                    title: $title,
+                );
+
+                $menu->order = $i;
+
+                $manager->persist($menu);
+            }
         }
 
+
         $manager->flush();
+    }
+
+    /**
+     * @return list<class-string<Fixture>>
+     */
+    public function getDependencies(): array
+    {
+        return [
+            DocVersionFixture::class,
+        ];
     }
 }

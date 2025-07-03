@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Domain\Documentation\Menu;
 
 use App\Domain\Documentation\Page;
+use App\Domain\Documentation\PageSet;
+use App\Domain\Documentation\Version\Version;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -24,13 +26,13 @@ class PageMenu implements
     use UpdatedDateProvider;
 
     #[ORM\Id]
-    #[ORM\Column(type: PageMenuId::class)]
+    #[ORM\Column(name: 'id', type: PageMenuId::class)]
     public private(set) PageMenuId $id;
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     public string $title;
 
     /**
@@ -40,24 +42,30 @@ class PageMenu implements
     public int $order = 0;
 
     /**
-     * @var PageMenuSet
+     * @var PageSet
      */
     #[ORM\OneToMany(targetEntity: Page::class, mappedBy: 'menu', cascade: ['ALL'], fetch: 'EAGER')]
     #[ORM\OrderBy(['id' => 'ASC'])]
     public iterable $pages {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => PageMenuSet::for($this, $this->pages);
+        get => PageSet::for($this, $this->pages);
     }
+
+    #[ORM\ManyToOne(targetEntity: Version::class, fetch: 'EAGER', inversedBy: 'menu')]
+    #[ORM\JoinColumn(name: 'version_id', referencedColumnName: 'id')]
+    public private(set) Version $version;
 
     /**
      * @param non-empty-string $title
      */
     public function __construct(
+        Version $version,
         string $title,
         ?PageMenuId $id = null,
     ) {
+        $this->version = $version;
         $this->title = $title;
-        $this->pages = new PageMenuSet($this);
+        $this->pages = new PageSet($this);
         $this->id = $id ?? PageMenuId::new();
     }
 }

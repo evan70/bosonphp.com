@@ -25,6 +25,7 @@ final class Version20250702174837 extends AbstractMigration
         $this->addSql(<<<'SQL'
             CREATE TABLE doc_page_menus (
                 id UUID NOT NULL,
+                version_id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
                 sorting_order SMALLINT NOT NULL DEFAULT 0,
                 created_at TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -34,11 +35,25 @@ final class Version20250702174837 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
+            ALTER TABLE doc_page_menus ADD CONSTRAINT FK_2EBD7EEB4BBC2705
+                FOREIGN KEY (version_id)
+                REFERENCES doc_page_versions (id) NOT DEFERRABLE INITIALLY IMMEDIATE
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            CREATE INDEX IDX_2EBD7EEB4BBC2705 ON doc_page_menus (version_id)
+            SQL);
+
+        $this->addSql(<<<'SQL'
             CREATE INDEX doc_page_menus_sorting_order_idx ON doc_page_menus (sorting_order)
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN doc_page_menus.id IS '(DC2Type:App\Domain\Documentation\Menu\MenuId)'
+            COMMENT ON COLUMN doc_page_menus.id IS '(DC2Type:App\Domain\Documentation\Menu\PageMenuId)'
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            COMMENT ON COLUMN doc_page_menus.version_id IS '(DC2Type:App\Domain\Documentation\PageId)'
             SQL);
 
         $this->addSql(<<<'SQL'
@@ -52,6 +67,16 @@ final class Version20250702174837 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
-        $this->addSql('DROP TABLE doc_page_menus');
+        $this->addSql(<<<'SQL'
+            ALTER TABLE doc_page_menus DROP CONSTRAINT FK_2EBD7EEB4BBC2705
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            DROP INDEX IDX_2EBD7EEB4BBC2705
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            DROP TABLE doc_page_menus
+            SQL);
     }
 }

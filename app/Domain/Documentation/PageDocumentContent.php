@@ -16,7 +16,7 @@ final class PageDocumentContent implements StringValueObjectInterface
     /**
      * Rendered content string value.
      */
-    #[ORM\Column(type: 'text', options: ['default' => ''])]
+    #[ORM\Column(name: 'rendered', type: 'text', options: ['default' => ''])]
     public private(set) string $rendered;
 
     /**

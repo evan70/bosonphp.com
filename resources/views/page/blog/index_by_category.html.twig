@@ -8,12 +8,10 @@
 
     <h1>&laquo; {{ category.title }} &raquo; blog posts</h1>
 
-    <nav>
+    <nav aria-label="breadcrumb">
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
-            <li>&rarr;</li>
-            <li><a href="{{ path('blog.index') }}">Blog</a> </li>
-            <li>&rarr;</li>
+            <li><a href="{{ path('blog.index') }}">Blog</a></li>
             <li>{{ category.title }}</li>
         </ul>
     </nav>

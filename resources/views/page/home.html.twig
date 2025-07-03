@@ -4,7 +4,18 @@
     <nav>
         <ul>
             <li>Home</li>
-            <li><a href="{{ path('doc.index') }}">References</a></li>
+            <li>
+                <details class="dropdown">
+                    <summary>
+                        <a href="{{ path('doc.index') }}">References</a>
+                    </summary>
+                    <ul>
+                        {% for item in menu %}
+                        <li><a href="#">{{ item.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </details>
+            </li>
             <li><a href="{{ path('blog.index') }}">Blog</a></li>
         </ul>
     </nav>

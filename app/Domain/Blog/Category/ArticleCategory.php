@@ -30,13 +30,13 @@ class ArticleCategory implements
     use UpdatedDateProvider;
 
     #[ORM\Id]
-    #[ORM\Column(type: ArticleCategoryId::class)]
+    #[ORM\Column(name: 'id', type: ArticleCategoryId::class)]
     public private(set) ArticleCategoryId $id;
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title')]
+    #[ORM\Column(name: 'title', type: 'string')]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -52,7 +52,7 @@ class ArticleCategory implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug')]
+    #[ORM\Column(name: 'slug', type: 'string')]
     public private(set) string $slug;
 
     /**

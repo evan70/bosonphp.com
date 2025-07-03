@@ -28,13 +28,13 @@ class Article implements
     use UpdatedDateProvider;
 
     #[ORM\Id]
-    #[ORM\Column(type: ArticleId::class)]
+    #[ORM\Column(name: 'id', type: ArticleId::class)]
     public private(set) ArticleId $id;
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -50,7 +50,7 @@ class Article implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug', length: 255)]
+    #[ORM\Column(name: 'slug', type: 'string')]
     public private(set) string $slug;
 
     #[ORM\Embedded(class: ArticleContent::class, columnPrefix: 'content_')]

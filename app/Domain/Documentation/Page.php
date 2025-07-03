@@ -30,13 +30,13 @@ abstract class Page implements
     use UpdatedDateProvider;
 
     #[ORM\Id]
-    #[ORM\Column(type: PageId::class)]
+    #[ORM\Column(name: 'id', type: PageId::class)]
     public private(set) PageId $id;
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {

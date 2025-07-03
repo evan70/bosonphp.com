@@ -13,13 +13,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class IndexController extends AbstractController
 {
     public function __construct(
-        private PageMenuListProviderInterface $pageMenuList,
+        private readonly PageMenuListProviderInterface $menus,
     ) {}
 
     public function __invoke(): Response
     {
         return $this->render('page/docs/index.html.twig', [
-            'menu' => $this->pageMenuList->getAll(),
+            'menu' => $this->menus->getAll(),
         ]);
     }
 }
