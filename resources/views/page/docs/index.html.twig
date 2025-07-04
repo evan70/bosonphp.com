@@ -53,7 +53,14 @@
             <h2>{{ item.title }}</h2>
             <ul>
                 {% for ref in item.pages %}
-                <li>{{ ref.title }}</li>
+                <li>
+                    <a href="{{ path('doc.show', {
+                        page: ref.slug,
+                        version: version.name
+                    }) }}">
+                        {{ ref.title }}
+                    </a>
+                </li>
                 {% endfor %}
             </ul>
         </article>

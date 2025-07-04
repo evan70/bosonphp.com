@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Presentation\Web\Controller\Documentation;
 
+use App\Domain\Documentation\PageDocument;
+use App\Domain\Documentation\Repository\PageByNameProviderInterface;
 use App\Domain\Documentation\Version\Repository\CurrentVersionProviderInterface;
 use App\Domain\Documentation\Version\Repository\VersionByNameProviderInterface;
 use App\Domain\Documentation\Version\Repository\VersionsListProviderInterface;
@@ -19,22 +21,31 @@ final class ShowController extends AbstractController
         private readonly CurrentVersionProviderInterface $currentVersions,
         private readonly VersionByNameProviderInterface $versionsByName,
         private readonly VersionsListProviderInterface $versionsList,
+        private readonly PageByNameProviderInterface $pageByName,
     ) {}
 
     public function __invoke(string $version, string $page): Response
     {
-        $instance = $version === 'current'
+        $versionInstance = $version === 'current'
             ? $this->currentVersions->findLatest()
             : $this->versionsByName->findVersionByName($version);
 
-        if ($instance === null) {
+        if ($versionInstance === null) {
             throw new NotFoundHttpException(\sprintf('Version "%s" not found', $version));
+        }
+
+        /** @var PageDocument $pageInstance */
+        $pageInstance = $this->pageByName->findByName($versionInstance, $page);
+
+        if ($pageInstance === null) {
+            throw new NotFoundHttpException(\sprintf('Page "%s" not found', $page));
         }
 
         return $this->render('page/docs/show.html.twig', [
             'versions' => $this->versionsList->getAll(),
-            'version' => $instance,
-            'menu' => $instance?->menu ?? [],
+            'version' => $versionInstance,
+            'page' => $pageInstance,
+            'menu' => $versionInstance?->menu ?? [],
         ]);
     }
 }

@@ -55,7 +55,7 @@ abstract class Page implements
     #[ORM\Column(name: 'slug', length: 255)]
     public private(set) string $slug;
 
-    #[ORM\ManyToOne(targetEntity: PageMenu::class, fetch: 'EAGER', inversedBy: 'pages')]
+    #[ORM\ManyToOne(targetEntity: PageMenu::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'menu_id', referencedColumnName: 'id')]
     public private(set) PageMenu $menu;
 

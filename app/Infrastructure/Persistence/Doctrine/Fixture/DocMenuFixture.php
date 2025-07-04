@@ -40,7 +40,7 @@ final class DocMenuFixture extends Fixture implements DependentFixtureInterface
             foreach ($versions as $version) {
                 $menu = new PageMenu(
                     version: $version,
-                    title: $title,
+                    title: $title . ' (v' . $version->name . ')',
                 );
 
                 $menu->order = $i;

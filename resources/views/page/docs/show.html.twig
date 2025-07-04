@@ -16,7 +16,10 @@
     </nav>
 
     <div>
-        asd
+        <h2>{{ page.title }}</h2>
+        <article>
+            {{ page.content | raw }}
+        </article>
     </div>
 
 {% endblock %}

@@ -33,28 +33,35 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
         $items = $manager->getRepository(PageMenu::class)
             ->findAll();
 
-        /** @var PageMenu $item */
-        foreach ($items as $item) {
-            $refCount = $this->faker->numberBetween(1, 10);
+        for ($i = 0; $i < 10; $i++) {
+            $title = \rtrim($this->faker->sentence(
+                $this->faker->numberBetween(1, 8)
+            ), '.');
 
-            for ($i = 0; $i < $refCount; $i++) {
+            /** @var PageMenu $item */
+            foreach ($items as $item) {
+                if (\random_int(0, 4) === 0) {
+                    continue;
+                }
+
                 $manager->persist(match ($this->faker->numberBetween(0, 8)) {
                     0 => new PageLink(
                         menu: $item,
-                        title: \rtrim($this->faker->sentence(
-                            $this->faker->numberBetween(1, 8)
-                        ), '.'),
+                        title: $title,
                         slugGenerator: $this->slugGenerator,
                     ),
                     default => new PageDocument(
                         menu: $item,
-                        title: \rtrim($this->faker->sentence(
-                            $this->faker->numberBetween(1, 8),
-                        ), '.'),
+                        title: $title,
                         slugGenerator: $this->slugGenerator,
                         content: $this->faker->markdownContent(
                             $this->faker->numberBetween(5, 50),
-                        ),
+                        )
+                            . "\n\n"
+                            . '> `menu:` ' . $item->title . "\n>\n"
+                            . '> `menu_id:` ' . $item->id . "\n>\n"
+                            . '> `ver:` ' . $item->version->name . "\n>\n"
+                        ,
                         contentRenderer: $this->renderer,
                     ),
                 });

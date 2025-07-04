@@ -4,8 +4,11 @@ services:
     autowire: true
     autoconfigure: true
 
-  # App\Domain\Documentation\PageRepositoryInterface:
-  #   alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageDatabaseRepository
+  App\Domain\Documentation\PageRepositoryInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageDatabaseRepository
+
+  App\Domain\Documentation\Repository\PageByNameProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageDatabaseRepository
 
 
 
