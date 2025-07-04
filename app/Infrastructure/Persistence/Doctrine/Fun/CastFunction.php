@@ -51,7 +51,7 @@ final class CastFunction extends FunctionNode
             if ($lexer->isNextToken(TokenType::T_COMMA)) {
                 while ($lexer->isNextToken(TokenType::T_COMMA)) {
                     $parser->match(TokenType::T_COMMA);
-                    $parameter    = $parser->Literal();
+                    $parameter = $parser->Literal();
                     $parameters[] = $parameter->value;
                 }
             }

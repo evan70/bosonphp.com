@@ -17,7 +17,7 @@ use Faker\Generator;
 /**
  * @api
  *
- * @internal this is an internal library class, please do not use it in your code.
+ * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
 final class DocPageFixture extends Fixture implements DependentFixtureInterface
@@ -33,7 +33,7 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
         $items = $manager->getRepository(PageMenu::class)
             ->findAll();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 10; ++$i) {
             $title = \rtrim($this->faker->sentence(
                 $this->faker->numberBetween(1, 8)
             ), '.');
@@ -60,8 +60,7 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
                             . "\n\n"
                             . '> `menu:` ' . $item->title . "\n>\n"
                             . '> `menu_id:` ' . $item->id . "\n>\n"
-                            . '> `ver:` ' . $item->version->name . "\n>\n"
-                        ,
+                            . '> `ver:` ' . $item->version->name . "\n>\n",
                         contentRenderer: $this->renderer,
                     ),
                 });

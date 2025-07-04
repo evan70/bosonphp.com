@@ -16,7 +16,7 @@ final class MarkdownProvider extends Base
             $this->markdownTitle(
                 words: $this->generator->numberBetween(1, 10),
                 level: $currentTitleLevel++,
-            )
+            ),
         ];
 
         for ($i = 0; $i < $paragraphs; ++$i) {

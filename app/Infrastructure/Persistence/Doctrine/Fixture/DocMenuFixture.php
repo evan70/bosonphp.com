@@ -14,7 +14,7 @@ use Faker\Generator;
 /**
  * @api
  *
- * @internal this is an internal library class, please do not use it in your code.
+ * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
 final class DocMenuFixture extends Fixture implements DependentFixtureInterface
@@ -48,7 +48,6 @@ final class DocMenuFixture extends Fixture implements DependentFixtureInterface
                 $manager->persist($menu);
             }
         }
-
 
         $manager->flush();
     }
