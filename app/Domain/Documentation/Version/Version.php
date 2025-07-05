@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Documentation\Version;
 
 use App\Domain\Documentation\Category\Category;
-use App\Domain\Documentation\Category\CategoriesOfVersionCollection;
-use App\Domain\Documentation\Page;
-use App\Domain\Documentation\PagesOfVersionCollection;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -40,13 +37,13 @@ class Version implements
     public Status $status = Status::DEFAULT;
 
     /**
-     * @var CategoriesOfVersionCollection
+     * @var VersionCategoriesSet
      */
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'version', cascade: ['ALL'])]
     #[ORM\OrderBy(['id' => 'ASC'])]
     public iterable $categories {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => CategoriesOfVersionCollection::for($this, $this->categories);
+        get => VersionCategoriesSet::for($this, $this->categories);
     }
 
     /**

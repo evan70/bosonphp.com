@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Documentation\Category;
+namespace App\Domain\Documentation\Version;
 
-use App\Domain\Documentation\Version\Version;
+use App\Domain\Documentation\Category\Category;
 use Local\Component\Set\RelationSet;
 
 /**
  * @template-extends RelationSet<Version, Category>
  */
-final class CategoriesOfVersionCollection extends RelationSet
+final class VersionCategoriesSet extends RelationSet
 {
     protected function shouldAdd(mixed $entry): bool
     {

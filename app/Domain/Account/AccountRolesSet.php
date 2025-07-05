@@ -9,7 +9,7 @@ use Local\Component\Set\RelationSet;
 /**
  * @template-extends RelationSet<Account, non-empty-string>
  */
-final class RoleSet extends RelationSet implements \Stringable
+final class AccountRolesSet extends RelationSet implements \Stringable
 {
     public function __toString(): string
     {

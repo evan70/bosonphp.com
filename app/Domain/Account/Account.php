@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Account;
 
 use App\Domain\Account\Integration\Integration;
-use App\Domain\Account\Integration\IntegrationsSet;
 use App\Domain\Account\Password\EncryptedPassword;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
@@ -43,22 +42,22 @@ class Account implements
     public EncryptedPassword $password;
 
     /**
-     * @var RoleSet
+     * @var AccountRolesSet
      */
     #[ORM\Column(name: 'roles', type: 'string[]', options: ['default' => '{}'])]
     public private(set) iterable $roles {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => RoleSet::for($this, $this->roles);
+        get => AccountRolesSet::for($this, $this->roles);
     }
 
     /**
-     * @var IntegrationsSet
+     * @var AccountIntegrationsSet
      */
     #[ORM\OneToMany(targetEntity: Integration::class, mappedBy: 'account', cascade: ['ALL'], orphanRemoval: true)]
     #[ORM\OrderBy(['createdAt' => 'ASC'])]
     public private(set) iterable $integrations {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => IntegrationsSet::for($this, $this->integrations);
+        get => AccountIntegrationsSet::for($this, $this->integrations);
     }
 
     /**
@@ -74,7 +73,7 @@ class Account implements
         $this->login = $login;
         $this->password = $password;
         $this->id = $id ?? AccountId::new();
-        $this->integrations = new IntegrationsSet($this);
+        $this->integrations = new AccountIntegrationsSet($this);
 
         /** @phpstan-ignore-next-line : PHPStan false-positive */
         $this->roles = match (true) {
