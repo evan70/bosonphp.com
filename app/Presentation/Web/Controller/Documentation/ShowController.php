@@ -45,7 +45,7 @@ final class ShowController extends AbstractController
             'versions' => $this->versionsList->getAll(),
             'version' => $versionInstance,
             'page' => $pageInstance,
-            'menu' => $versionInstance?->menu ?? [],
+            'categories' => $versionInstance?->categories ?? [],
         ]);
     }
 }

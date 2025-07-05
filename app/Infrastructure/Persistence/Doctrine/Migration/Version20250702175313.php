@@ -25,7 +25,7 @@ final class Version20250702175313 extends AbstractMigration
         $this->addSql(<<<'SQL'
             CREATE TABLE doc_pages (
                 id UUID NOT NULL,
-                menu_id UUID DEFAULT NULL,
+                category_id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
                 slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
                 type VARCHAR(255) NOT NULL CHECK (type <> ''),
@@ -38,7 +38,7 @@ final class Version20250702175313 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE INDEX IDX_4F9D8823CCD7E912 ON doc_pages (menu_id)
+            CREATE INDEX IDX_4F9D882312469DE2 ON doc_pages (category_id)
             SQL);
 
         $this->addSql(<<<'SQL'
@@ -50,7 +50,7 @@ final class Version20250702175313 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN doc_pages.menu_id IS '(DC2Type:App\Domain\Documentation\Menu\PageMenuId)'
+            COMMENT ON COLUMN doc_pages.category_id IS '(DC2Type:App\Domain\Documentation\Category\CategoryId)'
             SQL);
 
         $this->addSql(<<<'SQL'
@@ -63,8 +63,8 @@ final class Version20250702175313 extends AbstractMigration
 
         $this->addSql(<<<'SQL'
             ALTER TABLE doc_pages ADD CONSTRAINT FK_4F9D8823CCD7E912
-                FOREIGN KEY (menu_id)
-                REFERENCES doc_page_menus (id) NOT DEFERRABLE INITIALLY IMMEDIATE
+                FOREIGN KEY (category_id)
+                REFERENCES doc_page_categories (id) NOT DEFERRABLE INITIALLY IMMEDIATE
             SQL);
     }
 

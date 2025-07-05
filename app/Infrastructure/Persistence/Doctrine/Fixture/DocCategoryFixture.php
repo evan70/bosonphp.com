@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
-use App\Domain\Documentation\Menu\PageMenu;
+use App\Domain\Documentation\Category\Category;
 use App\Domain\Documentation\Version\Version;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -17,7 +17,7 @@ use Faker\Generator;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
-final class DocMenuFixture extends Fixture implements DependentFixtureInterface
+final class DocCategoryFixture extends Fixture implements DependentFixtureInterface
 {
     public function __construct(
         private readonly Generator $faker,
@@ -38,14 +38,14 @@ final class DocMenuFixture extends Fixture implements DependentFixtureInterface
             }
 
             foreach ($versions as $version) {
-                $menu = new PageMenu(
+                $category = new Category(
                     version: $version,
                     title: $title . ' (v' . $version->name . ')',
                 );
 
-                $menu->order = $i;
+                $category->order = $i;
 
-                $manager->persist($menu);
+                $manager->persist($category);
             }
         }
 

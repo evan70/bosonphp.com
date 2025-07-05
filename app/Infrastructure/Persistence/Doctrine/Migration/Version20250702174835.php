@@ -23,6 +23,10 @@ final class Version20250702174835 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql(<<<'SQL'
+            CREATE COLLATION numeric (provider = icu, locale = 'en@colNumeric=yes');
+            SQL);
+
+        $this->addSql(<<<'SQL'
             CREATE TABLE doc_page_versions (
                 id UUID NOT NULL,
                 name VARCHAR(255) COLLATE numeric NOT NULL CHECK ( name <> '' ),
@@ -53,6 +57,10 @@ final class Version20250702174835 extends AbstractMigration
     {
         $this->addSql(<<<'SQL'
             DROP TABLE doc_page_versions
+            SQL);
+
+        $this->addSql(<<<'SQL'
+            DROP COLLATION numeric
             SQL);
     }
 }

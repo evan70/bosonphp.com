@@ -24,9 +24,9 @@ final class DocumentationPageDatabaseRepository extends ServiceEntityRepository 
     public function findByName(Version $version, string $name): ?Page
     {
         $query = $this->createQueryBuilder('page')
-            ->join('page.menu', 'menu')
+            ->join('page.category', 'category')
             ->where('page.slug = :slug')
-            ->andWhere('menu.version = :version')
+            ->andWhere('category.version = :version')
             ->setParameter('version', $version)
             ->setParameter('slug', $name)
             ->getQuery();

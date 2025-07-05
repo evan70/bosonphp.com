@@ -34,7 +34,7 @@ final class IndexByVersionController extends AbstractController
         return $this->render('page/docs/index.html.twig', [
             'versions' => $this->versionsList->getAll(),
             'version' => $instance,
-            'menu' => $instance?->menu ?? [],
+            'categories' => $instance?->categories ?? [],
         ]);
     }
 }

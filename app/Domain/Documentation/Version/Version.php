@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Documentation\Version;
 
-use App\Domain\Documentation\Menu\PageMenu;
-use App\Domain\Documentation\Menu\PageMenuSet;
+use App\Domain\Documentation\Category\Category;
+use App\Domain\Documentation\Category\CategoriesOfVersionCollection;
+use App\Domain\Documentation\Page;
+use App\Domain\Documentation\PagesOfVersionCollection;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -15,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'doc_page_versions')]
-#[ORM\UniqueConstraint(name: 'doc_page_versions_unique_idx', columns: ['title'])]
+#[ORM\UniqueConstraint(name: 'doc_page_versions_unique_idx', columns: ['name'])]
 class Version implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
@@ -38,13 +40,13 @@ class Version implements
     public Status $status = Status::DEFAULT;
 
     /**
-     * @var PageMenuSet
+     * @var CategoriesOfVersionCollection
      */
-    #[ORM\OneToMany(targetEntity: PageMenu::class, mappedBy: 'version', cascade: ['ALL'])]
+    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'version', cascade: ['ALL'])]
     #[ORM\OrderBy(['id' => 'ASC'])]
-    public iterable $menu {
+    public iterable $categories {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => PageMenuSet::for($this, $this->menu);
+        get => CategoriesOfVersionCollection::for($this, $this->categories);
     }
 
     /**

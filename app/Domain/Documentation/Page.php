@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Documentation;
 
-use App\Domain\Documentation\Menu\PageMenu;
+use App\Domain\Documentation\Category\Category;
+use App\Domain\Documentation\Version\Version;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -55,21 +56,21 @@ abstract class Page implements
     #[ORM\Column(name: 'slug', length: 255)]
     public private(set) string $slug;
 
-    #[ORM\ManyToOne(targetEntity: PageMenu::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
-    #[ORM\JoinColumn(name: 'menu_id', referencedColumnName: 'id')]
-    public private(set) PageMenu $menu;
+    #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
+    #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
+    public private(set) Category $category;
 
     /**
      * @param non-empty-string $title
      */
     public function __construct(
-        PageMenu $menu,
+        Category $category,
         string $title,
         protected readonly PageSlugGeneratorInterface $slugGenerator,
         ?PageId $id = null,
     ) {
         $this->title = $title;
-        $this->menu = $menu;
+        $this->category = $category;
         $this->id = $id ?? PageId::new();
     }
 }

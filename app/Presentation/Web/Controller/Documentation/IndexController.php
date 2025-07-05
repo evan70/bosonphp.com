@@ -26,7 +26,7 @@ final class IndexController extends AbstractController
         return $this->render('page/docs/index.html.twig', [
             'version' => $version,
             'versions' => $versions,
-            'menu' => $version?->menu ?? [],
+            'categories' => $version?->categories ?? [],
         ]);
     }
 }

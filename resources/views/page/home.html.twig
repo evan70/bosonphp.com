@@ -15,8 +15,8 @@
                         <a href="{{ path('doc.index') }}">References</a>
                     </summary>
                     <ul dir="rtl">
-                        {% for item in menu %}
-                        <li><a href="#">{{ item.title }}</a></li>
+                        {% for category in categories %}
+                        <li><a href="#">{{ category.title }}</a></li>
                         {% endfor %}
                     </ul>
                 </details>

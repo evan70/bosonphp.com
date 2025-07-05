@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Type;
+namespace App\Infrastructure\Persistence\Doctrine\Type\Documentation;
 
 use App\Domain\Documentation\PageId;
+use App\Infrastructure\Persistence\Doctrine\Type\UniversalUniqueIdType;
 
 /**
  * @api

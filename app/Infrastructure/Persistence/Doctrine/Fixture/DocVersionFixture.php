@@ -32,18 +32,18 @@ final class DocVersionFixture extends Fixture
                     continue;
                 }
 
-                $manager->persist(
-                    new Version(
-                        name: \sprintf('%d.%d', $major, $minor),
-                        status: match ($this->faker->numberBetween(0, 8)) {
+                $manager->persist(new Version(
+                    name: \sprintf('%d.%d', $major, $minor),
+                    status: match ($this->faker->numberBetween(0, 8)) {
                         1 => Status::Hidden,
                         2 => Status::Dev,
                         3,4,5 => Status::Deprecated,
                         default => Status::Stable,
                     }
-                    ),
-                );
+                ));
             }
+
+            $manager->flush();
         }
 
         $manager->flush();

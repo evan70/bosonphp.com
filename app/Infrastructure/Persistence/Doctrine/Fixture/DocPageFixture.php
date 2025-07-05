@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Fixture;
 
-use App\Domain\Documentation\Menu\PageMenu;
+use App\Domain\Documentation\Category\Category;
 use App\Domain\Documentation\PageDocument;
 use App\Domain\Documentation\PageDocumentContentRendererInterface;
 use App\Domain\Documentation\PageLink;
@@ -30,41 +30,43 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $items = $manager->getRepository(PageMenu::class)
+        $categories = $manager->getRepository(Category::class)
             ->findAll();
 
-        for ($i = 0; $i < 10; ++$i) {
-            $title = \rtrim($this->faker->sentence(
-                $this->faker->numberBetween(1, 8)
-            ), '.');
-
-            /** @var PageMenu $item */
-            foreach ($items as $item) {
-                if (\random_int(0, 4) === 0) {
-                    continue;
-                }
+        /** @var Category $category */
+        foreach ($categories as $category) {
+            for ($i = 0; $i < 10; ++$i) {
+                $title = \rtrim($this->faker->sentence(
+                    $this->faker->numberBetween(1, 8)
+                ), '.');
 
                 $manager->persist(match ($this->faker->numberBetween(0, 8)) {
                     0 => new PageLink(
-                        menu: $item,
+                        category: $category,
                         title: $title,
                         slugGenerator: $this->slugGenerator,
                     ),
                     default => new PageDocument(
-                        menu: $item,
+                        category: $category,
                         title: $title,
                         slugGenerator: $this->slugGenerator,
                         content: $this->faker->markdownContent(
                             $this->faker->numberBetween(5, 50),
                         )
                             . "\n\n"
-                            . '> `menu:` ' . $item->title . "\n>\n"
-                            . '> `menu_id:` ' . $item->id . "\n>\n"
-                            . '> `ver:` ' . $item->version->name . "\n>\n",
+                            . '> `category:` ' . $category->title . "\n>\n"
+                            . '> `category_id:` ' . $category->id . "\n>\n"
+                            . '> `ver:` ' . $category->version->name . "\n>\n",
                         contentRenderer: $this->renderer,
                     ),
                 });
+
+                if (\random_int(0, 4) === 0) {
+                    continue;
+                }
             }
+
+            $manager->flush();
         }
 
         $manager->flush();
@@ -76,7 +78,7 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            DocMenuFixture::class,
+            DocCategoryFixture::class,
         ];
     }
 }
