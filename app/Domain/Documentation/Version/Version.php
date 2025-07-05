@@ -56,6 +56,7 @@ class Version implements
     ) {
         $this->name = $name;
         $this->status = $status;
+        $this->categories = new VersionCategoriesSet($this);
         $this->id = $id ?? VersionId::new();
     }
 }

@@ -15,7 +15,7 @@ final class CategoryPagesSet extends RelationSet
     protected function shouldAdd(mixed $entry): bool
     {
         if ($entry->category !== $this->parent) {
-            throw new \LogicException('Could not change category relation');
+            $entry->category = $this->parent;
         }
 
         return parent::shouldAdd($entry);

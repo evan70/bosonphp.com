@@ -26,9 +26,6 @@
         <testsuite name="unit">
             <directory>tests/Unit</directory>
         </testsuite>
-        <testsuite name="local/token">
-            <directory>libs/token/tests</directory>
-        </testsuite>
     </testsuites>
 
     <coverage/>

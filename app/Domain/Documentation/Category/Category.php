@@ -52,7 +52,19 @@ class Category implements
 
     #[ORM\ManyToOne(targetEntity: Version::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'categories')]
     #[ORM\JoinColumn(name: 'version_id', referencedColumnName: 'id', nullable: false)]
-    public private(set) Version $version;
+    public Version $version {
+        get => $this->version;
+        set(Version $new) {
+            $previous = $this->version ?? null;
+
+            if ($previous !== $new) {
+                $previous?->categories->removeElement($this);
+
+                $this->version = $new;
+                $new->categories->add($this);
+            }
+        }
+    }
 
     /**
      * @param non-empty-string $title

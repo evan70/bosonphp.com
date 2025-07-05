@@ -58,7 +58,19 @@ abstract class Page implements
 
     #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
-    public private(set) Category $category;
+    public Category $category {
+        get => $this->category;
+        set(Category $new) {
+            $previous = $this->category ?? null;
+
+            if ($previous !== $new) {
+                $previous?->pages->removeElement($this);
+
+                $this->category = $new;
+                $new->pages->add($this);
+            }
+        }
+    }
 
     /**
      * @param non-empty-string $title

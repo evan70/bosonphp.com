@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
-namespace app\Tests\Unit;
+namespace App\Tests\Unit;
 
-abstract class TestCase {}
+use PHPUnit\Framework\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase {}

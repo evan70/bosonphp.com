@@ -15,7 +15,7 @@ final class VersionCategoriesSet extends RelationSet
     protected function shouldAdd(mixed $entry): bool
     {
         if ($entry->version !== $this->parent) {
-            throw new \LogicException('Could not change category relation');
+            $entry->version = $this->parent;
         }
 
         return parent::shouldAdd($entry);
