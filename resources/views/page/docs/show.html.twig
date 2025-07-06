@@ -8,10 +8,45 @@
 
     <h1>Documentation</h1>
 
-    <nav aria-label="breadcrumb">
+    <nav>
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
-            <li><a href="{{ path('doc.index') }}">Documentation</a></li>
+            <li style="color: #5d6b89">&gt;</li>
+            <li>
+                <details class="dropdown">
+                    <summary role="button" class="outline secondary">
+                        <a href="{{ path('doc.index') }}">Documentation ({{ version.name }})</a>
+                    </summary>
+                    <ul>
+                        {% for availableVersion in versions %}
+                            {% if availableVersion.status.value != 'deprecated' %}
+                                <li>
+                                    <a href="{{ path('doc.show', {
+                                        page: page.uri,
+                                        version: availableVersion.name
+                                    }) }}">{{ availableVersion.name }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
+                        <li>
+                            <strong>Unmaintained Versions</strong>
+                        </li>
+
+                        {% for deprecatedVersion in versions %}
+                            {% if deprecatedVersion.status.value == 'deprecated' %}
+                                <li>
+                                    <a href="{{ path('doc.show', {
+                                        page: page.uri,
+                                        version: deprecatedVersion.name
+                                    }) }}">{{ deprecatedVersion.name }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </details>
+            </li>
+            <li style="color: #5d6b89">&gt;</li>
             <li>{{ page.category.title }}</li>
         </ul>
     </nav>
