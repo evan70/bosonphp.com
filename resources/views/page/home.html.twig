@@ -16,7 +16,15 @@
                     </summary>
                     <ul dir="rtl">
                         {% for category in categories %}
-                        <li><a href="#">{{ category.title }}</a></li>
+                        <li>
+                            <a href="#">
+                                {% if category.icon is not null %}
+                                    <img src="{{ category.icon }}"
+                                         width="16" height="16" />
+                                {% endif %}
+                                {{ category.title }}
+                            </a>
+                        </li>
                         {% endfor %}
                     </ul>
                 </details>

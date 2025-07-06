@@ -34,6 +34,15 @@ class Category implements
     #[ORM\Column(name: 'title', type: 'string', length: 255)]
     public string $title;
 
+    #[ORM\Column(name: 'description', type: 'text', nullable: true)]
+    public ?string $description = null;
+
+    /**
+     * @var non-empty-string
+     */
+    #[ORM\Column(name: 'icon', type: 'string', length: 255, nullable: true)]
+    public ?string $icon = null;
+
     /**
      * @var int<-32768, 32767>
      */
@@ -73,10 +82,14 @@ class Category implements
     public function __construct(
         Version $version,
         string $title,
+        ?string $description = null,
+        ?string $icon = null,
         ?CategoryId $id = null,
     ) {
         $this->version = $version;
         $this->title = $title;
+        $this->description = $description;
+        $this->icon = $icon;
         $this->pages = new CategoryPagesSet($this);
         $this->id = $id ?? CategoryId::new();
     }
