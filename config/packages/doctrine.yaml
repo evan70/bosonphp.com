@@ -1,5 +1,5 @@
 parameters:
-  env(DB_DATABASE): phpdoc
+  env(DB_DATABASE): boson
   env(DB_HOST): postgres
   env(DB_PORT): 5432
   env(DB_USERNAME): user

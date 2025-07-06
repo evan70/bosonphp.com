@@ -11,9 +11,9 @@ services:
     build:
       context: .
       dockerfile: docker/angie/Dockerfile
-    container_name: phpdoc-angie
+    container_name: boson-angie
     volumes:
-      - ./:/home/phpdoc/phpdoc.app:ro
+      - ./:/home/boson/boson.app:ro
     ports:
       - "${APP_HTTP_PUBLIC_PORT:-80}:80"
       - "${APP_HTTPS_PUBLIC_PORT:-443}:443"
@@ -28,16 +28,16 @@ services:
 
   php:
     <<: *environment
-    image: ghcr.io/phpdoc-app/app:${APP_VERSION:-0.0.1}
+    image: ghcr.io/boson-php/bosonphp.com:${APP_VERSION:-0.0.1}
     build:
       context: .
       dockerfile: docker/php/Dockerfile
       target: dev
-    container_name: phpdoc-php
+    container_name: boson-php
     restart: on-failure
     volumes:
-      - composer:/home/phpdoc/.composer:rw
-      - ./:/home/phpdoc/phpdoc.app:rw
+      - composer:/home/boson/.composer:rw
+      - ./:/home/boson/boson.app:rw
     profiles:
       - ''
       - backend
@@ -51,11 +51,11 @@ services:
     build:
       context: .
       dockerfile: docker/postgres/Dockerfile
-    container_name: phpdoc-postgres
+    container_name: boson-postgres
     volumes:
       - postgres:/var/lib/postgresql/data:rw
     environment:
-      - POSTGRES_DB=${DB_DATABASE:-phpdoc}
+      - POSTGRES_DB=${DB_DATABASE:-boson}
       - POSTGRES_USER=${DB_USERNAME:-user}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-password}
     healthcheck:
@@ -73,7 +73,7 @@ services:
 
 networks:
   frontend:
-    name: phpdoc_org
+    name: boson_org
     driver: bridge
     ipam:
       config:

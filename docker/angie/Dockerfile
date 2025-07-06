@@ -1,6 +1,6 @@
 FROM docker.angie.software/angie:1.7.0-minimal
 
-WORKDIR "/home/phpdoc"
+WORKDIR "/home/boson"
 
 COPY --chown=root:root ./docker/angie/http.d/default.conf /etc/angie/http.d/default.conf
 

@@ -3,7 +3,7 @@
 # ==============================================================================
 FROM php:8.4-fpm AS base
 
-WORKDIR "/home/phpdoc/phpdoc.app"
+WORKDIR "/home/boson/bosonphp.com"
 
 # Fix debconf warnings upon build
 ARG DEBIAN_FRONTEND=noninteractive
@@ -52,7 +52,7 @@ RUN apt-get update \
     && apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
        && ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime \
     # 4.1 Create User
-    && useradd -u 1000 -m phpdoc
+    && useradd -u 1000 -m boson
 
 # ------------------------------------------------------------------------------
 #   Common Configuration
@@ -91,6 +91,6 @@ RUN chmod +x /usr/local/bin/entrypoint.dev.sh
 #   Ready
 # ------------------------------------------------------------------------------
 
-USER phpdoc
+USER boson
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.dev.sh"]
