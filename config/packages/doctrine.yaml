@@ -38,8 +38,9 @@ doctrine:
       App\Domain\Blog\ArticleId: App\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
       App\Domain\Blog\Category\ArticleCategoryId: App\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
       # Documentation
-      App\Domain\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\PageIdType
       App\Domain\Documentation\Category\CategoryId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\CategoryIdType
+      App\Domain\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\PageIdType
+      App\Domain\Documentation\PageType: App\Infrastructure\Persistence\Doctrine\Type\Documentation\PageTypeType
       App\Domain\Documentation\Version\VersionId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\VersionIdType
       App\Domain\Documentation\Version\Status: App\Infrastructure\Persistence\Doctrine\Type\Documentation\VersionStatusType
       # Shared

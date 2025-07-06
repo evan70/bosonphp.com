@@ -15,10 +15,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: 'doc_pages')]
 #[ORM\InheritanceType('SINGLE_TABLE')]
-#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string', enumType: PageType::class)]
 #[ORM\DiscriminatorMap([
-    'document' => PageDocument::class,
-    'link' => PageLink::class,
+    PageType::Document->value => PageDocument::class,
+    PageType::Link->value => PageLink::class,
 ])]
 #[ORM\Index(name: 'doc_pages_uri_idx', columns: ['uri'])]
 abstract class Page implements
@@ -70,6 +70,10 @@ abstract class Page implements
                 $new->pages->add($this);
             }
         }
+    }
+
+    public bool $isLink {
+        get => $this instanceof PageLink;
     }
 
     /**
