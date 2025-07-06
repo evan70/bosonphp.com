@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Query\Handler;
 
-use App\Application\Query\GetArticleBySlugQuery;
+use App\Application\Query\GetArticleByNameQuery;
 use App\Application\UseCase\GetArticleByName\GetArticleByNameResult;
 use App\Application\UseCase\GetArticleByName\GetArticleByNameUseCase;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -16,7 +16,7 @@ final readonly class GetArticleBySlugHandler
         private GetArticleByNameUseCase $workflow,
     ) {}
 
-    public function __invoke(GetArticleBySlugQuery $query): GetArticleByNameResult
+    public function __invoke(GetArticleByNameQuery $query): GetArticleByNameResult
     {
         return $this->workflow->getArticle(
             name: $query->articleUri,

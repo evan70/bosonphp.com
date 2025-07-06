@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presentation\Web\Controller\Blog;
 
-use App\Application\Query\GetArticleBySlugQuery;
+use App\Application\Query\GetArticleByNameQuery;
 use App\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundException;
 use App\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
 use App\Application\UseCase\GetArticleByName\GetArticleByNameResult;
@@ -26,7 +26,7 @@ final class ShowController extends AbstractController
     {
         try {
             /** @var GetArticleByNameResult $result */
-            $result = $this->queries->get(new GetArticleBySlugQuery($slug));
+            $result = $this->queries->get(new GetArticleByNameQuery($slug));
         } catch (InvalidArticleUriException) {
             throw new BadRequestHttpException('Article name contain invalid characters');
         } catch (ArticleNotFoundException) {

@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Presentation\Web\Controller\Documentation;
 
-use App\Domain\Documentation\PageDocument;
-use App\Domain\Documentation\Repository\PageByNameProviderInterface;
-use App\Domain\Documentation\Version\Repository\CurrentVersionProviderInterface;
-use App\Domain\Documentation\Version\Repository\VersionByNameProviderInterface;
+use App\Application\Query\GetDocumentationPageByNameQuery;
+use App\Application\UseCase\GetDocumentationPageByName\Exception\PageNotFoundException;
+use App\Application\UseCase\GetDocumentationPageByName\GetDocumentationPageByNameResult;
+use App\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
+use App\Domain\Documentation\PageLink;
 use App\Domain\Documentation\Version\Repository\VersionsListProviderInterface;
+use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,34 +21,33 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ShowController extends AbstractController
 {
     public function __construct(
-        private readonly CurrentVersionProviderInterface $currentVersions,
-        private readonly VersionByNameProviderInterface $versionsByName,
-        private readonly VersionsListProviderInterface $versionsList,
-        private readonly PageByNameProviderInterface $pageByName,
+        private readonly VersionsListProviderInterface $versions,
+        private readonly QueryBusInterface $queries,
     ) {}
 
     public function __invoke(string $version, string $page): Response
     {
-        $versionInstance = $version === 'current'
-            ? $this->currentVersions->findLatest()
-            : $this->versionsByName->findVersionByName($version);
-
-        if ($versionInstance === null) {
+        try {
+            /** @var GetDocumentationPageByNameResult $result */
+            $result = $this->queries->get(new GetDocumentationPageByNameQuery(
+                name: $page,
+                version: $version,
+            ));
+        } catch (VersionNotFoundException) {
             throw new NotFoundHttpException(\sprintf('Version "%s" not found', $version));
-        }
-
-        /** @var PageDocument $pageInstance */
-        $pageInstance = $this->pageByName->findByName($versionInstance, $page);
-
-        if ($pageInstance === null) {
+        } catch (PageNotFoundException) {
             throw new NotFoundHttpException(\sprintf('Page "%s" not found', $page));
         }
 
+        if ($result->page instanceof PageLink) {
+            return new RedirectResponse($result->page->slug);
+        }
+
         return $this->render('page/docs/show.html.twig', [
-            'versions' => $this->versionsList->getAll(),
-            'version' => $versionInstance,
-            'page' => $pageInstance,
-            'categories' => $versionInstance?->categories ?? [],
+            'page' => $result->page,
+            'version' => $result->version,
+            'categories' => $result->categories,
+            'versions' => $this->versions->getAll(),
         ]);
     }
 }

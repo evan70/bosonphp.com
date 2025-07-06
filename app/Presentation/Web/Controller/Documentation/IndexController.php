@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Presentation\Web\Controller\Documentation;
 
 use App\Application\Query\GetDocumentationCategoriesListQuery;
-use App\Application\UseCase\GetDocumentationCategoriesList\Exception\VersionNotFoundException;
 use App\Application\UseCase\GetDocumentationCategoriesList\GetDocumentationCategoriesListResult;
+use App\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
 use App\Domain\Documentation\Version\Repository\VersionsListProviderInterface;
 use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
