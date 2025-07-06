@@ -27,7 +27,7 @@ final class Version20250702175313 extends AbstractMigration
                 id UUID NOT NULL,
                 category_id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
-                slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
+                uri VARCHAR(255) NOT NULL CHECK (uri <> ''),
                 type VARCHAR(255) NOT NULL CHECK (type <> ''),
                 content_rendered TEXT DEFAULT '',
                 content_raw TEXT DEFAULT '',
@@ -42,7 +42,7 @@ final class Version20250702175313 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE INDEX doc_pages_url_idx ON doc_pages (slug)
+            CREATE INDEX doc_pages_uri_idx ON doc_pages (uri)
             SQL);
 
         $this->addSql(<<<'SQL'

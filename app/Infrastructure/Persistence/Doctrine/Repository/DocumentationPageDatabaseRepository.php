@@ -25,10 +25,10 @@ final class DocumentationPageDatabaseRepository extends ServiceEntityRepository 
     {
         $query = $this->createQueryBuilder('page')
             ->join('page.category', 'category')
-            ->where('page.slug = :slug')
+            ->where('page.uri = :uri')
             ->andWhere('category.version = :version')
             ->setParameter('version', $version)
-            ->setParameter('slug', $name)
+            ->setParameter('uri', $name)
             ->getQuery();
 
         /** @var Page|null */

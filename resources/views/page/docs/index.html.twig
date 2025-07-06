@@ -55,7 +55,7 @@
                 {% for ref in item.pages %}
                 <li>
                     <a href="{{ path('doc.show', {
-                        page: ref.slug,
+                        page: ref.uri,
                         version: version.name
                     }) }}">
                         {{ ref.title }}

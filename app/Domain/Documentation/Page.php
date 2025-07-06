@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
     'document' => PageDocument::class,
     'link' => PageLink::class,
 ])]
-#[ORM\Index(name: 'doc_pages_url_idx', columns: ['slug'])]
+#[ORM\Index(name: 'doc_pages_uri_idx', columns: ['uri'])]
 abstract class Page implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
@@ -45,15 +45,15 @@ abstract class Page implements
             assert($title !== '', 'Documentation page title cannot be empty');
 
             $this->title = $title;
-            $this->slug = $this->slugGenerator->createSlug($this);
+            $this->uri = $this->slugGenerator->createSlug($this);
         }
     }
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug', length: 255)]
-    public private(set) string $slug;
+    #[ORM\Column(name: 'uri', length: 255)]
+    public private(set) string $uri;
 
     #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
