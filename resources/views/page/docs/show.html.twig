@@ -11,14 +11,40 @@
     <nav aria-label="breadcrumb">
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
+            <li><a href="{{ path('doc.index') }}">Documentation</a></li>
             <li>{{ page.category.title }}</li>
-            <li>{{ page.title }}</li>
         </ul>
     </nav>
 
-    <div>
-        <h2>{{ page.title }}</h2>
+    <div style="display: grid; grid-template-columns: 1fr 3fr;" class="grid">
+        <aside>
+            <ul style="padding-inline-start: 0">
+            {% for nav_page in page.category.pages %}
+                <li>
+                    {% if page.id.equals(nav_page.id) %}
+                        <strong>{{ nav_page.title }}</strong>
+                    {% else %}
+                        {% if nav_page.isLink %}
+                            <a href="{{ nav_page.uri }}" target="_blank">
+                                {{ nav_page.title }}
+                                <img src="https://intellij-icons.jetbrains.design/icons/AllIcons/expui/ide/externalLink_dark.svg"
+                                     width="18" height="18" />
+                            </a>
+                        {% else %}
+                            <a href="{{ path('doc.show', {
+                                page: nav_page.uri,
+                                version: version.name
+                            }) }}">
+                                {{ nav_page.title }}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+            </ul>
+        </aside>
         <article>
+            <h1>{{ page.title }}</h1>
             {{ page.content | raw }}
         </article>
     </div>

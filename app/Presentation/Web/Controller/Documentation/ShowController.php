@@ -40,7 +40,7 @@ final class ShowController extends AbstractController
         }
 
         if ($result->page instanceof PageLink) {
-            return new RedirectResponse($result->page->slug);
+            return new RedirectResponse($result->page->uri);
         }
 
         return $this->render('page/docs/show.html.twig', [
