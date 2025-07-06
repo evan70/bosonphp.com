@@ -15,7 +15,9 @@
             <li>
                 <details class="dropdown">
                     <summary role="button" class="outline secondary">
-                        <a href="{{ path('doc.index') }}">Documentation ({{ version.name }})</a>
+                        <a href="{{ path('doc.index_by_version', {
+                            version: version.name,
+                        }) }}">Documentation ({{ version.name }})</a>
                     </summary>
                     <ul>
                         {% for availableVersion in versions %}
@@ -47,7 +49,17 @@
                 </details>
             </li>
             <li style="color: #5d6b89">&gt;</li>
-            <li>{{ page.category.title }}</li>
+            <li>
+                {% if page.category.icon is not null %}
+                    <img width="18" height="18"
+                        src="{{ page.category.icon }}" />
+                {% endif %}
+                {% if page.category.description is not null %}
+                    <span data-tooltip="{{ page.category.description }}">{{ page.category.title }}</span>
+                {% else %}
+                    <span>{{ page.category.title }}</span>
+                {% endif %}
+            </li>
         </ul>
     </nav>
 
