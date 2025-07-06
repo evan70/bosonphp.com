@@ -6,7 +6,7 @@ namespace App\Presentation\Web\Controller\Blog;
 
 use App\Application\Query\GetArticleBySlugQuery;
 use App\Application\UseCase\GetArticleBySlug\Exception\ArticleNotFoundException;
-use App\Application\UseCase\GetArticleBySlug\Exception\InvalidSlugException;
+use App\Application\UseCase\GetArticleBySlug\Exception\InvalidArticleUriException;
 use App\Application\UseCase\GetArticleBySlug\GetArticleBySlugResult;
 use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,8 +27,8 @@ final class ShowController extends AbstractController
         try {
             /** @var GetArticleBySlugResult $result */
             $result = $this->queries->get(new GetArticleBySlugQuery($slug));
-        } catch (InvalidSlugException) {
-            throw new BadRequestHttpException('Invalid article name');
+        } catch (InvalidArticleUriException) {
+            throw new BadRequestHttpException('Article name contain invalid characters');
         } catch (ArticleNotFoundException) {
             throw new NotFoundHttpException(\sprintf('Article with name "%s" not found', $slug));
         }

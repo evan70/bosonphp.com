@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Presentation\Web\Controller\Blog;
 
+use App\Application\Query\GetArticlesListQuery;
+use App\Application\UseCase\GetArticlesList\GetArticlesListResult;
 use App\Domain\Blog\Category\Repository\ArticleCategoryListProviderInterface;
-use App\Domain\Blog\Repository\ArticlePaginateProviderInterface;
+use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,28 +17,21 @@ use Symfony\Component\Routing\Attribute\Route;
 final class IndexController extends AbstractController
 {
     public function __construct(
-        private readonly ArticlePaginateProviderInterface $articles,
         private readonly ArticleCategoryListProviderInterface $categories,
+        private readonly QueryBusInterface $queries,
     ) {}
-
-    /**
-     * @return int<1, 2147483647>
-     */
-    private function getCurrentPage(Request $request): int
-    {
-        $page = $request->query->getInt('page', 1);
-
-        return \min(\max($page, 1), 2147483647);
-    }
 
     public function __invoke(Request $request): Response
     {
+        /** @var GetArticlesListResult $result */
+        $result = $this->queries->get(new GetArticlesListQuery(
+            page: $request->query->getInt('page', 1),
+        ));
+
         return $this->render('page/blog/index.html.twig', [
-            'articles' => $this->articles->getAllAsPaginator(
-                page: $page = $this->getCurrentPage($request),
-            ),
+            'articles' => $result->articles,
+            'page' => $result->page,
             'categories' => $this->categories->getAll(),
-            'page' => $page,
         ]);
     }
 }

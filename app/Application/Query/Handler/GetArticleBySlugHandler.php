@@ -13,11 +13,13 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final readonly class GetArticleBySlugHandler
 {
     public function __construct(
-        private GetArticleBySlugUseCase $case,
+        private GetArticleBySlugUseCase $workflow,
     ) {}
 
     public function __invoke(GetArticleBySlugQuery $query): GetArticleBySlugResult
     {
-        return $this->case->getArticle($query->slug);
+        return $this->workflow->getArticle(
+            name: $query->articleUri,
+        );
     }
 }
