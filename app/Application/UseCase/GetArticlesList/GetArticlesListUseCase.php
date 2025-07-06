@@ -38,6 +38,7 @@ final readonly class GetArticlesListUseCase
             throw new InvalidCategoryUriException();
         }
 
+        /** @var non-empty-string $categoryUri */
         return $this->categories->findBySlug($categoryUri)
             ?? throw new CategoryNotFoundException();
     }
@@ -56,6 +57,7 @@ final readonly class GetArticlesListUseCase
             throw new InvalidPageException();
         }
 
+        /** @var int<1, 2147483647> */
         return $page;
     }
 

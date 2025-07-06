@@ -22,7 +22,7 @@ final class HomeController extends AbstractController
 
         return $this->render('page/home.html.twig', [
             'version' => $version,
-            'categories' => $version?->categories ?? null,
+            'categories' => $version->categories ?? [],
         ]);
     }
 }

@@ -42,6 +42,7 @@ final class DocumentationVersionDatabaseRepository extends ServiceEntityReposito
             ->orderBy('ver.name', 'DESC')
             ->getQuery();
 
+        /** @var list<Version> */
         return $query->getArrayResult();
     }
 }

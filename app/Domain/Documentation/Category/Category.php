@@ -55,6 +55,7 @@ class Category implements
     public Version $version {
         get => $this->version;
         set(Version $new) {
+            /** @phpstan-ignore-next-line : PHPStan false-positive */
             $previous = $this->version ?? null;
 
             if ($previous !== $new) {

@@ -13,6 +13,8 @@ use Doctrine\DBAL\Types\Type;
  *
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Type
+ *
+ * @template T of \BackedEnum
  */
 abstract class StringEnumType extends Type
 {
@@ -25,7 +27,7 @@ abstract class StringEnumType extends Type
     }
 
     /**
-     * @return class-string<\BackedEnum>
+     * @return class-string<T>
      */
     abstract protected static function getEnumClass(): string;
 

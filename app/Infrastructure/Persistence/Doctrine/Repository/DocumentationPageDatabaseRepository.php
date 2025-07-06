@@ -31,6 +31,7 @@ final class DocumentationPageDatabaseRepository extends ServiceEntityRepository 
             ->setParameter('slug', $name)
             ->getQuery();
 
+        /** @var Page|null */
         return $query->getOneOrNullResult();
     }
 }

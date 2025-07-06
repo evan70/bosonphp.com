@@ -28,6 +28,7 @@ final readonly class GetArticleByNameUseCase
             throw new InvalidArticleUriException();
         }
 
+        /** @var non-empty-string $name */
         $article = $this->articles->findBySlug($name);
 
         if ($article === null) {

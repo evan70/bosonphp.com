@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Documentation;
 
 use App\Domain\Documentation\Category\Category;
-use App\Domain\Documentation\Version\Version;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;
@@ -61,6 +60,7 @@ abstract class Page implements
     public Category $category {
         get => $this->category;
         set(Category $new) {
+            /** @phpstan-ignore-next-line : PHPStan false-positive */
             $previous = $this->category ?? null;
 
             if ($previous !== $new) {

@@ -38,7 +38,7 @@ final class CastFunction extends FunctionNode
         $parser->match(TokenType::T_AS);
         $parser->match(TokenType::T_IDENTIFIER);
 
-        $type = $lexer->token->value;
+        $type = (string) $lexer->token?->value;
 
         if ($lexer->isNextToken(TokenType::T_OPEN_PARENTHESIS)) {
             $parser->match(TokenType::T_OPEN_PARENTHESIS);

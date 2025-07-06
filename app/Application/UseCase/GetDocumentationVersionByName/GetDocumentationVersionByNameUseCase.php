@@ -18,14 +18,24 @@ final readonly class GetDocumentationVersionByNameUseCase
     ) {}
 
     /**
+     * @return ($version is non-empty-string ? bool : false)
+     */
+    private function requiresCurrentVersion(?string $version): bool
+    {
+        return $version === null
+            || $version === ''
+            || \strtolower($version) === self::CURRENT_VERSION_ALIAS;
+    }
+
+    /**
      * @throws VersionNotFoundException
      */
     public function getVersion(?string $version): GetDocumentationVersionByNameResult
     {
-        $instance = match (\strtolower($version ?? '')) {
-            self::CURRENT_VERSION_ALIAS, '' => $this->currentVersion->findLatest(),
-            default => $this->versionsByName->findVersionByName($version),
-        };
+        $instance = $this->requiresCurrentVersion($version)
+            ? $this->currentVersion->findLatest()
+            /** @phpstan-ignore-next-line : PHPStan false-positive */
+            : $this->versionsByName->findVersionByName($version);
 
         return new GetDocumentationVersionByNameResult(
             version: $instance ?? throw new VersionNotFoundException(),
