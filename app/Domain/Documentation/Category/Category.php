@@ -78,6 +78,7 @@ class Category implements
 
     /**
      * @param non-empty-string $title
+     * @param non-empty-string|null $icon
      */
     public function __construct(
         Version $version,
