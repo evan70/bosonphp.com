@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\Application\UseCase\GetArticleBySlug;
+namespace App\Application\UseCase\GetArticleByName;
 
-use App\Application\UseCase\GetArticleBySlug\Exception\ArticleNotFoundException;
-use App\Application\UseCase\GetArticleBySlug\Exception\InvalidArticleUriException;
+use App\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundException;
+use App\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
 use App\Domain\Blog\ArticleRepositoryInterface;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final readonly class GetArticleBySlugUseCase
+final readonly class GetArticleByNameUseCase
 {
     public function __construct(
         private ArticleRepositoryInterface $articles,
         private ValidatorInterface $validator,
     ) {}
 
-    public function getArticle(string $name): GetArticleBySlugResult
+    public function getArticle(string $name): GetArticleByNameResult
     {
         $errors = $this->validator->validate($name, [
             new Regex('/^' . Requirement::ASCII_SLUG . '$/'),
@@ -34,7 +34,7 @@ final readonly class GetArticleBySlugUseCase
             throw new ArticleNotFoundException();
         }
 
-        return new GetArticleBySlugResult(
+        return new GetArticleByNameResult(
             article: $article,
         );
     }

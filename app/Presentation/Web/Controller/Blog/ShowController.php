@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\Presentation\Web\Controller\Blog;
 
 use App\Application\Query\GetArticleBySlugQuery;
-use App\Application\UseCase\GetArticleBySlug\Exception\ArticleNotFoundException;
-use App\Application\UseCase\GetArticleBySlug\Exception\InvalidArticleUriException;
-use App\Application\UseCase\GetArticleBySlug\GetArticleBySlugResult;
+use App\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundException;
+use App\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
+use App\Application\UseCase\GetArticleByName\GetArticleByNameResult;
 use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +25,7 @@ final class ShowController extends AbstractController
     public function __invoke(string $slug): Response
     {
         try {
-            /** @var GetArticleBySlugResult $result */
+            /** @var GetArticleByNameResult $result */
             $result = $this->queries->get(new GetArticleBySlugQuery($slug));
         } catch (InvalidArticleUriException) {
             throw new BadRequestHttpException('Article name contain invalid characters');
