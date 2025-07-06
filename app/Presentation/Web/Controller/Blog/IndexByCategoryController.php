@@ -34,7 +34,6 @@ final class IndexByCategoryController extends AbstractController
                 page: $request->query->getInt('page', 1),
                 categoryUri: $slug,
             ));
-
         } catch (InvalidCategoryUriException) {
             throw new BadRequestHttpException('Category name contain invalid characters');
         } catch (InvalidPageException) {
