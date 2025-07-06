@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Bus;
+namespace App\Infrastructure\Bus\EventBus;
 
-use App\Domain\Shared\Bus\EventBusInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-final readonly class EventBus implements EventBusInterface
+final readonly class PsrDispatcherEventBus extends EventBus
 {
     public function __construct(
         private EventDispatcherInterface $dispatcher,

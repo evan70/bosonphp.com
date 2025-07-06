@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Application\UseCase\:
+    resource: '%kernel.project_dir%/app/Application/UseCase'

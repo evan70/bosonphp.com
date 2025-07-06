@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace App\Presentation\Web\Controller\Blog;
 
-use App\Domain\Blog\ArticleRepositoryInterface;
+use App\Application\Query\GetArticleBySlugQuery;
+use App\Application\UseCase\GetArticleBySlug\Exception\ArticleNotFoundException;
+use App\Application\UseCase\GetArticleBySlug\Exception\InvalidSlugException;
+use App\Application\UseCase\GetArticleBySlug\GetArticleBySlugResult;
+use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -14,16 +19,22 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ShowController extends AbstractController
 {
     public function __construct(
-        private readonly ArticleRepositoryInterface $articles,
+        private readonly QueryBusInterface $queries,
     ) {}
 
     public function __invoke(string $slug): Response
     {
-        $article = $this->articles->findBySlug($slug)
-            ?? throw new NotFoundHttpException('Article not found');
+        try {
+            /** @var GetArticleBySlugResult $result */
+            $result = $this->queries->get(new GetArticleBySlugQuery($slug));
+        } catch (InvalidSlugException) {
+            throw new BadRequestHttpException('Invalid article name');
+        } catch (ArticleNotFoundException) {
+            throw new NotFoundHttpException(\sprintf('Article with name "%s" not found', $slug));
+        }
 
         return $this->render('page/blog/show.html.twig', [
-            'article' => $article,
+            'article' => $result->article,
         ]);
     }
 }
