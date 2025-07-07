@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Documentation\Category;
 
 use App\Domain\Documentation\Page;
+use App\Domain\Documentation\PageDocument;
 use App\Domain\Documentation\Version\Version;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
@@ -59,6 +60,21 @@ class Category implements
         get => CategoryPagesSet::for($this, $this->pages);
     }
 
+    /**
+     * Gets first documentation page
+     */
+    public ?PageDocument $page {
+        get {
+            foreach ($this->pages as $page) {
+                if ($page instanceof PageDocument) {
+                    return $page;
+                }
+            }
+
+            return null;
+        }
+    }
+
     #[ORM\ManyToOne(targetEntity: Version::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'categories')]
     #[ORM\JoinColumn(name: 'version_id', referencedColumnName: 'id', nullable: false)]
     public Version $version {
@@ -79,18 +95,21 @@ class Category implements
     /**
      * @param non-empty-string $title
      * @param non-empty-string|null $icon
+     * @param int<-32768, 32767> $order
      */
     public function __construct(
         Version $version,
         string $title,
         ?string $description = null,
         ?string $icon = null,
+        ?int $order = 0,
         ?CategoryId $id = null,
     ) {
         $this->version = $version;
         $this->title = $title;
         $this->description = $description;
         $this->icon = $icon;
+        $this->order = $order;
         $this->pages = new CategoryPagesSet($this);
         $this->id = $id ?? CategoryId::new();
     }

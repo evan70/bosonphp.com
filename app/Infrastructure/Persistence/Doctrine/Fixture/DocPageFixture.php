@@ -22,6 +22,23 @@ use Faker\Generator;
  */
 final class DocPageFixture extends Fixture implements DependentFixtureInterface
 {
+    private const array PAGES = [
+        'Configuration',
+        'Events',
+        'Application',
+        'Window',
+        'WebView',
+        'Dialog API',
+        'Custom Schemes',
+        'Scheme Events',
+        'Functions Bindings',
+        'WebView Data Retrieving',
+        'JavaScript Injection',
+        'Web Components',
+        'Battery Status',
+        'Security Context',
+    ];
+
     public function __construct(
         private readonly Generator $faker,
         private readonly PageSlugGeneratorInterface $slugGenerator,
@@ -35,24 +52,23 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
 
         /** @var Category $category */
         foreach ($categories as $category) {
-            for ($i = 0; $i < 10; ++$i) {
-                $title = \rtrim($this->faker->sentence(
-                    $this->faker->numberBetween(1, 8)
-                ), '.');
+            $titles = $this->faker->randomElements(
+                self::PAGES,
+                $this->faker->numberBetween(1, \count(self::PAGES)),
+            );
 
-                $manager->persist(match ($this->faker->numberBetween(0, 8)) {
+            foreach ($titles as $title) {
+                $manager->persist(match ($this->faker->numberBetween(0, 10)) {
                     0 => new PageLink(
                         category: $category,
-                        title: $title,
+                        title: $title . ' in ' . $category->title,
                         uri: 'https://www.google.com/search?q='
-                            . \htmlspecialchars(\rtrim($this->faker->sentence(
-                                $this->faker->numberBetween(1, 8)
-                            ), '.')),
+                            . \htmlspecialchars($title . ' in ' . $category->title),
                         order: $this->faker->numberBetween(0, 10),
                     ),
                     default => new PageDocument(
                         category: $category,
-                        title: $title,
+                        title: $title . ' in ' . $category->title,
                         slugGenerator: $this->slugGenerator,
                         content: $this->faker->markdownContent(
                             $this->faker->numberBetween(5, 50),
@@ -65,10 +81,6 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
                         order: $this->faker->numberBetween(0, 10),
                     ),
                 });
-
-                if (\random_int(0, 4) === 0) {
-                    continue;
-                }
             }
 
             $manager->flush();

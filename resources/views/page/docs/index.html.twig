@@ -23,7 +23,12 @@
                                 <li>
                                     <a href="{{ path('doc.index_by_version', {
                                         version: availableVersion.name
-                                    }) }}">{{ availableVersion.name }}</a>
+                                    }) }}">
+                                        {{ availableVersion.name }}
+                                        {% if availableVersion.status.value == 'dev' %}
+                                            (dev)
+                                        {% endif %}
+                                    </a>
                                 </li>
                             {% endif %}
                         {% endfor %}

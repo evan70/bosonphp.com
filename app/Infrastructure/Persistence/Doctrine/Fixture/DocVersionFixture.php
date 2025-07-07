@@ -8,7 +8,6 @@ use App\Domain\Documentation\Version\Status;
 use App\Domain\Documentation\Version\Version;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Generator;
 
 /**
  * @api
@@ -18,32 +17,35 @@ use Faker\Generator;
  */
 final class DocVersionFixture extends Fixture
 {
-    public function __construct(
-        private readonly Generator $faker,
-    ) {}
+    private const array VERSIONS = [
+        '0.1',
+        '0.2',
+        '0.3',
+        '0.4',
+        '0.5',
+        '0.6',
+        '0.7',
+        '0.8',
+        '0.9',
+        '0.10',
+        '0.11',
+        '0.12',
+        '0.13',
+        '0.14',
+        '0.15',
+    ];
 
     public function load(ObjectManager $manager): void
     {
-        for ($major = 0; $major < 7; ++$major) {
-            $maxMinorValue = $this->faker->numberBetween(1, 5);
-
-            for ($minor = 0; $minor < $maxMinorValue; ++$minor) {
-                if ($major === 0 && $minor === 0) {
-                    continue;
+        foreach (self::VERSIONS as $version) {
+            $manager->persist(new Version(
+                name: $version,
+                status: match ($version) {
+                    '0.15' => Status::Dev,
+                    '0.14' => Status::Stable,
+                    default => Status::Deprecated,
                 }
-
-                $manager->persist(new Version(
-                    name: \sprintf('%d.%d', $major, $minor),
-                    status: match ($this->faker->numberBetween(0, 8)) {
-                        1 => Status::Hidden,
-                        2 => Status::Dev,
-                        3,4,5 => Status::Deprecated,
-                        default => Status::Stable,
-                    }
-                ));
-            }
-
-            $manager->flush();
+            ));
         }
 
         $manager->flush();

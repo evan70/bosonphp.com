@@ -21,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
     PageType::Link->value => PageLink::class,
 ])]
 #[ORM\Index(name: 'doc_pages_uri_idx', columns: ['uri'])]
+#[ORM\UniqueConstraint(name: 'doc_pages_uri_unique', columns: ['uri', 'category_id'])]
 abstract class Page implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
