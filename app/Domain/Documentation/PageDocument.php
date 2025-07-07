@@ -37,7 +37,10 @@ class PageDocument extends Page
         PageDocumentContentRendererInterface $contentRenderer,
         ?PageId $id = null,
     ) {
-        $this->content = new PageDocumentContent($content, $contentRenderer);
+        $this->content = new PageDocumentContent(
+            value: $content,
+            contentRenderer: $contentRenderer,
+        );
 
         parent::__construct($category, $title, $slugGenerator, $id);
     }

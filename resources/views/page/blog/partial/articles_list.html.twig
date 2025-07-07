@@ -1,11 +1,14 @@
 <section>
     {% for article in articles %}
         <article>
-            <h2>
-                <a href="{{ path('blog.show', {slug: article.slug}) }}">
-                    {{ article.title }}
-                </a>
-            </h2>
+            <hgroup>
+                <h2>
+                    <a href="{{ path('blog.show', {slug: article.slug}) }}">
+                        {{ article.title }}
+                    </a>
+                </h2>
+                <p>{{ article.preview }}</p>
+            </hgroup>
         </article>
     {% endfor %}
 

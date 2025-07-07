@@ -11,6 +11,8 @@ use App\Domain\Shared\Date\UpdatedDateProvider;
 use App\Domain\Shared\Date\UpdatedDateProviderInterface;
 use App\Domain\Shared\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\TruncateMode;
+use Symfony\Component\String\UnicodeString;
 
 /**
  * @final impossible to specify "final" attribute natively due
@@ -68,6 +70,9 @@ class Article implements
         }
     }
 
+    #[ORM\Column(name: 'preview', type: 'text', options: ['default' => ''])]
+    public string $preview;
+
     #[ORM\ManyToOne(targetEntity: ArticleCategory::class, fetch: 'EAGER', inversedBy: 'articles')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     public private(set) ArticleCategory $category;
@@ -85,7 +90,17 @@ class Article implements
     ) {
         $this->category = $category;
         $this->title = $title;
-        $this->content = new ArticleContent($content, $contentRenderer);
+
+        $this->content = new ArticleContent(
+            value: $content,
+            contentRenderer: $contentRenderer,
+        );
+
+        $this->preview = new UnicodeString($content)
+            ->replaceMatches('/^#[^\n]+/', '')
+            ->truncate(200, cut: TruncateMode::WordAfter)
+            ->toString();
+
         $this->id = $id ?? ArticleId::new();
     }
 }
