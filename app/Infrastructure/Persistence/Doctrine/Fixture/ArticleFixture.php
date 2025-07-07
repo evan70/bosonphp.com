@@ -21,6 +21,37 @@ use Faker\Generator;
  */
 final class ArticleFixture extends Fixture implements DependentFixtureInterface
 {
+    private const array TITLES = [
+        'Overview',
+        'Getting Started',
+        'Introduction',
+        'Installation',
+        'Release Notes',
+        'The Basics',
+        'Configuration',
+        'Events',
+        'Application',
+        'Window',
+        'WebView',
+        'Application APIs',
+        'Dialog API',
+        'WebView APIs',
+        'Custom Schemes',
+        'Scheme Events',
+        'Functions Bindings',
+        'WebView Data Retrieving',
+        'JavaScript Injection',
+        'Web Components',
+        'Battery Status',
+        'Security Context',
+        'Distribute',
+        'Components',
+        'Framework Integrations',
+        'Examples',
+        'Contribution Guide',
+        'License',
+    ];
+
     public function __construct(
         private readonly ArticleContentRendererInterface $contentRenderer,
         private readonly ArticleSlugGeneratorInterface $slugGenerator,
@@ -33,20 +64,28 @@ final class ArticleFixture extends Fixture implements DependentFixtureInterface
             ->getRepository(ArticleCategory::class)
             ->findAll();
 
-        for ($i = 0; $i < 100; ++$i) {
-            $manager->persist(new Article(
-                category: $this->faker->randomElement(
-                    $categories,
-                ),
-                title: \rtrim($this->faker->sentence(
-                    $this->faker->numberBetween(1, 10),
-                ), '.'),
-                slugGenerator: $this->slugGenerator,
-                content: $this->faker->markdownContent(
-                    $this->faker->numberBetween(5, 50),
-                ),
-                contentRenderer: $this->contentRenderer,
-            ));
+        foreach ($categories as $category) {
+            $items = $this->faker->numberBetween(1, 40);
+
+            for ($i = 0; $i < $items; ++$i) {
+                $manager->persist(new Article(
+                    category: $category,
+                    title: $this->faker->randomElement(self::TITLES)
+                        . ' of ' . $category->title . ' ' . $i,
+                    slugGenerator: $this->slugGenerator,
+                    content: $this->faker->randomElement([
+                        \file_get_contents(__DIR__ . '/ArticleFixture/article_fixture.01.md'),
+                        \file_get_contents(__DIR__ . '/ArticleFixture/article_fixture.02.md'),
+                        \file_get_contents(__DIR__ . '/ArticleFixture/article_fixture.03.md'),
+                        $this->faker->markdownContent(
+                            $this->faker->numberBetween(5, 50),
+                        ),
+                    ]),
+                    contentRenderer: $this->contentRenderer,
+                ));
+            }
+
+            $manager->flush();
         }
 
         $manager->flush();

@@ -8,7 +8,6 @@ use App\Domain\Blog\Category\ArticleCategory;
 use App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Generator;
 
 /**
  * @api
@@ -18,24 +17,30 @@ use Faker\Generator;
  */
 final class ArticleCategoryFixture extends Fixture
 {
+    private const array CATEGORIES = [
+        'A Week of Boson',
+        'Case Studies',
+        'Cloud',
+        'Community',
+        'Conferences',
+        'Living on the edge',
+        'Releases',
+        'Security',
+        'Frameworks',
+    ];
+
     public function __construct(
         private readonly ArticleCategorySlugGeneratorInterface $slugGenerator,
-        private readonly Generator $faker,
     ) {}
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 16; ++$i) {
+        foreach (self::CATEGORIES as $i => $title) {
             $category = new ArticleCategory(
-                title: \rtrim($this->faker->sentence(
-                    $this->faker->numberBetween(1, 3)
-                ), '.'),
+                title: $title,
                 slugGenerator: $this->slugGenerator,
+                order: $i,
             );
-
-            if ($i > 0) {
-                $category->order = $this->faker->numberBetween(0, $i);
-            }
 
             $manager->persist($category);
         }

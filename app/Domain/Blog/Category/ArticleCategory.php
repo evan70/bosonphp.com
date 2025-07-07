@@ -69,14 +69,17 @@ class ArticleCategory implements
 
     /**
      * @param non-empty-string|\Stringable $title
+     * @param int<-32768, 32767> $order
      */
     public function __construct(
         string|\Stringable $title,
         private readonly ArticleCategorySlugGeneratorInterface $slugGenerator,
+        int $order = 0,
         ?ArticleCategoryId $id = null,
     ) {
         $this->title = $title;
         $this->articles = new ArrayCollection();
+        $this->order = $order;
         $this->id = $id ?? ArticleCategoryId::new();
     }
 }
