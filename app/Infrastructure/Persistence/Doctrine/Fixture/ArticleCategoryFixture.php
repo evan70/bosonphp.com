@@ -28,7 +28,7 @@ final class ArticleCategoryFixture extends Fixture
         for ($i = 0; $i < 16; ++$i) {
             $category = new ArticleCategory(
                 title: \rtrim($this->faker->sentence(
-                    $this->faker->numberBetween(1, 6)
+                    $this->faker->numberBetween(1, 3)
                 ), '.'),
                 slugGenerator: $this->slugGenerator,
             );

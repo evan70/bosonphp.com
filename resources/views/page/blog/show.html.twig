@@ -17,8 +17,11 @@
         </ul>
     </nav>
 
-    <div style="padding: 20px 0">
-        {{ article.content | raw }}
+    <div style="padding: 20px 0; display: grid; grid-template-columns: 2fr 1fr;">
+        <section>
+            {{ article.content | raw }}
+        </section>
+        {% include 'page/blog/partial/categories_list.html.twig' with {categories: categories} %}
     </div>
 
 {% endblock %}

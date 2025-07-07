@@ -8,6 +8,7 @@ use App\Application\Query\GetArticleByNameQuery;
 use App\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundException;
 use App\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
 use App\Application\UseCase\GetArticleByName\GetArticleByNameResult;
+use App\Domain\Blog\Category\Repository\ArticleCategoryListProviderInterface;
 use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ShowController extends AbstractController
 {
     public function __construct(
+        private readonly ArticleCategoryListProviderInterface $categories,
         private readonly QueryBusInterface $queries,
     ) {}
 
@@ -35,6 +37,7 @@ final class ShowController extends AbstractController
 
         return $this->render('page/blog/show.html.twig', [
             'article' => $result->article,
+            'categories' => $this->categories->getAll(),
         ]);
     }
 }
