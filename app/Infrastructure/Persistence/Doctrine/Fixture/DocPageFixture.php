@@ -44,7 +44,10 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
                     0 => new PageLink(
                         category: $category,
                         title: $title,
-                        slugGenerator: $this->slugGenerator,
+                        uri: 'https://www.google.com/search?q='
+                            . \htmlspecialchars(\rtrim($this->faker->sentence(
+                                $this->faker->numberBetween(1, 8)
+                            ), '.')),
                     ),
                     default => new PageDocument(
                         category: $category,

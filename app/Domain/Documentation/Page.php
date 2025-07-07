@@ -36,24 +36,16 @@ abstract class Page implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string', length: 255)]
-    public string $title {
-        get => $this->title;
-        set(string|\Stringable $value) {
-            $title = (string) $value;
-
-            assert($title !== '', 'Documentation page title cannot be empty');
-
-            $this->title = $title;
-            $this->uri = $this->slugGenerator->createSlug($this);
-        }
+    abstract public string $title {
+        get;
     }
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'uri', length: 255)]
-    public private(set) string $uri;
+    abstract public string $uri {
+        get;
+    }
 
     #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
@@ -72,6 +64,9 @@ abstract class Page implements
         }
     }
 
+    /**
+     * @api
+     */
     public bool $isLink {
         get => $this instanceof PageLink;
     }
@@ -81,11 +76,8 @@ abstract class Page implements
      */
     public function __construct(
         Category $category,
-        string $title,
-        protected readonly PageSlugGeneratorInterface $slugGenerator,
         ?PageId $id = null,
     ) {
-        $this->title = $title;
         $this->category = $category;
         $this->id = $id ?? PageId::new();
     }

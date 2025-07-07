@@ -14,6 +14,28 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 class PageDocument extends Page
 {
+    /**
+     * @var non-empty-string
+     */
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
+    public string $title {
+        get => $this->title;
+        set(string|\Stringable $value) {
+            $title = (string) $value;
+
+            assert($title !== '', 'Documentation page title cannot be empty');
+
+            $this->title = $title;
+            $this->uri = $this->slugGenerator->createSlug($this);
+        }
+    }
+
+    /**
+     * @var non-empty-string
+     */
+    #[ORM\Column(name: 'uri', length: 255)]
+    public protected(set) string $uri;
+
     #[ORM\Embedded(class: PageDocumentContent::class, columnPrefix: 'content_')]
     public PageDocumentContent $content {
         get => $this->content;
@@ -32,16 +54,18 @@ class PageDocument extends Page
     public function __construct(
         Category $category,
         string $title,
-        PageSlugGeneratorInterface $slugGenerator,
+        private readonly PageSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,
         PageDocumentContentRendererInterface $contentRenderer,
         ?PageId $id = null,
     ) {
+        $this->title = $title;
+
         $this->content = new PageDocumentContent(
             value: $content,
             contentRenderer: $contentRenderer,
         );
 
-        parent::__construct($category, $title, $slugGenerator, $id);
+        parent::__construct($category, $id);
     }
 }

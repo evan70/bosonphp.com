@@ -30,9 +30,8 @@ final readonly class PageLoadListener
      */
     public function postLoad(Page $page): void
     {
-        $this->bootSlugGenerator($page);
-
         if ($page instanceof PageDocument) {
+            $this->bootSlugGenerator($page);
             $this->bootContentRenderer($page->content);
         }
     }

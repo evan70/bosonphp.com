@@ -8,11 +8,9 @@ use App\Application\Query\GetDocumentationPageByNameQuery;
 use App\Application\UseCase\GetDocumentationPageByName\Exception\PageNotFoundException;
 use App\Application\UseCase\GetDocumentationPageByName\GetDocumentationPageByNameResult;
 use App\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
-use App\Domain\Documentation\PageLink;
 use App\Domain\Documentation\Version\Repository\VersionsListProviderInterface;
 use App\Domain\Shared\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
@@ -37,10 +35,6 @@ final class ShowController extends AbstractController
             throw new NotFoundHttpException(\sprintf('Version "%s" not found', $version));
         } catch (PageNotFoundException) {
             throw new NotFoundHttpException(\sprintf('Page "%s" not found', $page));
-        }
-
-        if ($result->page instanceof PageLink) {
-            return new RedirectResponse($result->page->uri);
         }
 
         return $this->render('page/docs/show.html.twig', [
