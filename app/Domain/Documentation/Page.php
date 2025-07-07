@@ -36,9 +36,8 @@ abstract class Page implements
     /**
      * @var non-empty-string
      */
-    abstract public string $title {
-        get;
-    }
+    #[ORM\Column(name: 'title', type: 'string', length: 255, nullable: false)]
+    public string $title;
 
     /**
      * @var non-empty-string
@@ -78,14 +77,16 @@ abstract class Page implements
     }
 
     /**
-     * @param int<-32768, 32767> $order
      * @param non-empty-string $title
+     * @param int<-32768, 32767> $order
      */
     public function __construct(
+        string $title,
         Category $category,
         int $order = 0,
         ?PageId $id = null,
     ) {
+        $this->title = $title;
         $this->order = $order;
         $this->category = $category;
         $this->id = $id ?? PageId::new();

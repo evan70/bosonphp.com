@@ -17,12 +17,6 @@ class PageLink extends Page
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string', length: 255, nullable: false)]
-    public string $title;
-
-    /**
-     * @var non-empty-string
-     */
     #[ORM\Column(name: 'uri', length: 255, nullable: false)]
     public string $uri;
 
@@ -38,10 +32,10 @@ class PageLink extends Page
         int $order = 0,
         ?PageId $id = null,
     ) {
-        $this->title = $title;
         $this->uri = $uri;
 
         parent::__construct(
+            title: $title,
             category: $category,
             order: $order,
             id: $id,

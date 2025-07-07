@@ -17,7 +17,6 @@ class PageDocument extends Page
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string', length: 255, nullable: false)]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -64,14 +63,13 @@ class PageDocument extends Page
         int $order = 0,
         ?PageId $id = null,
     ) {
-        $this->title = $title;
-
         $this->content = new PageDocumentContent(
             value: $content,
             contentRenderer: $contentRenderer,
         );
 
         parent::__construct(
+            title: $title,
             category: $category,
             order: $order,
             id: $id,
