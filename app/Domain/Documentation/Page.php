@@ -47,6 +47,12 @@ abstract class Page implements
         get;
     }
 
+    /**
+     * @var int<-32768, 32767>
+     */
+    #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
+    public int $order = 0;
+
     #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
     public Category $category {
@@ -72,12 +78,15 @@ abstract class Page implements
     }
 
     /**
+     * @param int<-32768, 32767> $order
      * @param non-empty-string $title
      */
     public function __construct(
         Category $category,
+        int $order = 0,
         ?PageId $id = null,
     ) {
+        $this->order = $order;
         $this->category = $category;
         $this->id = $id ?? PageId::new();
     }

@@ -17,28 +17,34 @@ class PageLink extends Page
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string', length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255, nullable: false)]
     public string $title;
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'uri', length: 255)]
+    #[ORM\Column(name: 'uri', length: 255, nullable: false)]
     public string $uri;
 
     /**
      * @param non-empty-string $title
      * @param non-empty-string $uri
+     * @param int<-32768, 32767> $order
      */
     public function __construct(
         Category $category,
         string $title,
         string $uri,
+        int $order = 0,
         ?PageId $id = null,
     ) {
         $this->title = $title;
         $this->uri = $uri;
 
-        parent::__construct($category, $id);
+        parent::__construct(
+            category: $category,
+            order: $order,
+            id: $id,
+        );
     }
 }

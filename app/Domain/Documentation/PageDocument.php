@@ -17,7 +17,7 @@ class PageDocument extends Page
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string', length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255, nullable: false)]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -33,7 +33,7 @@ class PageDocument extends Page
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'uri', length: 255)]
+    #[ORM\Column(name: 'uri', length: 255, nullable: false)]
     public protected(set) string $uri;
 
     #[ORM\Embedded(class: PageDocumentContent::class, columnPrefix: 'content_')]
@@ -51,12 +51,17 @@ class PageDocument extends Page
         }
     }
 
+    /**
+     * @param non-empty-string $title
+     * @param int<-32768, 32767> $order
+     */
     public function __construct(
         Category $category,
         string $title,
         private readonly PageSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,
         PageDocumentContentRendererInterface $contentRenderer,
+        int $order = 0,
         ?PageId $id = null,
     ) {
         $this->title = $title;
@@ -66,6 +71,10 @@ class PageDocument extends Page
             contentRenderer: $contentRenderer,
         );
 
-        parent::__construct($category, $id);
+        parent::__construct(
+            category: $category,
+            order: $order,
+            id: $id,
+        );
     }
 }
