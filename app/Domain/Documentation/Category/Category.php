@@ -53,7 +53,7 @@ class Category implements
      * @var CategoryPagesSet
      */
     #[ORM\OneToMany(targetEntity: Page::class, mappedBy: 'category', cascade: ['ALL'], fetch: 'EAGER')]
-    #[ORM\OrderBy(['id' => 'ASC'])]
+    #[ORM\OrderBy(['order' => 'ASC', 'createdAt' => 'DESC'])]
     public iterable $pages {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
         get => CategoryPagesSet::for($this, $this->pages);

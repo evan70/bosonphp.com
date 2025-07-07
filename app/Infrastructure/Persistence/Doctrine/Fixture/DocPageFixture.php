@@ -48,6 +48,7 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
                             . \htmlspecialchars(\rtrim($this->faker->sentence(
                                 $this->faker->numberBetween(1, 8)
                             ), '.')),
+                        order: $this->faker->numberBetween(0, 10),
                     ),
                     default => new PageDocument(
                         category: $category,
@@ -61,6 +62,7 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
                             . '> `category_id:` ' . $category->id . "\n>\n"
                             . '> `ver:` ' . $category->version->name . "\n>\n",
                         contentRenderer: $this->renderer,
+                        order: $this->faker->numberBetween(0, 10),
                     ),
                 });
 
