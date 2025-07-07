@@ -65,7 +65,7 @@ final class DocCategoryFixture extends Fixture implements DependentFixtureInterf
         'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/toggleVisibility_dark.svg',
         'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/undeploy_dark.svg',
         'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/unselectAll_dark.svg',
-        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/addFile_dark.svg'
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/addFile_dark.svg',
     ];
 
     public function __construct(

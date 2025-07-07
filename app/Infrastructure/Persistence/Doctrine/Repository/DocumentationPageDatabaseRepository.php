@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Domain\Documentation\Page;
 use App\Domain\Documentation\PageDocument;
 use App\Domain\Documentation\PageRepositoryInterface;
 use App\Domain\Documentation\Version\Version;

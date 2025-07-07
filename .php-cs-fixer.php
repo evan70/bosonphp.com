@@ -18,13 +18,6 @@ return new PhpCsFixer\Config()
     ->setRules([
         '@PER-CS2.0' => true,
         '@PER-CS2.0:risky' => true,
-        // broken in v3.70.2 (`$property { get; set; }` -> `$property { get; }`)
-        'no_empty_statement' => false,
-        // broken in v3.70.2 (`public private(set) Some $x` -> `public private(set) public Some $x`)
-        'visibility_required' => false,
-        // broken in v3.70.2 (invalid indentation of property accessors/mutators)
-        'statement_indentation' => false,
-        // other
         'strict_param' => true,
         'align_multiline_comment' => true,
         'array_syntax' => [
