@@ -33,6 +33,41 @@ final class DocCategoryFixture extends Fixture implements DependentFixtureInterf
         'License',
     ];
 
+    private const array ICONS = [
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/moveToRightBottom_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/moveToRightTop_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/newFolder_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/playBack_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/playFirst_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/playForward_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/playLast_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/preview_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/profileCPU_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/profileMemory_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/profileRed_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/projectDirectory_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/reformatCode_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/replace_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/report_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/rerunAutomatically_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/restartStop_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/runAll_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/selectAll_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/shortcutFilter_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/showImportStatements_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/showReadAccess_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/showWriteAccess_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/split_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/startMemoryProfile_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/suggestedRefactoringBulb_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/swapPanels_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/synchronizeScrolling_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/toggleVisibility_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/undeploy_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/unselectAll_dark.svg',
+        'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/actions/addFile_dark.svg'
+    ];
+
     public function __construct(
         private readonly Generator $faker,
     ) {}
@@ -54,13 +89,7 @@ final class DocCategoryFixture extends Fixture implements DependentFixtureInterf
                     description: $this->faker->numberBetween(0, 1) === 0
                         ? \rtrim($description, '.')
                         : null,
-                    icon: match ($this->faker->numberBetween(0, 4)) {
-                        1 => 'https://intellij-icons.jetbrains.design/icons/PhpIcons/icons/expui/phpLocal_dark.svg',
-                        2 => 'https://intellij-icons.jetbrains.design/icons/PhpIcons/icons/expui/phpUnit_dark.svg',
-                        3 => 'https://intellij-icons.jetbrains.design/icons/AllIcons/expui/run/testCustom_dark.svg',
-                        4 => 'https://intellij-icons.jetbrains.design/icons/CidrGoogleIcons/icons/expui/googleTest_dark.svg',
-                        default => null,
-                    },
+                    icon: $this->faker->randomElement(self::ICONS),
                     order: $i,
                 );
 

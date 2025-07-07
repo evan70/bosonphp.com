@@ -14,7 +14,7 @@
                     <summary role="button" class="outline secondary">
                         <a href="{{ path('doc.index') }}">References</a>
                     </summary>
-                    <ul dir="rtl">
+                    <ul >
                         {% for category in categories %}
                         <li>
                             <a href="{{ path('doc.show', {
@@ -24,12 +24,13 @@
                                 {% if category.icon is not null %}
                                     <img src="{{ category.icon }}"
                                          width="16" height="16" />
+                                    &nbsp;
                                 {% endif %}
                                 {{ category.title }}
                             </a>
                         </li>
                         {% endfor %}
-                    </ul>
+                    </ul >
                 </details>
             </li>
             <li><a href="{{ path('blog.index') }}">Blog</a></li>
