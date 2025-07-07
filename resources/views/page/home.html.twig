@@ -17,7 +17,10 @@
                     <ul dir="rtl">
                         {% for category in categories %}
                         <li>
-                            <a href="#">
+                            <a href="{{ path('doc.show', {
+                                page: category.pages.first.uri,
+                                version: category.version.name
+                            }) }}">
                                 {% if category.icon is not null %}
                                     <img src="{{ category.icon }}"
                                          width="16" height="16" />
