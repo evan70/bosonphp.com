@@ -1,6 +1,13 @@
 <aside>
     <nav>
         <ul>
+            <li>
+                {% if app.request.get('_route') == 'blog.index' %}
+                    <strong>All Blog Posts</strong>
+                {% else %}
+                    <a href="{{ path('blog.index') }}">All Blog Posts</a>
+                {% endif %}
+            </li>
             {% for current in categories %}
                 <li>
                     {% if category is defined and category.id.equals(current.id) %}

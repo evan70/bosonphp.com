@@ -102,7 +102,7 @@ class Category implements
         string $title,
         ?string $description = null,
         ?string $icon = null,
-        ?int $order = 0,
+        int $order = 0,
         ?CategoryId $id = null,
     ) {
         $this->version = $version;

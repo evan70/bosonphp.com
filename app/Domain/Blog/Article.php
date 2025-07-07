@@ -86,6 +86,7 @@ class Article implements
         private readonly ArticleSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,
         ArticleContentRendererInterface $contentRenderer,
+        string|\Stringable|null $preview = null,
         ?ArticleId $id = null,
     ) {
         $this->category = $category;
@@ -96,10 +97,10 @@ class Article implements
             contentRenderer: $contentRenderer,
         );
 
-        $this->preview = new UnicodeString($content)
-            ->replaceMatches('/^#[^\n]+/', '')
-            ->truncate(200, cut: TruncateMode::WordAfter)
-            ->toString();
+        $this->preview = (string) ($preview ?? new UnicodeString(
+            string: \strip_tags($this->content->rendered),
+        )
+            ->truncate(200, cut: TruncateMode::WordAfter));
 
         $this->id = $id ?? ArticleId::new();
     }
