@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\Query;
+namespace App\Documentation\Application\UseCase\GetDocumentationCategoriesList;
 
 final readonly class GetDocumentationCategoriesListQuery
 {

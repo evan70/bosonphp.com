@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\Query;
+namespace App\Documentation\Application\UseCase\GetDocumentationPageByName;
 
 final readonly class GetDocumentationPageByNameQuery
 {

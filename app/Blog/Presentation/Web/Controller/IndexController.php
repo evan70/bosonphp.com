@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Presentation\Web\Controller;
 
-use App\Blog\Application\Query\GetArticlesListQuery;
+use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
 use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListResult;
 use App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface;

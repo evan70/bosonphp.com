@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Presentation\Web\Controller;
 
-use App\Blog\Application\Query\GetArticleByNameQuery;
+use App\Blog\Application\UseCase\GetArticleByName\GetArticleByNameQuery;
 use App\Blog\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundException;
 use App\Blog\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
 use App\Blog\Application\UseCase\GetArticleByName\GetArticleByNameResult;

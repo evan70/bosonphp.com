@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Documentation\Presentation\Web\Controller;
 
-use App\Documentation\Application\Query\GetDocumentationPageByNameQuery;
+use App\Documentation\Application\UseCase\GetDocumentationPageByName\GetDocumentationPageByNameQuery;
 use App\Documentation\Application\UseCase\GetDocumentationPageByName\Exception\PageNotFoundException;
 use App\Documentation\Application\UseCase\GetDocumentationPageByName\GetDocumentationPageByNameResult;
 use App\Documentation\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;

@@ -7,7 +7,9 @@ namespace App\Documentation\Application\UseCase\GetDocumentationVersionByName;
 use App\Documentation\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
 use App\Documentation\Domain\Version\Repository\CurrentVersionProviderInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler(bus: 'query.bus', method: 'getVersion')]
 final readonly class GetDocumentationVersionByNameUseCase
 {
     public const string CURRENT_VERSION_ALIAS = 'current';
@@ -30,8 +32,10 @@ final readonly class GetDocumentationVersionByNameUseCase
     /**
      * @throws VersionNotFoundException
      */
-    public function getVersion(?string $version): GetDocumentationVersionByNameResult
+    public function getVersion(GetDocumentationVersionByNameQuery $query): GetDocumentationVersionByNameResult
     {
+        $version = $query->version;
+
         $instance = $this->requiresCurrentVersion($version)
             ? $this->currentVersion->findLatest()
             /** @phpstan-ignore-next-line : PHPStan false-positive */

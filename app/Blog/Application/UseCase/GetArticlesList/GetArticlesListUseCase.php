@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace App\Blog\Application\UseCase\GetArticlesList;
 
+use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\CategoryNotFoundException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidCategoryUriException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
 use App\Blog\Domain\Category\ArticleCategory;
 use App\Blog\Domain\Category\Repository\ArticleCategoryBySlugProviderInterface;
 use App\Blog\Domain\Repository\ArticlePaginateProviderInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
+#[AsMessageHandler(bus: 'query.bus', method: 'getArticles')]
 final readonly class GetArticlesListUseCase
 {
     public function __construct(
@@ -61,8 +64,11 @@ final readonly class GetArticlesListUseCase
         return $page;
     }
 
-    public function getArticles(int $page, ?string $categoryUri): GetArticlesListResult
+    public function getArticles(GetArticlesListQuery $query): GetArticlesListResult
     {
+        $page = $query->page;
+        $categoryUri = $query->categoryUri;
+
         $articles = $this->articles->getAllAsPaginator(
             page: $page = $this->getPageByArgument($page),
             category: $category = $this->findCategoryByArgument($categoryUri),

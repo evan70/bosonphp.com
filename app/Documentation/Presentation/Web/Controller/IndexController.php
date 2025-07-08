@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Documentation\Presentation\Web\Controller;
 
-use App\Documentation\Application\Query\GetDocumentationCategoriesListQuery;
+use App\Documentation\Application\UseCase\GetDocumentationCategoriesList\GetDocumentationCategoriesListQuery;
 use App\Documentation\Application\UseCase\GetDocumentationCategoriesList\GetDocumentationCategoriesListResult;
 use App\Documentation\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
