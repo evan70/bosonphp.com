@@ -22,7 +22,11 @@ parameters:
     # - identifier: greater.alwaysFalse
     # - identifier: booleanOr.alwaysFalse
   excludePaths:
-    # Exclude testing and dev directories and files
-    - app/Shared/Infrastructure/Persistence/Doctrine/Fixture
+    # Blog
+    - app/Blog/Infrastructure/Persistence/Doctrine/Fixture
+    # Documentation
+    - app/Documentation/Infrastructure/Persistence/Doctrine/Fixture
+    # Shared
+    - app/Shared/Infrastructure/Faker
     - app/Shared/Infrastructure/Persistence/Doctrine/Migration
     - app/Shared/Presentation/Console/TestCommand.php (?)

@@ -8,16 +8,14 @@ use Faker\Provider\Base;
 
 final class MarkdownProvider extends Base
 {
+    /**
+     * @param int<1, max> $paragraphs
+     */
     public function markdownContent(int $paragraphs = 10): string
     {
         $currentTitleLevel = 2;
 
-        $result = [
-            $this->markdownTitle(
-                words: $this->generator->numberBetween(1, 10),
-                level: $currentTitleLevel++,
-            ),
-        ];
+        $result = [];
 
         for ($i = 0; $i < $paragraphs; ++$i) {
             $result[] = match ($this->generator->numberBetween(1, 10)) {
@@ -65,6 +63,9 @@ final class MarkdownProvider extends Base
             . \rtrim($this->generator->sentence($words), '.');
     }
 
+    /**
+     * @param int<1, max> $lines
+     */
     public function markdownCode(int $lines = 10, string $lang = ''): string
     {
         $sourceCode = \file(__FILE__, \FILE_SKIP_EMPTY_LINES | \FILE_IGNORE_NEW_LINES);
@@ -83,6 +84,9 @@ final class MarkdownProvider extends Base
             MARKDOWN;
     }
 
+    /**
+     * @param int<1, max> $elements
+     */
     public function markdownList(int $elements = 6): string
     {
         $result = [];
