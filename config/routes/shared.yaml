@@ -1,0 +1,15 @@
+web:
+  resource:
+    path: ../../app/Shared/Presentation/Web/Controller/
+    namespace: App\Shared\Presentation\Web\Controller
+  type: attribute
+
+api:
+  resource:
+    path: ../../app/Shared/Presentation/Api/Controller/
+    namespace: App\Shared\Presentation\Api\Controller
+  type: attribute
+  prefix: v1
+  stateless: true
+  defaults:
+    api: v1
