@@ -36,7 +36,7 @@ class ArticleCategory implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string')]
+    #[ORM\Column(name: 'title', type: 'non_empty_string')]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -52,20 +52,23 @@ class ArticleCategory implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug', type: 'string')]
+    #[ORM\Column(name: 'slug', type: 'non_empty_string')]
     public private(set) string $slug;
 
     /**
      * @var int<-32768, 32767>
      */
-    #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
+    #[ORM\Column(name: 'sorting_order', type: 'int8', options: ['default' => 0])]
     public int $order = 0;
 
     /**
-     * @var iterable<array-key, Article>
+     * @var CategoryArticleSet
      */
     #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'category', cascade: ['all'])]
-    public private(set) iterable $articles;
+    public iterable $articles {
+        /** @phpstan-ignore-next-line : PHPStan false-positive */
+        get => CategoryArticleSet::for($this, $this->articles);
+    }
 
     /**
      * @param non-empty-string|\Stringable $title
@@ -78,7 +81,7 @@ class ArticleCategory implements
         ?ArticleCategoryId $id = null,
     ) {
         $this->title = $title;
-        $this->articles = new ArrayCollection();
+        $this->articles = new CategoryArticleSet($this);
         $this->order = $order;
         $this->id = $id ?? ArticleCategoryId::new();
     }

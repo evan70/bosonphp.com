@@ -36,7 +36,7 @@ class Article implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string', length: 255)]
+    #[ORM\Column(name: 'title', type: 'non_empty_string', length: 255)]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -52,7 +52,7 @@ class Article implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug', type: 'string')]
+    #[ORM\Column(name: 'slug', type: 'non_empty_string')]
     public private(set) string $slug;
 
     #[ORM\Embedded(class: ArticleContent::class, columnPrefix: 'content_')]
@@ -73,9 +73,22 @@ class Article implements
     #[ORM\Column(name: 'preview', type: 'text', options: ['default' => ''])]
     public string $preview;
 
-    #[ORM\ManyToOne(targetEntity: ArticleCategory::class, fetch: 'EAGER', inversedBy: 'articles')]
+    #[ORM\ManyToOne(targetEntity: ArticleCategory::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'articles')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
-    public private(set) ArticleCategory $category;
+    public ArticleCategory $category {
+        get => $this->category;
+        set(ArticleCategory $new) {
+            /** @phpstan-ignore-next-line : PHPStan false-positive */
+            $previous = $this->category ?? null;
+
+            if ($previous !== $new) {
+                $previous?->articles->removeElement($this);
+
+                $this->category = $new;
+                $new->articles->add($this);
+            }
+        }
+    }
 
     /**
      * @param non-empty-string|\Stringable $title

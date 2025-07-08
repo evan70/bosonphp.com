@@ -30,7 +30,7 @@ class Version implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'name', type: 'string')]
+    #[ORM\Column(name: 'name', type: 'non_empty_string')]
     public string $name;
 
     #[ORM\Column(name: 'status', type: Status::class)]

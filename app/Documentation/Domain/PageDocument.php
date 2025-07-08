@@ -32,7 +32,7 @@ class PageDocument extends Page
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'uri', length: 255, nullable: false)]
+    #[ORM\Column(name: 'uri', type: 'non_empty_string', length: 255, nullable: false)]
     public protected(set) string $uri;
 
     #[ORM\Embedded(class: PageDocumentContent::class, columnPrefix: 'content_')]

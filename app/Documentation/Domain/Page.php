@@ -37,7 +37,7 @@ abstract class Page implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'string', length: 255, nullable: false)]
+    #[ORM\Column(name: 'title', type: 'non_empty_string', length: 255, nullable: false)]
     public string $title;
 
     /**
@@ -50,7 +50,7 @@ abstract class Page implements
     /**
      * @var int<-32768, 32767>
      */
-    #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
+    #[ORM\Column(name: 'sorting_order', type: 'int8', options: ['default' => 0])]
     public int $order = 0;
 
     #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]

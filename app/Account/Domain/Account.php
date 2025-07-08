@@ -35,7 +35,7 @@ class Account implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(type: 'string', unique: true)]
+    #[ORM\Column(type: 'non_empty_string', unique: true)]
     public string $login;
 
     #[ORM\Embedded(class: EncryptedPassword::class, columnPrefix: false)]
@@ -62,7 +62,7 @@ class Account implements
 
     /**
      * @param non-empty-string $login
-     * @param iterable<array-key, non-empty-string>|non-empty-string $roles
+     * @param iterable<mixed, non-empty-string>|non-empty-string $roles
      */
     public function __construct(
         string $login,
