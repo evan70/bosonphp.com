@@ -23,6 +23,6 @@ parameters:
     # - identifier: booleanOr.alwaysFalse
   excludePaths:
     # Exclude testing and dev directories and files
-    - app/Infrastructure/Persistence/Doctrine/Fixture
-    - app/Infrastructure/Persistence/Doctrine/Migration
-    - app/Presentation/Console/TestCommand.php (?)
+    - app/Shared/Infrastructure/Persistence/Doctrine/Fixture
+    - app/Shared/Infrastructure/Persistence/Doctrine/Migration
+    - app/Shared/Presentation/Console/TestCommand.php (?)
