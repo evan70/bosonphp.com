@@ -18,33 +18,36 @@
                         Documentation ({{ version.name }})
                     </summary>
                     <ul>
-                        {% for availableVersion in versions %}
-                            {% if availableVersion.status.value != 'deprecated' %}
-                                <li>
-                                    <a href="{{ path('doc.index_by_version', {
-                                        version: availableVersion.name
-                                    }) }}">
-                                        {{ availableVersion.name }}
-                                        {% if availableVersion.status.value == 'dev' %}
-                                            (dev)
-                                        {% endif %}
-                                    </a>
-                                </li>
-                            {% endif %}
+                        {% for devVersion in versions.dev %}
+                            <li>
+                                <a href="{{ path('doc.index_by_version', {
+                                    version: devVersion.name
+                                }) }}">
+                                    {{ devVersion.name }} (dev)
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                        {% for availableVersion in versions.stable %}
+                            <li>
+                                <a href="{{ path('doc.index_by_version', {
+                                    version: availableVersion.name
+                                }) }}">
+                                    {{ availableVersion.name }}
+                                </a>
+                            </li>
                         {% endfor %}
 
                         <li>
                             <strong>Unmaintained Versions</strong>
                         </li>
 
-                        {% for deprecatedVersion in versions %}
-                            {% if deprecatedVersion.status.value == 'deprecated' %}
+                        {% for deprecatedVersion in versions.deprecated %}
                             <li>
                                 <a href="{{ path('doc.index_by_version', {
                                     version: deprecatedVersion.name
                                 }) }}">{{ deprecatedVersion.name }}</a>
                             </li>
-                            {% endif %}
                         {% endfor %}
                     </ul>
                 </details>

@@ -20,15 +20,22 @@
                         }) }}">Documentation ({{ version.name }})</a>
                     </summary>
                     <ul>
-                        {% for availableVersion in versions %}
-                            {% if availableVersion.status.value != 'deprecated' %}
-                                <li>
-                                    <a href="{{ path('doc.show', {
-                                        page: page.uri,
-                                        version: availableVersion.name
-                                    }) }}">{{ availableVersion.name }}</a>
-                                </li>
-                            {% endif %}
+                        {% for devVersion in versions.dev %}
+                            <li>
+                                <a href="{{ path('doc.show', {
+                                    page: page.uri,
+                                    version: devVersion.name
+                                }) }}">{{ devVersion.name }}</a>
+                            </li>
+                        {% endfor %}
+
+                        {% for stableVersion in versions.stable %}
+                            <li>
+                                <a href="{{ path('doc.show', {
+                                    page: page.uri,
+                                    version: stableVersion.name
+                                }) }}">{{ stableVersion.name }}</a>
+                            </li>
                         {% endfor %}
 
                         <li>
@@ -36,14 +43,12 @@
                         </li>
 
                         {% for deprecatedVersion in versions %}
-                            {% if deprecatedVersion.status.value == 'deprecated' %}
-                                <li>
-                                    <a href="{{ path('doc.show', {
-                                        page: page.uri,
-                                        version: deprecatedVersion.name
-                                    }) }}">{{ deprecatedVersion.name }}</a>
-                                </li>
-                            {% endif %}
+                            <li>
+                                <a href="{{ path('doc.show', {
+                                    page: page.uri,
+                                    version: deprecatedVersion.name
+                                }) }}">{{ deprecatedVersion.name }}</a>
+                            </li>
                         {% endfor %}
                     </ul>
                 </details>
