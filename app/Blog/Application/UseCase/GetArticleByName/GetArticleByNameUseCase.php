@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Application\UseCase\GetArticleByName;
 
-use App\Blog\Application\UseCase\GetArticleByName\GetArticleByNameQuery;
+use App\Blog\Application\Output\CategoryOutput;
+use App\Blog\Application\Output\FullArticleOutput;
 use App\Blog\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundException;
 use App\Blog\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
 use App\Blog\Domain\ArticleRepositoryInterface;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-#[AsMessageHandler(bus: 'query.bus', method: 'getArticle')]
+#[AsMessageHandler(bus: 'query.bus')]
 final readonly class GetArticleByNameUseCase
 {
     public function __construct(
@@ -21,11 +22,14 @@ final readonly class GetArticleByNameUseCase
         private ValidatorInterface $validator,
     ) {}
 
-    public function getArticle(GetArticleByNameQuery $query): GetArticleByNameResult
+    /**
+     * @return non-empty-string
+     */
+    private function getValidUri(GetArticleByNameQuery $query): string
     {
-        $name = $query->articleUri;
+        $uri = $query->uri;
 
-        $errors = $this->validator->validate($name, [
+        $errors = $this->validator->validate($uri, [
             new Regex('/^' . Requirement::ASCII_SLUG . '$/'),
         ]);
 
@@ -33,15 +37,24 @@ final readonly class GetArticleByNameUseCase
             throw new InvalidArticleUriException();
         }
 
-        /** @var non-empty-string $name */
-        $article = $this->articles->findBySlug($name);
+        /** @var non-empty-string */
+        return $uri;
+    }
+
+    public function __invoke(GetArticleByNameQuery $query): GetArticleByNameOutput
+    {
+        $uri = $this->getValidUri($query);
+
+        $article = $this->articles->findByUri($uri);
 
         if ($article === null) {
             throw new ArticleNotFoundException();
         }
 
-        return new GetArticleByNameResult(
-            article: $article,
+        return new GetArticleByNameOutput(
+            uri: $uri,
+            category: CategoryOutput::fromCategory($article->category),
+            article: FullArticleOutput::fromArticle($article),
         );
     }
 }

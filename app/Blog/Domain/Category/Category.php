@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: 'blog_article_categories')]
 #[ORM\Index(name: 'blog_article_categories_sorting_order_idx', columns: ['sorting_order'])]
-#[ORM\UniqueConstraint(name: 'blog_article_categories_slug_unique', columns: ['slug'])]
+#[ORM\UniqueConstraint(name: 'blog_article_categories_uri_unique', columns: ['uri'])]
 class Category implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
@@ -44,15 +44,15 @@ class Category implements
             assert($title !== '', 'Category title cannot be empty');
 
             $this->title = $title;
-            $this->slug = $this->slugGenerator->createSlug($this);
+            $this->uri = $this->slugGenerator->createSlug($this);
         }
     }
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug', type: 'string')]
-    public private(set) string $slug;
+    #[ORM\Column(name: 'uri', type: 'string')]
+    public private(set) string $uri;
 
     /**
      * @var int<-32768, 32767>
@@ -74,10 +74,10 @@ class Category implements
      * @param int<-32768, 32767> $order
      */
     public function __construct(
-        string|\Stringable                              $title,
+        string|\Stringable $title,
         private readonly CategorySlugGeneratorInterface $slugGenerator,
-        int                                             $order = 0,
-        ?CategoryId                                     $id = null,
+        int $order = 0,
+        ?CategoryId $id = null,
     ) {
         $this->title = $title;
         $this->articles = new CategoryArticleSet($this);

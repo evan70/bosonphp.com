@@ -8,8 +8,9 @@ use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\CategoryNotFoundException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidCategoryUriException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
-use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListResult;
-use App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface;
+use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListOutput;
+use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListOutput;
+use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListQuery;
 use App\Shared\Domain\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,18 +29,20 @@ use Symfony\Component\Routing\Attribute\Route;
 final class IndexByCategoryController extends AbstractController
 {
     public function __construct(
-        private readonly ArticleCategoryListProviderInterface $categories,
         private readonly QueryBusInterface $queries,
     ) {}
 
     public function __invoke(Request $request, string $slug): Response
     {
         try {
-            /** @var GetArticlesListResult $result */
-            $result = $this->queries->get(new GetArticlesListQuery(
+            /** @var GetArticlesListOutput $articlesResult */
+            $articlesResult = $this->queries->get(new GetArticlesListQuery(
                 page: $request->query->getInt('page', 1),
-                categoryUri: $slug,
+                uri: $slug,
             ));
+
+            /** @var GetCategoriesListOutput $categoriesResult */
+            $categoriesResult = $this->queries->get(new GetCategoriesListQuery());
         } catch (InvalidCategoryUriException) {
             throw new BadRequestHttpException('Category name contain invalid characters');
         } catch (InvalidPageException) {
@@ -49,10 +52,10 @@ final class IndexByCategoryController extends AbstractController
         }
 
         return $this->render('page/blog/index_by_category.html.twig', [
-            'category' => $result->category,
-            'articles' => $result->articles,
-            'page' => $result->page,
-            'categories' => $this->categories->getAll(),
+            'category' => $articlesResult->category,
+            'articles' => $articlesResult->articles,
+            'page' => $articlesResult->page,
+            'categories' => $categoriesResult->categories,
         ]);
     }
 }

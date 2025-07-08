@@ -6,9 +6,8 @@ namespace App\Blog\Domain\Repository;
 
 use App\Blog\Domain\Article;
 use App\Blog\Domain\Category\Category;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
-interface ArticlePaginateProviderInterface
+interface ArticlesListPaginateProviderInterface
 {
     /**
      * @var int<1, max>
@@ -24,11 +23,11 @@ interface ArticlePaginateProviderInterface
      * @param int<1, max> $page
      * @param int<1, max> $itemsPerPage
      *
-     * @return Paginator<Article>
+     * @return \Traversable<array-key, Article>&\Countable
      */
     public function getAllAsPaginator(
-        int       $page = self::DEFAULT_PAGE,
-        int       $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
+        int $page = self::DEFAULT_PAGE,
+        int $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
         ?Category $category = null,
-    ): Paginator;
+    ): \Traversable&\Countable;
 }

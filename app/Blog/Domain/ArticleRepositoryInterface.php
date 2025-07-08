@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Blog\Domain;
 
-use App\Blog\Domain\Repository\ArticleBySlugProviderInterface;
-use App\Blog\Domain\Repository\ArticlePaginateProviderInterface;
+use App\Blog\Domain\Repository\ArticleByUriProviderInterface;
+use App\Blog\Domain\Repository\ArticlesListPaginateProviderInterface;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
  * @template-extends ObjectRepository<Article>
  */
 interface ArticleRepositoryInterface extends
-    ArticlePaginateProviderInterface,
-    ArticleBySlugProviderInterface,
+    ArticlesListPaginateProviderInterface,
+    ArticleByUriProviderInterface,
     ObjectRepository {}

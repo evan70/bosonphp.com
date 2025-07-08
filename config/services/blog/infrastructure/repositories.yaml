@@ -14,10 +14,10 @@ services:
   App\Blog\Domain\ArticleRepositoryInterface:
     alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
 
-  App\Blog\Domain\Repository\ArticlePaginateProviderInterface:
+  App\Blog\Domain\Repository\ArticlesListPaginateProviderInterface:
     alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
 
-  App\Blog\Domain\Repository\ArticleBySlugProviderInterface:
+  App\Blog\Domain\Repository\ArticleByUriProviderInterface:
     alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
 
   # ----------------------------------------------------------------------------
@@ -27,8 +27,8 @@ services:
   App\Blog\Domain\Category\CategoryRepositoryInterface:
     alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository
 
-  App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface:
+  App\Blog\Domain\Category\Repository\CategoriesListProviderInterface:
     alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository
 
-  App\Blog\Domain\Category\Repository\ArticleCategoryBySlugProviderInterface:
+  App\Blog\Domain\Category\Repository\CategoryByUriProviderInterface:
     alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository

@@ -26,10 +26,10 @@ final class CategoryDatabaseRepository extends ServiceEntityRepository implement
         parent::__construct($registry, Category::class);
     }
 
-    public function findBySlug(string $slug): ?Category
+    public function findByUri(string $uri): ?Category
     {
         return $this->findOneBy([
-            'slug' => new UnicodeString($slug)
+            'uri' => new UnicodeString($uri)
                 ->lower()
                 ->toString(),
         ]);

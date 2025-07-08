@@ -7,8 +7,9 @@ namespace App\Blog\Presentation\Web\Controller;
 use App\Blog\Application\UseCase\GetArticleByName\GetArticleByNameQuery;
 use App\Blog\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundException;
 use App\Blog\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
-use App\Blog\Application\UseCase\GetArticleByName\GetArticleByNameResult;
-use App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface;
+use App\Blog\Application\UseCase\GetArticleByName\GetArticleByNameOutput;
+use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListOutput;
+use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListQuery;
 use App\Shared\Domain\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,15 +27,17 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ShowController extends AbstractController
 {
     public function __construct(
-        private readonly ArticleCategoryListProviderInterface $categories,
         private readonly QueryBusInterface $queries,
     ) {}
 
     public function __invoke(string $slug): Response
     {
         try {
-            /** @var GetArticleByNameResult $result */
-            $result = $this->queries->get(new GetArticleByNameQuery($slug));
+            /** @var GetArticleByNameOutput $articleResult */
+            $articleResult = $this->queries->get(new GetArticleByNameQuery($slug));
+
+            /** @var GetCategoriesListOutput $categoriesResult */
+            $categoriesResult = $this->queries->get(new GetCategoriesListQuery());
         } catch (InvalidArticleUriException) {
             throw new BadRequestHttpException('Article name contain invalid characters');
         } catch (ArticleNotFoundException) {
@@ -42,8 +45,9 @@ final class ShowController extends AbstractController
         }
 
         return $this->render('page/blog/show.html.twig', [
-            'article' => $result->article,
-            'categories' => $this->categories->getAll(),
+            'article' => $articleResult->article,
+            'category' => $articleResult->category,
+            'categories' => $categoriesResult->categories,
         ]);
     }
 }

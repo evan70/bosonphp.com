@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Blog\Application\UseCase\GetArticlesList;
 
-use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
+use App\Blog\Application\Output\CategoryOutput;
+use App\Blog\Application\Output\ShortArticlesListOutput;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\CategoryNotFoundException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidCategoryUriException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
 use App\Blog\Domain\Category\Category;
-use App\Blog\Domain\Category\Repository\ArticleCategoryBySlugProviderInterface;
-use App\Blog\Domain\Repository\ArticlePaginateProviderInterface;
+use App\Blog\Domain\Category\Repository\CategoryByUriProviderInterface;
+use App\Blog\Domain\Repository\ArticlesListPaginateProviderInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
@@ -18,13 +19,17 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-#[AsMessageHandler(bus: 'query.bus', method: 'getArticles')]
+#[AsMessageHandler(bus: 'query.bus')]
 final readonly class GetArticlesListUseCase
 {
     public function __construct(
-        private ArticlePaginateProviderInterface $articles,
-        private ArticleCategoryBySlugProviderInterface $categories,
+        private ArticlesListPaginateProviderInterface $articles,
+        private CategoryByUriProviderInterface $categories,
         private ValidatorInterface $validator,
+        /**
+         * @var int<0, max>
+         */
+        private int $itemsPerPage = ArticlesListPaginateProviderInterface::DEFAULT_ITEMS_PER_PAGE,
     ) {}
 
     private function findCategoryByArgument(?string $categoryUri): ?Category
@@ -42,7 +47,7 @@ final readonly class GetArticlesListUseCase
         }
 
         /** @var non-empty-string $categoryUri */
-        return $this->categories->findBySlug($categoryUri)
+        return $this->categories->findByUri($categoryUri)
             ?? throw new CategoryNotFoundException();
     }
 
@@ -64,20 +69,21 @@ final readonly class GetArticlesListUseCase
         return $page;
     }
 
-    public function getArticles(GetArticlesListQuery $query): GetArticlesListResult
+    public function __invoke(GetArticlesListQuery $query): GetArticlesListOutput
     {
         $page = $query->page;
-        $categoryUri = $query->categoryUri;
+        $categoryUri = $query->uri;
 
         $articles = $this->articles->getAllAsPaginator(
             page: $page = $this->getPageByArgument($page),
+            itemsPerPage: $this->itemsPerPage,
             category: $category = $this->findCategoryByArgument($categoryUri),
         );
 
-        return new GetArticlesListResult(
+        return new GetArticlesListOutput(
             page: $page,
-            articles: $articles,
-            category: $category,
+            articles: ShortArticlesListOutput::fromArticlesPaginator($this->itemsPerPage, $articles),
+            category: CategoryOutput::fromOptionalCategory($category),
         );
     }
 }

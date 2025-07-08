@@ -8,6 +8,6 @@ final readonly class GetArticlesListQuery
 {
     public function __construct(
         public int $page,
-        public ?string $categoryUri = null,
+        public ?string $uri = null,
     ) {}
 }

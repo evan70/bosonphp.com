@@ -20,7 +20,7 @@ use Symfony\Component\String\UnicodeString;
  */
 #[ORM\Entity]
 #[ORM\Table(name: 'blog_articles')]
-#[ORM\UniqueConstraint(name: 'blog_article_slug_unique', columns: ['slug'])]
+#[ORM\UniqueConstraint(name: 'blog_article_uri_unique', columns: ['uri'])]
 class Article implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
@@ -45,15 +45,15 @@ class Article implements
             assert($title !== '', 'Article title cannot be empty');
 
             $this->title = $title;
-            $this->slug = $this->slugGenerator->createSlug($this);
+            $this->uri = $this->slugGenerator->createSlug($this);
         }
     }
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug', type: 'string')]
-    public private(set) string $slug;
+    #[ORM\Column(name: 'uri', type: 'string')]
+    public private(set) string $uri;
 
     #[ORM\Embedded(class: ArticleContent::class, columnPrefix: 'content_')]
     public ArticleContent $content {
@@ -94,13 +94,13 @@ class Article implements
      * @param non-empty-string|\Stringable $title
      */
     public function __construct(
-        Category                                       $category,
-        string|\Stringable                             $title,
+        Category $category,
+        string|\Stringable $title,
         private readonly ArticleSlugGeneratorInterface $slugGenerator,
-        string|\Stringable                             $content,
-        ArticleContentRendererInterface                $contentRenderer,
-        string|\Stringable|null                        $preview = null,
-        ?ArticleId                                     $id = null,
+        string|\Stringable $content,
+        ArticleContentRendererInterface $contentRenderer,
+        string|\Stringable|null $preview = null,
+        ?ArticleId $id = null,
     ) {
         $this->category = $category;
         $this->title = $title;

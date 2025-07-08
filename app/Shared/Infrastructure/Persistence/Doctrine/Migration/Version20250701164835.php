@@ -26,7 +26,7 @@ final class Version20250701164835 extends AbstractMigration
             CREATE TABLE blog_article_categories (
                 id UUID NOT NULL,
                 title VARCHAR(255) NOT NULL CHECK (title <> ''),
-                slug VARCHAR(255) NOT NULL CHECK (slug <> ''),
+                uri VARCHAR(255) NOT NULL CHECK (uri <> ''),
                 sorting_order SMALLINT NOT NULL DEFAULT 0,
                 created_at TIMESTAMP(0) WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
                 updated_at TIMESTAMP(0) WITH TIME ZONE DEFAULT NULL,
@@ -35,7 +35,7 @@ final class Version20250701164835 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            CREATE UNIQUE INDEX blog_article_categories_slug_unique ON blog_article_categories (slug)
+            CREATE UNIQUE INDEX blog_article_categories_uri_unique ON blog_article_categories (uri)
             SQL);
 
         $this->addSql(<<<'SQL'

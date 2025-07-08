@@ -6,7 +6,7 @@ namespace App\Blog\Domain\Category\Repository;
 
 use App\Blog\Domain\Category\Category;
 
-interface ArticleCategoryListProviderInterface
+interface CategoriesListProviderInterface
 {
     /**
      * @return iterable<array-key, Category>

@@ -32,8 +32,8 @@ final class ArticleDatabaseRepository extends ServiceEntityRepository implements
      * @return Paginator<Article>
      */
     public function getAllAsPaginator(
-        int       $page = self::DEFAULT_PAGE,
-        int       $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
+        int $page = self::DEFAULT_PAGE,
+        int $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
         ?Category $category = null,
     ): Paginator {
         $builder = $this->createQueryBuilder('a')
@@ -53,10 +53,10 @@ final class ArticleDatabaseRepository extends ServiceEntityRepository implements
         );
     }
 
-    public function findBySlug(string $slug): ?Article
+    public function findByUri(string $uri): ?Article
     {
         return $this->findOneBy([
-            'slug' => new UnicodeString($slug)
+            'uri' => new UnicodeString($uri)
                 ->lower()
                 ->toString(),
         ]);
