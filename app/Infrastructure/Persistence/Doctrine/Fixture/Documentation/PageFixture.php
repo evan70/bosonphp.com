@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Fixture;
+namespace App\Infrastructure\Persistence\Doctrine\Fixture\Documentation;
 
 use App\Domain\Documentation\Category\Category;
 use App\Domain\Documentation\PageDocument;
@@ -20,7 +20,7 @@ use Faker\Generator;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
-final class DocPageFixture extends Fixture implements DependentFixtureInterface
+final class PageFixture extends Fixture implements DependentFixtureInterface
 {
     private const array PAGES = [
         'Configuration',
@@ -95,7 +95,7 @@ final class DocPageFixture extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            DocCategoryFixture::class,
+            CategoryFixture::class,
         ];
     }
 }

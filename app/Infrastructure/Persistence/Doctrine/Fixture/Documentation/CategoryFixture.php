@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Fixture;
+namespace App\Infrastructure\Persistence\Doctrine\Fixture\Documentation;
 
 use App\Domain\Documentation\Category\Category;
 use App\Domain\Documentation\Version\Version;
@@ -17,7 +17,7 @@ use Faker\Generator;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
-final class DocCategoryFixture extends Fixture implements DependentFixtureInterface
+final class CategoryFixture extends Fixture implements DependentFixtureInterface
 {
     private const array CATEGORIES = [
         'Overview',
@@ -106,7 +106,7 @@ final class DocCategoryFixture extends Fixture implements DependentFixtureInterf
     public function getDependencies(): array
     {
         return [
-            DocVersionFixture::class,
+            VersionFixture::class,
         ];
     }
 }

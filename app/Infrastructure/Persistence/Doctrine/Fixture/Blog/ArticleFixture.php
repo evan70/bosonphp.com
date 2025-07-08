@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Fixture;
+namespace App\Infrastructure\Persistence\Doctrine\Fixture\Blog;
 
 use App\Domain\Blog\Article;
 use App\Domain\Blog\ArticleContentRendererInterface;
@@ -97,7 +97,7 @@ final class ArticleFixture extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
-            ArticleCategoryFixture::class,
+            CategoryFixture::class,
         ];
     }
 }

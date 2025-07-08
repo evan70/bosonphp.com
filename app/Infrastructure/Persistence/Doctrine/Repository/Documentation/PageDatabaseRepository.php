@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Repository;
+namespace App\Infrastructure\Persistence\Doctrine\Repository\Documentation;
 
 use App\Domain\Documentation\PageDocument;
 use App\Domain\Documentation\PageRepositoryInterface;
@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @template-extends ServiceEntityRepository<PageDocument>
  */
-final class DocumentationPageDatabaseRepository extends ServiceEntityRepository implements
+final class PageDatabaseRepository extends ServiceEntityRepository implements
     PageRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

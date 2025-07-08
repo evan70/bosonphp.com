@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Repository;
+namespace App\Infrastructure\Persistence\Doctrine\Repository\Blog;
 
 use App\Domain\Blog\Category\ArticleCategory;
 use App\Domain\Blog\Category\ArticleCategoryRepositoryInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\String\UnicodeString;
 /**
  * @template-extends ServiceEntityRepository<ArticleCategory>
  */
-final class ArticleCategoryDatabaseRepository extends ServiceEntityRepository implements
+final class CategoryDatabaseRepository extends ServiceEntityRepository implements
     ArticleCategoryRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

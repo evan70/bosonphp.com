@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Fixture;
+namespace App\Infrastructure\Persistence\Doctrine\Fixture\Account;
 
 use App\Domain\Account\Account;
 use App\Domain\Account\Password\Password;

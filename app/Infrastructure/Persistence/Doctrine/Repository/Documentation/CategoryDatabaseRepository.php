@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Repository;
+namespace App\Infrastructure\Persistence\Doctrine\Repository\Documentation;
 
 use App\Domain\Documentation\Category\Category;
 use App\Domain\Documentation\Category\CategoryRepositoryInterface;
@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @template-extends ServiceEntityRepository<Category>
  */
-final class DocumentationCategoryDatabaseRepository extends ServiceEntityRepository implements
+final class CategoryDatabaseRepository extends ServiceEntityRepository implements
     CategoryRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

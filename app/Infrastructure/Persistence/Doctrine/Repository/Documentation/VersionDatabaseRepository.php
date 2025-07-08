@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Repository;
+namespace App\Infrastructure\Persistence\Doctrine\Repository\Documentation;
 
 use App\Domain\Documentation\Version\Status;
 use App\Domain\Documentation\Version\Version;
@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @template-extends ServiceEntityRepository<Version>
  */
-final class DocumentationVersionDatabaseRepository extends ServiceEntityRepository implements
+final class VersionDatabaseRepository extends ServiceEntityRepository implements
     VersionRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)

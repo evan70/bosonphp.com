@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Listener;
+namespace App\Infrastructure\Persistence\Doctrine\Listener\Documentation;
 
 use App\Domain\Documentation\Page;
 use App\Domain\Documentation\PageDocument;

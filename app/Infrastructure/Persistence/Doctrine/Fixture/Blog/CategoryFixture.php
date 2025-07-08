@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Fixture;
+namespace App\Infrastructure\Persistence\Doctrine\Fixture\Blog;
 
 use App\Domain\Blog\Category\ArticleCategory;
 use App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface;
@@ -15,7 +15,7 @@ use Doctrine\Persistence\ObjectManager;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
-final class ArticleCategoryFixture extends Fixture
+final class CategoryFixture extends Fixture
 {
     private const array CATEGORIES = [
         'A Week of Boson',

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Fixture;
+namespace App\Infrastructure\Persistence\Doctrine\Fixture\Documentation;
 
 use App\Domain\Documentation\Version\Status;
 use App\Domain\Documentation\Version\Version;
@@ -15,7 +15,7 @@ use Doctrine\Persistence\ObjectManager;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Infrastructure\Persistence\Doctrine\Fixture
  */
-final class DocVersionFixture extends Fixture
+final class VersionFixture extends Fixture
 {
     private const array VERSIONS = [
         '0.1',

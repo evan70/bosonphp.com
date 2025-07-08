@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Listener;
+namespace App\Infrastructure\Persistence\Doctrine\Listener\Blog;
 
 use App\Domain\Blog\Category\ArticleCategory;
 use App\Domain\Blog\Category\ArticleCategorySlugGeneratorInterface;
@@ -13,7 +13,7 @@ use Doctrine\ORM\Events;
  * @api
  */
 #[AsEntityListener(event: Events::postLoad, entity: ArticleCategory::class)]
-final readonly class ArticleCategoryLoadListener
+final readonly class CategoryLoadListener
 {
     public function __construct(
         private ArticleCategorySlugGeneratorInterface $slugGenerator,

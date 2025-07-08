@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Listener;
+namespace App\Infrastructure\Persistence\Doctrine\Listener\Blog;
 
 use App\Domain\Blog\Article;
 use App\Domain\Blog\ArticleContent;

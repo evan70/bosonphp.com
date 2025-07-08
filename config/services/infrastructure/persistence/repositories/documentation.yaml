@@ -5,29 +5,29 @@ services:
     autoconfigure: true
 
   App\Domain\Documentation\PageRepositoryInterface:
-    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageDatabaseRepository
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\PageDatabaseRepository
 
   App\Domain\Documentation\Repository\PageByNameProviderInterface:
-    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationPageDatabaseRepository
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\PageDatabaseRepository
 
 
 
   App\Domain\Documentation\Version\VersionRepositoryInterface:
-    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\VersionDatabaseRepository
 
   App\Domain\Documentation\Version\Repository\CurrentVersionProviderInterface:
-    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\VersionDatabaseRepository
 
   App\Domain\Documentation\Version\Repository\VersionByNameProviderInterface:
-    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\VersionDatabaseRepository
 
   App\Domain\Documentation\Version\Repository\VersionsListProviderInterface:
-    alias: App\Infrastructure\Persistence\Doctrine\Repository\DocumentationVersionDatabaseRepository
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\VersionDatabaseRepository
 
 
 
-  App\Domain\Documentation\Menu\PageMenuRepositoryInterface:
-    alias: DocumentationCategoryDatabaseRepository
+  App\Domain\Documentation\Category\CategoryRepositoryInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\CategoryDatabaseRepository
 
-  App\Domain\Documentation\Menu\Repository\PageMenuListProviderInterface:
-    alias: DocumentationCategoryDatabaseRepository
+  App\Domain\Documentation\Category\Repository\CategoryListProviderInterface:
+    alias: App\Infrastructure\Persistence\Doctrine\Repository\Documentation\CategoryDatabaseRepository
