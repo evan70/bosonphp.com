@@ -2,8 +2,9 @@
 
 1. `docker compose up --build -d`
 2. `make php`
-3. `composer db:up`
-4. `composer db:fill -- -q` (fixtures, optional)
+3. `composer install`
+4. `composer db:up`
+5. `composer db:fill -- -q` (fixtures, optional)
 
 ## Other Commands
 
