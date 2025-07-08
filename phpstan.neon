@@ -2,6 +2,8 @@ includes:
   - phar://phpstan.phar/conf/bleedingEdge.neon
   - vendor/phpstan/phpstan-deprecation-rules/rules.neon
   - vendor/phpstan/phpstan-strict-rules/rules.neon
+  - vendor/phpstan/phpstan-symfony/extension.neon
+  - vendor/phpstan/phpstan-symfony/rules.neon
 parameters:
   level: max
   phpVersion:
@@ -9,6 +11,10 @@ parameters:
     max: 80400
   strictRules:
     allRules: true
+  symfony:
+    containerXmlPath: var/cache/dev/App_Shared_Infrastructure_KernelDevDebugContainer.xml
+  scanDirectories:
+    - var/cache/dev/Symfony/Config
   paths:
     - app
   tmpDir: vendor/.cache.phpstan
