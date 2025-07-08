@@ -9,6 +9,11 @@ use App\Blog\Domain\ArticleSlugGeneratorInterface;
 use App\Infrastructure\Content\SlugGenerator;
 
 /**
+ * @api
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal App\Blog\Infrastructure\Content
+ *
  * @template-extends SlugGenerator<Article>
  */
 final readonly class ArticleSlugGenerator extends SlugGenerator implements

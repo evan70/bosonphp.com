@@ -8,6 +8,12 @@ use App\Blog\Domain\ArticleContent;
 use App\Blog\Domain\ArticleContentRendererInterface;
 use League\CommonMark\ConverterInterface;
 
+/**
+ * @api
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal App\Blog\Infrastructure\Content
+ */
 final readonly class ArticleContentRenderer implements ArticleContentRendererInterface
 {
     public function __construct(

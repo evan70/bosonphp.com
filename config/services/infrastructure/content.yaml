@@ -1,7 +1,4 @@
 
-imports:
-  - { resource: content/*.yaml }
-
 services:
   _defaults:
     autowire: true

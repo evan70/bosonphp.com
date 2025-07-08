@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Presentation\Web\Controller;
 
-use App\Domain\Documentation\Version\Repository\CurrentVersionProviderInterface;
+use App\Documentation\Domain\Version\Repository\CurrentVersionProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

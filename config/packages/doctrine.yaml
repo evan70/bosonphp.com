@@ -38,11 +38,11 @@ doctrine:
       App\Blog\Domain\ArticleId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
       App\Blog\Domain\Category\ArticleCategoryId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
       # Documentation
-      App\Domain\Documentation\Category\CategoryId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\CategoryIdType
-      App\Domain\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\PageIdType
-      App\Domain\Documentation\PageType: App\Infrastructure\Persistence\Doctrine\Type\Documentation\PageTypeType
-      App\Domain\Documentation\Version\VersionId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\VersionIdType
-      App\Domain\Documentation\Version\Status: App\Infrastructure\Persistence\Doctrine\Type\Documentation\VersionStatusType
+      App\Documentation\Domain\Category\CategoryId: App\Documentation\Infrastructure\Persistence\Doctrine\Type\CategoryIdType
+      App\Documentation\Domain\PageId: App\Documentation\Infrastructure\Persistence\Doctrine\Type\PageIdType
+      App\Documentation\Domain\PageType: App\Documentation\Infrastructure\Persistence\Doctrine\Type\PageTypeType
+      App\Documentation\Domain\Version\VersionId: App\Documentation\Infrastructure\Persistence\Doctrine\Type\VersionIdType
+      App\Documentation\Domain\Version\Status: App\Documentation\Infrastructure\Persistence\Doctrine\Type\VersionStatusType
       # Shared
       string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 
@@ -72,6 +72,12 @@ doctrine:
         dir: '%kernel.project_dir%/app/Blog/Domain'
         prefix: 'App\Blog\Domain'
         alias: blog
+      Documentation:
+        type: attribute
+        is_bundle: false
+        dir: '%kernel.project_dir%/app/Documentation/Domain'
+        prefix: 'App\Documentation\Domain'
+        alias: documentation
 
 when@test:
   doctrine:

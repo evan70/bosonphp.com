@@ -16,6 +16,22 @@ blog_api:
   type: attribute
 
 # ------------------------------------------------------------------------------
+#   Documentation
+# ------------------------------------------------------------------------------
+
+documentation_web:
+  resource:
+    path: ../app/Documentation/Presentation/Web/Controller/
+    namespace: App\Documentation\Presentation\Web\Controller
+  type: attribute
+
+documentation_api:
+  resource:
+    path: ../app/Documentation/Presentation/Api/Controller/
+    namespace: App\Documentation\Presentation\Api\Controller
+  type: attribute
+
+# ------------------------------------------------------------------------------
 #   Shared
 # ------------------------------------------------------------------------------
 

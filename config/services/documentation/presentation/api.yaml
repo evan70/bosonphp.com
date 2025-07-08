@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Documentation\Presentation\Api\Controller\:
+    resource: '%kernel.project_dir%/app/Documentation/Presentation/Api/Controller/'

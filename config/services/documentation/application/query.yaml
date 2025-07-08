@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Documentation\Application\Query\Handler\:
+    resource: '%kernel.project_dir%/app/Documentation/Application/Query/Handler'

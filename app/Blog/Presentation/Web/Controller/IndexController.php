@@ -15,6 +15,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * @api
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal App\Blog\Presentation\Web\Controller
+ */
 #[Route('/blog', name: 'blog.index', methods: 'GET')]
 final class IndexController extends AbstractController
 {

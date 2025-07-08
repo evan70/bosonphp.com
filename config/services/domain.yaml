@@ -1,8 +1,0 @@
-
-imports:
-  - { resource: domain/*.yaml }
-
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true

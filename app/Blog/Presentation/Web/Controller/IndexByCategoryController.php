@@ -18,6 +18,12 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 
+/**
+ * @api
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal App\Blog\Presentation\Web\Controller
+ */
 #[Route('/blog/category/{slug}', name: 'blog.index_by_category', methods: 'GET')]
 final class IndexByCategoryController extends AbstractController
 {
