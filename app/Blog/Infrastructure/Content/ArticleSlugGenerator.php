@@ -6,7 +6,7 @@ namespace App\Blog\Infrastructure\Content;
 
 use App\Blog\Domain\Article;
 use App\Blog\Domain\ArticleSlugGeneratorInterface;
-use App\Infrastructure\Content\SlugGenerator;
+use App\Shared\Infrastructure\Content\SlugGenerator;
 
 /**
  * @api

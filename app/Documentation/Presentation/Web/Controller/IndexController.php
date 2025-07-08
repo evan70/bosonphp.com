@@ -8,7 +8,7 @@ use App\Documentation\Application\Query\GetDocumentationCategoriesListQuery;
 use App\Documentation\Application\UseCase\GetDocumentationCategoriesList\GetDocumentationCategoriesListResult;
 use App\Documentation\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
-use App\Domain\Shared\Bus\QueryBusInterface;
+use App\Shared\Domain\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

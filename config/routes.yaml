@@ -14,6 +14,10 @@ blog_api:
     path: ../app/Blog/Presentation/Api/Controller/
     namespace: App\Blog\Presentation\Api\Controller
   type: attribute
+  prefix: v1
+  stateless: true
+  defaults:
+    api: v1
 
 # ------------------------------------------------------------------------------
 #   Documentation
@@ -30,6 +34,10 @@ documentation_api:
     path: ../app/Documentation/Presentation/Api/Controller/
     namespace: App\Documentation\Presentation\Api\Controller
   type: attribute
+  prefix: v1
+  stateless: true
+  defaults:
+    api: v1
 
 # ------------------------------------------------------------------------------
 #   Shared
@@ -37,14 +45,14 @@ documentation_api:
 
 web:
   resource:
-    path: ../app/Presentation/Web/Controller/
-    namespace: App\Presentation\Web\Controller
+    path: ../app/Shared/Presentation/Web/Controller/
+    namespace: App\Shared\Presentation\Web\Controller
   type: attribute
 
 api:
   resource:
-    path: ../app/Presentation/Api/Controller/
-    namespace: App\Presentation\Api\Controller
+    path: ../app/Shared/Presentation/Api/Controller/
+    namespace: App\Shared\Presentation\Api\Controller
   type: attribute
   prefix: v1
   stateless: true

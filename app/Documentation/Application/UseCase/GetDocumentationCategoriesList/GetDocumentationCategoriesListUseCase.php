@@ -6,8 +6,7 @@ namespace App\Documentation\Application\UseCase\GetDocumentationCategoriesList;
 
 use App\Documentation\Application\Query\GetDocumentationVersionByNameQuery;
 use App\Documentation\Application\UseCase\GetDocumentationVersionByName\GetDocumentationVersionByNameResult;
-use App\Documentation\Application\UseCase\GetDocumentationCategoriesList\GetDocumentationCategoriesListResult;
-use App\Domain\Shared\Bus\QueryBusInterface;
+use App\Shared\Domain\Bus\QueryBusInterface;
 
 final readonly class GetDocumentationCategoriesListUseCase
 {

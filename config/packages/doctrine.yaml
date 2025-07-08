@@ -44,12 +44,12 @@ doctrine:
       App\Documentation\Domain\Version\VersionId: App\Documentation\Infrastructure\Persistence\Doctrine\Type\VersionIdType
       App\Documentation\Domain\Version\Status: App\Documentation\Infrastructure\Persistence\Doctrine\Type\VersionStatusType
       # Shared
-      string[]: App\Infrastructure\Persistence\Doctrine\Type\StringArrayType
+      string[]: App\Shared\Infrastructure\Persistence\Doctrine\Type\StringArrayType
 
   orm:
     dql:
       string_functions:
-        cast: App\Infrastructure\Persistence\Doctrine\Fun\CastFunction
+        cast: App\Shared\Infrastructure\Persistence\Doctrine\Fun\CastFunction
     auto_generate_proxy_classes: true
     enable_lazy_ghost_objects: true
     report_fields_where_declared: true

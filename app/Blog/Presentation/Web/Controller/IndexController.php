@@ -8,7 +8,7 @@ use App\Blog\Application\Query\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
 use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListResult;
 use App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface;
-use App\Domain\Shared\Bus\QueryBusInterface;
+use App\Shared\Domain\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

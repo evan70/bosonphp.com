@@ -6,7 +6,7 @@ namespace App\Documentation\Infrastructure\Content;
 
 use App\Documentation\Domain\Page;
 use App\Documentation\Domain\PageSlugGeneratorInterface;
-use App\Infrastructure\Content\SlugGenerator;
+use App\Shared\Infrastructure\Content\SlugGenerator;
 
 /**
  * @api

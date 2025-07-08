@@ -9,7 +9,7 @@ use App\Blog\Application\UseCase\GetArticleByName\Exception\ArticleNotFoundExcep
 use App\Blog\Application\UseCase\GetArticleByName\Exception\InvalidArticleUriException;
 use App\Blog\Application\UseCase\GetArticleByName\GetArticleByNameResult;
 use App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface;
-use App\Domain\Shared\Bus\QueryBusInterface;
+use App\Shared\Domain\Bus\QueryBusInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;

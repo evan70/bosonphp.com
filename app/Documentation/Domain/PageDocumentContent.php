@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Documentation\Domain;
 
-use App\Domain\Shared\ValueObject\StringValueObjectInterface;
+use App\Shared\Domain\ValueObject\StringValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

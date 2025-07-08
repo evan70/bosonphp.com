@@ -8,7 +8,7 @@ use App\Documentation\Application\Query\GetDocumentationVersionByNameQuery;
 use App\Documentation\Application\UseCase\GetDocumentationPageByName\Exception\PageNotFoundException;
 use App\Documentation\Application\UseCase\GetDocumentationVersionByName\GetDocumentationVersionByNameResult;
 use App\Documentation\Domain\Repository\PageByNameProviderInterface;
-use App\Domain\Shared\Bus\QueryBusInterface;
+use App\Shared\Domain\Bus\QueryBusInterface;
 
 final readonly class GetDocumentationPageByNameUseCase
 {

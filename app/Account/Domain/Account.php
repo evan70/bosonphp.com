@@ -6,11 +6,11 @@ namespace App\Account\Domain;
 
 use App\Account\Domain\Integration\Integration;
 use App\Account\Domain\Password\EncryptedPassword;
-use App\Domain\Shared\Date\CreatedDateProvider;
-use App\Domain\Shared\Date\CreatedDateProviderInterface;
-use App\Domain\Shared\Date\UpdatedDateProvider;
-use App\Domain\Shared\Date\UpdatedDateProviderInterface;
-use App\Domain\Shared\Id\IdentifiableInterface;
+use App\Shared\Domain\Date\CreatedDateProvider;
+use App\Shared\Domain\Date\CreatedDateProviderInterface;
+use App\Shared\Domain\Date\UpdatedDateProvider;
+use App\Shared\Domain\Date\UpdatedDateProviderInterface;
+use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

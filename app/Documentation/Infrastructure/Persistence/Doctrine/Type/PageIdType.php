@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Type;
 
 use App\Documentation\Domain\PageId;
-use App\Infrastructure\Persistence\Doctrine\Type\UniversalUniqueIdType;
+use App\Shared\Infrastructure\Persistence\Doctrine\Type\UniversalUniqueIdType;
 
 /**
  * @api

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Type;
 
 use App\Documentation\Domain\PageType;
-use App\Infrastructure\Persistence\Doctrine\Type\StringEnumType;
+use App\Shared\Infrastructure\Persistence\Doctrine\Type\StringEnumType;
 
 /**
  * @api

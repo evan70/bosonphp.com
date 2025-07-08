@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Shared\Infrastructure\Listener\:
+    resource: '%kernel.project_dir%/app/Shared/Infrastructure/Listener'

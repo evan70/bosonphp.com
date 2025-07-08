@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Documentation\Domain;
 
-use App\Domain\Shared\Content\ContentRendererInterface;
+use App\Shared\Domain\Content\ContentRendererInterface;
 
 /**
  * Defines contract for content renderers in the {@see PageDocumentContent} VO.

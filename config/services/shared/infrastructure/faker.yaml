@@ -1,0 +1,22 @@
+parameters:
+  env(TEST_FAKER_LOCALE): 'en_US'
+
+  test.faker.locale: '%env(TEST_FAKER_LOCALE)%'
+
+when@dev: &dev
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
+    App\Shared\Infrastructure\Faker\:
+      resource: '%kernel.project_dir%/app/Shared/Infrastructure/Faker'
+
+    Faker\Generator:
+      factory: ['Faker\Factory', 'create']
+      arguments:
+        $locale: '%test.faker.locale%'
+      calls:
+        - ['addProvider', ['@App\Shared\Infrastructure\Faker\MarkdownProvider']]
+
+when@test: *dev

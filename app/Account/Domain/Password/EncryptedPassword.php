@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Account\Domain\Password;
 
-use App\Domain\Shared\ValueObject\ValueObjectInterface;
+use App\Shared\Domain\ValueObject\ValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Embeddable]

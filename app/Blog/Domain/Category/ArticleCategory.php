@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Blog\Domain\Category;
 
 use App\Blog\Domain\Article;
-use App\Domain\Shared\Date\CreatedDateProvider;
-use App\Domain\Shared\Date\CreatedDateProviderInterface;
-use App\Domain\Shared\Date\UpdatedDateProvider;
-use App\Domain\Shared\Date\UpdatedDateProviderInterface;
-use App\Domain\Shared\Id\IdentifiableInterface;
+use App\Shared\Domain\Date\CreatedDateProvider;
+use App\Shared\Domain\Date\CreatedDateProviderInterface;
+use App\Shared\Domain\Date\UpdatedDateProvider;
+use App\Shared\Domain\Date\UpdatedDateProviderInterface;
+use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
