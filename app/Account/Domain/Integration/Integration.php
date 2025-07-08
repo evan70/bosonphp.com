@@ -40,25 +40,25 @@ class Integration implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(type: 'non_empty_string')]
+    #[ORM\Column(type: 'string')]
     public string $externalId;
 
     /**
      * @var non-empty-string|null
      */
-    #[ORM\Column(type: 'non_empty_string', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     public ?string $login = null;
 
     /**
      * @var non-empty-string|null
      */
-    #[ORM\Column(type: 'non_empty_string', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     public ?string $email = null;
 
     /**
      * @var non-empty-string|null
      */
-    #[ORM\Column(type: 'non_empty_string', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
     public ?string $avatar = null;
 
     /**

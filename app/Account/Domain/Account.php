@@ -35,7 +35,7 @@ class Account implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(type: 'non_empty_string', unique: true)]
+    #[ORM\Column(type: 'string', unique: true)]
     public string $login;
 
     #[ORM\Embedded(class: EncryptedPassword::class, columnPrefix: false)]

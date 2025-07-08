@@ -55,7 +55,7 @@ final class Version20250701164836 extends AbstractMigration
             SQL);
 
         $this->addSql(<<<'SQL'
-            COMMENT ON COLUMN blog_articles.category_id IS '(DC2Type:App\Blog\Domain\Category\ArticleCategoryId)'
+            COMMENT ON COLUMN blog_articles.category_id IS '(DC2Type:App\Blog\Domain\Category\CategoryId)'
             SQL);
 
         $this->addSql(<<<'SQL'

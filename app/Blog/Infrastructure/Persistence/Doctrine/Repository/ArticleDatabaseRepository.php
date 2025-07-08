@@ -6,7 +6,7 @@ namespace App\Blog\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Blog\Domain\Article;
 use App\Blog\Domain\ArticleRepositoryInterface;
-use App\Blog\Domain\Category\ArticleCategory;
+use App\Blog\Domain\Category\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,9 +32,9 @@ final class ArticleDatabaseRepository extends ServiceEntityRepository implements
      * @return Paginator<Article>
      */
     public function getAllAsPaginator(
-        int $page = self::DEFAULT_PAGE,
-        int $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
-        ?ArticleCategory $category = null,
+        int       $page = self::DEFAULT_PAGE,
+        int       $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
+        ?Category $category = null,
     ): Paginator {
         $builder = $this->createQueryBuilder('a')
             ->orderBy('a.createdAt', 'DESC')

@@ -6,7 +6,7 @@ use App\Blog\Domain\Article;
 use Local\Component\Set\RelationSet;
 
 /**
- * @template-extends RelationSet<ArticleCategory, Article>
+ * @template-extends RelationSet<Category, Article>
  */
 final class CategoryArticleSet extends RelationSet
 {

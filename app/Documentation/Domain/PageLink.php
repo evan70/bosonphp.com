@@ -17,7 +17,7 @@ class PageLink extends Page
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'uri', type: 'non_empty_string', length: 255, nullable: false)]
+    #[ORM\Column(name: 'uri', type: 'string', length: 255, nullable: false)]
     public string $uri;
 
     /**

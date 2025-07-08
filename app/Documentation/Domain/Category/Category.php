@@ -32,7 +32,7 @@ class Category implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'non_empty_string', length: 255)]
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
     public string $title;
 
     #[ORM\Column(name: 'description', type: 'text', nullable: true)]
@@ -41,13 +41,13 @@ class Category implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'icon', type: 'non_empty_string', length: 255, nullable: true)]
+    #[ORM\Column(name: 'icon', type: 'string', length: 255, nullable: true)]
     public ?string $icon = null;
 
     /**
      * @var int<-32768, 32767>
      */
-    #[ORM\Column(name: 'sorting_order', type: 'int8', options: ['default' => 0])]
+    #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
     public int $order = 0;
 
     /**

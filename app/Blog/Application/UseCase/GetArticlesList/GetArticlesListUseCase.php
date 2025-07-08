@@ -8,7 +8,7 @@ use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\CategoryNotFoundException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidCategoryUriException;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
-use App\Blog\Domain\Category\ArticleCategory;
+use App\Blog\Domain\Category\Category;
 use App\Blog\Domain\Category\Repository\ArticleCategoryBySlugProviderInterface;
 use App\Blog\Domain\Repository\ArticlePaginateProviderInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -27,7 +27,7 @@ final readonly class GetArticlesListUseCase
         private ValidatorInterface $validator,
     ) {}
 
-    private function findCategoryByArgument(?string $categoryUri): ?ArticleCategory
+    private function findCategoryByArgument(?string $categoryUri): ?Category
     {
         if ($categoryUri === null) {
             return null;

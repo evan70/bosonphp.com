@@ -24,7 +24,7 @@ services:
   #   Category
   # ----------------------------------------------------------------------------
 
-  App\Blog\Domain\Category\ArticleCategoryRepositoryInterface:
+  App\Blog\Domain\Category\CategoryRepositoryInterface:
     alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository
 
   App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface:

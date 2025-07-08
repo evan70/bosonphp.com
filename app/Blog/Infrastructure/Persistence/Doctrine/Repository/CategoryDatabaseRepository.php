@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Blog\Domain\Category\ArticleCategory;
-use App\Blog\Domain\Category\ArticleCategoryRepositoryInterface;
+use App\Blog\Domain\Category\Category;
+use App\Blog\Domain\Category\CategoryRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\String\UnicodeString;
@@ -16,17 +16,17 @@ use Symfony\Component\String\UnicodeString;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Blog\Infrastructure\Persistence\Doctrine\Repository
  *
- * @template-extends ServiceEntityRepository<ArticleCategory>
+ * @template-extends ServiceEntityRepository<Category>
  */
 final class CategoryDatabaseRepository extends ServiceEntityRepository implements
-    ArticleCategoryRepositoryInterface
+    CategoryRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ArticleCategory::class);
+        parent::__construct($registry, Category::class);
     }
 
-    public function findBySlug(string $slug): ?ArticleCategory
+    public function findBySlug(string $slug): ?Category
     {
         return $this->findOneBy([
             'slug' => new UnicodeString($slug)
@@ -36,7 +36,7 @@ final class CategoryDatabaseRepository extends ServiceEntityRepository implement
     }
 
     /**
-     * @return list<ArticleCategory>
+     * @return list<Category>
      */
     public function getAll(): array
     {

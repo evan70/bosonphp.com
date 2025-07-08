@@ -23,6 +23,10 @@ parameters:
   tipsOfTheDay: false
   checkMissingCallableSignature: true
   ignoreErrors:
+    # Doctrine type errors
+    - '/database can contain int but property expects int<\-32768, 32767>/'
+    - '/database can contain string but property expects non\-empty\-string/'
+    - '/database can contain string\|null but property expects non\-empty\-string\|null/'
     # Do not report DbC invariants and preconditions
     - identifier: function.alreadyNarrowedType
     - identifier: instanceof.alwaysTrue

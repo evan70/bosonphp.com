@@ -9,9 +9,9 @@ use App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
- * @template-extends ObjectRepository<ArticleCategory>
+ * @template-extends ObjectRepository<Category>
  */
-interface ArticleCategoryRepositoryInterface extends
+interface CategoryRepositoryInterface extends
     ArticleCategoryListProviderInterface,
     ArticleCategoryBySlugProviderInterface,
     ObjectRepository {}

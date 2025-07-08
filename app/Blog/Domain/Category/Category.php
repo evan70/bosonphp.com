@@ -10,7 +10,6 @@ use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
 use App\Shared\Domain\Id\IdentifiableInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'blog_article_categories')]
 #[ORM\Index(name: 'blog_article_categories_sorting_order_idx', columns: ['sorting_order'])]
 #[ORM\UniqueConstraint(name: 'blog_article_categories_slug_unique', columns: ['slug'])]
-class ArticleCategory implements
+class Category implements
     IdentifiableInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
@@ -30,13 +29,13 @@ class ArticleCategory implements
     use UpdatedDateProvider;
 
     #[ORM\Id]
-    #[ORM\Column(name: 'id', type: ArticleCategoryId::class)]
-    public private(set) ArticleCategoryId $id;
+    #[ORM\Column(name: 'id', type: CategoryId::class)]
+    public private(set) CategoryId $id;
 
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'title', type: 'non_empty_string')]
+    #[ORM\Column(name: 'title', type: 'string')]
     public string $title {
         get => $this->title;
         set(string|\Stringable $value) {
@@ -52,13 +51,13 @@ class ArticleCategory implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(name: 'slug', type: 'non_empty_string')]
+    #[ORM\Column(name: 'slug', type: 'string')]
     public private(set) string $slug;
 
     /**
      * @var int<-32768, 32767>
      */
-    #[ORM\Column(name: 'sorting_order', type: 'int8', options: ['default' => 0])]
+    #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
     public int $order = 0;
 
     /**
@@ -75,14 +74,14 @@ class ArticleCategory implements
      * @param int<-32768, 32767> $order
      */
     public function __construct(
-        string|\Stringable $title,
-        private readonly ArticleCategorySlugGeneratorInterface $slugGenerator,
-        int $order = 0,
-        ?ArticleCategoryId $id = null,
+        string|\Stringable                              $title,
+        private readonly CategorySlugGeneratorInterface $slugGenerator,
+        int                                             $order = 0,
+        ?CategoryId                                     $id = null,
     ) {
         $this->title = $title;
         $this->articles = new CategoryArticleSet($this);
         $this->order = $order;
-        $this->id = $id ?? ArticleCategoryId::new();
+        $this->id = $id ?? CategoryId::new();
     }
 }

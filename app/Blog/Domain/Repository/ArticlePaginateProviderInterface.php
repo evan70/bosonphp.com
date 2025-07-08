@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Blog\Domain\Repository;
 
 use App\Blog\Domain\Article;
-use App\Blog\Domain\Category\ArticleCategory;
+use App\Blog\Domain\Category\Category;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 interface ArticlePaginateProviderInterface
@@ -27,8 +27,8 @@ interface ArticlePaginateProviderInterface
      * @return Paginator<Article>
      */
     public function getAllAsPaginator(
-        int $page = self::DEFAULT_PAGE,
-        int $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
-        ?ArticleCategory $category = null,
+        int       $page = self::DEFAULT_PAGE,
+        int       $itemsPerPage = self::DEFAULT_ITEMS_PER_PAGE,
+        ?Category $category = null,
     ): Paginator;
 }

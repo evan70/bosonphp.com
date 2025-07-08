@@ -6,4 +6,4 @@ namespace App\Blog\Domain\Category;
 
 use App\Shared\Domain\Id\UniversalUniqueId;
 
-final readonly class ArticleCategoryId extends UniversalUniqueId {}
+final readonly class CategoryId extends UniversalUniqueId {}

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Blog\Application\UseCase\GetArticlesList;
 
 use App\Blog\Domain\Article;
-use App\Blog\Domain\Category\ArticleCategory;
+use App\Blog\Domain\Category\Category;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 final readonly class GetArticlesListResult
@@ -14,11 +14,11 @@ final readonly class GetArticlesListResult
         /**
          * @var int<1, 2147483647>
          */
-        public int $page,
+        public int       $page,
         /**
          * @var Paginator<Article>
          */
         public Paginator $articles,
-        public ?ArticleCategory $category = null,
+        public ?Category $category = null,
     ) {}
 }

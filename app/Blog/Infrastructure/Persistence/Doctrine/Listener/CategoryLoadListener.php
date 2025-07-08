@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Infrastructure\Persistence\Doctrine\Listener;
 
-use App\Blog\Domain\Category\ArticleCategory;
-use App\Blog\Domain\Category\ArticleCategorySlugGeneratorInterface;
+use App\Blog\Domain\Category\Category;
+use App\Blog\Domain\Category\CategorySlugGeneratorInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 
@@ -15,11 +15,11 @@ use Doctrine\ORM\Events;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Blog\Infrastructure\Persistence\Doctrine\Listener
  */
-#[AsEntityListener(event: Events::postLoad, entity: ArticleCategory::class)]
+#[AsEntityListener(event: Events::postLoad, entity: Category::class)]
 final readonly class CategoryLoadListener
 {
     public function __construct(
-        private ArticleCategorySlugGeneratorInterface $slugGenerator,
+        private CategorySlugGeneratorInterface $slugGenerator,
     ) {}
 
     /**
@@ -27,7 +27,7 @@ final readonly class CategoryLoadListener
      *
      * @throws \ReflectionException
      */
-    public function postLoad(ArticleCategory $category): void
+    public function postLoad(Category $category): void
     {
         $this->bootSlugGenerator($category);
     }
@@ -35,7 +35,7 @@ final readonly class CategoryLoadListener
     /**
      * @throws \ReflectionException
      */
-    private function bootSlugGenerator(ArticleCategory $category): void
+    private function bootSlugGenerator(Category $category): void
     {
         $slugGenerator = new \ReflectionProperty($category, 'slugGenerator');
 

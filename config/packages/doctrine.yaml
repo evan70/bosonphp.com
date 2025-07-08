@@ -29,13 +29,6 @@ doctrine:
         use_savepoints: true
         mapping_types:
           app_domain_documentation_version_status: string
-          non_empty_string: string
-          int8: tinyint
-          uint8: tinyint
-          int32: integer
-          uint32: integer
-          int64: bigint
-          uint64: bigint
 
     types:
       # Account
@@ -43,7 +36,7 @@ doctrine:
       App\Account\Domain\AccountId: App\Account\Infrastructure\Persistence\Doctrine\Type\AccountIdType
       # Blog
       App\Blog\Domain\ArticleId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
-      App\Blog\Domain\Category\ArticleCategoryId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
+      App\Blog\Domain\Category\CategoryId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
       # Documentation
       App\Documentation\Domain\Category\CategoryId: App\Documentation\Infrastructure\Persistence\Doctrine\Type\CategoryIdType
       App\Documentation\Domain\PageId: App\Documentation\Infrastructure\Persistence\Doctrine\Type\PageIdType
