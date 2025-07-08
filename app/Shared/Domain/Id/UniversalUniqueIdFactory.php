@@ -19,8 +19,6 @@ abstract class UniversalUniqueIdFactory implements IdFactoryInterface
 
     /**
      * @param non-empty-string $value
-     *
-     * @return IdInterface
      */
     abstract protected function createInstance(string $value): IdInterface;
 

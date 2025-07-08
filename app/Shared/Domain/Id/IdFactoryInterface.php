@@ -12,7 +12,6 @@ use App\Shared\Domain\Id\Exception\InvalidIdException;
 interface IdFactoryInterface
 {
     /**
-     * @return IdInterface
      * @throws InvalidIdException
      */
     public function create(mixed $input): IdInterface;

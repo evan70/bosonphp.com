@@ -6,6 +6,7 @@ namespace App\Shared\Infrastructure\Persistence\Doctrine\Type;
 
 use App\Shared\Domain\Id\UniversalUniqueId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 
 /**
@@ -36,11 +37,6 @@ abstract class UniversalUniqueIdType extends Type
         return 'UUID';
     }
 
-    /**
-     * @param UniversalUniqueId|string|\Stringable|null $value
-     *
-     * @phpstan-ignore-next-line
-     */
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         if (\is_string($value) || $value instanceof \Stringable) {
@@ -51,11 +47,9 @@ abstract class UniversalUniqueIdType extends Type
     }
 
     /**
-     * @param non-empty-string|null $value
+     * @return T|null
      *
-     * @return UniversalUniqueId|null
-     *
-     * @phpstan-ignore-next-line
+     * @throws ConversionException
      */
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?UniversalUniqueId
     {
@@ -63,13 +57,17 @@ abstract class UniversalUniqueIdType extends Type
             return null;
         }
 
+        if (!\is_string($value) || $value === '') {
+            throw ConversionException::conversionFailedInvalidType(
+                $value,
+                \get_debug_type($value),
+                ['null', 'non-empty-string'],
+            );
+        }
+
+        /** @var class-string<T> $class */
         $class = static::getClass();
 
-        /**
-         * @var UniversalUniqueId|null
-         *
-         * @phpstan-ignore-next-line
-         */
         return new $class($value);
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Documentation\Application\UseCase\GetDocumentationVersionByName;
 
 use App\Documentation\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
-use App\Documentation\Application\UseCase\GetDocumentationVersionByName\GetDocumentationVersionByNameResult;
 use App\Documentation\Domain\Version\Repository\CurrentVersionProviderInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 
