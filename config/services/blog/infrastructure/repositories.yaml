@@ -1,0 +1,34 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Blog\Infrastructure\Persistence\Doctrine\Repository\:
+    resource: '%kernel.project_dir%/app/Blog/Infrastructure/Persistence/Doctrine/Repository'
+
+  # ----------------------------------------------------------------------------
+  #   Article
+  # ----------------------------------------------------------------------------
+
+  App\Blog\Domain\ArticleRepositoryInterface:
+    alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
+
+  App\Blog\Domain\Repository\ArticlePaginateProviderInterface:
+    alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
+
+  App\Blog\Domain\Repository\ArticleBySlugProviderInterface:
+    alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\ArticleDatabaseRepository
+
+  # ----------------------------------------------------------------------------
+  #   Category
+  # ----------------------------------------------------------------------------
+
+  App\Blog\Domain\Category\ArticleCategoryRepositoryInterface:
+    alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository
+
+  App\Blog\Domain\Category\Repository\ArticleCategoryListProviderInterface:
+    alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository
+
+  App\Blog\Domain\Category\Repository\ArticleCategoryBySlugProviderInterface:
+    alias: App\Blog\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository

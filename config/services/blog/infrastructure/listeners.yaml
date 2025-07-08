@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Blog\Infrastructure\Persistence\Doctrine\Listener\:
+    resource: '%kernel.project_dir%/app/Blog/Infrastructure/Persistence/Doctrine/Listener'

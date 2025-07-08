@@ -1,0 +1,8 @@
+
+imports:
+  - { resource: blog/*.yaml }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true

@@ -1,0 +1,14 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Blog\Domain\ArticleContentRendererInterface:
+    class: App\Blog\Infrastructure\Content\ArticleContentRenderer
+
+  App\Blog\Domain\ArticleSlugGeneratorInterface:
+    class: App\Blog\Infrastructure\Content\ArticleSlugGenerator
+
+  App\Blog\Domain\Category\ArticleCategorySlugGeneratorInterface:
+    class: App\Blog\Infrastructure\Content\ArticleCategorySlugGenerator

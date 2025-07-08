@@ -35,8 +35,8 @@ doctrine:
       App\Domain\Account\Integration\IntegrationId: App\Infrastructure\Persistence\Doctrine\Type\IntegrationIdType
       App\Domain\Account\AccountId: App\Infrastructure\Persistence\Doctrine\Type\AccountIdType
       # Blog
-      App\Domain\Blog\ArticleId: App\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
-      App\Domain\Blog\Category\ArticleCategoryId: App\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
+      App\Blog\Domain\ArticleId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
+      App\Blog\Domain\Category\ArticleCategoryId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
       # Documentation
       App\Domain\Documentation\Category\CategoryId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\CategoryIdType
       App\Domain\Documentation\PageId: App\Infrastructure\Persistence\Doctrine\Type\Documentation\PageIdType
@@ -66,6 +66,12 @@ doctrine:
         dir: '%kernel.project_dir%/app/Domain'
         prefix: 'App\Domain'
         alias: app
+      Blog:
+        type: attribute
+        is_bundle: false
+        dir: '%kernel.project_dir%/app/Blog/Domain'
+        prefix: 'App\Blog\Domain'
+        alias: blog
 
 when@test:
   doctrine:

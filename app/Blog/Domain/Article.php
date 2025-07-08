@@ -1,0 +1,107 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Blog\Domain;
+
+use App\Blog\Domain\Category\ArticleCategory;
+use App\Domain\Shared\Date\CreatedDateProvider;
+use App\Domain\Shared\Date\CreatedDateProviderInterface;
+use App\Domain\Shared\Date\UpdatedDateProvider;
+use App\Domain\Shared\Date\UpdatedDateProviderInterface;
+use App\Domain\Shared\Id\IdentifiableInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\TruncateMode;
+use Symfony\Component\String\UnicodeString;
+
+/**
+ * @final impossible to specify "final" attribute natively due
+ *        to a Doctrine bug https://github.com/doctrine/orm/issues/7598
+ */
+#[ORM\Entity]
+#[ORM\Table(name: 'blog_articles')]
+#[ORM\UniqueConstraint(name: 'blog_article_slug_unique', columns: ['slug'])]
+class Article implements
+    IdentifiableInterface,
+    CreatedDateProviderInterface,
+    UpdatedDateProviderInterface
+{
+    use CreatedDateProvider;
+    use UpdatedDateProvider;
+
+    #[ORM\Id]
+    #[ORM\Column(name: 'id', type: ArticleId::class)]
+    public private(set) ArticleId $id;
+
+    /**
+     * @var non-empty-string
+     */
+    #[ORM\Column(name: 'title', type: 'string', length: 255)]
+    public string $title {
+        get => $this->title;
+        set(string|\Stringable $value) {
+            $title = (string) $value;
+
+            assert($title !== '', 'Article title cannot be empty');
+
+            $this->title = $title;
+            $this->slug = $this->slugGenerator->createSlug($this);
+        }
+    }
+
+    /**
+     * @var non-empty-string
+     */
+    #[ORM\Column(name: 'slug', type: 'string')]
+    public private(set) string $slug;
+
+    #[ORM\Embedded(class: ArticleContent::class, columnPrefix: 'content_')]
+    public ArticleContent $content {
+        get => $this->content;
+        set(string|\Stringable $value) {
+            /** @phpstan-ignore-next-line : PHPStan false-positive in isset() */
+            if (!isset($this->content) && $value instanceof ArticleContent) {
+                $this->content = $value;
+
+                return;
+            }
+
+            $this->content->value = $value;
+        }
+    }
+
+    #[ORM\Column(name: 'preview', type: 'text', options: ['default' => ''])]
+    public string $preview;
+
+    #[ORM\ManyToOne(targetEntity: ArticleCategory::class, fetch: 'EAGER', inversedBy: 'articles')]
+    #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+    public private(set) ArticleCategory $category;
+
+    /**
+     * @param non-empty-string|\Stringable $title
+     */
+    public function __construct(
+        ArticleCategory $category,
+        string|\Stringable $title,
+        private readonly ArticleSlugGeneratorInterface $slugGenerator,
+        string|\Stringable $content,
+        ArticleContentRendererInterface $contentRenderer,
+        string|\Stringable|null $preview = null,
+        ?ArticleId $id = null,
+    ) {
+        $this->category = $category;
+        $this->title = $title;
+
+        $this->content = new ArticleContent(
+            value: $content,
+            contentRenderer: $contentRenderer,
+        );
+
+        $this->preview = (string) ($preview ?? new UnicodeString(
+            string: \strip_tags($this->content->rendered),
+        )
+            ->truncate(200, cut: TruncateMode::WordAfter));
+
+        $this->id = $id ?? ArticleId::new();
+    }
+}
