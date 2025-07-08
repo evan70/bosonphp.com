@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Account\Password;
+namespace App\Account\Domain\Password;
 
 use App\Domain\Shared\ValueObject\ValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;

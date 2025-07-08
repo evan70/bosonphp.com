@@ -32,8 +32,8 @@ doctrine:
 
     types:
       # Account
-      App\Domain\Account\Integration\IntegrationId: App\Infrastructure\Persistence\Doctrine\Type\IntegrationIdType
-      App\Domain\Account\AccountId: App\Infrastructure\Persistence\Doctrine\Type\AccountIdType
+      App\Account\Domain\Integration\IntegrationId: App\Account\Infrastructure\Persistence\Doctrine\Type\IntegrationIdType
+      App\Account\Domain\AccountId: App\Account\Infrastructure\Persistence\Doctrine\Type\AccountIdType
       # Blog
       App\Blog\Domain\ArticleId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleIdType
       App\Blog\Domain\Category\ArticleCategoryId: App\Blog\Infrastructure\Persistence\Doctrine\Type\ArticleCategoryIdType
@@ -60,12 +60,12 @@ doctrine:
     auto_mapping: false
     enable_native_lazy_objects: true
     mappings:
-      App:
+      Account:
         type: attribute
         is_bundle: false
-        dir: '%kernel.project_dir%/app/Domain'
-        prefix: 'App\Domain'
-        alias: app
+        dir: '%kernel.project_dir%/app/Account/Domain'
+        prefix: 'App\Account\Domain'
+        alias: account
       Blog:
         type: attribute
         is_bundle: false

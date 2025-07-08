@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Account;
+namespace App\Account\Domain;
 
-use App\Domain\Account\Integration\Integration;
-use App\Domain\Account\Password\EncryptedPassword;
+use App\Account\Domain\Integration\Integration;
+use App\Account\Domain\Password\EncryptedPassword;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;

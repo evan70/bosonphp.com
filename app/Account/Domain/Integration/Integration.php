@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Account\Integration;
+namespace App\Account\Domain\Integration;
 
-use App\Domain\Account\Account;
+use App\Account\Domain\Account;
 use App\Domain\Shared\Date\CreatedDateProvider;
 use App\Domain\Shared\Date\CreatedDateProviderInterface;
 use App\Domain\Shared\Date\UpdatedDateProvider;

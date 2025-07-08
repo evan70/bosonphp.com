@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Persistence\Doctrine\Type;
+namespace App\Account\Infrastructure\Persistence\Doctrine\Type;
 
-use App\Domain\Account\Integration\IntegrationId;
+use App\Account\Domain\Integration\IntegrationId;
+use App\Infrastructure\Persistence\Doctrine\Type\UniversalUniqueIdType;
 
 /**
  * @api
  *
  * @internal this is an internal library class, please do not use it in your code
- * @psalm-internal App\Infrastructure\Persistence\Doctrine\Type
+ * @psalm-internal App\Account\Infrastructure\Persistence\Doctrine\Type
  *
  * @template-extends UniversalUniqueIdType<IntegrationId>
  */

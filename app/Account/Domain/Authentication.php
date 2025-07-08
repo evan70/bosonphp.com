@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Account;
+namespace App\Account\Domain;
 
-use App\Domain\Account\Password\Password;
+use App\Account\Domain\Password\Password;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

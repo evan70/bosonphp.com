@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Account\Password;
+namespace App\Account\Domain\Password;
 
-use App\Domain\Account\Account;
-use App\Domain\Account\Authentication;
+use App\Account\Domain\Account;
+use App\Account\Domain\Authentication;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\PasswordHasher\Exception\InvalidPasswordException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

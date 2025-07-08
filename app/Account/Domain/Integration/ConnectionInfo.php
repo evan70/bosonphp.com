@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Account\Integration;
+namespace App\Account\Domain\Integration;
 
 use App\Domain\Shared\ValueObject\StringValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;
