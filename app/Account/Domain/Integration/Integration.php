@@ -31,7 +31,7 @@ class Integration implements
     public private(set) IntegrationId $id;
 
     #[ORM\ManyToOne(targetEntity: Account::class, cascade: ['ALL'], inversedBy: 'integrations')]
-    #[ORM\JoinColumn(name: 'account_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(name: 'account_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     public readonly Account $account;
 
     #[ORM\Embedded(class: ConnectionInfo::class, columnPrefix: false)]
@@ -40,13 +40,13 @@ class Integration implements
     /**
      * @var non-empty-string
      */
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'non_empty_string')]
     public string $externalId;
 
     /**
      * @var non-empty-string|null
      */
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'non_empty_string', nullable: true)]
     public ?string $login = null;
 
     /**

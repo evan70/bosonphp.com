@@ -29,6 +29,7 @@ doctrine:
         use_savepoints: true
         mapping_types:
           app_domain_documentation_version_status: string
+          non_empty_string: string
 
     types:
       # Account

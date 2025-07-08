@@ -25,7 +25,7 @@ final class Version20240830211215 extends AbstractMigration
         $this->addSql(<<<'SQL'
             CREATE TABLE account_integrations (
                 id UUID NOT NULL,
-                account_id UUID DEFAULT NULL,
+                account_id UUID NOT NULL,
                 dsn VARCHAR(255) NOT NULL CHECK(dsn ~* '^[\w+-.]+://.+?$'),
                 external_id VARCHAR(255) NOT NULL CHECK(dsn <> ''),
                 login VARCHAR(255) DEFAULT NULL,
