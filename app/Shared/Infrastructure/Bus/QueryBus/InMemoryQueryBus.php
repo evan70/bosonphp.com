@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\TerminableInterface;
 final class InMemoryQueryBus implements QueryBusInterface, TerminableInterface
 {
     /**
-     * @var array<non-empty-string, object>
+     * @var array<non-empty-string, mixed>
      */
     private array $memory = [];
 
