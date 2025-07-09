@@ -6,7 +6,6 @@ namespace App\Documentation\Infrastructure\Persistence\Doctrine\Repository;
 
 use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageRepositoryInterface;
-use App\Documentation\Domain\Version\Version;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

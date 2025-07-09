@@ -45,7 +45,6 @@ abstract class UniversalUniqueIdType extends Type
 
     /**
      * @return T|null
-     *
      * @throws ConversionException
      */
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?UniversalUniqueId

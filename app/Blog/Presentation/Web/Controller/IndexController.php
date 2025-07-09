@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Blog\Presentation\Web\Controller;
 
-use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
 use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListOutput;
+use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListOutput;
 use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListQuery;
 use App\Shared\Domain\Bus\QueryBusInterface;

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Documentation\Presentation\Web\Controller;
 
-use App\Documentation\Application\UseCase\GetPageByName\GetPageByNameQuery;
 use App\Documentation\Application\UseCase\GetPageByName\Exception\PageNotFoundException;
 use App\Documentation\Application\UseCase\GetPageByName\GetPageByNameOutput;
+use App\Documentation\Application\UseCase\GetPageByName\GetPageByNameQuery;
 use App\Documentation\Application\UseCase\GetVersionByName\Exception\VersionNotFoundException;
 use App\Documentation\Application\UseCase\GetVersionsList\GetVersionsListOutput;
 use App\Documentation\Application\UseCase\GetVersionsList\GetVersionsListQuery;

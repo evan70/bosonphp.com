@@ -6,7 +6,6 @@ namespace App\Documentation\Domain;
 
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Version\Version;
-use App\Documentation\Domain\Version\VersionId;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;

@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Version\Status;
 use App\Documentation\Domain\Version\Version;
 use App\Documentation\Domain\Version\VersionRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\FetchMode;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\Persistence\ManagerRegistry;
 

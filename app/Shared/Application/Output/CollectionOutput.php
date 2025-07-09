@@ -6,7 +6,6 @@ namespace App\Shared\Application\Output;
 
 /**
  * @template T of mixed
- *
  * @template-implements \IteratorAggregate<array-key, T>
  */
 abstract class CollectionOutput implements \IteratorAggregate

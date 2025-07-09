@@ -6,8 +6,6 @@ namespace App\Documentation\Infrastructure\Twig\Provider;
 
 use App\Documentation\Application\Output\Category\CategoryOutput;
 use App\Documentation\Application\Output\Version\VersionOutput;
-use App\Documentation\Application\UseCase\GetCategoriesList\GetCategoriesListOutput;
-use App\Documentation\Application\UseCase\GetCategoriesList\GetCategoriesListQuery;
 use App\Documentation\Application\UseCase\GetVersionByName\GetVersionByNameOutput;
 use App\Documentation\Application\UseCase\GetVersionByName\GetVersionByNameQuery;
 use App\Shared\Domain\Bus\QueryBusInterface;

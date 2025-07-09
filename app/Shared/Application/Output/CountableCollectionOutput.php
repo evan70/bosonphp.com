@@ -6,7 +6,6 @@ namespace App\Shared\Application\Output;
 
 /**
  * @template T of mixed
- *
  * @template-extends CollectionOutput<T>
  */
 abstract class CountableCollectionOutput extends CollectionOutput implements \Countable
