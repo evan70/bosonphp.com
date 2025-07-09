@@ -29,12 +29,6 @@ class PageDocument extends Page
         }
     }
 
-    /**
-     * @var non-empty-string
-     */
-    #[ORM\Column(name: 'uri', type: 'string', length: 255, nullable: false)]
-    public protected(set) string $uri;
-
     #[ORM\Embedded(class: PageDocumentContent::class, columnPrefix: 'content_')]
     public PageDocumentContent $content {
         get => $this->content;

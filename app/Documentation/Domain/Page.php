@@ -43,9 +43,8 @@ abstract class Page implements
     /**
      * @var non-empty-string
      */
-    abstract public string $uri {
-        get;
-    }
+    #[ORM\Column(name: 'uri', type: 'string', length: 255, nullable: false)]
+    public protected(set) string $uri;
 
     /**
      * @var int<-32768, 32767>
