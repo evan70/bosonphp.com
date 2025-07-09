@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Blog\Application\Output;
 
 use App\Blog\Domain\Category\Category;
