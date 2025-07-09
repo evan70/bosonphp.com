@@ -12,7 +12,17 @@ services:
     arguments:
       $bus: '@command.bus'
 
+  # ----------------------------------------------------------------------------
+  #   Query Bus
+  # ----------------------------------------------------------------------------
+
   App\Shared\Domain\Bus\QueryBusInterface:
     class: App\Shared\Infrastructure\Bus\QueryBus\SymfonyMessengerQueryBus
     arguments:
       $bus: '@query.bus'
+
+  App\Shared\Infrastructure\Bus\QueryBus\InMemoryQueryBus:
+    decorates: App\Shared\Domain\Bus\QueryBusInterface
+    arguments:
+      $delegate: '@.inner'
+

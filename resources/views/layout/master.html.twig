@@ -20,7 +20,9 @@
 </head>
 <body lang="{{ app.request.locale|slice(0, 2) }}">
     <header class="container">
-        {% block header %}{% endblock %}
+        {% block header %}
+            {% include 'partials/header.html.twig' %}
+        {% endblock %}
     </header>
 
     <main class="container">

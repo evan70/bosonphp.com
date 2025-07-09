@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Bus\QueryBus;
 
+use App\Shared\Domain\Bus\QueryBusInterface;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
 
-final readonly class SymfonyMessengerQueryBus extends QueryBus
+final readonly class SymfonyMessengerQueryBus implements QueryBusInterface
 {
     public function __construct(
         private MessageBusInterface $bus,
@@ -26,8 +27,7 @@ final readonly class SymfonyMessengerQueryBus extends QueryBus
             throw $e;
         }
 
-        $stamp = $envelope->last(HandledStamp::class);
-
-        return $stamp?->getResult();
+        return $envelope->last(HandledStamp::class)
+            ?->getResult();
     }
 }

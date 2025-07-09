@@ -1,39 +1,7 @@
 {% extends 'layout/master.html.twig' %}
 
 {% block body %}
-    <nav>
-        <ul>
-            <li>
-                <h1>Logo</h1>
-            </li>
-        </ul>
-        <ul>
-            <li>Home</li>
-            <li>
-                <details class="dropdown">
-                    <summary role="button" class="outline secondary">
-                        <a href="{{ path('doc.index') }}">References</a>
-                    </summary>
-                    <ul >
-                        {% for category in categories %}
-                        <li>
-                            <a href="{{ path('doc.show', {
-                                page: category.page.uri,
-                                version: category.version.name
-                            }) }}">
-                                {% if category.icon is not null %}
-                                    <img src="{{ category.icon }}"
-                                         width="16" height="16" />
-                                    &nbsp;
-                                {% endif %}
-                                {{ category.title }}
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul >
-                </details>
-            </li>
-            <li><a href="{{ path('blog.index') }}">Blog</a></li>
-        </ul>
-    </nav>
+
+    <h1>Body</h1>
+
 {% endblock %}

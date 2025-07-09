@@ -1,0 +1,74 @@
+{% if blog_categories is not defined %}
+    {% set blog_categories = blog.categories %}
+{% endif %}
+
+{% if docs_categories is not defined %}
+    {% set docs_categories = docs.categories %}
+{% endif %}
+
+<nav>
+    <ul>
+        <li>
+            <h1>Logo</h1>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            {% if app.current_route == 'home' %}
+                <span>Home</span>
+            {% else %}
+                <a href="{{ path('home') }}">Home</a>
+            {% endif %}
+        </li>
+        <li>
+            <details class="dropdown">
+                <summary role="button" class="outline secondary">
+                    {% if app.current_route == 'doc.index' %}
+                        <span>References</span>
+                    {% else %}
+                        <a href="{{ path('doc.index') }}">References</a>
+                    {% endif %}
+                </summary>
+                <ul>
+                    {% for docs_category in docs_categories %}
+                        <li>
+                            {#<a href="{{ path('doc.show', {
+                                page: docs_category.page.uri,
+                                version: docs.version.name
+                            }) }}">
+                                {% if category.icon is not null %}
+                                    <img src="{{ category.icon }}"
+                                         width="16" height="16" />
+                                    &nbsp;
+                                {% endif %}#}
+                                {{ docs_category.title }}
+                            {#</a>#}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </details>
+        </li>
+        <li>
+            <details class="dropdown">
+                <summary role="button" class="outline secondary">
+                    {% if app.current_route == 'blog.index' %}
+                        <span>Blog</span>
+                    {% else %}
+                        <a href="{{ path('blog.index') }}">Blog</a>
+                    {% endif %}
+                </summary>
+                <ul>
+                    {% for blog_category in blog_categories %}
+                        <li>
+                            <a href="{{ path('blog.index_by_category', {
+                                slug: blog_category.uri
+                            }) }}">
+                                {{ blog_category.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </details>
+        </li>
+    </ul>
+</nav>
