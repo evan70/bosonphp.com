@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Documentation\Domain;
 
 use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\Version\Version;
+use App\Documentation\Domain\Version\VersionId;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
@@ -67,6 +69,15 @@ abstract class Page implements
                 $new->pages->add($this);
             }
         }
+    }
+
+    /**
+     * Generated column
+     */
+    #[ORM\ManyToOne(targetEntity: Version::class, fetch: 'EAGER', inversedBy: 'categories')]
+    #[ORM\JoinColumn(name: 'version_id', referencedColumnName: 'id', nullable: false)]
+    public private(set) Version $version {
+        get => $this->version;
     }
 
     /**
