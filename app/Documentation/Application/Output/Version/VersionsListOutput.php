@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\Output;
+namespace App\Documentation\Application\Output\Version;
 
 use App\Documentation\Domain\Version\Version;
 use App\Shared\Application\Output\CollectionOutput;
@@ -10,45 +10,39 @@ use App\Shared\Application\Output\CollectionOutput;
 /**
  * @template-extends CollectionOutput<VersionOutput>
  */
-final readonly class VersionsListOutput extends CollectionOutput
+final class VersionsListOutput extends CollectionOutput
 {
     /**
      * @var list<VersionOutput>
      */
-    public array $dev;
+    public array $dev {
+        get => $this->dev ??= $this->only(VersionStatusOutput::Dev);
+    }
 
     /**
      * @var list<VersionOutput>
      */
-    public array $stable;
+    public array $stable {
+        get => $this->stable ??= $this->only(VersionStatusOutput::Stable);
+    }
 
     /**
      * @var list<VersionOutput>
      */
-    public array $deprecated;
-
-    /**
-     * @param iterable<mixed, VersionOutput> $versions
-     */
-    public function __construct(
-        iterable $versions,
-    ) {
-        parent::__construct($versions);
-
-        $this->dev = $this->only(VersionStatus::Dev);
-        $this->stable = $this->only(VersionStatus::Stable);
-        $this->deprecated = $this->only(VersionStatus::Deprecated);
+    public array $deprecated {
+        get => $this->deprecated ??= $this->only(VersionStatusOutput::Deprecated);
     }
 
     /**
      * @return list<VersionOutput>
      */
-    private function only(VersionStatus $status): array
+    private function only(VersionStatusOutput $status): array
     {
         $filter = static function (VersionOutput $v) use ($status): bool {
             return $v->status === $status;
         };
 
+        /** @phpstan-ignore-next-line PHPStan false-positive, $items is list<T> */
         return \array_values(\array_filter($this->items, $filter));
     }
 

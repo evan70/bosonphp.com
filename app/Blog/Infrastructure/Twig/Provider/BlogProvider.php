@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Infrastructure\Twig\Provider;
 
-use App\Blog\Application\Output\CategoriesListOutput;
+use App\Blog\Application\Output\Category\CategoriesListOutput;
 use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListOutput;
 use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListQuery;
 use App\Shared\Domain\Bus\QueryBusInterface;

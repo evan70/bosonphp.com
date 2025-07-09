@@ -35,6 +35,9 @@ class Category implements
     #[ORM\Column(name: 'title', type: 'string', length: 255)]
     public string $title;
 
+    /**
+     * @var non-empty-string|null
+     */
     #[ORM\Column(name: 'description', type: 'text', nullable: true)]
     public ?string $description = null;
 
@@ -94,6 +97,7 @@ class Category implements
 
     /**
      * @param non-empty-string $title
+     * @param non-empty-string|null $description
      * @param non-empty-string|null $icon
      * @param int<-32768, 32767> $order
      */

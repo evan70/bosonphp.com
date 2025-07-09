@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Blog\Application\UseCase\GetArticleByName;
 
-use App\Blog\Application\Output\CategoryOutput;
-use App\Blog\Application\Output\FullArticleOutput;
+use App\Blog\Application\Output\Article\FullArticleOutput;
+use App\Blog\Application\Output\Category\CategoryOutput;
 
 final readonly class GetArticleByNameOutput
 {

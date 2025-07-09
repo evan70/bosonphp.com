@@ -1,0 +1,60 @@
+<details class="dropdown">
+    <summary role="button" class="outline secondary">
+        {% if app.current_route == 'doc.index_by_version' %}
+            <span>
+                Documentation ({{ version.name }})
+            </span>
+        {% else %}
+            <a href="{{ path('doc.index_by_version', { version: version.name }) }}">
+                Documentation ({{ version.name }})
+            </a>
+        {% endif %}
+    </summary>
+    <ul>
+        {% for dev in versions.dev %}
+            <li>
+                {% if page is defined %}
+                    <a href="{{ path('doc.show', { page: page.uri, version: dev.name }) }}">
+                        {{ dev.name }} (dev)
+                    </a>
+                {% else %}
+                    <a href="{{ path('doc.index_by_version', { version: dev.name }) }}">
+                        {{ dev.name }} (dev)
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+        {% for stable in versions.stable %}
+            <li>
+                {% if page is defined %}
+                    <a href="{{ path('doc.show', { page: page.uri, version: stable.name }) }}">
+                        {{ stable.name }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('doc.index_by_version', { version: stable.name }) }}">
+                        {{ stable.name }}
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+
+        <li>
+            <strong>Unmaintained Versions</strong>
+        </li>
+
+        {% for deprecated in versions.deprecated %}
+            <li>
+                {% if page is defined %}
+                    <a href="{{ path('doc.show', { page: page.uri, version: deprecated.name }) }}">
+                        {{ deprecated.name }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('doc.index_by_version', { version: deprecated.name }) }}">
+                        {{ deprecated.name }}
+                    </a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</details>

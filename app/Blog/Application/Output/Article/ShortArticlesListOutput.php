@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Application\Output;
+namespace App\Blog\Application\Output\Article;
 
 use App\Blog\Domain\Article;
 use App\Shared\Application\Output\CountableCollectionOutput;
@@ -10,8 +10,7 @@ use App\Shared\Application\Output\CountableCollectionOutput;
 /**
  * @template-extends CountableCollectionOutput<ShortArticleOutput>
  */
-final readonly class ShortArticlesListOutput extends
-    CountableCollectionOutput
+final class ShortArticlesListOutput extends CountableCollectionOutput
 {
     /**
      * @param int<0, max> $itemsPerPage

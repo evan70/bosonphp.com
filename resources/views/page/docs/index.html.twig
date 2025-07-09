@@ -13,50 +13,16 @@
             <li><a href="{{ path('home') }}">Home</a></li>
             <li style="color: #5d6b89">&gt;</li>
             <li>
-                <details class="dropdown">
-                    <summary role="button" class="outline secondary">
-                        Documentation ({{ version.name }})
-                    </summary>
-                    <ul>
-                        {% for devVersion in versions.dev %}
-                            <li>
-                                <a href="{{ path('doc.index_by_version', {
-                                    version: devVersion.name
-                                }) }}">
-                                    {{ devVersion.name }} (dev)
-                                </a>
-                            </li>
-                        {% endfor %}
-
-                        {% for availableVersion in versions.stable %}
-                            <li>
-                                <a href="{{ path('doc.index_by_version', {
-                                    version: availableVersion.name
-                                }) }}">
-                                    {{ availableVersion.name }}
-                                </a>
-                            </li>
-                        {% endfor %}
-
-                        <li>
-                            <strong>Unmaintained Versions</strong>
-                        </li>
-
-                        {% for deprecatedVersion in versions.deprecated %}
-                            <li>
-                                <a href="{{ path('doc.index_by_version', {
-                                    version: deprecatedVersion.name
-                                }) }}">{{ deprecatedVersion.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </details>
+                {% include 'page/docs/partials/version_selector.html.twig' with {
+                    version: version,
+                    versions: versions,
+                } %}
             </li>
         </ul>
     </nav>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;" class="grid">
-        {% for category in categories %}
+        {% for category in version.categories %}
         <article>
             <hgroup>
                 <h2>
@@ -74,7 +40,7 @@
             <ul>
                 {% for page in category.pages %}
                 <li>
-                    {% if page.isLink %}
+                    {% if page.type.name == 'Link' %}
                         <a href="{{ page.uri }}" target="_blank">
                             {{ page.title }}
                             <img src="https://intellij-icons.jetbrains.design/icons/AllIcons/expui/ide/externalLink_dark.svg"

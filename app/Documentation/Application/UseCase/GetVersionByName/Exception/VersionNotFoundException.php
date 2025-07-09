@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\GetDocumentationVersionByName\Exception;
+namespace App\Documentation\Application\UseCase\GetVersionByName\Exception;
 
 final class VersionNotFoundException extends \OutOfBoundsException {}

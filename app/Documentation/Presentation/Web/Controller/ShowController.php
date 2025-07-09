@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Documentation\Presentation\Web\Controller;
 
-use App\Documentation\Application\UseCase\GetDocumentationPageByName\GetDocumentationPageByNameQuery;
-use App\Documentation\Application\UseCase\GetDocumentationPageByName\Exception\PageNotFoundException;
-use App\Documentation\Application\UseCase\GetDocumentationPageByName\GetDocumentationPageByNameResult;
-use App\Documentation\Application\UseCase\GetDocumentationVersionByName\Exception\VersionNotFoundException;
+use App\Documentation\Application\UseCase\GetPageByName\GetPageByNameQuery;
+use App\Documentation\Application\UseCase\GetPageByName\Exception\PageNotFoundException;
+use App\Documentation\Application\UseCase\GetPageByName\GetPageByNameOutput;
+use App\Documentation\Application\UseCase\GetVersionByName\Exception\VersionNotFoundException;
 use App\Documentation\Application\UseCase\GetVersionsList\GetVersionsListOutput;
 use App\Documentation\Application\UseCase\GetVersionsList\GetVersionsListQuery;
 use App\Shared\Domain\Bus\QueryBusInterface;
@@ -32,8 +32,8 @@ final class ShowController extends AbstractController
     public function __invoke(string $version, string $page): Response
     {
         try {
-            /** @var GetDocumentationPageByNameResult $pageResult */
-            $pageResult = $this->queries->get(new GetDocumentationPageByNameQuery(
+            /** @var GetPageByNameOutput $pageResult */
+            $pageResult = $this->queries->get(new GetPageByNameQuery(
                 name: $page,
                 version: $version,
             ));
@@ -49,7 +49,8 @@ final class ShowController extends AbstractController
         return $this->render('page/docs/show.html.twig', [
             'page' => $pageResult->page,
             'version' => $pageResult->version,
-            'categories' => $pageResult->categories,
+            'category' => $pageResult->category,
+            'categories' => $pageResult->version->categories,
             'versions' => $versionsResult->versions,
         ]);
     }

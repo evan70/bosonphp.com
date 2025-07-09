@@ -39,7 +39,7 @@ class Version implements
     /**
      * @var VersionCategoriesSet
      */
-    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'version', cascade: ['ALL'])]
+    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'version', cascade: ['ALL'], fetch: 'EAGER')]
     #[ORM\OrderBy(['id' => 'ASC'])]
     public iterable $categories {
         /** @phpstan-ignore-next-line : PHPStan false-positive */

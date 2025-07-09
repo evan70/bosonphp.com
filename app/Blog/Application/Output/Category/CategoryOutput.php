@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Application\Output;
+namespace App\Blog\Application\Output\Category;
 
 use App\Blog\Domain\Category\Category;
 

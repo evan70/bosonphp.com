@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Application\Output;
+namespace App\Blog\Application\Output\Article;
 
 use App\Blog\Domain\Article;
 

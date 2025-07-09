@@ -13,56 +13,22 @@
             <li><a href="{{ path('home') }}">Home</a></li>
             <li style="color: #5d6b89">&gt;</li>
             <li>
-                <details class="dropdown">
-                    <summary role="button" class="outline secondary">
-                        <a href="{{ path('doc.index_by_version', {
-                            version: version.name,
-                        }) }}">Documentation ({{ version.name }})</a>
-                    </summary>
-                    <ul>
-                        {% for devVersion in versions.dev %}
-                            <li>
-                                <a href="{{ path('doc.show', {
-                                    page: page.uri,
-                                    version: devVersion.name
-                                }) }}">{{ devVersion.name }}</a>
-                            </li>
-                        {% endfor %}
-
-                        {% for stableVersion in versions.stable %}
-                            <li>
-                                <a href="{{ path('doc.show', {
-                                    page: page.uri,
-                                    version: stableVersion.name
-                                }) }}">{{ stableVersion.name }}</a>
-                            </li>
-                        {% endfor %}
-
-                        <li>
-                            <strong>Unmaintained Versions</strong>
-                        </li>
-
-                        {% for deprecatedVersion in versions %}
-                            <li>
-                                <a href="{{ path('doc.show', {
-                                    page: page.uri,
-                                    version: deprecatedVersion.name
-                                }) }}">{{ deprecatedVersion.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </details>
+                {% include 'page/docs/partials/version_selector.html.twig' with {
+                    page: page,
+                    version: version,
+                    versions: versions,
+                } %}
             </li>
             <li style="color: #5d6b89">&gt;</li>
             <li>
-                {% if page.category.icon is not null %}
+                {% if category.icon is not null %}
                     <img width="18" height="18"
-                        src="{{ page.category.icon }}" />
+                        src="{{ category.icon }}" />
                 {% endif %}
-                {% if page.category.description is not null %}
-                    <span data-tooltip="{{ page.category.description }}">{{ page.category.title }}</span>
+                {% if category.description is not null %}
+                    <span data-tooltip="{{ category.description }}">{{ category.title }}</span>
                 {% else %}
-                    <span>{{ page.category.title }}</span>
+                    <span>{{ category.title }}</span>
                 {% endif %}
             </li>
         </ul>
@@ -71,12 +37,12 @@
     <div style="display: grid; grid-template-columns: 1fr 3fr;" class="grid">
         <aside>
             <ul style="padding-inline-start: 0">
-            {% for nav_page in page.category.pages %}
+            {% for nav_page in category.pages %}
                 <li>
-                    {% if page.id.equals(nav_page.id) %}
+                    {% if page.uri == nav_page.uri %}
                         <strong>{{ nav_page.title }}</strong>
                     {% else %}
-                        {% if nav_page.isLink %}
+                        {% if nav_page.type.name == 'Link' %}
                             <a href="{{ nav_page.uri }}" target="_blank">
                                 {{ nav_page.title }}
                                 <img src="https://intellij-icons.jetbrains.design/icons/AllIcons/expui/ide/externalLink_dark.svg"

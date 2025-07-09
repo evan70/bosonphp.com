@@ -26,12 +26,13 @@ final class PageDatabaseRepository extends ServiceEntityRepository implements
         parent::__construct($registry, PageDocument::class);
     }
 
-    public function findByName(Version $version, string $name): ?PageDocument
+    public function findByName(string $version, string $name): ?PageDocument
     {
         $query = $this->createQueryBuilder('page')
             ->join('page.category', 'category')
+            ->join('category.version', 'version')
             ->where('page.uri = :uri')
-            ->andWhere('category.version = :version')
+            ->andWhere('version.name = :version')
             ->setParameter('version', $version)
             ->setParameter('uri', $name)
             ->getQuery();

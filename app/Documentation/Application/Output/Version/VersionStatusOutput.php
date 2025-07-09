@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\Output;
+namespace App\Documentation\Application\Output\Version;
 
 use App\Documentation\Domain\Version\Status;
 
-enum VersionStatus
+enum VersionStatusOutput
 {
     case Stable;
     case Dev;

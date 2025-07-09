@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Application\Output;
+namespace App\Blog\Application\Output\Article;
 
 use App\Blog\Domain\Article;
 
 /**
- * Represents a full blog article output.
+ * Represents a short/preview blog article output.
  */
-final readonly class FullArticleOutput extends ArticleOutput
+final readonly class ShortArticleOutput extends ArticleOutput
 {
     /**
      * @param non-empty-string $title
@@ -19,11 +19,11 @@ final readonly class FullArticleOutput extends ArticleOutput
         string $title,
         string $uri,
         /**
-         * The rendered content of the article in HTML format.
+         * The preview text of the article content.
          *
          * @var string
          */
-        public string $content,
+        public string $preview,
     ) {
         parent::__construct(
             title: $title,
@@ -36,7 +36,7 @@ final readonly class FullArticleOutput extends ArticleOutput
         return new self(
             title: $article->title,
             uri: $article->uri,
-            content: $article->content->rendered,
+            preview: $article->preview,
         );
     }
 }

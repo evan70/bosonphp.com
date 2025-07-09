@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\Output;
+namespace App\Blog\Application\Output\Category;
 
-use App\Documentation\Domain\Category\Category;
+use App\Blog\Domain\Category\Category;
 use App\Shared\Application\Output\CollectionOutput;
 
 /**
  * @template-extends CollectionOutput<CategoryOutput>
  */
-final readonly class CategoriesListOutput extends CollectionOutput
+final class CategoriesListOutput extends CollectionOutput
 {
     /**
      * @param iterable<mixed, Category> $categories
      */
     public static function fromCategories(iterable $categories): self
     {
-        $mapped = [];
+        $result = [];
 
         foreach ($categories as $category) {
-            $mapped[] = CategoryOutput::fromCategory($category);
+            $result[] = CategoryOutput::fromCategory($category);
         }
 
-        return new self($mapped);
+        return new self($result);
     }
 }
