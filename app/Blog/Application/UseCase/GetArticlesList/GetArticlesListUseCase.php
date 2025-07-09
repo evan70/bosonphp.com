@@ -27,7 +27,7 @@ final readonly class GetArticlesListUseCase
         private CategoryByUriProviderInterface $categories,
         private ValidatorInterface $validator,
         /**
-         * @var int<0, max>
+         * @var int<1, max>
          */
         private int $itemsPerPage = ArticlesListPaginateProviderInterface::DEFAULT_ITEMS_PER_PAGE,
     ) {}
