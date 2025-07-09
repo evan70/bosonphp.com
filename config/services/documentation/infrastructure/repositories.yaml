@@ -1,0 +1,44 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Documentation\Infrastructure\Persistence\Doctrine\Repository\:
+    resource: '%kernel.project_dir%/app/Documentation/Infrastructure/Persistence/Doctrine/Repository'
+
+  # ----------------------------------------------------------------------------
+  #   Page
+  # ----------------------------------------------------------------------------
+
+  App\Documentation\Domain\PageRepositoryInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\PageDatabaseRepository
+
+  App\Documentation\Domain\Repository\PageByNameProviderInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\PageDatabaseRepository
+
+  # ----------------------------------------------------------------------------
+  #   Version
+  # ----------------------------------------------------------------------------
+
+  App\Documentation\Domain\Version\VersionRepositoryInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\VersionDatabaseRepository
+
+  App\Documentation\Domain\Version\Repository\CurrentVersionProviderInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\VersionDatabaseRepository
+
+  App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\VersionDatabaseRepository
+
+  App\Documentation\Domain\Version\Repository\VersionsListProviderInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\VersionDatabaseRepository
+
+  # ----------------------------------------------------------------------------
+  #   Category
+  # ----------------------------------------------------------------------------
+
+  App\Documentation\Domain\Category\CategoryRepositoryInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository
+
+  App\Documentation\Domain\Category\Repository\CategoryListProviderInterface:
+    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\CategoryDatabaseRepository

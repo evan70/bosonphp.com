@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # App\Account\Infrastructure\Persistence\Doctrine\Repository\:
+  #   resource: '%kernel.project_dir%/app/Account/Infrastructure/Persistence/Doctrine/Repository'

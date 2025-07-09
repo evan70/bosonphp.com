@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Relations;
 
-use App\Domain\Documentation\Category\Category;
-use App\Domain\Documentation\PageDocument;
-use App\Domain\Documentation\PageDocumentContentRendererInterface;
-use App\Domain\Documentation\PageSlugGeneratorInterface;
-use App\Domain\Documentation\Version\Version;
+use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\PageDocument;
+use App\Documentation\Domain\PageDocumentContentRendererInterface;
+use App\Documentation\Domain\PageSlugGeneratorInterface;
+use App\Documentation\Domain\Version\Version;
 
 final class CategoryToPagesTest extends RelationsTestCase
 {
@@ -19,7 +19,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         self::assertSame($category, $page->category);
@@ -33,7 +33,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         $category->pages->add($page);
@@ -55,7 +55,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category1, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         $category2->pages->add($page);
@@ -75,7 +75,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category1, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         // Act - Change category property directly
@@ -97,7 +97,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         $category->pages->removeElement($page);
@@ -112,7 +112,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page1 = new PageDocument($category, 'Page 1', $slugGenerator, 'Content 1', $contentRenderer);
         $page2 = new PageDocument($category, 'Page 2', $slugGenerator, 'Content 2', $contentRenderer);
         $page3 = new PageDocument($category, 'Page 3', $slugGenerator, 'Content 3', $contentRenderer);
@@ -136,7 +136,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category1, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         // Act - Move from category1 to category2
@@ -164,7 +164,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         $initialPagesCount = $category->pages->count();
@@ -185,7 +185,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         // Act & Assert
@@ -200,7 +200,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         self::assertSame($category, $page->category);
@@ -216,7 +216,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $slugGenerator = $this->createMock(PageSlugGeneratorInterface::class);
         $slugGenerator->method('createSlug')->willReturn('test-page');
         $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
-        
+
         $page = new PageDocument($category1, 'Test Page', $slugGenerator, 'Test content', $contentRenderer);
 
         // Verify initial state

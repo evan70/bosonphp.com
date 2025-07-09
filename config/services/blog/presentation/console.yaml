@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Blog\Presentation\Console\:
+    resource: '%kernel.project_dir%/app/Blog/Presentation/Console/'

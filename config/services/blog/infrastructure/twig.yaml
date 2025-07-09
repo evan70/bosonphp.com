@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Blog\Infrastructure\Twig\Provider\:
+    resource: '%kernel.project_dir%/app/Blog/Infrastructure/Twig/Provider'

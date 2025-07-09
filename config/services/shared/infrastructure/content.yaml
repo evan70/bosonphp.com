@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  League\CommonMark\ConverterInterface:
+    class: League\CommonMark\CommonMarkConverter

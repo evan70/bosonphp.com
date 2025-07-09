@@ -1,8 +1,0 @@
-
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-
-  # App\Domain\Documentation\Service\:
-  #   resource: '%kernel.project_dir%/app/Domain/Documentation/Service'

@@ -19,11 +19,22 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
 </head>
 <body lang="{{ app.request.locale|slice(0, 2) }}">
-<main class="container">
-    {% block body %}{% endblock %}
-</main>
-{% block javascripts %}
-    <!-- scripts -->
-{% endblock %}
+    <header class="container">
+        {% block header %}
+            {% include 'partials/header.html.twig' %}
+        {% endblock %}
+    </header>
+
+    <main class="container">
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer class="container">
+        {% block footer %}{% endblock %}
+    </footer>
+
+    {% block javascripts %}
+        <!-- scripts -->
+    {% endblock %}
 </body>
 </html>

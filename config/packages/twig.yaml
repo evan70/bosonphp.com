@@ -1,6 +1,9 @@
 twig:
   default_path: '%kernel.project_dir%/resources/views'
   file_name_pattern: '*.twig'
+  globals:
+    blog: '@App\Blog\Infrastructure\Twig\Provider\BlogProvider'
+    docs: '@App\Documentation\Infrastructure\Twig\Provider\DocsProvider'
 
 when@test:
   twig:

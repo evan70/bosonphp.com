@@ -29,11 +29,15 @@ framework:
 
     buses:
       command.bus:
+        middleware:
+          - validation
         default_middleware:
           enabled: true
           allow_no_handlers: true
 
       query.bus:
+        middleware:
+          - validation
         default_middleware:
           enabled: true
           allow_no_handlers: false

@@ -12,16 +12,22 @@
         <ul>
             <li><a href="{{ path('home') }}">Home</a></li>
             <li><a href="{{ path('blog.index') }}">Blog</a></li>
-            <li><a href="{{ path('blog.index_by_category', {slug: article.category.slug}) }}">{{ article.category.title }}</a></li>
+            <li><a href="{{ path('blog.index_by_category', {slug: category.uri}) }}">{{ category.title }}</a></li>
             <li>{{ article.title }}</li>
         </ul>
     </nav>
 
     <div style="padding: 20px 0; display: grid; grid-template-columns: 2fr 1fr;">
+
         <section>
-            {{ article.content | raw }}
+            <article>
+                {{ article.content | raw }}
+            </article>
         </section>
-        {% include 'page/blog/partial/categories_list.html.twig' with {categories: categories} %}
+
+        {% include 'page/blog/partial/categories_list.html.twig' with {
+            categories: categories
+        } %}
     </div>
 
 {% endblock %}

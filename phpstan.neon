@@ -2,6 +2,10 @@ includes:
   - phar://phpstan.phar/conf/bleedingEdge.neon
   - vendor/phpstan/phpstan-deprecation-rules/rules.neon
   - vendor/phpstan/phpstan-strict-rules/rules.neon
+  - vendor/phpstan/phpstan-symfony/extension.neon
+  - vendor/phpstan/phpstan-symfony/rules.neon
+  - vendor/phpstan/phpstan-doctrine/extension.neon
+  - vendor/phpstan/phpstan-doctrine/rules.neon
 parameters:
   level: max
   phpVersion:
@@ -9,12 +13,20 @@ parameters:
     max: 80400
   strictRules:
     allRules: true
+  symfony:
+    containerXmlPath: var/cache/dev/App_Shared_Infrastructure_KernelDevDebugContainer.xml
+  scanDirectories:
+    - var/cache/dev/Symfony/Config
   paths:
     - app
   tmpDir: vendor/.cache.phpstan
   tipsOfTheDay: false
   checkMissingCallableSignature: true
   ignoreErrors:
+    # Doctrine type errors
+    - '/database can contain int but property expects int<\-32768, 32767>/'
+    - '/database can contain string but property expects non\-empty\-string/'
+    - '/database can contain string\|null but property expects non\-empty\-string\|null/'
     # Do not report DbC invariants and preconditions
     - identifier: function.alreadyNarrowedType
     - identifier: instanceof.alwaysTrue
@@ -22,7 +34,11 @@ parameters:
     # - identifier: greater.alwaysFalse
     # - identifier: booleanOr.alwaysFalse
   excludePaths:
-    # Exclude testing and dev directories and files
-    - app/Infrastructure/Persistence/Doctrine/Fixture
-    - app/Infrastructure/Persistence/Doctrine/Migration
-    - app/Presentation/Console/TestCommand.php (?)
+    # Blog
+    - app/Blog/Infrastructure/Persistence/Doctrine/Fixture
+    # Documentation
+    - app/Documentation/Infrastructure/Persistence/Doctrine/Fixture
+    # Shared
+    - app/Shared/Infrastructure/Faker
+    - app/Shared/Infrastructure/Persistence/Doctrine/Migration
+    - app/Shared/Presentation/Console/TestCommand.php (?)

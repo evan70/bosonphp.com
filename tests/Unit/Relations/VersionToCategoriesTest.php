@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Relations;
 
-use App\Domain\Documentation\Category\Category;
-use App\Domain\Documentation\Version\Version;
+use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\Version\Version;
 
 final class VersionToCategoriesTest extends RelationsTestCase
 {

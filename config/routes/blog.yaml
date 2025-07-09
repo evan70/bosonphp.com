@@ -1,0 +1,15 @@
+blog_web:
+  resource:
+    path: ../../app/Blog/Presentation/Web/Controller/
+    namespace: App\Blog\Presentation\Web\Controller
+  type: attribute
+
+blog_api:
+  resource:
+    path: ../../app/Blog/Presentation/Api/Controller/
+    namespace: App\Blog\Presentation\Api\Controller
+  type: attribute
+  prefix: v1
+  stateless: true
+  defaults:
+    api: v1
