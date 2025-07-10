@@ -1,0 +1,19 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Github\HttpClient\Builder:
+    arguments:
+      - '@psr18.http_client'
+      - '@psr18.http_client'
+      - '@psr18.http_client'
+
+  Github\Client:
+    arguments:
+      $httpClientBuilder: '@Github\HttpClient\Builder'
+  #
+  # Uncomment to enable authentication
+  # calls:
+  #   - ['authenticate', ['%env(GITHUB_USERNAME)%', '%env(GITHUB_SECRET)%', '%env(GITHUB_AUTH_METHOD)%']]

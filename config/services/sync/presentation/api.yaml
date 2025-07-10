@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Sync\Presentation\Api\Controller\:
+    resource: '%kernel.project_dir%/app/Sync/Presentation/Api/Controller/'

@@ -1,0 +1,15 @@
+sync_web:
+  resource:
+    path: ../../app/Sync/Presentation/Web/Controller/
+    namespace: App\Sync\Presentation\Web\Controller
+  type: attribute
+
+sync_api:
+  resource:
+    path: ../../app/Sync/Presentation/Api/Controller/
+    namespace: App\Sync\Presentation\Api\Controller
+  type: attribute
+  prefix: v1
+  stateless: true
+  defaults:
+    api: v1

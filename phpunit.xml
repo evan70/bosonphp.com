@@ -27,6 +27,12 @@
         <!-- MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages -->
         <env name="MESSENGER_TRANSPORT_DSN" value="doctrine://default?auto_setup=0"/>
         <!-- ###- symfony/messenger ### -->
+
+        <!-- ###+ knplabs/github-api ### -->
+        <env name="GITHUB_AUTH_METHOD" value="http_password"/>
+        <env name="GITHUB_USERNAME" value="username"/>
+        <env name="GITHUB_SECRET" value="password_or_token"/>
+        <!-- ###- knplabs/github-api ### -->
     </php>
 
     <testsuites>
