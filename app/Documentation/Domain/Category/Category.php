@@ -106,6 +106,7 @@ class Category implements
      * @param non-empty-string|null $description
      * @param non-empty-string|null $icon
      * @param int<-32768, 32767> $order
+     * @param non-empty-lowercase-string|null $hash
      */
     public function __construct(
         Version $version,
@@ -113,6 +114,7 @@ class Category implements
         ?string $description = null,
         ?string $icon = null,
         int $order = 0,
+        ?string $hash = null,
         ?CategoryId $id = null,
     ) {
         $this->version = $version;
@@ -120,6 +122,7 @@ class Category implements
         $this->description = $description;
         $this->icon = $icon;
         $this->order = $order;
+        $this->hash = $hash;
         $this->pages = new CategoryPagesSet($this);
         $this->id = $id ?? CategoryId::new();
     }

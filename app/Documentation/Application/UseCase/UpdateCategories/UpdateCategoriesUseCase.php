@@ -93,6 +93,7 @@ final readonly class UpdateCategoriesUseCase
                     description: $commandCategory->description,
                     icon: $commandCategory->icon,
                     order: $order,
+                    hash: $commandCategory->hash,
                 ));
 
                 yield new CategoryCreated(
@@ -103,6 +104,12 @@ final readonly class UpdateCategoriesUseCase
                 continue;
             }
 
+            // Skip in case hash is equals to the command one
+            if ($databaseCategory->hash === $commandCategory->hash) {
+                continue;
+            }
+
+            $databaseCategory->hash = $commandCategory->hash;
             $databaseCategory->order = $order;
             $databaseCategory->description = $commandCategory->description;
             $databaseCategory->icon = $commandCategory->icon;
