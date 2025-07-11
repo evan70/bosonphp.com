@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Sync\Presentation\Console;
 
-use App\Sync\Domain\DownloaderInterface;
+use App\Shared\Domain\Bus\CommandBusInterface;
+use App\Sync\Application\UseCase\SyncAllVersions\SyncAllVersionsCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 
@@ -12,14 +13,14 @@ use Symfony\Component\Console\Command\Command;
 final class DocsUpdateCommand extends Command
 {
     public function __construct(
-        private readonly DownloaderInterface $downloader,
+        private readonly CommandBusInterface $commands,
     ) {
         parent::__construct();
     }
 
     public function __invoke(): int
     {
-        dd($this->downloader);
+        $this->commands->send(new SyncAllVersionsCommand());
 
         return self::SUCCESS;
     }

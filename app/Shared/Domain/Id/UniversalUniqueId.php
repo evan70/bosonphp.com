@@ -24,11 +24,11 @@ abstract readonly class UniversalUniqueId implements IdInterface
     private string $value;
 
     /**
-     * @param non-empty-string|\Stringable $value
+     * @param non-empty-string|\Stringable|null $value
      */
-    final public function __construct(string|\Stringable $value)
+    final public function __construct(string|\Stringable|null $value = null)
     {
-        $value = (string) $value;
+        $value = (string) ($value ?? self::createRawUuid7());
 
         assert(\preg_match(self::PATTERN, $value) !== false);
 
@@ -36,10 +36,15 @@ abstract readonly class UniversalUniqueId implements IdInterface
         $this->value = $value;
     }
 
+    private static function createRawUuid7(?ClockInterface $clock = null): UuidInterface
+    {
+        return Uuid::uuid7($clock?->now());
+    }
+
     public static function new(?ClockInterface $clock = null): static
     {
         /** @phpstan-ignore-next-line : PHPStan false-positive */
-        return new static(Uuid::uuid7($clock?->now()));
+        return new static(self::createRawUuid7($clock));
     }
 
     /**

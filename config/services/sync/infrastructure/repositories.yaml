@@ -1,0 +1,50 @@
+parameters:
+  env(SYNC_GITHUB_OWNER): 'boson-php'
+  env(SYNC_GITHUB_REPOSITORY): 'docs'
+
+  app.sync.github_owner: '%env(SYNC_GITHUB_OWNER)%'
+  app.sync.github_repository: '%env(SYNC_GITHUB_REPOSITORY)%'
+
+  app.sync.version.github_owner: '%app.sync.github_owner%'
+  app.sync.version.github_repository: '%app.sync.github_repository%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Sync\Infrastructure\Persistence\Repository\:
+    resource: '%kernel.project_dir%/app/Sync/Infrastructure/Persistence/Repository'
+
+  # ----------------------------------------------------------------------------
+  #   External Version
+  # ----------------------------------------------------------------------------
+
+  App\Sync\Infrastructure\Persistence\Repository\ExternalVersionGitHubRepository:
+    arguments:
+      $owner: '%app.sync.version.github_owner%'
+      $repository: '%app.sync.version.github_repository%'
+
+  App\Sync\Domain\Version\ExternalVersionRepositoryInterface:
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalVersionGitHubRepository
+
+  App\Sync\Domain\Version\Repository\ExternalVersionsListProviderInterface:
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalVersionGitHubRepository
+
+  # ----------------------------------------------------------------------------
+  #   External Documentation
+  # ----------------------------------------------------------------------------
+
+  App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository:
+    arguments:
+      $owner: '%app.sync.version.github_owner%'
+      $repository: '%app.sync.version.github_repository%'
+
+  App\Sync\Domain\ExternalDocumentRepositoryInterface:
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository
+
+  App\Sync\Domain\Repository\ExternalDocumentReferencesListProviderInterface:
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository
+
+  App\Sync\Domain\Repository\ExternalDocumentByNameProviderInterface:
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository
