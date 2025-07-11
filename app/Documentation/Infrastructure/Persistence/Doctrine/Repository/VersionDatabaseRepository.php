@@ -30,9 +30,16 @@ final class VersionDatabaseRepository extends ServiceEntityRepository implements
     public function findLatest(): ?Version
     {
         $query = $this->createQueryBuilder('ver')
-            ->where('ver.status = :status')
-            ->setParameter('status', Status::DEFAULT)
-            ->orderBy('ver.name', 'DESC')
+            ->addSelect("(
+                CASE ver.status
+                    WHEN 'stable' THEN 0
+                    WHEN 'dev' THEN 1
+                    WHEN 'deprecated' THEN 2
+                    ELSE 3
+                END
+            ) AS HIDDEN ordered_status")
+            ->addOrderBy('ordered_status', 'ASC')
+            ->addOrderBy('ver.name', 'DESC')
             ->setMaxResults(1)
             ->getQuery();
 
