@@ -33,6 +33,12 @@ class Version implements
     #[ORM\Column(name: 'name', type: 'string')]
     public string $name;
 
+    /**
+     * @var non-empty-lowercase-string
+     */
+    #[ORM\Column(name: 'hash', type: 'string', nullable: true)]
+    public ?string $hash = null;
+
     #[ORM\Column(name: 'status', type: Status::class)]
     public Status $status = Status::DEFAULT;
 

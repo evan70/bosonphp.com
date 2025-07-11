@@ -42,6 +42,12 @@ abstract class Page implements
     public string $title;
 
     /**
+     * @var non-empty-lowercase-string
+     */
+    #[ORM\Column(name: 'hash', type: 'string', nullable: true)]
+    public ?string $hash = null;
+
+    /**
      * @var non-empty-string
      */
     #[ORM\Column(name: 'uri', type: 'string', length: 255, nullable: false)]

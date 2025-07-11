@@ -7,6 +7,12 @@ namespace App\Shared\Infrastructure\Persistence\Doctrine\Migration;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
+/**
+ * @api
+ *
+ * @internal this is an internal library class, please do not use it in your code
+ * @psalm-internal App\Database\Migrations
+ */
 final class Version20250709135133 extends AbstractMigration
 {
     public function getDescription(): string

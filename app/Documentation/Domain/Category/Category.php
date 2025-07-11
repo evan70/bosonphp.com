@@ -36,6 +36,12 @@ class Category implements
     public string $title;
 
     /**
+     * @var non-empty-lowercase-string
+     */
+    #[ORM\Column(name: 'hash', type: 'string', nullable: true)]
+    public ?string $hash = null;
+
+    /**
      * @var non-empty-string|null
      */
     #[ORM\Column(name: 'description', type: 'text', nullable: true)]
