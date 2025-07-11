@@ -36,6 +36,10 @@ class Version implements
     #[ORM\Column(name: 'status', type: Status::class)]
     public Status $status = Status::DEFAULT;
 
+    public bool $isHidden {
+        get => $this->status === Status::Hidden;
+    }
+
     /**
      * @var VersionCategoriesSet
      */
@@ -58,5 +62,15 @@ class Version implements
         $this->status = $status;
         $this->categories = new VersionCategoriesSet($this);
         $this->id = $id ?? VersionId::new();
+    }
+
+    public function disable(): void
+    {
+        $this->status = Status::Hidden;
+    }
+
+    public function enable(): void
+    {
+        $this->status = Status::Dev;
     }
 }
