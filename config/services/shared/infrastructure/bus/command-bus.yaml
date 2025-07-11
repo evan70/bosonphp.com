@@ -1,0 +1,21 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Shared\Domain\Bus\CommandBusInterface:
+    class: App\Shared\Infrastructure\Bus\CommandBus\SymfonyMessengerCommandBus
+    arguments:
+      $bus: '@command.bus'
+
+when@dev:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
+    App\Shared\Infrastructure\Bus\CommandBus\TraceableCommandBus:
+      decorates: App\Shared\Domain\Bus\CommandBusInterface
+      arguments:
+        $delegate: '@.inner'

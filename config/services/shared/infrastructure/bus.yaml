@@ -1,42 +1,8 @@
 
+imports:
+  - { resource: bus/*.yaml }
+
 services:
   _defaults:
     autowire: true
     autoconfigure: true
-
-  # ----------------------------------------------------------------------------
-  #   Event Bus
-  # ----------------------------------------------------------------------------
-
-  App\Shared\Domain\Bus\EventBusInterface:
-    class: App\Shared\Infrastructure\Bus\EventBus\PsrDispatcherEventBus
-
-  App\Shared\Infrastructure\Bus\EventBus\FailFreeEventBus:
-    decorates: App\Shared\Domain\Bus\EventBusInterface
-    arguments:
-      $delegate: '@.inner'
-
-  # ----------------------------------------------------------------------------
-  #   Command Bus
-  # ----------------------------------------------------------------------------
-
-  App\Shared\Domain\Bus\CommandBusInterface:
-    class: App\Shared\Infrastructure\Bus\CommandBus\SymfonyMessengerCommandBus
-    arguments:
-      $bus: '@command.bus'
-
-
-  # ----------------------------------------------------------------------------
-  #   Query Bus
-  # ----------------------------------------------------------------------------
-
-  App\Shared\Domain\Bus\QueryBusInterface:
-    class: App\Shared\Infrastructure\Bus\QueryBus\SymfonyMessengerQueryBus
-    arguments:
-      $bus: '@query.bus'
-
-  App\Shared\Infrastructure\Bus\QueryBus\InMemoryQueryBus:
-    decorates: App\Shared\Domain\Bus\QueryBusInterface
-    arguments:
-      $delegate: '@.inner'
-

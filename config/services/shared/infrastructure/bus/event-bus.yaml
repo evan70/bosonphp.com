@@ -1,0 +1,24 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Shared\Domain\Bus\EventBusInterface:
+    class: App\Shared\Infrastructure\Bus\EventBus\PsrDispatcherEventBus
+
+  App\Shared\Infrastructure\Bus\EventBus\FailFreeEventBus:
+    decorates: App\Shared\Domain\Bus\EventBusInterface
+    arguments:
+      $delegate: '@.inner'
+
+when@dev:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
+    App\Shared\Infrastructure\Bus\EventBus\TraceableEventBus:
+      decorates: App\Shared\Domain\Bus\EventBusInterface
+      arguments:
+        $delegate: '@.inner'
