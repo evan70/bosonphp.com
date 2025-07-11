@@ -39,9 +39,11 @@
             </li>
         {% endfor %}
 
+        {% if versions.deprecated|length > 0 %}
         <li>
             <strong>Unmaintained Versions</strong>
         </li>
+        {% endif %}
 
         {% for deprecated in versions.deprecated %}
             <li>
