@@ -58,14 +58,17 @@ class Version implements
 
     /**
      * @param non-empty-string $name
+     * @param non-empty-lowercase-string $hash
      */
     public function __construct(
         string $name,
         Status $status = Status::DEFAULT,
+        ?string $hash = null,
         ?VersionId $id = null,
     ) {
         $this->name = $name;
         $this->status = $status;
+        $this->hash = $hash;
         $this->categories = new VersionCategoriesSet($this);
         $this->id = $id ?? VersionId::new();
     }

@@ -28,14 +28,14 @@ final readonly class UpdateVersionsUseCase
 
     /**
      * @param iterable<mixed, VersionIndex> $versions
-     * @return list<non-empty-string>
+     * @return array<non-empty-string, VersionIndex>
      */
-    private function getCommandVersionNames(iterable $versions): array
+    private function getCommandVersionsGroupByName(iterable $versions): array
     {
         $result = [];
 
         foreach ($versions as $version) {
-            $result[] = $version->name;
+            $result[$version->name] = $version;
         }
 
         return $result;
@@ -71,26 +71,34 @@ final readonly class UpdateVersionsUseCase
     private function process(UpdateVersionsCommand $command): iterable
     {
         $databaseVersions = $this->versionsListProvider->getAll();
-        $commandVersionNames = $this->getCommandVersionNames($command->versions);
+        $commandVersionsByName = $this->getCommandVersionsGroupByName($command->versions);
 
         foreach ($databaseVersions as $databaseVersion) {
             // In case of version is present in command
-            $isPresent = \in_array($databaseVersion->name, $commandVersionNames, true);
+            $commandVersion = $commandVersionsByName[$databaseVersion->name] ?? null;
 
             // Enable previously hidden existent version
             // In case of version is not HIDDEN,
-            if ($isPresent) {
+            if ($commandVersion !== null) {
+                // Skip in case hash is equals to stored one
+                if ($databaseVersion->hash === $commandVersion->hash) {
+                    continue;
+                }
+
+                $databaseVersion->hash = $commandVersion->hash;
+
                 if ($databaseVersion->isHidden) {
                     $databaseVersion->enable();
 
                     yield new VersionEnabled($databaseVersion->name);
                 }
 
+                $this->em->persist($databaseVersion);
                 yield new VersionUpdated($databaseVersion->name);
             }
 
             // Disable non-existent version
-            if (!$isPresent) {
+            if ($commandVersion === null) {
                 $databaseVersion->disable();
 
                 yield new VersionDisabled($databaseVersion->name);
@@ -111,6 +119,7 @@ final readonly class UpdateVersionsUseCase
             // TODO Should be moved to domain service?
             $this->em->persist(new Version(
                 name: $commandVersion->name,
+                hash: $commandVersion->hash,
             ));
 
             yield new VersionCreated($commandVersion->name);
