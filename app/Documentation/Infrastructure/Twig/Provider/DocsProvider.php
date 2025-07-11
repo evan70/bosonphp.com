@@ -15,21 +15,26 @@ use Symfony\Component\HttpKernel\TerminableInterface;
 
 final class DocsProvider implements TerminableInterface
 {
-    public VersionOutput $currentVersion {
-        /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => $this->versionByName->version;
+    public ?VersionOutput $currentVersion {
+        get => $this->versionByName?->version;
     }
 
     /**
      * @var iterable<array-key, CategoryOutput>
      */
     public iterable $categories {
-        get => $this->currentVersion->categories;
+        get => $this->currentVersion->categories ?? [];
     }
 
     public ?GetVersionByNameOutput $versionByName = null {
-        /** @phpstan-ignore-next-line : PHPStan false-positive */
-        get => $this->versionByName ??= $this->queries->get(new GetVersionByNameQuery());
+        get {
+            try {
+                /** @phpstan-ignore-next-line : PHPStan false-positive */
+                return $this->versionByName ??= $this->queries->get(new GetVersionByNameQuery());
+            } catch (\Throwable) {
+                return null;
+            }
+        }
     }
 
     public function __construct(
