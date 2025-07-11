@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Sync\Presentation\Console;
 
 use App\Shared\Domain\Bus\CommandBusInterface;
-use App\Sync\Application\UseCase\SyncAllVersions\SyncAllVersionsCommand;
+use App\Sync\Application\UseCase\SyncVersions\SyncVersionsCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 
@@ -20,7 +20,7 @@ final class DocsUpdateCommand extends Command
 
     public function __invoke(): int
     {
-        $this->commands->send(new SyncAllVersionsCommand());
+        $this->commands->send(new SyncVersionsCommand());
 
         return self::SUCCESS;
     }

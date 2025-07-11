@@ -4,17 +4,25 @@ declare(strict_types=1);
 
 namespace App\Sync\Domain;
 
-final readonly class ExternalDocument extends ExternalDocumentReference
+final class ExternalDocument
 {
-    /**
-     * @param non-empty-string $path
-     * @param non-empty-string $hash
-     */
     public function __construct(
-        string $path,
-        string $hash,
-        public string $content,
-    ) {
-        parent::__construct($path, $hash);
-    }
+        /**
+         * @var non-empty-lowercase-string
+         */
+        public readonly string $hash,
+        /**
+         * @var non-empty-string
+         */
+        public readonly string $name,
+        public string|\Stringable $content {
+            get {
+                if ($this->content instanceof \Stringable) {
+                    return $this->content = (string) $this->content;
+                }
+
+                return $this->content;
+            }
+        },
+    ) {}
 }

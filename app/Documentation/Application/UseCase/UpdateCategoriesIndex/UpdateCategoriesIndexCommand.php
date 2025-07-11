@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateCategoriesIndex;
 
-use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand\IndexCategory;
+use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand\CategoryIndex;
 use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
 
 final readonly class UpdateCategoriesIndexCommand
 {
     /**
-     * @var list<IndexCategory>
+     * @var list<CategoryIndex>
      */
     public array $categories;
 
     /**
      * @param non-empty-string $version
-     * @param iterable<array-key, IndexCategory> $categories
+     * @param iterable<array-key, CategoryIndex> $categories
      */
     public function __construct(
         /**

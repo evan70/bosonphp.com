@@ -10,21 +10,21 @@ final readonly class ExternalDocumentOutput
 {
     public function __construct(
         /**
-         * @var non-empty-string
+         * @var non-empty-lowercase-string
          */
-        public string $path,
+        public string $hash,
         /**
          * @var non-empty-string
          */
-        public string $hash,
+        public string $path,
         public string $content,
     ) {}
 
     public static function fromExternalDocument(ExternalDocument $document): self
     {
         return new self(
-            path: $document->path,
             hash: $document->hash,
+            path: $document->name,
             content: $document->content,
         );
     }

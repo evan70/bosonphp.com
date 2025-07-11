@@ -1,12 +1,11 @@
 parameters:
   env(SYNC_GITHUB_OWNER): 'boson-php'
   env(SYNC_GITHUB_REPOSITORY): 'docs'
+  env(SYNC_NAV_PATHNAME): '.nav.json'
 
   app.sync.github_owner: '%env(SYNC_GITHUB_OWNER)%'
   app.sync.github_repository: '%env(SYNC_GITHUB_REPOSITORY)%'
-
-  app.sync.version.github_owner: '%app.sync.github_owner%'
-  app.sync.version.github_repository: '%app.sync.github_repository%'
+  app.sync.nav_pathname: '%env(SYNC_NAV_PATHNAME)%'
 
 services:
   _defaults:
@@ -22,8 +21,13 @@ services:
 
   App\Sync\Infrastructure\Persistence\Repository\ExternalVersionGitHubRepository:
     arguments:
-      $owner: '%app.sync.version.github_owner%'
-      $repository: '%app.sync.version.github_repository%'
+      $owner: '%app.sync.github_owner%'
+      $repository: '%app.sync.github_repository%'
+
+  App\Sync\Infrastructure\Persistence\Repository\ExternalVersionInMemoryRepository:
+    decorates: App\Sync\Infrastructure\Persistence\Repository\ExternalVersionGitHubRepository
+    arguments:
+      $delegate: '@.inner'
 
   App\Sync\Domain\Version\ExternalVersionRepositoryInterface:
     alias: App\Sync\Infrastructure\Persistence\Repository\ExternalVersionGitHubRepository
@@ -32,13 +36,32 @@ services:
     alias: App\Sync\Infrastructure\Persistence\Repository\ExternalVersionGitHubRepository
 
   # ----------------------------------------------------------------------------
+  #   External Category
+  # ----------------------------------------------------------------------------
+
+  App\Sync\Infrastructure\Persistence\Repository\ExternalCategoryGitHubRepository:
+    arguments:
+      $navigation: '%app.sync.nav_pathname%'
+
+  App\Sync\Infrastructure\Persistence\Repository\ExternalCategoryInMemoryRepository:
+    decorates: App\Sync\Infrastructure\Persistence\Repository\ExternalCategoryGitHubRepository
+    arguments:
+      $delegate: '@.inner'
+
+  App\Sync\Domain\Category\ExternalCategoryRepositoryInterface:
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalCategoryGitHubRepository
+
+  App\Sync\Domain\Category\Repository\ExternalCategoriesListProviderInterface:
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalCategoryGitHubRepository
+
+  # ----------------------------------------------------------------------------
   #   External Documentation
   # ----------------------------------------------------------------------------
 
   App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository:
     arguments:
-      $owner: '%app.sync.version.github_owner%'
-      $repository: '%app.sync.version.github_repository%'
+      $owner: '%app.sync.github_owner%'
+      $repository: '%app.sync.github_repository%'
 
   App\Sync\Domain\ExternalDocumentRepositoryInterface:
     alias: App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository

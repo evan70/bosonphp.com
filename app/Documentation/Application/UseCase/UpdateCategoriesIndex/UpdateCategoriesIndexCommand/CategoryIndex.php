@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand;
 
-final readonly class IndexCategory
+final readonly class CategoryIndex
 {
     public function __construct(
         /**
-         * @var non-empty-string
+         * @var non-empty-lowercase-string
          */
-        public string $category,
+        public string $hash,
         /**
          * @var non-empty-string
          */
-        public string $hash,
+        public string $name,
         /**
          * @var non-empty-string|null
          */

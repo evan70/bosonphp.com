@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateVersionsIndex;
 
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand\IndexVersion;
+use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand\VersionIndex;
 use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
 
 final readonly class UpdateVersionsIndexCommand
 {
     /**
-     * @var list<IndexVersion>
+     * @var list<VersionIndex>
      */
     public array $versions;
 
     /**
-     * @param iterable<mixed, IndexVersion> $versions
+     * @param iterable<mixed, VersionIndex> $versions
      */
     public function __construct(
         iterable $versions,

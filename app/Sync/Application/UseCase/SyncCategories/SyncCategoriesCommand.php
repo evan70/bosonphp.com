@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Sync\Application\UseCase\SyncVersion;
+namespace App\Sync\Application\UseCase\SyncCategories;
 
 use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
 
-final readonly class SyncVersionCommand
+final readonly class SyncCategoriesCommand
 {
     public function __construct(
         /**

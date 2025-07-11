@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateCategoriesIndex;
 
-use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand\IndexCategory;
+use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand\CategoryIndex;
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Category\Repository\CategoryListProviderInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
@@ -36,14 +36,14 @@ final readonly class UpdateCategoriesIndexUseCase
     }
 
     /**
-     * @return array<non-empty-string, IndexCategory>
+     * @return array<non-empty-string, CategoryIndex>
      */
     private function getCommandCategoriesGroupByName(UpdateCategoriesIndexCommand $command): array
     {
         $result = [];
 
         foreach ($command->categories as $category) {
-            $result[$category->category] = $category;
+            $result[$category->name] = $category;
         }
 
         return $result;
@@ -65,13 +65,13 @@ final readonly class UpdateCategoriesIndexUseCase
         foreach ($commandCategories as $commandCategory) {
             $order = \min($index++, 32767);
 
-            $databaseCategory = $databaseCategories[$commandCategory->category] ?? null;
+            $databaseCategory = $databaseCategories[$commandCategory->name] ?? null;
 
             // In case of category is not in database
             if ($databaseCategory === null) {
                 $this->em->persist(new Category(
                     version: $version,
-                    title: $commandCategory->category,
+                    title: $commandCategory->name,
                     description: $commandCategory->description,
                     icon: $commandCategory->icon,
                     order: $order,

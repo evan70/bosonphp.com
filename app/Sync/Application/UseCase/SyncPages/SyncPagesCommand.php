@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand;
+namespace App\Sync\Application\UseCase\SyncPages;
 
-final readonly class IndexVersion
+use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
+
+final readonly class SyncPagesCommand
 {
     public function __construct(
         /**
@@ -14,6 +16,7 @@ final readonly class IndexVersion
         /**
          * @var non-empty-string
          */
-        public string $hash,
+        public string $category,
+        public CommandId $id = new CommandId(),
     ) {}
 }

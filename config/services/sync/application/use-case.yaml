@@ -1,7 +1,3 @@
-parameters:
-  env(SYNC_NAV_PATHNAME): '.nav.json'
-
-  app.sync.nav_pathname: '%env(SYNC_NAV_PATHNAME)%'
 
 services:
   _defaults:
@@ -11,6 +7,3 @@ services:
   App\Sync\Application\UseCase\:
     resource: '%kernel.project_dir%/app/Sync/Application/UseCase'
 
-  App\Sync\Application\UseCase\SyncVersion\SyncVersionUseCase:
-    arguments:
-      $navigation: '%app.sync.nav_pathname%'

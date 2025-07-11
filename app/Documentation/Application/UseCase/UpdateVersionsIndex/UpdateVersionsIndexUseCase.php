@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateVersionsIndex;
 
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand\IndexVersion;
+use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand\VersionIndex;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
 use App\Documentation\Domain\Version\Version;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +19,7 @@ final readonly class UpdateVersionsIndexUseCase
     ) {}
 
     /**
-     * @param iterable<mixed, IndexVersion> $versions
+     * @param iterable<mixed, VersionIndex> $versions
      * @return list<non-empty-string>
      */
     private function getCommandVersionNames(iterable $versions): array
@@ -27,7 +27,7 @@ final readonly class UpdateVersionsIndexUseCase
         $result = [];
 
         foreach ($versions as $version) {
-            $result[] = $version->version;
+            $result[] = $version->name;
         }
 
         return $result;
@@ -73,7 +73,7 @@ final readonly class UpdateVersionsIndexUseCase
 
         foreach ($command->versions as $commandVersion) {
             // In case of version is present in database
-            $isPresent = \in_array($commandVersion->version, $actualVersionNames, true);
+            $isPresent = \in_array($commandVersion->name, $actualVersionNames, true);
 
             // Skip this case
             if ($isPresent) {
@@ -82,7 +82,7 @@ final readonly class UpdateVersionsIndexUseCase
 
             // TODO Should be moved to domain service?
             $this->em->persist(new Version(
-                name: $commandVersion->version,
+                name: $commandVersion->name,
             ));
         }
 
