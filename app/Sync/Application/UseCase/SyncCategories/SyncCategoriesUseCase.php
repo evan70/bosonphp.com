@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Sync\Application\UseCase\SyncCategories;
 
-use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand;
-use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand\CategoryIndex;
+use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand;
+use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand\CategoryIndex;
 use App\Shared\Domain\Bus\CommandBusInterface;
-use App\Sync\Application\UseCase\SyncPages\SyncPagesCommand;
 use App\Sync\Domain\Category\Repository\ExternalCategoriesListProviderInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -41,20 +40,10 @@ final readonly class SyncCategoriesUseCase
 
     public function __invoke(SyncCategoriesCommand $command): void
     {
-        $indices = $this->createCategoriesIndices($command->version);
-
-        $this->commands->send(new UpdateCategoriesIndexCommand(
+        $this->commands->send(new UpdateCategoriesCommand(
             version: $command->version,
-            categories: $indices,
+            categories: $this->createCategoriesIndices($command->version),
             id: $command->id,
         ));
-
-        foreach ($indices as $index) {
-            $this->commands->send(new SyncPagesCommand(
-                version: $command->version,
-                category: $index->name,
-                id: $command->id,
-            ));
-        }
     }
 }

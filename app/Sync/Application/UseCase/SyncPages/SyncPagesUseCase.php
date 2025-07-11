@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Sync\Application\UseCase\SyncPages;
 
-use App\Documentation\Application\UseCase\UpdatePagesIndex\UpdatePagesIndexCommand;
-use App\Documentation\Application\UseCase\UpdatePagesIndex\UpdatePagesIndexCommand\PageIndex;
+use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesCommand;
+use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Shared\Domain\Bus\CommandBusInterface;
 use App\Sync\Domain\Category\ExternalCategory;
 use App\Sync\Domain\Category\Repository\ExternalCategoriesListProviderInterface;
@@ -68,7 +68,7 @@ final readonly class SyncPagesUseCase
     {
         $indices = $this->createPagesIndices($command);
 
-        $this->commands->send(new UpdatePagesIndexCommand(
+        $this->commands->send(new UpdatePagesCommand(
             version: $command->version,
             category: $command->category,
             pages: $indices,

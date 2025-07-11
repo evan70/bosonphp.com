@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand;
+namespace App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand;
 
 final readonly class VersionIndex
 {

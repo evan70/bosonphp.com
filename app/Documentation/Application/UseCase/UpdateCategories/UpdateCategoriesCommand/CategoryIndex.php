@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand;
+namespace App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand;
 
 final readonly class CategoryIndex
 {

@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Sync\Infrastructure\Listener\:
+    resource: '%kernel.project_dir%/app/Sync/Infrastructure/Listener'

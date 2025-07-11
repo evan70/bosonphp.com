@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace App\Sync\Application\UseCase\SyncVersions;
 
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand;
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand\VersionIndex;
+use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand;
+use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Shared\Domain\Bus\CommandBusInterface;
-use App\Sync\Application\UseCase\SyncCategories\SyncCategoriesCommand;
 use App\Sync\Domain\Version\Repository\ExternalVersionsListProviderInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -38,18 +37,9 @@ final readonly class SyncVersionsUseCase
 
     public function __invoke(SyncVersionsCommand $command): void
     {
-        $indices = $this->createVersionIndices();
-
-        $this->commands->send(new UpdateVersionsIndexCommand(
-            versions: $indices,
+        $this->commands->send(new UpdateVersionsCommand(
+            versions: $this->createVersionIndices(),
             id: $command->id,
         ));
-
-        foreach ($indices as $index) {
-            $this->commands->send(new SyncCategoriesCommand(
-                version: $index->name,
-                id: $command->id,
-            ));
-        }
     }
 }

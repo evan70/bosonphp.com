@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdatePagesIndex;
+namespace App\Documentation\Application\UseCase\UpdatePages;
 
-use App\Documentation\Application\UseCase\UpdatePagesIndex\UpdatePagesIndexCommand\PageIndex;
+use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
 
-final readonly class UpdatePagesIndexCommand
+final readonly class UpdatePagesCommand
 {
     /**
      * @var list<PageIndex>

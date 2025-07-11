@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateVersionsIndex;
+namespace App\Documentation\Application\UseCase\UpdateVersions;
 
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand\VersionIndex;
+use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
 
-final readonly class UpdateVersionsIndexCommand
+final readonly class UpdateVersionsCommand
 {
     /**
      * @var list<VersionIndex>

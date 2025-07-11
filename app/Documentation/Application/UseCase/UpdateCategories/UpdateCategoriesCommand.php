@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateCategoriesIndex;
+namespace App\Documentation\Application\UseCase\UpdateCategories;
 
-use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand\CategoryIndex;
+use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand\CategoryIndex;
 use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
 
-final readonly class UpdateCategoriesIndexCommand
+final readonly class UpdateCategoriesCommand
 {
     /**
      * @var list<CategoryIndex>

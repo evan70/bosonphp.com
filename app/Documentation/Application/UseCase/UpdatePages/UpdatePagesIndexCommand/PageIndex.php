@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdatePagesIndex\UpdatePagesIndexCommand;
+namespace App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand;
 
 final readonly class PageIndex
 {

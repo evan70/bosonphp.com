@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateVersionsIndex;
+namespace App\Documentation\Application\UseCase\UpdateVersions;
 
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\Event\VersionCreated;
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\Event\VersionDisabled;
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\Event\VersionEnabled;
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\Event\VersionEvent;
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\Event\VersionUpdated;
-use App\Documentation\Application\UseCase\UpdateVersionsIndex\UpdateVersionsIndexCommand\VersionIndex;
+use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionCreated;
+use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionDisabled;
+use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionEnabled;
+use App\Documentation\Application\UseCase\UpdateVersions\Event\UpdateVersionEvent;
+use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionUpdateEvent;
+use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionUpdated;
+use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
 use App\Documentation\Domain\Version\Version;
 use App\Shared\Domain\Bus\EventBusInterface;
@@ -17,7 +18,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler(bus: 'command.bus')]
-final readonly class UpdateVersionsIndexUseCase
+final readonly class UpdateVersionsUseCase
 {
     public function __construct(
         private VersionsListProviderInterface $versionsListProvider,
@@ -55,7 +56,7 @@ final readonly class UpdateVersionsIndexUseCase
         return $result;
     }
 
-    public function __invoke(UpdateVersionsIndexCommand $command): void
+    public function __invoke(UpdateVersionsCommand $command): void
     {
         $events = \iterator_to_array($this->process($command));
 
@@ -65,9 +66,9 @@ final readonly class UpdateVersionsIndexUseCase
     }
 
     /**
-     * @return iterable<array-key, VersionEvent>
+     * @return iterable<array-key, UpdateVersionEvent>
      */
-    private function process(UpdateVersionsIndexCommand $command): iterable
+    private function process(UpdateVersionsCommand $command): iterable
     {
         $databaseVersions = $this->versionsListProvider->getAll();
         $commandVersionNames = $this->getCommandVersionNames($command->versions);

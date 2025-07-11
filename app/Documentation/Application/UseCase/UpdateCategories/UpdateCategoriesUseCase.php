@@ -2,23 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateCategoriesIndex;
+namespace App\Documentation\Application\UseCase\UpdateCategories;
 
-use App\Documentation\Application\UseCase\UpdateCategoriesIndex\UpdateCategoriesIndexCommand\CategoryIndex;
+use App\Documentation\Application\UseCase\UpdateCategories\Event\CategoryCreated;
+use App\Documentation\Application\UseCase\UpdateCategories\Event\CategoryRemoved;
+use App\Documentation\Application\UseCase\UpdateCategories\Event\CategoryUpdated;
+use App\Documentation\Application\UseCase\UpdateCategories\Event\UpdateCategoryEvent;
+use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand\CategoryIndex;
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Category\Repository\CategoryListProviderInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Documentation\Domain\Version\Version;
+use App\Shared\Domain\Bus\EventBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler(bus: 'command.bus')]
-final readonly class UpdateCategoriesIndexUseCase
+final readonly class UpdateCategoriesUseCase
 {
     public function __construct(
         private VersionByNameProviderInterface $versionByNameProvider,
         private CategoryListProviderInterface $categoryListProvider,
         private EntityManagerInterface $em,
+        private EventBusInterface $events,
     ) {}
 
     /**
@@ -38,7 +44,7 @@ final readonly class UpdateCategoriesIndexUseCase
     /**
      * @return array<non-empty-string, CategoryIndex>
      */
-    private function getCommandCategoriesGroupByName(UpdateCategoriesIndexCommand $command): array
+    private function getCommandCategoriesGroupByName(UpdateCategoriesCommand $command): array
     {
         $result = [];
 
@@ -49,13 +55,25 @@ final readonly class UpdateCategoriesIndexUseCase
         return $result;
     }
 
-    public function __invoke(UpdateCategoriesIndexCommand $command): void
+    public function __invoke(UpdateCategoriesCommand $command): void
+    {
+        $events = \iterator_to_array($this->process($command));
+
+        foreach ($events as $event) {
+            $this->events->dispatch($event);
+        }
+    }
+
+    /**
+     * @return iterable<array-key, UpdateCategoryEvent>
+     */
+    public function process(UpdateCategoriesCommand $command): iterable
     {
         $version = $this->versionByNameProvider->findVersionByName($command->version);
 
         if ($version === null) {
             // TODO: TBD An exception should be thrown?
-            return;
+            return [];
         }
 
         $databaseCategories = $this->getDatabaseCategoriesGroupByName($version);
@@ -77,12 +95,22 @@ final readonly class UpdateCategoriesIndexUseCase
                     order: $order,
                 ));
 
+                yield new CategoryCreated(
+                    version: $version->name,
+                    name: $commandCategory->name,
+                );
+
                 continue;
             }
 
             $databaseCategory->order = $order;
             $databaseCategory->description = $commandCategory->description;
             $databaseCategory->icon = $commandCategory->icon;
+
+            yield new CategoryUpdated(
+                version: $version->name,
+                name: $commandCategory->name,
+            );
         }
 
         // Remove unexistence categories
@@ -91,6 +119,11 @@ final readonly class UpdateCategoriesIndexUseCase
 
             if (!$containsInCommand) {
                 $this->em->remove($databaseCategory);
+
+                yield new CategoryRemoved(
+                    version: $version->name,
+                    name: $databaseCategory->title,
+                );
             }
         }
 
