@@ -11,6 +11,7 @@ interface ExternalDocumentReferencesListProviderInterface
 {
     /**
      * @param non-empty-string|ExternalVersion $version
+     *
      * @return iterable<array-key, ExternalDocument>
      */
     public function getAll(string|ExternalVersion $version): iterable;

@@ -119,6 +119,7 @@ final readonly class ExternalCategoryGitHubRepository implements
 
     /**
      * @param non-empty-string $version
+     *
      * @return ReadableCollection<array-key, ExternalDocument>
      */
     private function getAvailableExternalDocuments(string $version): ReadableCollection

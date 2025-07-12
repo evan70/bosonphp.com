@@ -11,6 +11,7 @@ interface ExternalCategoriesListProviderInterface
 {
     /**
      * @param non-empty-string|ExternalVersion $version
+     *
      * @return iterable<array-key, ExternalCategory>
      */
     public function getAll(string|ExternalVersion $version): iterable;

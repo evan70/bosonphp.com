@@ -35,6 +35,7 @@ final class ExternalCategoryInMemoryRepository implements
 
     /**
      * @param non-empty-string|ExternalVersion $version
+     *
      * @return list<ExternalCategory>
      */
     private function directGetAll(ExternalVersion|string $version): array

@@ -187,6 +187,7 @@ final readonly class UpdatePagesUseCase
 
     /**
      * @param non-empty-string $path
+     *
      * @return non-empty-string
      */
     private function getTitle(string $content, string $path): string

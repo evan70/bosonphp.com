@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Sync\Infrastructure\Persistence\Repository;
 
-use App\Sync\Domain\ExternalDocumentRepositoryInterface;
 use App\Sync\Domain\ExternalDocument;
+use App\Sync\Domain\ExternalDocumentRepositoryInterface;
 use App\Sync\Domain\Version\ExternalVersion;
 use App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository\LazyInitializedExternalDocumentContent;
 use Github\Exception\RuntimeException;
@@ -29,7 +29,6 @@ use Github\Exception\RuntimeException;
  *         html: non-empty-string
  *     }
  * }
- *
  * @phpstan-type DocumentsListArrayType array{
  *     sha: non-empty-string,
  *     url: non-empty-string,

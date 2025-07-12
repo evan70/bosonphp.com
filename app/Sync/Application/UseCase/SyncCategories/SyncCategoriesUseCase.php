@@ -20,6 +20,7 @@ final readonly class SyncCategoriesUseCase
 
     /**
      * @param non-empty-string $version
+     *
      * @return list<CategoryIndex>
      */
     private function createCategoriesIndices(string $version): array

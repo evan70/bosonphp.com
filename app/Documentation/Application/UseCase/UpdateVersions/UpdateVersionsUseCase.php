@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateVersions;
 
+use App\Documentation\Application\UseCase\UpdateVersions\Event\UpdateVersionEvent;
 use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionCreated;
 use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionDisabled;
 use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionEnabled;
-use App\Documentation\Application\UseCase\UpdateVersions\Event\UpdateVersionEvent;
-use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionUpdateEvent;
 use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionUpdated;
 use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
@@ -28,6 +27,7 @@ final readonly class UpdateVersionsUseCase
 
     /**
      * @param iterable<mixed, VersionIndex> $versions
+     *
      * @return array<non-empty-string, VersionIndex>
      */
     private function getCommandVersionsGroupByName(iterable $versions): array
@@ -43,6 +43,7 @@ final readonly class UpdateVersionsUseCase
 
     /**
      * @param iterable<mixed, Version> $versions
+     *
      * @return list<non-empty-string>
      */
     private function getActualVersionNames(iterable $versions): array
