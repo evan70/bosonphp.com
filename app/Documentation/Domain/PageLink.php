@@ -15,28 +15,25 @@ use Doctrine\ORM\Mapping as ORM;
 class PageLink extends Page
 {
     /**
-     * @var non-empty-string
-     */
-    public string $uri;
-
-    /**
      * @param non-empty-string $title
      * @param non-empty-string $uri
      * @param int<-32768, 32767> $order
+     * @param non-empty-lowercase-string|null $hash
      */
     public function __construct(
         Category $category,
         string $title,
         string $uri,
         int $order = 0,
+        ?string $hash = null,
         ?PageId $id = null,
     ) {
-        $this->uri = $uri;
-
         parent::__construct(
             title: $title,
+            uri: $uri,
             category: $category,
             order: $order,
+            hash: $hash,
             id: $id,
         );
     }

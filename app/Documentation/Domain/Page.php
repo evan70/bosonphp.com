@@ -39,7 +39,16 @@ abstract class Page implements
      * @var non-empty-string
      */
     #[ORM\Column(name: 'title', type: 'string', length: 255, nullable: false)]
-    public string $title;
+    public string $title {
+        get => $this->title;
+        set(string|\Stringable $value) {
+            $title = (string) $value;
+
+            assert($title !== '', 'Documentation page title cannot be empty');
+
+            $this->title = $title;
+        }
+    }
 
     /**
      * @var non-empty-lowercase-string
@@ -51,7 +60,7 @@ abstract class Page implements
      * @var non-empty-string
      */
     #[ORM\Column(name: 'uri', type: 'string', length: 255, nullable: false)]
-    public protected(set) string $uri;
+    public string $uri;
 
     /**
      * @var int<-32768, 32767>
@@ -94,16 +103,22 @@ abstract class Page implements
 
     /**
      * @param non-empty-string $title
+     * @param non-empty-string $uri
      * @param int<-32768, 32767> $order
+     * @param non-empty-lowercase-string|null $hash
      */
     public function __construct(
         string $title,
+        string $uri,
         Category $category,
         int $order = 0,
+        ?string $hash = null,
         ?PageId $id = null,
     ) {
         $this->title = $title;
+        $this->uri = $uri;
         $this->order = $order;
+        $this->hash = $hash;
         $this->category = $category;
         $this->id = $id ?? PageId::new();
     }

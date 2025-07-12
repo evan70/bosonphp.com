@@ -8,11 +8,11 @@ use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\PageLink;
-use App\Documentation\Domain\PageSlugGeneratorInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Generator;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 /**
  * @api
@@ -41,7 +41,6 @@ final class PageFixture extends Fixture implements DependentFixtureInterface
 
     public function __construct(
         private readonly Generator $faker,
-        private readonly PageSlugGeneratorInterface $slugGenerator,
         private readonly PageDocumentContentRendererInterface $renderer,
     ) {}
 
@@ -52,6 +51,7 @@ final class PageFixture extends Fixture implements DependentFixtureInterface
 
         /** @var Category $category */
         foreach ($categories as $category) {
+            /** @var list<non-empty-string> $titles */
             $titles = $this->faker->randomElements(
                 self::PAGES,
                 $this->faker->numberBetween(1, \count(self::PAGES)),
@@ -69,7 +69,9 @@ final class PageFixture extends Fixture implements DependentFixtureInterface
                     default => new PageDocument(
                         category: $category,
                         title: $title . ' in ' . $category->title,
-                        slugGenerator: $this->slugGenerator,
+                        uri: new AsciiSlugger()
+                            ->slug($title . ' in ' . $category->title)
+                            ->toString(),
                         content: $this->faker->markdownContent(
                             $this->faker->numberBetween(5, 50),
                         )

@@ -72,7 +72,7 @@ final readonly class UpdateCategoriesUseCase
         $version = $this->versionByNameProvider->findVersionByName($command->version);
 
         if ($version === null) {
-            // TODO: TBD An exception should be thrown?
+            // TODO: TBD Version Not Found exception should be thrown?
             return [];
         }
 
@@ -80,16 +80,16 @@ final readonly class UpdateCategoriesUseCase
         $commandCategories = $this->getCommandCategoriesGroupByName($command);
 
         $index = 0;
-        foreach ($commandCategories as $commandCategory) {
+        foreach ($commandCategories as $commandCategoryName => $commandCategory) {
             $order = \min($index++, 32767);
 
-            $databaseCategory = $databaseCategories[$commandCategory->name] ?? null;
+            $databaseCategory = $databaseCategories[$commandCategoryName] ?? null;
 
             // In case of category is not in database
             if ($databaseCategory === null) {
                 $this->em->persist(new Category(
                     version: $version,
-                    title: $commandCategory->name,
+                    title: $commandCategoryName,
                     description: $commandCategory->description,
                     icon: $commandCategory->icon,
                     order: $order,
@@ -114,6 +114,8 @@ final readonly class UpdateCategoriesUseCase
             $databaseCategory->description = $commandCategory->description;
             $databaseCategory->icon = $commandCategory->icon;
 
+            $this->em->persist($databaseCategory);
+
             yield new CategoryUpdated(
                 version: $version->name,
                 name: $commandCategory->name,
@@ -121,17 +123,19 @@ final readonly class UpdateCategoriesUseCase
         }
 
         // Remove unexistence categories
-        foreach ($databaseCategories as $databaseCategory) {
-            $containsInCommand = isset($commandCategories[$databaseCategory->title]);
+        foreach ($databaseCategories as $databaseCategoryName => $databaseCategory) {
+            $containsInCommand = isset($commandCategories[$databaseCategoryName]);
 
-            if (!$containsInCommand) {
-                $this->em->remove($databaseCategory);
-
-                yield new CategoryRemoved(
-                    version: $version->name,
-                    name: $databaseCategory->title,
-                );
+            if ($containsInCommand) {
+                continue;
             }
+
+            $this->em->remove($databaseCategory);
+
+            yield new CategoryRemoved(
+                version: $version->name,
+                name: $databaseCategoryName,
+            );
         }
 
         $this->em->flush();

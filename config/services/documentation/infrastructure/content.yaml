@@ -6,6 +6,3 @@ services:
 
   App\Documentation\Domain\PageDocumentContentRendererInterface:
     class: App\Documentation\Infrastructure\Content\PageDocumentContentRenderer
-
-  App\Documentation\Domain\PageSlugGeneratorInterface:
-    class: App\Documentation\Infrastructure\Content\PageSlugGenerator

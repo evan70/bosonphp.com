@@ -8,7 +8,6 @@ use App\Documentation\Domain\Page;
 use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageDocumentContent;
 use App\Documentation\Domain\PageDocumentContentRendererInterface;
-use App\Documentation\Domain\PageSlugGeneratorInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 
@@ -23,7 +22,6 @@ final readonly class PageLoadListener
 {
     public function __construct(
         private PageDocumentContentRendererInterface $contentRenderer,
-        private PageSlugGeneratorInterface $slugGenerator,
     ) {}
 
     /**
@@ -34,7 +32,6 @@ final readonly class PageLoadListener
     public function postLoad(Page $page): void
     {
         if ($page instanceof PageDocument) {
-            $this->bootSlugGenerator($page);
             $this->bootContentRenderer($page->content);
         }
     }
@@ -51,19 +48,5 @@ final readonly class PageLoadListener
         }
 
         $contentRenderer->setValue($content, $this->contentRenderer);
-    }
-
-    /**
-     * @throws \ReflectionException
-     */
-    private function bootSlugGenerator(Page $page): void
-    {
-        $slugGenerator = new \ReflectionProperty($page, 'slugGenerator');
-
-        if ($slugGenerator->isInitialized($page)) {
-            return;
-        }
-
-        $slugGenerator->setValue($page, $this->slugGenerator);
     }
 }

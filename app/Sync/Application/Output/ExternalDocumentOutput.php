@@ -25,7 +25,7 @@ final readonly class ExternalDocumentOutput
         return new self(
             hash: $document->hash,
             path: $document->name,
-            content: $document->content,
+            content: (string) $document->content,
         );
     }
 }
