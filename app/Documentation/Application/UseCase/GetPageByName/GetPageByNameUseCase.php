@@ -12,6 +12,7 @@ use App\Documentation\Application\UseCase\GetVersionByName\GetVersionByNameOutpu
 use App\Documentation\Application\UseCase\GetVersionByName\GetVersionByNameQuery;
 use App\Documentation\Domain\Repository\PageByNameProviderInterface;
 use App\Shared\Domain\Bus\QueryBusInterface;
+use App\Shared\Domain\Bus\QueryId;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler(bus: 'query.bus')]
@@ -28,7 +29,10 @@ final readonly class GetPageByNameUseCase
         $version = $query->version;
 
         /** @var GetVersionByNameOutput $result */
-        $result = $this->queries->get(new GetVersionByNameQuery($version));
+        $result = $this->queries->get(new GetVersionByNameQuery(
+            version: $version,
+            id: QueryId::createFrom($query->id),
+        ));
 
         $page = $this->pages->findByName($result->version->name, $name)
             ?? throw new PageNotFoundException();

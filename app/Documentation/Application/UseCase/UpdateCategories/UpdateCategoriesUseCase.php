@@ -14,6 +14,7 @@ use App\Documentation\Domain\Category\Repository\CategoryListProviderInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Documentation\Domain\Version\Version;
 use App\Shared\Domain\Bus\EventBusInterface;
+use App\Shared\Domain\Bus\EventId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -99,6 +100,7 @@ final readonly class UpdateCategoriesUseCase
                 yield new CategoryCreated(
                     version: $version->name,
                     name: $commandCategory->name,
+                    id: EventId::createFrom($command->id),
                 );
 
                 continue;
@@ -119,6 +121,7 @@ final readonly class UpdateCategoriesUseCase
             yield new CategoryUpdated(
                 version: $version->name,
                 name: $commandCategory->name,
+                id: EventId::createFrom($command->id),
             );
         }
 
@@ -135,6 +138,7 @@ final readonly class UpdateCategoriesUseCase
             yield new CategoryRemoved(
                 version: $version->name,
                 name: $databaseCategoryName,
+                id: EventId::createFrom($command->id),
             );
         }
 

@@ -47,6 +47,12 @@ abstract readonly class UniversalUniqueId implements IdInterface
         return new static(self::createRawUuid7($clock));
     }
 
+    public static function createFrom(self $uuid): static
+    {
+        /** @phpstan-ignore-next-line : PHPStan false-positive */
+        return new static($uuid->value);
+    }
+
     /**
      * @api
      */

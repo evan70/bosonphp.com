@@ -15,7 +15,9 @@ use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Shared\Domain\Bus\EventBusInterface;
+use App\Shared\Domain\Bus\EventId;
 use App\Shared\Domain\Bus\QueryBusInterface;
+use App\Shared\Domain\Bus\QueryId;
 use App\Sync\Application\UseCase\GetExternalDocumentByName\GetExternalDocumentByNameOutput;
 use App\Sync\Application\UseCase\GetExternalDocumentByName\GetExternalDocumentByNameQuery;
 use Doctrine\ORM\EntityManagerInterface;
@@ -119,7 +121,7 @@ final readonly class UpdatePagesUseCase
 
             // In case of category is not in database
             if ($databasePage === null) {
-                $content = $this->getContent($command->version, $commandPage->name);
+                $content = $this->getContent($command, $commandPage->name);
                 $title = $this->getTitle($content, $commandPage->name);
 
                 $this->em->persist(new PageDocument(
@@ -138,6 +140,7 @@ final readonly class UpdatePagesUseCase
                     name: $commandPage->name,
                     title: $title,
                     content: $content,
+                    id: EventId::createFrom($command->id),
                 );
 
                 continue;
@@ -156,7 +159,7 @@ final readonly class UpdatePagesUseCase
             $databasePage->order = $order;
             $databasePage->hash = $commandPage->hash;
 
-            $content = $this->getContent($command->version, $commandPage->name);
+            $content = $this->getContent($command, $commandPage->name);
             $title = $this->getTitle($content, $commandPage->name);
 
             $databasePage->title = $title;
@@ -170,6 +173,7 @@ final readonly class UpdatePagesUseCase
                 name: $commandPage->name,
                 title: $databasePage->title,
                 content: $databasePage->content->value,
+                id: EventId::createFrom($command->id),
             );
         }
 
@@ -194,6 +198,7 @@ final readonly class UpdatePagesUseCase
                 name: $databasePage->uri,
                 title: $databasePage->title,
                 content: $databasePage->content->value,
+                id: EventId::createFrom($command->id),
             );
         }
 
@@ -216,15 +221,15 @@ final readonly class UpdatePagesUseCase
     }
 
     /**
-     * @param non-empty-string $version
      * @param non-empty-string $path
      */
-    private function getContent(string $version, string $path): string
+    private function getContent(UpdatePagesCommand $command, string $path): string
     {
         /** @var GetExternalDocumentByNameOutput $result */
         $result = $this->queries->get(new GetExternalDocumentByNameQuery(
-            version: $version,
+            version: $command->version,
             path: $path,
+            id: QueryId::createFrom($command->id),
         ));
 
         return $result->document->content;

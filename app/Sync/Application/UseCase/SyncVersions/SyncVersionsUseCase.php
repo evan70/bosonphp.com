@@ -7,6 +7,7 @@ namespace App\Sync\Application\UseCase\SyncVersions;
 use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand;
 use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Shared\Domain\Bus\CommandBusInterface;
+use App\Shared\Domain\Bus\CommandId;
 use App\Sync\Domain\Version\Repository\ExternalVersionsListProviderInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -39,7 +40,7 @@ final readonly class SyncVersionsUseCase
     {
         $this->commands->send(new UpdateVersionsCommand(
             versions: $this->createVersionIndices(),
-            id: $command->id,
+            id: CommandId::createFrom($command->id),
         ));
     }
 }

@@ -7,6 +7,7 @@ namespace App\Sync\Application\UseCase\SyncPages;
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesCommand;
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Shared\Domain\Bus\CommandBusInterface;
+use App\Shared\Domain\Bus\CommandId;
 use App\Sync\Domain\Category\ExternalCategory;
 use App\Sync\Domain\Category\Repository\ExternalCategoriesListProviderInterface;
 use App\Sync\Domain\ExternalDocument;
@@ -72,6 +73,7 @@ final readonly class SyncPagesUseCase
             version: $command->version,
             category: $command->category,
             pages: $indices,
+            id: CommandId::createFrom($command->id),
         ));
     }
 }

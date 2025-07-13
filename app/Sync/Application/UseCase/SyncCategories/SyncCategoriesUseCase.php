@@ -7,6 +7,7 @@ namespace App\Sync\Application\UseCase\SyncCategories;
 use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand;
 use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand\CategoryIndex;
 use App\Shared\Domain\Bus\CommandBusInterface;
+use App\Shared\Domain\Bus\CommandId;
 use App\Sync\Domain\Category\Repository\ExternalCategoriesListProviderInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -44,7 +45,7 @@ final readonly class SyncCategoriesUseCase
         $this->commands->send(new UpdateCategoriesCommand(
             version: $command->version,
             categories: $this->createCategoriesIndices($command->version),
-            id: $command->id,
+            id: CommandId::createFrom($command->id),
         ));
     }
 }

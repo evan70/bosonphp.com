@@ -13,6 +13,7 @@ use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\V
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
 use App\Documentation\Domain\Version\Version;
 use App\Shared\Domain\Bus\EventBusInterface;
+use App\Shared\Domain\Bus\EventId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -95,14 +96,20 @@ final readonly class UpdateVersionsUseCase
                 }
 
                 $this->em->persist($databaseVersion);
-                yield new VersionUpdated($databaseVersion->name);
+                yield new VersionUpdated(
+                    name: $databaseVersion->name,
+                    id: EventId::createFrom($command->id),
+                );
             }
 
             // Disable non-existent version
             if ($commandVersion === null) {
                 $databaseVersion->disable();
 
-                yield new VersionDisabled($databaseVersion->name);
+                yield new VersionDisabled(
+                    name: $databaseVersion->name,
+                    id: EventId::createFrom($command->id),
+                );
             }
         }
 
@@ -123,7 +130,10 @@ final readonly class UpdateVersionsUseCase
                 hash: $commandVersion->hash,
             ));
 
-            yield new VersionCreated($commandVersion->name);
+            yield new VersionCreated(
+                name: $commandVersion->name,
+                id: EventId::createFrom($command->id),
+            );
         }
 
         $this->em->flush();
