@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Sync\Application\UseCase\SyncCategories;
 
 use App\Shared\Domain\Bus\CommandId;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final readonly class SyncCategoriesCommand
 {
@@ -12,6 +13,7 @@ final readonly class SyncCategoriesCommand
         /**
          * @var non-empty-string
          */
+        #[NotBlank]
         public string $version,
         public CommandId $id = new CommandId(),
     ) {}

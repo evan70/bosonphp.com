@@ -15,7 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 /**
  * @api
@@ -23,7 +25,7 @@ use Symfony\Component\Routing\Attribute\Route;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Blog\Presentation\Web\Controller
  */
-#[Route('/blog/{slug}', name: 'blog.show', methods: 'GET')]
+#[Route('/blog/{slug}', name: 'blog.show', requirements: ['slug' => Requirement::ASCII_SLUG], methods: 'GET')]
 final class ShowController extends AbstractController
 {
     public function __construct(
@@ -38,7 +40,7 @@ final class ShowController extends AbstractController
 
             /** @var GetCategoriesListOutput $categoriesResult */
             $categoriesResult = $this->queries->get(new GetCategoriesListQuery());
-        } catch (InvalidArticleUriException) {
+        } catch (ValidationFailedException) {
             throw new BadRequestHttpException('Article name contain invalid characters');
         } catch (ArticleNotFoundException) {
             throw new NotFoundHttpException(\sprintf('Article with name "%s" not found', $slug));

@@ -6,6 +6,7 @@ namespace App\Documentation\Application\UseCase\UpdatePages;
 
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Shared\Domain\Bus\CommandId;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 final readonly class UpdatePagesCommand
 {
@@ -22,10 +23,12 @@ final readonly class UpdatePagesCommand
         /**
          * @var non-empty-string
          */
+        #[NotBlank]
         public string $version,
         /**
          * @var non-empty-string
          */
+        #[NotBlank]
         public string $category,
         iterable $pages = [],
         public CommandId $id = new CommandId(),
