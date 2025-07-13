@@ -19,5 +19,10 @@ abstract readonly class UpdatePageEvent
          * @var non-empty-string
          */
         public string $name,
+        /**
+         * @var non-empty-string
+         */
+        public string $title,
+        public string $content,
     ) {}
 }

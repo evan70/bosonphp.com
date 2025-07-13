@@ -120,10 +120,11 @@ final readonly class UpdatePagesUseCase
             // In case of category is not in database
             if ($databasePage === null) {
                 $content = $this->getContent($command->version, $commandPage->name);
+                $title = $this->getTitle($content, $commandPage->name);
 
                 $this->em->persist(new PageDocument(
                     category: $category,
-                    title: $this->getTitle($content, $commandPage->name),
+                    title: $title,
                     uri: $commandPageUri,
                     content: $content,
                     contentRenderer: $this->contentRenderer,
@@ -135,6 +136,8 @@ final readonly class UpdatePagesUseCase
                     version: $command->version,
                     category: $command->category,
                     name: $commandPage->name,
+                    title: $title,
+                    content: $content,
                 );
 
                 continue;
@@ -145,16 +148,19 @@ final readonly class UpdatePagesUseCase
                 continue;
             }
 
+            // TODO Add support of PageLinks
+            if (!$databasePage instanceof PageDocument) {
+                continue;
+            }
+
             $databasePage->order = $order;
             $databasePage->hash = $commandPage->hash;
 
-            if ($databasePage instanceof PageDocument) {
-                $content = $this->getContent($command->version, $commandPage->name);
-                $title = $this->getTitle($content, $commandPage->name);
+            $content = $this->getContent($command->version, $commandPage->name);
+            $title = $this->getTitle($content, $commandPage->name);
 
-                $databasePage->title = $title;
-                $databasePage->content = $content;
-            }
+            $databasePage->title = $title;
+            $databasePage->content = $content;
 
             $this->em->persist($databasePage);
 
@@ -162,6 +168,8 @@ final readonly class UpdatePagesUseCase
                 version: $command->version,
                 category: $command->category,
                 name: $commandPage->name,
+                title: $databasePage->title,
+                content: $databasePage->content->value,
             );
         }
 
@@ -175,10 +183,17 @@ final readonly class UpdatePagesUseCase
 
             $this->em->remove($databasePage);
 
+            // TODO Add support of PageLinks
+            if (!$databasePage instanceof PageDocument) {
+                continue;
+            }
+
             yield new PageRemoved(
                 version: $command->version,
                 category: $command->category,
                 name: $databasePage->uri,
+                title: $databasePage->title,
+                content: $databasePage->content->value,
             );
         }
 
