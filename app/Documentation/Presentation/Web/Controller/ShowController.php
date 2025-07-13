@@ -22,6 +22,7 @@ use Symfony\Component\Routing\Attribute\Route;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Documentation\Presentation\Web\Controller
  */
+#[Route('doc/{version}/{page}.md', methods: 'GET')]
 #[Route('doc/{version}/{page}', name: 'doc.show', methods: 'GET')]
 final class ShowController extends AbstractController
 {
