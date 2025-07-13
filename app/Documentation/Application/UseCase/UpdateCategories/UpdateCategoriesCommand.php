@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Documentation\Application\UseCase\UpdateCategories;
 
 use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand\CategoryIndex;
-use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
+use App\Shared\Domain\Bus\CommandId;
 
 final readonly class UpdateCategoriesCommand
 {

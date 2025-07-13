@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Sync\Application\UseCase\SyncVersions;
 
-use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
+use App\Shared\Domain\Bus\CommandId;
 
 final readonly class SyncVersionsCommand
 {

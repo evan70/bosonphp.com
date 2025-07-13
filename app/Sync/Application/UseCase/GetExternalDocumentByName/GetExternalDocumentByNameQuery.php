@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Sync\Application\UseCase\GetExternalDocumentByName;
 
+use App\Shared\Domain\Bus\QueryId;
+
 final readonly class GetExternalDocumentByNameQuery
 {
     public function __construct(
@@ -15,5 +17,6 @@ final readonly class GetExternalDocumentByNameQuery
          * @var non-empty-string
          */
         public string $path,
+        public QueryId $id = new QueryId(),
     ) {}
 }

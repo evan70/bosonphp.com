@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateCategories\Event;
 
+use App\Shared\Domain\Bus\EventId;
+
 abstract readonly class UpdateCategoryEvent
 {
     public function __construct(
@@ -15,5 +17,6 @@ abstract readonly class UpdateCategoryEvent
          * @var non-empty-string
          */
         public string $name,
+        public EventId $id = new EventId(),
     ) {}
 }

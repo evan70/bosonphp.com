@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Documentation\Application\UseCase\UpdatePages;
 
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
-use App\Shared\Infrastructure\Bus\CommandBus\CommandId;
+use App\Shared\Domain\Bus\CommandId;
 
 final readonly class UpdatePagesCommand
 {

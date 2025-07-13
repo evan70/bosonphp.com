@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdatePages\Event;
 
+use App\Shared\Domain\Bus\EventId;
+
 abstract readonly class UpdatePageEvent
 {
     public function __construct(
@@ -24,5 +26,6 @@ abstract readonly class UpdatePageEvent
          */
         public string $title,
         public string $content,
+        public EventId $id = new EventId(),
     ) {}
 }
