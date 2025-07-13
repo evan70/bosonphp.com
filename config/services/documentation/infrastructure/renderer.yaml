@@ -5,4 +5,4 @@ services:
     autoconfigure: true
 
   App\Documentation\Domain\PageDocumentContentRendererInterface:
-    class: App\Documentation\Infrastructure\Content\PageDocumentContentRenderer
+    class: App\Documentation\Infrastructure\Renderer\PageDocumentContentRenderer
