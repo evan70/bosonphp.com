@@ -55,22 +55,16 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
             ->setParameter('query', $query)
         ;
 
-        while (true) {
-            /**
-             * @var array{
-             *      id: non-empty-string,
-             *      title: non-empty-string,
-             *      uri: non-empty-string,
-             *      content_rendered: string,
-             *      rank: float
-             *  }|false $record
-             */
-            $record = $builder->fetchAssociative();
-
-            if ($record === false) {
-                break;
-            }
-
+        /**
+         * @var array{
+         *      id: non-empty-string,
+         *      title: non-empty-string,
+         *      uri: non-empty-string,
+         *      content_rendered: string,
+         *      rank: float
+         *  } $record
+         */
+        foreach ($builder->fetchAllAssociative() as $record) {
             yield new SearchResult(
                 id: new SearchResultId($record['id']),
                 title: $record['title'],
