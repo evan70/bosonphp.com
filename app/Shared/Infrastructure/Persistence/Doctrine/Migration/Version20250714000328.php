@@ -8,6 +8,8 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
+ * Referenced to {@see AddHiddenSearchVectorColumn} doctrine listener.
+ *
  * @api
  *
  * @internal this is an internal library class, please do not use it in your code

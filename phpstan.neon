@@ -36,11 +36,24 @@ parameters:
     # - identifier: greater.alwaysFalse
     # - identifier: booleanOr.alwaysFalse
   excludePaths:
-    # Blog
+    # --------------------------------------------------------------------------
+    #   Blog
+    # --------------------------------------------------------------------------
+    # Blog: Skip all fixtures
     - app/Blog/Infrastructure/Persistence/Doctrine/Fixture
-    # Documentation
+    # --------------------------------------------------------------------------
+    #   Documentation
+    # --------------------------------------------------------------------------
+    # Documentation: Skip all fixtures
     - app/Documentation/Infrastructure/Persistence/Doctrine/Fixture
-    # Shared
+    # Documentation: Known deprecations usage
+    - app/Documentation/Infrastructure/Persistence/Doctrine/Listener/AddHiddenSearchVectorColumn.php
+    # --------------------------------------------------------------------------
+    #   Shared
+    # --------------------------------------------------------------------------
+    # Shared: Skip faker extensions
     - app/Shared/Infrastructure/Faker
+    # Shared: Skip migrations
     - app/Shared/Infrastructure/Persistence/Doctrine/Migration
+    # Shared: Skip (optionally) testing commands
     - app/Shared/Presentation/Console/TestCommand.php (?)
