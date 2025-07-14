@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Domain\Search\Repository;
+namespace App\Search\Domain\Repository;
 
-use App\Documentation\Domain\Search\SearchResult;
+use App\Search\Domain\SearchResult;
 
 interface SearchByOccurrenceProviderInterface
 {

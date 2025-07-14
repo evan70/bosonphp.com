@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Infrastructure\Persistence\Doctrine\Repository;
+namespace App\Search\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Documentation\Domain\PageId;
-use App\Documentation\Domain\Search\SearchResult;
-use App\Documentation\Domain\Search\SearchResultRepositoryInterface;
+use App\Search\Domain\SearchResult;
+use App\Search\Domain\SearchResultId;
+use App\Search\Domain\SearchResultRepositoryInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @api
  *
  * @internal this is an internal library class, please do not use it in your code
- * @psalm-internal App\Documentation\Infrastructure\Persistence\Doctrine\Repository
+ * @psalm-internal App\Search\Infrastructure\Persistence\Doctrine\Repository
  */
 final readonly class SearchResultDatabaseRepository implements SearchResultRepositoryInterface
 {
@@ -45,7 +45,11 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
         ];
 
         $result = $this->connection->executeQuery(<<<'SQL'
-            SELECT doc_pages.id, ts_rank(doc_pages.search_vector, to_tsquery('english', :query)) AS rank
+            SELECT doc_pages.id,
+                   doc_pages.title,
+                   doc_pages.uri,
+                   doc_pages.content_rendered,
+                   ts_rank(doc_pages.search_vector, to_tsquery('english', :query)) AS rank
             FROM doc_pages
                  LEFT JOIN doc_page_versions versions ON doc_pages.version_id = versions.id
             WHERE versions.name = :version
@@ -58,6 +62,9 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
             /**
              * @var array{
              *      id: non-empty-string,
+             *      title: non-empty-string,
+             *      uri: non-empty-string,
+             *      content_rendered: string,
              *      rank: float
              *  }|false $record
              */
@@ -68,7 +75,10 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
             }
 
             yield new SearchResult(
-                id: new PageId($record['id']),
+                id: new SearchResultId($record['id']),
+                title: $record['title'],
+                uri: $record['uri'],
+                content: $record['content_rendered'],
                 rank: $record['rank'],
             );
         }

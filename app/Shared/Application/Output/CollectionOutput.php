@@ -17,7 +17,7 @@ abstract class CollectionOutput implements \IteratorAggregate
         /**
          * @var iterable<mixed, T>
          */
-        public iterable $items {
+        public iterable $items = [] {
             /**
              * @return list<T>
              */

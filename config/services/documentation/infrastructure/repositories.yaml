@@ -18,16 +18,6 @@ services:
     alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\PageDatabaseRepository
 
   # ----------------------------------------------------------------------------
-  #   Search
-  # ----------------------------------------------------------------------------
-
-  App\Documentation\Domain\Search\SearchResultRepositoryInterface:
-    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\SearchResultDatabaseRepository
-
-  App\Documentation\Domain\Search\Repository\SearchByOccurrenceProviderInterface:
-    alias: App\Documentation\Infrastructure\Persistence\Doctrine\Repository\SearchResultDatabaseRepository
-
-  # ----------------------------------------------------------------------------
   #   Version
   # ----------------------------------------------------------------------------
 

@@ -85,5 +85,18 @@
                 </ul>
             </details>
         </li>
+        <li>
+            <form method="get" action="{{ path('search.index') }}">
+                <input
+                    style="width: 10px"
+                    onfocus="this.style.width = '300px'"
+                    onblur="this.style.width = '10px'"
+                    type="search"
+                    name="q"
+                    placeholder="Search"
+                    aria-label="Search"
+                />
+            </form>
+        </li>
     </ul>
 </nav>

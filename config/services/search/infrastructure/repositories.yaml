@@ -1,0 +1,18 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Search\Infrastructure\Persistence\Doctrine\Repository\:
+    resource: '%kernel.project_dir%/app/Search/Infrastructure/Persistence/Doctrine/Repository'
+
+  # ----------------------------------------------------------------------------
+  #   Search
+  # ----------------------------------------------------------------------------
+
+  App\Search\Domain\SearchResultRepositoryInterface:
+    alias: App\Search\Infrastructure\Persistence\Doctrine\Repository\SearchResultDatabaseRepository
+
+  App\Search\Domain\Repository\SearchByOccurrenceProviderInterface:
+    alias: App\Search\Infrastructure\Persistence\Doctrine\Repository\SearchResultDatabaseRepository

@@ -1,0 +1,15 @@
+search_web:
+  resource:
+    path: ../../app/Search/Presentation/Web/Controller/
+    namespace: App\Search\Presentation\Web\Controller
+  type: attribute
+
+search_api:
+  resource:
+    path: ../../app/Search/Presentation/Api/Controller/
+    namespace: App\Search\Presentation\Api\Controller
+  type: attribute
+  prefix: v1
+  stateless: true
+  defaults:
+    api: v1

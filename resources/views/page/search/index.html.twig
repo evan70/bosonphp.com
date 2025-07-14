@@ -1,0 +1,45 @@
+{% extends 'layout/master.html.twig' %}
+
+{% block title %}
+    Search :: {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h1>Search</h1>
+
+    <nav>
+        <ul>
+            <li><a href="{{ path('home') }}">Home</a></li>
+            <li style="color: #5d6b89">&gt;</li>
+            <li>Boson Search</li>
+        </ul>
+    </nav>
+
+    <form method="get" action="{{ path('search.index') }}">
+        <input
+            type="search"
+            name="q"
+            value="{{ app.request.get('q') }}"
+            placeholder="Search"
+            aria-label="Search"
+        />
+    </form>
+
+    <section>
+        {% for item in results %}
+            <article>
+                <h2>
+                    <a href="{{ path('doc.show', {
+                        version: version,
+                        page: item.uri,
+                    }) }}">{{ item.title }}</a>
+                </h2>
+                <span>
+                    {{ item.content | striptags | u.truncate(256, '...') }}
+                </span>
+            </article>
+        {% endfor %}
+    </section>
+
+{% endblock %}

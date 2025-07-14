@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Persistence\Doctrine\Migration;
 
+use App\Search\Infrastructure\Persistence\Doctrine\Listener\AddHiddenSearchVectorColumn;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 

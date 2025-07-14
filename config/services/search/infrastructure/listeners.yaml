@@ -1,0 +1,7 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Search\Infrastructure\Persistence\Doctrine\Listener\:
+    resource: '%kernel.project_dir%/app/Search/Infrastructure/Persistence/Doctrine/Listener'

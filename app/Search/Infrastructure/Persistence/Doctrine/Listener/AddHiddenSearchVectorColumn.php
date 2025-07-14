@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Infrastructure\Persistence\Doctrine\Listener;
+namespace App\Search\Infrastructure\Persistence\Doctrine\Listener;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\DBAL\Event\SchemaColumnDefinitionEventArgs;
