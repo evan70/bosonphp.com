@@ -29,16 +29,24 @@
     <section>
         {% for item in results %}
             <article>
-                <h2>
-                    <a href="{{ path('doc.show', {
-                        version: version,
-                        page: item.uri,
-                    }) }}">{{ item.title }}</a>
-                </h2>
-                <span>
-                    {{ item.content | striptags | u.truncate(256, '...') }}
-                </span>
+                <hgroup>
+                    <h2>
+                        <a href="{{ path('doc.show', {
+                            version: version,
+                            page: item.uri,
+                        }) }}">{{ item.title }}</a>
+                    </h2>
+                    <br />
+                    <p>
+                        {{ item.content | striptags | u.truncate(256, '...') }}
+                    </p>
+                </hgroup>
             </article>
+        {% else %}
+            <hgroup>
+                <h1>No results</h1>
+                <p>Try making your query more generic!</p>
+            </hgroup>
         {% endfor %}
     </section>
 

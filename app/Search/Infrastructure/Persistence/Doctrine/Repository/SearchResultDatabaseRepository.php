@@ -39,24 +39,21 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
             return [];
         }
 
-        $parameters = [
-            'query' => $query,
-            'version' => $version,
-        ];
-
-        $result = $this->connection->executeQuery(<<<'SQL'
-            SELECT doc_pages.id,
-                   doc_pages.title,
-                   doc_pages.uri,
-                   doc_pages.content_rendered,
-                   ts_rank(doc_pages.search_vector, to_tsquery('english', :query)) AS rank
-            FROM doc_pages
-                 LEFT JOIN doc_page_versions versions ON doc_pages.version_id = versions.id
-            WHERE versions.name = :version
-              AND doc_pages.search_vector @@ to_tsquery('english', :query)
-            ORDER BY rank DESC
-            LIMIT 10;
-            SQL, $parameters);
+        $builder = $this->connection->createQueryBuilder()
+            ->from('doc_pages')
+            ->addSelect('doc_pages.id')
+            ->addSelect('doc_pages.title')
+            ->addSelect('doc_pages.uri')
+            ->addSelect('doc_pages.content_rendered')
+            ->addSelect('ts_rank(doc_pages.search_vector, to_tsquery(\'english\', quote_literal(:query))) AS rank')
+            ->leftJoin('doc_pages', 'doc_page_versions', 'versions', 'doc_pages.version_id = versions.id')
+            ->andWhere('versions.name = :version')
+            ->andWhere('doc_pages.search_vector @@ to_tsquery(\'english\', quote_literal(:query))')
+            ->orderBy('rank', 'DESC')
+            ->setMaxResults($limit)
+            ->setParameter('version', $version)
+            ->setParameter('query', $query)
+        ;
 
         while (true) {
             /**
@@ -68,7 +65,7 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
              *      rank: float
              *  }|false $record
              */
-            $record = $result->fetchAssociative();
+            $record = $builder->fetchAssociative();
 
             if ($record === false) {
                 break;
