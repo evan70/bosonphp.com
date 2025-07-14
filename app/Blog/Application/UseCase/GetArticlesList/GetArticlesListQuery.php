@@ -17,7 +17,7 @@ final readonly class GetArticlesListQuery
         #[GreaterThanOrEqual(value: 1)]
         #[LessThanOrEqual(value: 2_147_483_647)]
         public int $page,
-        #[NotBlank]
+        #[NotBlank(allowNull: true)]
         #[Regex('/^' . Requirement::ASCII_SLUG . '$/')]
         public ?string $uri = null,
         public QueryId $id = new QueryId(),

@@ -10,9 +10,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 final readonly class GetPageByNameQuery
 {
     public function __construct(
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $name,
-        #[NotBlank]
+        #[NotBlank(allowNull: true)]
         public ?string $version = null,
         public QueryId $id = new QueryId(),
     ) {}

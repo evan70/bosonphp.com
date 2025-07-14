@@ -13,7 +13,7 @@ final readonly class SyncCategoriesCommand
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $version,
         public CommandId $id = new CommandId(),
     ) {}

@@ -12,12 +12,12 @@ final readonly class VersionIndex
         /**
          * @var non-empty-lowercase-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $hash,
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $name,
     ) {}
 }

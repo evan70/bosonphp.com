@@ -13,12 +13,12 @@ final readonly class GetExternalDocumentByNameQuery
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $version,
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $path,
         public QueryId $id = new QueryId(),
     ) {}

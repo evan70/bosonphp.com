@@ -23,12 +23,12 @@ final readonly class UpdatePagesCommand
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $version,
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $category,
         iterable $pages = [],
         public CommandId $id = new CommandId(),

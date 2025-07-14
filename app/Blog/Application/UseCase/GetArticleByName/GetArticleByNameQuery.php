@@ -18,7 +18,7 @@ final readonly class GetArticleByNameQuery
         /**
          * The unique URI slug of the article to retrieve.
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         #[Regex('/^' . Requirement::ASCII_SLUG . '$/')]
         public string $uri,
         public QueryId $id = new QueryId(),

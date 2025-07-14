@@ -23,7 +23,7 @@ final readonly class UpdateCategoriesCommand
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $version,
         iterable $categories = [],
         public CommandId $id = new CommandId(),

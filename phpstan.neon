@@ -32,7 +32,7 @@ parameters:
     # Do not report DbC invariants and preconditions
     - identifier: function.alreadyNarrowedType
     - identifier: instanceof.alwaysTrue
-    # - identifier: smaller.alwaysFalse
+    - identifier: smaller.alwaysFalse
     # - identifier: greater.alwaysFalse
     # - identifier: booleanOr.alwaysFalse
   excludePaths:

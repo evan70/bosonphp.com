@@ -13,12 +13,12 @@ final readonly class SyncPagesCommand
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $version,
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $category,
         public CommandId $id = new CommandId(),
     ) {}

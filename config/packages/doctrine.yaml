@@ -29,6 +29,7 @@ doctrine:
         use_savepoints: true
         mapping_types:
           app_domain_documentation_version_status: string
+          tsvector: tsvector
 
     types:
       # Account
@@ -45,6 +46,7 @@ doctrine:
       App\Documentation\Domain\Version\Status: App\Documentation\Infrastructure\Persistence\Doctrine\Type\VersionStatusType
       # Shared
       string[]: App\Shared\Infrastructure\Persistence\Doctrine\Type\StringArrayType
+      tsvector: App\Shared\Infrastructure\Persistence\Doctrine\Type\TsVectorType
 
   orm:
     dql:

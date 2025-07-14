@@ -12,22 +12,22 @@ final readonly class CategoryIndex
         /**
          * @var non-empty-lowercase-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $hash,
         /**
          * @var non-empty-string
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: false)]
         public string $name,
         /**
          * @var non-empty-string|null
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: true)]
         public ?string $description = null,
         /**
          * @var non-empty-string|null
          */
-        #[NotBlank]
+        #[NotBlank(allowNull: true)]
         public ?string $icon = null,
     ) {}
 }

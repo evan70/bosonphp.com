@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Blog\Presentation\Web\Controller;
 
-use App\Blog\Application\UseCase\GetArticlesList\Exception\InvalidPageException;
 use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListOutput;
 use App\Blog\Application\UseCase\GetArticlesList\GetArticlesListQuery;
 use App\Blog\Application\UseCase\GetCategoriesList\GetCategoriesListOutput;
@@ -14,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Messenger\Exception\ValidationFailedException;
 use Symfony\Component\Routing\Attribute\Route;
 
 /**
@@ -39,8 +39,8 @@ final class IndexController extends AbstractController
 
             /** @var GetCategoriesListOutput $categoriesResult */
             $categoriesResult = $this->queries->get(new GetCategoriesListQuery());
-        } catch (InvalidPageException) {
-            throw new BadRequestHttpException('Articles page contain invalid value');
+        } catch (ValidationFailedException $e) {
+            throw new BadRequestHttpException('Articles page contain invalid value', previous: $e);
         }
 
         return $this->render('page/blog/index.html.twig', [
