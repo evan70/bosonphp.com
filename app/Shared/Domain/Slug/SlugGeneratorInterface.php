@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\Content;
+namespace App\Shared\Domain\Slug;
 
 /**
  * @template T  of object

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Content;
+namespace App\Shared\Infrastructure\Slug;
 
-use App\Shared\Domain\Content\SlugGeneratorInterface;
+use App\Shared\Domain\Slug\SlugGeneratorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Infrastructure\Content;
+namespace App\Blog\Infrastructure\Slug;
 
 use App\Blog\Domain\Category\Category;
 use App\Blog\Domain\Category\CategorySlugGeneratorInterface;
-use App\Shared\Infrastructure\Content\SlugGenerator;
+use App\Shared\Infrastructure\Slug\SlugGenerator;
 
 /**
  * @api
  *
  * @internal this is an internal library class, please do not use it in your code
- * @psalm-internal App\Blog\Infrastructure\Content
+ * @psalm-internal App\Blog\Infrastructure\Slug
  *
  * @template-extends SlugGenerator<Category>
  */

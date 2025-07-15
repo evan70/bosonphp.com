@@ -20,11 +20,13 @@ final readonly class PageDocumentContentRenderer implements PageDocumentContentR
         private ConverterInterface $converter,
     ) {}
 
-    public function renderContent(object $entity): string
+    public function renderContent(object $entity): RenderingPageDocumentContentResult
     {
         assert($entity instanceof PageDocumentContent);
 
-        return $this->converter->convert($entity->value)
-            ->getContent();
+        return new RenderingPageDocumentContentResult(
+            content: $this->converter->convert($entity->value)
+                ->getContent(),
+        );
     }
 }

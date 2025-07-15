@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Blog\Domain;
 
-use App\Shared\Domain\Content\ContentRendererInterface;
+use App\Shared\Domain\Renderer\ContentRendererInterface;
 
 /**
  * Defines contract for content renderers in the {@see ArticleContent} VO.
