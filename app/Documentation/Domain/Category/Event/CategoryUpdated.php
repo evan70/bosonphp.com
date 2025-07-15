@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateCategories\Event;
+namespace App\Documentation\Domain\Category\Event;
 
 final readonly class CategoryUpdated extends
     UpdateCategoryEvent {}

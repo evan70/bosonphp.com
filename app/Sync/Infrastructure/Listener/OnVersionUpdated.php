@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Sync\Infrastructure\Listener;
 
-use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionUpdated;
+use App\Documentation\Domain\Version\Event\VersionUpdated;
 use App\Shared\Domain\Bus\CommandBusInterface;
 use App\Shared\Domain\Bus\CommandId;
 use App\Sync\Application\UseCase\SyncCategories\SyncCategoriesCommand;

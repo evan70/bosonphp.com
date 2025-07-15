@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateVersions;
 
-use App\Documentation\Application\UseCase\UpdateVersions\Event\UpdateVersionEvent;
-use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionCreated;
-use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionDisabled;
-use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionEnabled;
-use App\Documentation\Application\UseCase\UpdateVersions\Event\VersionUpdated;
+use App\Documentation\Domain\Version\Event\VersionEvent;
+use App\Documentation\Domain\Version\Event\VersionCreated;
+use App\Documentation\Domain\Version\Event\VersionDisabled;
+use App\Documentation\Domain\Version\Event\VersionEnabled;
+use App\Documentation\Domain\Version\Event\VersionUpdated;
 use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
 use App\Documentation\Domain\Version\Version;
@@ -68,7 +68,7 @@ final readonly class UpdateVersionsUseCase
     }
 
     /**
-     * @return iterable<array-key, UpdateVersionEvent>
+     * @return iterable<array-key, VersionEvent>
      */
     private function process(UpdateVersionsCommand $command): iterable
     {
@@ -96,6 +96,7 @@ final readonly class UpdateVersionsUseCase
                 }
 
                 $this->em->persist($databaseVersion);
+
                 yield new VersionUpdated(
                     name: $databaseVersion->name,
                     id: EventId::createFrom($command->id),

@@ -2,17 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Application\UseCase\UpdateCategories\Event;
+namespace App\Documentation\Domain\Version\Event;
 
 use App\Shared\Domain\Bus\EventId;
 
-abstract readonly class UpdateCategoryEvent
+abstract readonly class VersionEvent
 {
     public function __construct(
-        /**
-         * @var non-empty-string
-         */
-        public string $version,
         /**
          * @var non-empty-string
          */
