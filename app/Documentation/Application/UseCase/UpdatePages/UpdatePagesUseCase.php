@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdatePages;
 
-use App\Documentation\Application\UseCase\UpdatePages\Event\PageCreated;
-use App\Documentation\Application\UseCase\UpdatePages\Event\PageRemoved;
-use App\Documentation\Application\UseCase\UpdatePages\Event\PageUpdated;
-use App\Documentation\Application\UseCase\UpdatePages\Event\UpdatePageEvent;
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\Event\PageDocumentEvent;
+use App\Documentation\Domain\Event\PageDocumentRemoved;
+use App\Documentation\Domain\Event\PageDocumentUpdated;
 use App\Documentation\Domain\Page;
 use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageDocumentContentRendererInterface;
@@ -99,7 +98,7 @@ final readonly class UpdatePagesUseCase
     }
 
     /**
-     * @return iterable<array-key, UpdatePageEvent>
+     * @return iterable<array-key, PageDocumentEvent>
      */
     public function process(UpdatePagesCommand $command): iterable
     {
@@ -134,11 +133,11 @@ final readonly class UpdatePagesUseCase
                     hash: $commandPage->hash,
                 ));
 
-                yield new PageCreated(
+                yield new PageDocumentUpdated(
                     version: $command->version,
                     category: $command->category,
-                    name: $commandPage->name,
                     title: $title,
+                    uri: $commandPage->name,
                     content: $content,
                     id: EventId::createFrom($command->id),
                 );
@@ -167,11 +166,11 @@ final readonly class UpdatePagesUseCase
 
             $this->em->persist($databasePage);
 
-            yield new PageUpdated(
+            yield new PageDocumentRemoved(
                 version: $command->version,
                 category: $command->category,
-                name: $commandPage->name,
                 title: $databasePage->title,
+                uri: $commandPage->name,
                 content: $databasePage->content->value,
                 id: EventId::createFrom($command->id),
             );
@@ -192,11 +191,11 @@ final readonly class UpdatePagesUseCase
                 continue;
             }
 
-            yield new PageRemoved(
+            yield new PageDocumentRemoved(
                 version: $command->version,
                 category: $command->category,
-                name: $databasePage->uri,
                 title: $databasePage->title,
+                uri: $databasePage->uri,
                 content: $databasePage->content->value,
                 id: EventId::createFrom($command->id),
             );
