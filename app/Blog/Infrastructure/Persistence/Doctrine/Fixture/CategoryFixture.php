@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Blog\Infrastructure\Persistence\Doctrine\Fixture;
 
 use App\Blog\Domain\Category\Category;
-use App\Blog\Domain\Category\CategorySlugGeneratorInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -29,16 +28,11 @@ final class CategoryFixture extends Fixture
         'Frameworks',
     ];
 
-    public function __construct(
-        private readonly CategorySlugGeneratorInterface $slugGenerator,
-    ) {}
-
     public function load(ObjectManager $manager): void
     {
         foreach (self::CATEGORIES as $i => $title) {
             $category = new Category(
                 title: $title,
-                slugGenerator: $this->slugGenerator,
                 order: $i,
             );
 

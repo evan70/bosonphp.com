@@ -5,7 +5,7 @@ services:
     autoconfigure: true
 
   App\Blog\Domain\ArticleSlugGeneratorInterface:
-    class: App\Blog\Infrastructure\Slug\ArticleSlugGenerator
+    class: App\Blog\Infrastructure\Slug\ArticleByTitleSlugGenerator
 
   App\Blog\Domain\Category\CategorySlugGeneratorInterface:
-    class: App\Blog\Infrastructure\Slug\CategorySlugGenerator
+    class: App\Blog\Infrastructure\Slug\CategoryByTitleSlugGenerator

@@ -16,10 +16,10 @@ use App\Shared\Infrastructure\Slug\SlugGenerator;
  *
  * @template-extends SlugGenerator<Article>
  */
-final readonly class ArticleSlugGenerator extends SlugGenerator implements
+final readonly class ArticleByTitleSlugGenerator extends SlugGenerator implements
     ArticleSlugGeneratorInterface
 {
-    public function createSlug(object $entity): string
+    public function generateSlug(object $entity): string
     {
         assert($entity instanceof Article);
 

@@ -44,7 +44,6 @@ class Category implements
             assert($title !== '', 'Category title cannot be empty');
 
             $this->title = $title;
-            $this->uri = $this->slugGenerator->createSlug($this);
         }
     }
 
@@ -52,7 +51,7 @@ class Category implements
      * @var non-empty-string
      */
     #[ORM\Column(name: 'uri', type: 'string')]
-    public private(set) string $uri;
+    public private(set) string $uri = 'about:blank';
 
     /**
      * @var int<-32768, 32767>
@@ -75,7 +74,6 @@ class Category implements
      */
     public function __construct(
         string|\Stringable $title,
-        private readonly CategorySlugGeneratorInterface $slugGenerator,
         int $order = 0,
         ?CategoryId $id = null,
     ) {
@@ -83,5 +81,10 @@ class Category implements
         $this->articles = new CategoryArticleSet($this);
         $this->order = $order;
         $this->id = $id ?? CategoryId::new();
+    }
+
+    public function updateUri(CategorySlugGeneratorInterface $generator): void
+    {
+        $this->uri = $generator->generateSlug($this);
     }
 }

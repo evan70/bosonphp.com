@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Blog\Domain;
+namespace App\Blog\Domain\Content;
 
 use App\Shared\Domain\ValueObject\StringValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,20 +27,23 @@ final class ArticleContent implements StringValueObjectInterface
         get => $this->value;
         set(string|\Stringable $value) {
             $this->value = (string) $value;
-            $this->rendered = (string) $this->contentRenderer->renderContent($this);
+            $this->rendered = '';
         }
     }
 
-    public function __construct(
-        string|\Stringable $value,
-        private readonly ArticleContentRendererInterface $contentRenderer,
-    ) {
+    public function __construct(string|\Stringable $value)
+    {
         $this->value = $value;
     }
 
-    public static function empty(ArticleContentRendererInterface $contentRenderer): self
+    public function render(ArticleContentRendererInterface $renderer): void
     {
-        return new self('', $contentRenderer);
+        $this->rendered = $renderer->renderContent($this);
+    }
+
+    public static function empty(): self
+    {
+        return new self('');
     }
 
     public function toString(): string

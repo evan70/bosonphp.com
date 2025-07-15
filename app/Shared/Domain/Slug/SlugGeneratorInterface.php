@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Shared\Domain\Slug;
 
 /**
- * @template T  of object
+ * @template T of object
  */
 interface SlugGeneratorInterface
 {
@@ -14,5 +14,5 @@ interface SlugGeneratorInterface
      *
      * @return non-empty-lowercase-string
      */
-    public function createSlug(object $entity): string;
+    public function generateSlug(object $entity): string;
 }

@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Blog\Domain;
 
 use App\Blog\Domain\Category\Category;
+use App\Blog\Domain\Content\ArticleContent;
 use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\String\TruncateMode;
-use Symfony\Component\String\UnicodeString;
 
 /**
  * @final impossible to specify "final" attribute natively due
@@ -45,7 +44,6 @@ class Article implements
             assert($title !== '', 'Article title cannot be empty');
 
             $this->title = $title;
-            $this->uri = $this->slugGenerator->createSlug($this);
         }
     }
 
@@ -53,7 +51,7 @@ class Article implements
      * @var non-empty-string
      */
     #[ORM\Column(name: 'uri', type: 'string')]
-    public private(set) string $uri;
+    public private(set) string $uri = 'about:blank';
 
     #[ORM\Embedded(class: ArticleContent::class, columnPrefix: 'content_')]
     public ArticleContent $content {
@@ -96,25 +94,19 @@ class Article implements
     public function __construct(
         Category $category,
         string|\Stringable $title,
-        private readonly ArticleSlugGeneratorInterface $slugGenerator,
         string|\Stringable $content,
-        ArticleContentRendererInterface $contentRenderer,
         string|\Stringable|null $preview = null,
         ?ArticleId $id = null,
     ) {
         $this->category = $category;
         $this->title = $title;
-
-        $this->content = new ArticleContent(
-            value: $content,
-            contentRenderer: $contentRenderer,
-        );
-
-        $this->preview = (string) ($preview ?? new UnicodeString(
-            string: \strip_tags($this->content->rendered),
-        )
-            ->truncate(200, cut: TruncateMode::WordAfter));
-
+        $this->content = new ArticleContent($content);
+        $this->preview = (string) $preview;
         $this->id = $id ?? ArticleId::new();
+    }
+
+    public function updateUri(ArticleSlugGeneratorInterface $generator): void
+    {
+        $this->uri = $generator->generateSlug($this);
     }
 }

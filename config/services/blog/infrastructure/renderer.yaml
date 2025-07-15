@@ -1,8 +1,0 @@
-
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-
-  App\Blog\Domain\ArticleContentRendererInterface:
-    class: App\Blog\Infrastructure\Renderer\ArticleContentRenderer

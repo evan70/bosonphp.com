@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Blog\Infrastructure\Persistence\Doctrine\Fixture;
 
 use App\Blog\Domain\Article;
-use App\Blog\Domain\ArticleContentRendererInterface;
-use App\Blog\Domain\ArticleSlugGeneratorInterface;
 use App\Blog\Domain\Category\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -53,8 +51,6 @@ final class ArticleFixture extends Fixture implements DependentFixtureInterface
     ];
 
     public function __construct(
-        private readonly ArticleContentRendererInterface $contentRenderer,
-        private readonly ArticleSlugGeneratorInterface $slugGenerator,
         private readonly Generator $faker,
     ) {}
 
@@ -72,7 +68,6 @@ final class ArticleFixture extends Fixture implements DependentFixtureInterface
                     category: $category,
                     title: $this->faker->randomElement(self::TITLES)
                         . ' of ' . $category->title . ' ' . $i,
-                    slugGenerator: $this->slugGenerator,
                     content: $this->faker->randomElement([
                         \file_get_contents(__DIR__ . '/ArticleFixture/article_fixture.01.md'),
                         \file_get_contents(__DIR__ . '/ArticleFixture/article_fixture.02.md'),
@@ -81,7 +76,6 @@ final class ArticleFixture extends Fixture implements DependentFixtureInterface
                             $this->faker->numberBetween(5, 50),
                         ),
                     ]),
-                    contentRenderer: $this->contentRenderer,
                 ));
             }
 
