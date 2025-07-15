@@ -6,11 +6,11 @@ namespace App\Account\Domain;
 
 use App\Account\Domain\Integration\Integration;
 use App\Account\Domain\Password\EncryptedPassword;
+use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
-use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'accounts')]
 #[ORM\UniqueConstraint(name: 'login_unique', columns: ['login'])]
 class Account implements
-    IdentifiableInterface,
+    AggregateRootInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
 {

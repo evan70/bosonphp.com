@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Documentation\Domain\Version;
 
 use App\Documentation\Domain\Category\Category;
+use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
-use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'doc_page_versions')]
 #[ORM\UniqueConstraint(name: 'doc_page_versions_unique_idx', columns: ['name'])]
 class Version implements
-    IdentifiableInterface,
+    AggregateRootInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
 {

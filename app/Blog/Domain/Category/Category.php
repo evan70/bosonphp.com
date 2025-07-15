@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Blog\Domain\Category;
 
 use App\Blog\Domain\Article;
+use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
-use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'blog_article_categories_sorting_order_idx', columns: ['sorting_order'])]
 #[ORM\UniqueConstraint(name: 'blog_article_categories_uri_unique', columns: ['uri'])]
 class Category implements
-    IdentifiableInterface,
+    AggregateRootInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
 {

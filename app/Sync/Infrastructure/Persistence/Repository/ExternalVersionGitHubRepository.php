@@ -6,6 +6,7 @@ namespace App\Sync\Infrastructure\Persistence\Repository;
 
 use App\Sync\Domain\Category\Repository\ExternalCategoriesListProviderInterface;
 use App\Sync\Domain\Version\ExternalVersion;
+use App\Sync\Domain\Version\ExternalVersionId;
 use App\Sync\Domain\Version\ExternalVersionRepositoryInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\ReadableCollection;
@@ -54,6 +55,11 @@ final readonly class ExternalVersionGitHubRepository extends GitHubRepository im
             $name = $item['name'];
 
             $instance = $reflection->newInstanceWithoutConstructor();
+
+            $reflection->getProperty('id')
+                ->setRawValue($instance, ExternalVersionId::createFromName(
+                    version: $name,
+                ));
 
             $reflection->getProperty('hash')
                 ->setRawValue($instance, $hash);

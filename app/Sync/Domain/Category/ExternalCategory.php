@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Sync\Domain\Category;
 
+use App\Shared\Domain\AggregateRootInterface;
 use App\Sync\Domain\ExternalDocument;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\ReadableCollection;
 
-final readonly class ExternalCategory
+final readonly class ExternalCategory implements AggregateRootInterface
 {
     /**
      * @var ReadableCollection<array-key, ExternalDocument>
@@ -16,6 +17,7 @@ final readonly class ExternalCategory
     public ReadableCollection $pages;
 
     public function __construct(
+        public ExternalCategoryId $id,
         /**
          * @var non-empty-lowercase-string
          */

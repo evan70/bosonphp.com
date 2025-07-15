@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Sync\Domain;
 
-final class ExternalDocument
+use App\Shared\Domain\AggregateRootInterface;
+
+final class ExternalDocument implements AggregateRootInterface
 {
     public function __construct(
+        public ExternalDocumentId $id,
         /**
          * @var non-empty-lowercase-string
          */

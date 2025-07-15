@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Sync\Infrastructure\Persistence\Repository;
 
 use App\Sync\Domain\ExternalDocument;
+use App\Sync\Domain\ExternalDocumentId;
 use App\Sync\Domain\ExternalDocumentRepositoryInterface;
 use App\Sync\Domain\Version\ExternalVersion;
 use App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository\LazyInitializedExternalDocumentContent;
@@ -66,6 +67,7 @@ final readonly class ExternalDocumentGitHubRepository extends GitHubRepository i
             }
 
             yield new ExternalDocument(
+                id: ExternalDocumentId::createFromVersionAndPath($version, $item['path']),
                 hash: $item['sha'],
                 name: $item['path'],
                 content: new LazyInitializedExternalDocumentContent(
@@ -97,6 +99,7 @@ final readonly class ExternalDocumentGitHubRepository extends GitHubRepository i
         }
 
         return new ExternalDocument(
+            id: ExternalDocumentId::createFromVersionAndPath($version, $response['path']),
             hash: $response['sha'],
             name: $response['path'],
             content: self::decodeContent($response),

@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Account\Domain\Integration;
 
 use App\Account\Domain\Account;
+use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
-use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity]
 #[ORM\Table(name: 'account_integrations')]
 class Integration implements
-    IdentifiableInterface,
+    AggregateRootInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
 {

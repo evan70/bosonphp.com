@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Blog\Domain;
 
 use App\Blog\Domain\Category\Category;
+use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
-use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\String\TruncateMode;
 use Symfony\Component\String\UnicodeString;
@@ -22,7 +22,7 @@ use Symfony\Component\String\UnicodeString;
 #[ORM\Table(name: 'blog_articles')]
 #[ORM\UniqueConstraint(name: 'blog_article_uri_unique', columns: ['uri'])]
 class Article implements
-    IdentifiableInterface,
+    AggregateRootInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
 {

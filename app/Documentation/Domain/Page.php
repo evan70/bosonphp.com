@@ -6,11 +6,11 @@ namespace App\Documentation\Domain;
 
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Version\Version;
+use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
-use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Index(name: 'doc_pages_uri_idx', columns: ['uri'])]
 #[ORM\UniqueConstraint(name: 'doc_pages_uri_unique', columns: ['uri', 'category_id'])]
 abstract class Page implements
-    IdentifiableInterface,
+    AggregateRootInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
 {

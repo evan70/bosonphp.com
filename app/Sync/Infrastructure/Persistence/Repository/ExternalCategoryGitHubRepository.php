@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Sync\Infrastructure\Persistence\Repository;
 
 use App\Sync\Domain\Category\ExternalCategory;
+use App\Sync\Domain\Category\ExternalCategoryId;
 use App\Sync\Domain\Category\ExternalCategoryRepositoryInterface;
 use App\Sync\Domain\ExternalDocument;
 use App\Sync\Domain\Repository\ExternalDocumentByNameProviderInterface;
@@ -83,6 +84,12 @@ final readonly class ExternalCategoryGitHubRepository implements
             }
 
             $instance = $reflection->newInstanceWithoutConstructor();
+
+            $reflection->getProperty('id')
+                ->setRawValue($instance, ExternalCategoryId::createFromVersionAndName(
+                    version: $version,
+                    name: $category['title'],
+                ));
 
             $reflection->getProperty('hash')
                 ->setRawValue($instance, $page->hash);

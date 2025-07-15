@@ -27,7 +27,7 @@ final class ArticleContent implements StringValueObjectInterface
         get => $this->value;
         set(string|\Stringable $value) {
             $this->value = (string) $value;
-            $this->rendered = $this->contentRenderer->renderContent($this);
+            $this->rendered = (string) $this->contentRenderer->renderContent($this);
         }
     }
 

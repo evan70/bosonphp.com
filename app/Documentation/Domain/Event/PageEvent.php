@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Search\Domain;
+namespace App\Documentation\Domain\Event;
 
-use App\Shared\Domain\AggregateRootInterface;
+use App\Shared\Domain\Bus\EventId;
 
-final readonly class SearchResult implements AggregateRootInterface
+abstract readonly class PageEvent
 {
     public function __construct(
-        public SearchResultId $id,
         /**
          * @var non-empty-string
          */
@@ -18,7 +17,6 @@ final readonly class SearchResult implements AggregateRootInterface
          * @var non-empty-string
          */
         public string $uri,
-        public string $content,
-        public float $rank,
+        public EventId $id = new EventId(),
     ) {}
 }

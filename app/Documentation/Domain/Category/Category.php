@@ -7,18 +7,18 @@ namespace App\Documentation\Domain\Category;
 use App\Documentation\Domain\Page;
 use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\Version\Version;
+use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
 use App\Shared\Domain\Date\CreatedDateProviderInterface;
 use App\Shared\Domain\Date\UpdatedDateProvider;
 use App\Shared\Domain\Date\UpdatedDateProviderInterface;
-use App\Shared\Domain\Id\IdentifiableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'doc_page_categories')]
 #[ORM\Index(name: 'doc_page_categories_sorting_order_idx', columns: ['sorting_order'])]
 class Category implements
-    IdentifiableInterface,
+    AggregateRootInterface,
     CreatedDateProviderInterface,
     UpdatedDateProviderInterface
 {
