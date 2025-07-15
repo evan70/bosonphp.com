@@ -6,7 +6,7 @@
 
 {% block body %}
 
-    <h1>Documentation</h1>
+    <h1>{{ category.title }}</h1>
 
     <nav>
         <ul>
@@ -60,6 +60,23 @@
                     {% endif %}
                 </li>
             {% endfor %}
+            </ul>
+            <h4>Other Categories</h4>
+            <ul style="padding-inline-start: 0">
+                {% for nav_category in version.categories %}
+                    <li style="white-space: nowrap">
+                        <a href="{{ path('doc.show', {
+                            page: nav_category.page.uri,
+                            version: version.name
+                        }) }}">
+                            {% if nav_category.icon is not null %}
+                                <img src="{{ nav_category.icon }}"
+                                     width="16" height="16" />
+                            {% endif %}
+                            {{ nav_category.title }}
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
         </aside>
         <section>
