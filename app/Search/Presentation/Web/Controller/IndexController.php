@@ -32,7 +32,7 @@ final class IndexController extends AbstractController
         try {
             /** @var GetDocumentationSearchResultsOutput $result */
             $result = $this->queries->get(new GetDocumentationSearchResultsQuery(
-                query: $request->query->get('q'),
+                query: $request->query->get('q', ''),
             ));
         } catch (ValidationFailedException $e) {
             throw new BadRequestHttpException('Invalid query arguments', previous: $e);
