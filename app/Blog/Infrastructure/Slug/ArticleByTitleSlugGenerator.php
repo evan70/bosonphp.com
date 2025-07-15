@@ -19,10 +19,10 @@ use App\Shared\Infrastructure\Slug\SlugGenerator;
 final readonly class ArticleByTitleSlugGenerator extends SlugGenerator implements
     ArticleSlugGeneratorInterface
 {
-    public function generateSlug(object $entity): string
+    public function generateSlug(object $target): string
     {
-        assert($entity instanceof Article);
+        assert($target instanceof Article);
 
-        return $this->createSlugByString($entity->title);
+        return $this->createSlugByString($target->title);
     }
 }

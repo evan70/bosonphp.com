@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Slug;
 
-use App\Shared\Domain\Slug\SlugGeneratorInterface;
+use App\Shared\Domain\SlugGeneratorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**

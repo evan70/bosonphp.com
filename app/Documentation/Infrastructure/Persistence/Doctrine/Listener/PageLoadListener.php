@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Listener;
 
+use App\Documentation\Domain\Content\PageDocumentContent;
+use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\Page;
 use App\Documentation\Domain\PageDocument;
-use App\Documentation\Domain\PageDocumentContent;
-use App\Documentation\Domain\PageDocumentContentRendererInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Events;
 

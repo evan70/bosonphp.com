@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Documentation\Domain;
 
 use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\Content\PageDocumentContent;
+use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

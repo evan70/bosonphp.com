@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Domain;
+namespace App\Documentation\Domain\Content;
 
 use App\Shared\Domain\ValueObject\StringValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +27,7 @@ final class PageDocumentContent implements StringValueObjectInterface
         get => $this->value;
         set(string|\Stringable $value) {
             $this->value = (string) $value;
-            $this->rendered = (string) $this->contentRenderer->renderContent($this);
+            $this->rendered = $this->contentRenderer->renderContent($this);
         }
     }
 

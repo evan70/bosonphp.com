@@ -1,0 +1,13 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Documentation\Domain\PageTitleExtractorInterface:
+    class: App\Documentation\Infrastructure\PageTitleExtractor\UriTitleExtractor
+
+  App\Documentation\Infrastructure\PageTitleExtractor\MarkdownTitleExtractor:
+    decorates: App\Documentation\Domain\PageTitleExtractorInterface
+    arguments:
+      $delegate: '@.inner'

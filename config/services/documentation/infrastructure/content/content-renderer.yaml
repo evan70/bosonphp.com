@@ -1,0 +1,8 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Documentation\Domain\Content\PageDocumentContentRendererInterface:
+    class: App\Documentation\Infrastructure\Content\ContentRenderer\MarkdownPageDocumentContentRenderer

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Fixture;
 
 use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\PageDocument;
-use App\Documentation\Domain\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\PageLink;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

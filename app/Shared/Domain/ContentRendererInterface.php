@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Domain\Renderer;
+namespace App\Shared\Domain;
 
 /**
  * Defines contract for content renderers.
@@ -14,9 +14,9 @@ interface ContentRendererInterface
     /**
      * Renders the provided entity content string.
      *
-     * @param T $entity
+     * @param T $target
      *
      * @throws \Throwable in case of rendering error occurs
      */
-    public function renderContent(object $entity): RenderingResultInterface;
+    public function renderContent(object $target): string;
 }

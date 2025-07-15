@@ -20,9 +20,11 @@ final readonly class MarkdownArticleContentRenderer implements ArticleContentRen
         private ConverterInterface $converter,
     ) {}
 
-    public function renderContent(ArticleContent $content): string
+    public function renderContent(object $target): string
     {
-        return $this->converter->convert($content->value)
+        assert($target instanceof ArticleContent);
+
+        return $this->converter->convert($target->value)
                 ->getContent();
     }
 }

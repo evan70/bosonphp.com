@@ -6,12 +6,13 @@ namespace App\Documentation\Application\UseCase\UpdatePages;
 
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\Event\PageDocumentEvent;
 use App\Documentation\Domain\Event\PageDocumentRemoved;
 use App\Documentation\Domain\Event\PageDocumentUpdated;
 use App\Documentation\Domain\Page;
 use App\Documentation\Domain\PageDocument;
-use App\Documentation\Domain\PageDocumentContentRendererInterface;
+use App\Documentation\Domain\PageTitleExtractorInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Shared\Domain\Bus\EventBusInterface;
 use App\Shared\Domain\Bus\EventId;
@@ -29,6 +30,7 @@ final readonly class UpdatePagesUseCase
     public function __construct(
         private VersionByNameProviderInterface $versionByNameProvider,
         private PageDocumentContentRendererInterface $contentRenderer,
+        private PageTitleExtractorInterface $titleExtractor,
         private EntityManagerInterface $em,
         private QueryBusInterface $queries,
         private EventBusInterface $events,
@@ -120,25 +122,26 @@ final readonly class UpdatePagesUseCase
 
             // In case of category is not in database
             if ($databasePage === null) {
-                $content = $this->getContent($command, $commandPage->name);
-                $title = $this->getTitle($content, $commandPage->name);
-
-                $this->em->persist(new PageDocument(
+                $page = new PageDocument(
                     category: $category,
-                    title: $title,
+                    title: $commandPageUri,
                     uri: $commandPageUri,
-                    content: $content,
+                    content: $this->getContent($command, $commandPage->name),
                     contentRenderer: $this->contentRenderer,
                     order: $order,
                     hash: $commandPage->hash,
-                ));
+                );
+
+                $page->title = $this->titleExtractor->extractTitle($page);
+
+                $this->em->persist($page);
 
                 yield new PageDocumentUpdated(
                     version: $command->version,
                     category: $command->category,
-                    title: $title,
-                    uri: $commandPage->name,
-                    content: $content,
+                    title: $page->title,
+                    uri: $page->uri,
+                    content: $page->content->value,
                     id: EventId::createFrom($command->id),
                 );
 
@@ -157,12 +160,7 @@ final readonly class UpdatePagesUseCase
 
             $databasePage->order = $order;
             $databasePage->hash = $commandPage->hash;
-
-            $content = $this->getContent($command, $commandPage->name);
-            $title = $this->getTitle($content, $commandPage->name);
-
-            $databasePage->title = $title;
-            $databasePage->content = $content;
+            $databasePage->content = $this->getContent($command, $commandPage->name);
 
             $this->em->persist($databasePage);
 
@@ -202,21 +200,6 @@ final readonly class UpdatePagesUseCase
         }
 
         $this->em->flush();
-    }
-
-    /**
-     * @param non-empty-string $path
-     *
-     * @return non-empty-string
-     */
-    private function getTitle(string $content, string $path): string
-    {
-        \preg_match('/^#+\h+(.+?)$/ium', $content, $matches);
-
-        /** @var non-empty-string */
-        return $matches[1] ?? new UnicodeString(\pathinfo($path, \PATHINFO_FILENAME))
-            ->replaceMatches('/\W/', ' ')
-            ->toString();
     }
 
     /**

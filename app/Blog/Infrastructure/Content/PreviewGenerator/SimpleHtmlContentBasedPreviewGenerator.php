@@ -9,11 +9,14 @@ use App\Blog\Domain\Content\ArticlePreviewGeneratorInterface;
 use Symfony\Component\String\TruncateMode;
 use Symfony\Component\String\UnicodeString;
 
-final readonly class SimpleHtmlContentBasedPreviewGenerator implements ArticlePreviewGeneratorInterface
+final readonly class SimpleHtmlContentBasedPreviewGenerator implements
+    ArticlePreviewGeneratorInterface
 {
-    public function generatePreview(ArticleContent $content): string
+    public function generatePreview(object $target): string
     {
-        return new UnicodeString(\strip_tags($content->rendered))
+        assert($target instanceof ArticleContent);
+
+        return new UnicodeString(\strip_tags($target->rendered))
             ->truncate(200, cut: TruncateMode::WordAfter)
             ->toString();
     }

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Relations;
 
 use App\Documentation\Domain\Category\Category;
+use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\PageDocument;
-use App\Documentation\Domain\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\Version\Version;
 
 final class CategoryToPagesTest extends RelationsTestCase
