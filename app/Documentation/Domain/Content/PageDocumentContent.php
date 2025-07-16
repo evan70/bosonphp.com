@@ -38,6 +38,11 @@ final class PageDocumentContent implements StringValueObjectInterface
         $this->value = $value;
     }
 
+    public function render(PageDocumentContentRendererInterface $renderer): void
+    {
+        $this->rendered = $renderer->renderContent($this);
+    }
+
     public static function empty(PageDocumentContentRendererInterface $contentRenderer): self
     {
         return new self('', $contentRenderer);

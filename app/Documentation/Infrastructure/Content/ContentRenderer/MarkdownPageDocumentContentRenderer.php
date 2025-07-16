@@ -25,7 +25,10 @@ final readonly class MarkdownPageDocumentContentRenderer implements
     {
         assert($target instanceof PageDocumentContent);
 
-        return $this->converter->convert($target->value)
-                ->getContent();
+        $result = $this->converter->convert($target->value);
+
+        $document = $result->getDocument();
+
+        return $result->getContent();
     }
 }

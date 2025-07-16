@@ -4,5 +4,40 @@ services:
     autowire: true
     autoconfigure: true
 
+  App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\:
+    resource: '%kernel.project_dir%/app/Documentation/Infrastructure/Content/ContentRenderer/Markdown'
+
+  App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\NormalizeInternalLinksProcessor:
+    arguments:
+      $parser: '@psr18.http_client'
+
+  League\CommonMark\Extension\GithubFlavoredMarkdownExtension: ~
+  League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension: ~
+  League\CommonMark\Extension\ExternalLink\ExternalLinkExtension: ~
+  League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension: ~
+
+  League\CommonMark\Environment\EnvironmentInterface:
+    class: League\CommonMark\Environment\Environment
+    arguments:
+      $config:
+        external_link:
+          open_in_new_window: true
+          html_class: 'external-link'
+          nofollow: ''
+          noopener: 'external'
+          noreferrer: 'external'
+        heading_permalink:
+          max_heading_level: 3
+
+    calls:
+      - ['addExtension', ['@League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension']]
+      - ['addExtension', ['@League\CommonMark\Extension\GithubFlavoredMarkdownExtension']]
+      - ['addExtension', ['@League\CommonMark\Extension\ExternalLink\ExternalLinkExtension']]
+      - ['addExtension', ['@League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension']]
+      - ['addRenderer', [League\CommonMark\Extension\CommonMark\Node\Block\Heading, '@App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\RemoveH1TitleNodeRenderer']]
+      - ['addEventListener', ['League\CommonMark\Event\DocumentParsedEvent', '@App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\NormalizeInternalLinksProcessor']]
+
   League\CommonMark\ConverterInterface:
-    class: League\CommonMark\CommonMarkConverter
+    class: League\CommonMark\MarkdownConverter
+    arguments:
+      $environment: '@League\CommonMark\Environment\EnvironmentInterface'
