@@ -40,10 +40,10 @@ final readonly class GitHubWebhookValidateUseCase
             return new GitHubWebhookValidateOutput(isValid: false);
         }
 
-        $hash = \hash_hmac('sha256', $query->body, $this->secret, true);
+        $expected = 'sha256=' . \hash_hmac('sha256', $query->body, $this->secret, false);
 
         return new GitHubWebhookValidateOutput(
-            isValid: \hash_equals('sha256=' . $hash, $header),
+            isValid: \hash_equals($expected, $header),
         );
     }
 }
