@@ -1,4 +1,9 @@
 
+parameters:
+  env(GITHUB_WEBHOOK_SECRET): 'webhook_secret_value'
+
+  app.github.webhook.secret: '%env(GITHUB_WEBHOOK_SECRET)%'
+
 services:
   _defaults:
     autowire: true
@@ -17,3 +22,6 @@ services:
   # Uncomment to enable authentication
   # calls:
   #   - ['authenticate', ['%env(GITHUB_USERNAME)%', '%env(GITHUB_SECRET)%', '%env(GITHUB_AUTH_METHOD)%']]
+
+  Compwright\XHubSignature\SignerInterface:
+    class: Compwright\XHubSignature\Sha256

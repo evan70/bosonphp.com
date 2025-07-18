@@ -10,6 +10,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-mbstring": "*",
+        "compwright/x-hub-signature": "^1.0",
         "doctrine/dbal": "^3.10.0",
         "doctrine/doctrine-bundle": "^2.15",
         "doctrine/doctrine-fixtures-bundle": "^4.1",

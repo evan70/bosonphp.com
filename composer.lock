@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26656d07f3ea8102808dd451875b320b",
+    "content-hash": "47cf4d8a0078e2e2d2541cd040b81ab8",
     "packages": [
         {
             "name": "brick/math",
@@ -131,6 +131,54 @@
                 }
             ],
             "time": "2023-12-20T15:40:13+00:00"
+        },
+        {
+            "name": "compwright/x-hub-signature",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/compwright/x-hub-signature-php.git",
+                "reference": "0bc1591afc1df8f326fd52256ac333daf7b83e73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/compwright/x-hub-signature-php/zipball/0bc1591afc1df8f326fd52256ac333daf7b83e73",
+                "reference": "0bc1591afc1df8f326fd52256ac333daf7b83e73",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.46",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^10.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Compwright\\XHubSignature\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathon Hill",
+                    "email": "jonathon@compwright.com"
+                }
+            ],
+            "description": "X-Hub-Signature webhook signing utility for PHP",
+            "support": {
+                "issues": "https://github.com/compwright/x-hub-signature-php/issues",
+                "source": "https://github.com/compwright/x-hub-signature-php/tree/v1.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/compwright",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-10T01:11:37+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

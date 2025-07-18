@@ -7,3 +7,6 @@ services:
   App\Sync\Application\UseCase\:
     resource: '%kernel.project_dir%/app/Sync/Application/UseCase'
 
+  App\Sync\Application\UseCase\GitHubWebhookValidate\GitHubWebhookValidateUseCase:
+    arguments:
+      $secret: '%app.github.webhook.secret%'
