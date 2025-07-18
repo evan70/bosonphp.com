@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Sync\Application\UseCase\GitHubWebhookValidate;
 
-use Compwright\XHubSignature\SignerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler(bus: 'query.bus')]
@@ -15,7 +14,6 @@ final readonly class GitHubWebhookValidateUseCase
          * @var non-empty-string
          */
         private string $secret,
-        private SignerInterface $signer,
     ) {}
 
     /**
@@ -23,7 +21,7 @@ final readonly class GitHubWebhookValidateUseCase
      */
     private function findHeaderValue(GitHubWebhookValidateQuery $query): ?string
     {
-        $values = $query->headers[\strtolower($this->signer->getHeaderName())] ?? [];
+        $values = $query->headers['x-hub-signature-256'] ?? [];
 
         foreach ($values as $value) {
             if (\is_string($value) && $value !== '') {
@@ -42,8 +40,10 @@ final readonly class GitHubWebhookValidateUseCase
             return new GitHubWebhookValidateOutput(isValid: false);
         }
 
+        $hash = \hash_hmac('sha256', $query->body, $this->secret, true);
+
         return new GitHubWebhookValidateOutput(
-            isValid: $this->signer->verify($header, $this->secret, $query->body),
+            isValid: \hash_equals('sha256=' . $hash, $header),
         );
     }
 }
