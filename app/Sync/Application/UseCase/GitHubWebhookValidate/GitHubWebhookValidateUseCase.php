@@ -23,7 +23,7 @@ final readonly class GitHubWebhookValidateUseCase
      */
     private function findHeaderValue(GitHubWebhookValidateQuery $query): ?string
     {
-        $values = $query->headers[$this->signer->getHeaderName()] ?? [];
+        $values = $query->headers[\strtolower($this->signer->getHeaderName())] ?? [];
 
         foreach ($values as $value) {
             if (\is_string($value) && $value !== '') {
