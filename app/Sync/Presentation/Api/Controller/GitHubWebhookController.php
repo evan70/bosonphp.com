@@ -35,7 +35,7 @@ final readonly class GitHubWebhookController
         ));
 
         if ($result->isValid === false) {
-            throw new AccessDeniedHttpException('Access denied: Invalid GitHub webhook signature');
+            throw new AccessDeniedHttpException('Invalid GitHub WebHook Signature');
         }
 
         $this->commands->send(new SyncVersionsCommand());

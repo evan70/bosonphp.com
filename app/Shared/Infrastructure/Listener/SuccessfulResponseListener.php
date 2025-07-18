@@ -10,17 +10,40 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 #[AsEventListener(priority: 64)]
-final class SuccessfulResponseListener
+final readonly class SuccessfulResponseListener extends ResponseListener
 {
-    public function __invoke(ViewEvent $e): void
+    public function __invoke(ViewEvent $event): void
     {
-        $request = $e->getRequest();
-        $payload = $e->getControllerResult();
+        $version = $this->fetchApiVersion($event);
 
-        $e->setControllerResult(match ($request->attributes->get('api')) {
+        if ($version === null) {
+            return;
+        }
+
+        $payload = $event->getControllerResult();
+
+        $response = $this->encode(
+            request: $event->getRequest(),
+            data: $this->process(
+                version: $version,
+                payload: $payload,
+            ),
+        );
+
+        // TODO extend response
+
+        $event->setResponse($response);
+    }
+
+    /**
+     * @param non-empty-string $version
+     */
+    private function process(string $version, mixed $payload): mixed
+    {
+        return match ($version) {
             'v1' => $this->processApiV1($payload),
             default => $payload,
-        });
+        };
     }
 
     private function processApiV1(mixed $payload): ApiResponseDTO

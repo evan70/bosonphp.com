@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Local\Bridge\HttpFactory\DependencyInjection;
 
 use Local\Bridge\HttpFactory\Listener\ControllerRequestDecoderListener;
-use Local\Bridge\HttpFactory\Listener\ControllerResultEncoderListener;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Local\Component\HttpFactory\Driver\JsonDriver;
 use Local\Component\HttpFactory\Driver\MessagePackDriver;
@@ -26,15 +25,6 @@ final class HttpFactoryExtension extends Extension
     {
         $this->registerBuiltinDrivers($container);
         $this->registerFactories($container);
-
-        $container->register(ControllerResultEncoderListener::class, ControllerResultEncoderListener::class)
-            ->setArgument('$factory', new Reference(ResponseEncoderFactoryInterface::class))
-            ->setArgument('$default', new Reference(JsonDriver::class))
-            ->addTag('kernel.event_listener', [
-                'event' => 'kernel.view',
-                'method' => '__invoke',
-                'priority' => -32,
-            ]);
 
         $container->register(ControllerRequestDecoderListener::class, ControllerRequestDecoderListener::class)
             ->setArgument('$factory', new Reference(RequestDecoderFactoryInterface::class))
