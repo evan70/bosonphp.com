@@ -59,14 +59,17 @@ final class VersionDatabaseRepository extends ServiceEntityRepository implements
         return $query->getOneOrNullResult();
     }
 
-    public function getAll(): iterable
+    public function getAll(bool $hidden = false): iterable
     {
-        $query = $this->createQueryBuilder('ver')
-            ->where('ver.status <> :status')
-            ->setParameter('status', Status::Hidden)
-            ->orderBy('ver.name', 'DESC')
-            ->getQuery();
+        $builder = $this->createQueryBuilder('ver')
+            ->orderBy('ver.name', 'DESC');
 
+        if ($hidden === false) {
+            $builder = $builder->where('ver.status <> :status')
+                ->setParameter('status', Status::Hidden);
+        }
+
+        $query = $builder->getQuery();
         $query->setFetchMode(Version::class, 'categories', ClassMetadata::FETCH_LAZY);
 
         /** @var iterable<array-key, Version> */

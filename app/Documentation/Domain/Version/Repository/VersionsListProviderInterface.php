@@ -11,5 +11,5 @@ interface VersionsListProviderInterface
     /**
      * @return iterable<array-key, Version>
      */
-    public function getAll(): iterable;
+    public function getAll(bool $hidden = false): iterable;
 }

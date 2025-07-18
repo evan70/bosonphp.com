@@ -72,7 +72,7 @@ final readonly class UpdateVersionsUseCase
      */
     private function process(UpdateVersionsCommand $command): iterable
     {
-        $databaseVersions = $this->versionsListProvider->getAll();
+        $databaseVersions = $this->versionsListProvider->getAll(hidden: true);
         $commandVersionsByName = $this->getCommandVersionsGroupByName($command->versions);
 
         foreach ($databaseVersions as $databaseVersion) {
