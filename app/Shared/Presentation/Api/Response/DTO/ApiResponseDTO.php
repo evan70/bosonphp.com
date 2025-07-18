@@ -13,7 +13,7 @@ abstract readonly class ApiResponseDTO
      * @param TData|null $data
      */
     public function __construct(
-        public string $version = '1.0',
         public mixed $data = null,
+        public string $version = '1.0',
     ) {}
 }
