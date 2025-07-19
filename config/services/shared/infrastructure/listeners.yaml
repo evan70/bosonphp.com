@@ -6,15 +6,3 @@ services:
 
   App\Shared\Infrastructure\Listener\:
     resource: '%kernel.project_dir%/app/Shared/Infrastructure/Listener'
-
-  App\Shared\Infrastructure\Listener\FailedResponseListener:
-    arguments:
-      $debug: '%kernel.debug%'
-      $factory: '@Local\Component\HttpFactory\ResponseEncoderFactoryInterface'
-      $default: '@Local\Component\HttpFactory\Driver\JsonDriver'
-
-  App\Shared\Infrastructure\Listener\SuccessfulResponseListener:
-    arguments:
-      $debug: '%kernel.debug%'
-      $factory: '@Local\Component\HttpFactory\ResponseEncoderFactoryInterface'
-      $default: '@Local\Component\HttpFactory\Driver\JsonDriver'

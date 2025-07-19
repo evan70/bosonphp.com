@@ -1,0 +1,11 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Shared\Infrastructure\Response\ApiV1Mapper:
+    arguments:
+      $debug: '%kernel.debug%'
+    tags:
+      - phpdoc.response_mapper: { name: 'v1' }

@@ -36,13 +36,13 @@ final class TypeLangExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         // Cache
-        $container->setAlias('type_lang.cache.psr6', 'cache.app');
-        $container->register('type_lang.cache.psr16', Psr16Cache::class)
-            ->setArgument('$pool', new Reference('type_lang.cache.psr6'))
+        $container->setAlias('phpdoc.mapper.cache.psr6', 'cache.app');
+        $container->register('phpdoc.mapper.cache.psr16', Psr16Cache::class)
+            ->setArgument('$pool', new Reference('phpdoc.mapper.cache.psr6'))
         ;
 
         // Expression Language
-        $container->register('type_lang.expression_language', ExpressionLanguage::class)
+        $container->register('phpdoc.mapper.expression_language', ExpressionLanguage::class)
             ->setArgument('$cache', new Reference('cache.app'))
         ;
 
@@ -63,16 +63,16 @@ final class TypeLangExtension extends Extension
 
     private function registerAttributeDriver(ContainerBuilder $container): void
     {
-        $container->register('type_lang.driver.attribute', AttributeDriver::class)
+        $container->register('phpdoc.mapper.driver.attribute', AttributeDriver::class)
             ->setDecoratedService(DriverInterface::class)
             ->setArgument('$delegate', new Reference('.inner'))
-            ->setArgument('$expression', new Reference('type_lang.expression_language'))
+            ->setArgument('$expression', new Reference('phpdoc.mapper.expression_language'))
         ;
     }
 
     private function registerReflectionDriver(ContainerBuilder $container): void
     {
-        $container->register('type_lang.driver.reflection', ReflectionDriver::class)
+        $container->register('phpdoc.mapper.driver.reflection', ReflectionDriver::class)
             ->setDecoratedService(DriverInterface::class)
             ->setArgument('$delegate', new Reference('.inner'))
         ;
@@ -84,9 +84,9 @@ final class TypeLangExtension extends Extension
             return;
         }
 
-        $container->register('type_lang.driver.cached', Psr16CachedDriver::class)
+        $container->register('phpdoc.mapper.driver.cached', Psr16CachedDriver::class)
             ->setDecoratedService(DriverInterface::class)
-            ->setArgument('$cache', new Reference('type_lang.cache.psr16'))
+            ->setArgument('$cache', new Reference('phpdoc.mapper.cache.psr16'))
             ->setArgument('$delegate', new Reference('.inner'))
         ;
     }

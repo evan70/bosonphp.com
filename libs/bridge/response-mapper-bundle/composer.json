@@ -1,0 +1,42 @@
+{
+    "name": "local/response-mapper-bundle",
+    "version": "1.0.0",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "type-lang/mapper": "^0.4",
+        "local/http-factory-component": "^1.0",
+        "symfony/http-kernel": "^6.4|^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Local\\Bridge\\ResponseMapper\\": "src"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Local\\Bridge\\ResponseMapper\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev",
+            "dev-main": "1.0.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "platform-check": true,
+        "bin-compat": "full",
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

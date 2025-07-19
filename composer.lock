@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f34eab0e174150b7aa41026f4d27236d",
+    "content-hash": "58cc93ac70ef92806c29cdf984a83436",
     "packages": [
         {
             "name": "brick/math",
@@ -1786,7 +1786,7 @@
             "dist": {
                 "type": "path",
                 "url": "libs/bridge/http-factory-bundle",
-                "reference": "9b42928685589f24d5d399aad13195261d4fba6a"
+                "reference": "5515702e9b4b59ac7eb53cf70db9a4e043717429"
             },
             "require": {
                 "local/http-factory-component": "^1.0",
@@ -1814,7 +1814,7 @@
                 }
             },
             "license": [
-                "proprietary"
+                "MIT"
             ],
             "transport-options": {
                 "relative": true
@@ -1869,7 +1869,7 @@
             "dist": {
                 "type": "path",
                 "url": "libs/bridge/request-mapper-bundle",
-                "reference": "d79dd05de8d65feef6ac8aabc9273369e5d6fcc2"
+                "reference": "779da870290c652e5d3f01d44df1fb37f099f0c9"
             },
             "require": {
                 "local/http-factory-component": "^1.0",
@@ -1898,7 +1898,48 @@
                 }
             },
             "license": [
-                "proprietary"
+                "MIT"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "local/response-mapper-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "libs/bridge/response-mapper-bundle",
+                "reference": "d3fd93963f4bd99b89bb7c06ee71a2b9f79d2550"
+            },
+            "require": {
+                "local/http-factory-component": "^1.0",
+                "php": "^8.4",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "type-lang/mapper": "^0.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Local\\Bridge\\ResponseMapper\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Local\\Bridge\\ResponseMapper\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
             ],
             "transport-options": {
                 "relative": true
@@ -1946,7 +1987,7 @@
             "dist": {
                 "type": "path",
                 "url": "libs/bridge/type-lang-mapper-bundle",
-                "reference": "6fe961043447658270987671ee7f2ae1c666269d"
+                "reference": "38ce94130e8e51a101ff4dc291e77e4a2f562dca"
             },
             "require": {
                 "php": "^8.4",
@@ -1975,7 +2016,7 @@
                 }
             },
             "license": [
-                "proprietary"
+                "MIT"
             ],
             "transport-options": {
                 "relative": true
