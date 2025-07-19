@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateVersions;
 
-use App\Documentation\Domain\Version\Event\VersionEvent;
+use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Documentation\Domain\Version\Event\VersionCreated;
 use App\Documentation\Domain\Version\Event\VersionDisabled;
 use App\Documentation\Domain\Version\Event\VersionEnabled;
+use App\Documentation\Domain\Version\Event\VersionEvent;
 use App\Documentation\Domain\Version\Event\VersionUpdated;
-use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
 use App\Documentation\Domain\Version\Version;
 use App\Shared\Domain\Bus\EventBusInterface;

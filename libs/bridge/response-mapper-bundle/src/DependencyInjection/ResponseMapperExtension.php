@@ -10,8 +10,8 @@ use Local\Component\HttpFactory\ResponseEncoderFactoryInterface;
 use Local\Component\HttpFactory\ResponseEncoderInterface;
 use Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument;
 use Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Reference;
 
 final class ResponseMapperExtension extends Extension

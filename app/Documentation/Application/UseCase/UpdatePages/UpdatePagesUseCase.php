@@ -22,7 +22,6 @@ use App\Sync\Application\UseCase\GetExternalDocumentByName\GetExternalDocumentBy
 use App\Sync\Application\UseCase\GetExternalDocumentByName\GetExternalDocumentByNameQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\String\UnicodeString;
 
 #[AsMessageHandler(bus: 'command.bus')]
 final readonly class UpdatePagesUseCase

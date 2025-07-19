@@ -3,7 +3,7 @@
 $files = PhpCsFixer\Finder::create()
     ->in([
         __DIR__ . '/app',
-        // __DIR__ . '/libs',
+        __DIR__ . '/libs',
     ])
     ->filter(static fn (\SplFileInfo $file): bool
         => !\in_array(\realpath($file->getPathname()), [

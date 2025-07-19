@@ -7,8 +7,8 @@ namespace Local\Bridge\RequestMapper\DependencyInjection;
 use Local\Bridge\RequestMapper\ValueResolver\MapRequestValueResolver;
 use Local\Component\HttpFactory\RequestDecoderFactoryInterface;
 use Local\Component\HttpFactory\RequestDecoderInterface;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Reference;
 use TypeLang\Mapper\DenormalizerInterface;
 

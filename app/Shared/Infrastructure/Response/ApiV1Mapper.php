@@ -39,7 +39,6 @@ final readonly class ApiV1Mapper implements ResponseMapperInterface
     }
 
     /**
-     * @param \Throwable $error
      * @return array<array-key, mixed>|null
      */
     private function getFailureData(\Throwable $error): ?array

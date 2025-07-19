@@ -26,7 +26,8 @@ final readonly class GitHubWebhookController
 
     public function __invoke(
         Request $request,
-        #[MapRequest] GitHubWebhookRequestDTO $dto,
+        #[MapRequest]
+        GitHubWebhookRequestDTO $dto,
     ): GitHubWebhookResponseDTO {
         /** @var GitHubWebhookValidateOutput $result */
         $result = $this->queries->get(new GitHubWebhookValidateQuery(

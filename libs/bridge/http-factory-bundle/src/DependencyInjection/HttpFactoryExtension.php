@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Local\Bridge\HttpFactory\DependencyInjection;
 
-use Local\Component\HttpFactory\RequestDecoderInterface;
-use Local\Component\HttpFactory\ResponseEncoderInterface;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 use Local\Component\HttpFactory\Driver\JsonDriver;
 use Local\Component\HttpFactory\Driver\MessagePackDriver;
 use Local\Component\HttpFactory\Driver\YamlDriver;
 use Local\Component\HttpFactory\RequestDecoderFactory;
 use Local\Component\HttpFactory\RequestDecoderFactoryInterface;
+use Local\Component\HttpFactory\RequestDecoderInterface;
 use Local\Component\HttpFactory\ResponseEncoderFactory;
 use Local\Component\HttpFactory\ResponseEncoderFactoryInterface;
+use Local\Component\HttpFactory\ResponseEncoderInterface;
 use MessagePack\MessagePack;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\Yaml\Yaml;
 
 final class HttpFactoryExtension extends Extension
