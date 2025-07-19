@@ -43,10 +43,10 @@ final readonly class JsonDriver extends Driver
     /**
      * @throws \InvalidArgumentException
      */
-    protected function fromString(string $data): array
+    protected function fromString(string $data): mixed
     {
         try {
-            return (array) \json_decode($data, true, depth: 32, flags: \JSON_THROW_ON_ERROR);
+            return \json_decode($data, true, depth: 32, flags: \JSON_THROW_ON_ERROR);
         } catch (\JsonException $e) {
             $message = 'An error occurred while parsing request json payload: ' . $e->getMessage();
             throw new \InvalidArgumentException($message, $e->getCode());

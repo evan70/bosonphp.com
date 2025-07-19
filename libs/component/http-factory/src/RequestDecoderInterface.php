@@ -6,8 +6,5 @@ namespace Local\Component\HttpFactory;
 
 interface RequestDecoderInterface
 {
-    /**
-     * @return object|array<array-key, mixed>
-     */
-    public function decode(string $payload): object|array;
+    public function decode(string $payload): mixed;
 }

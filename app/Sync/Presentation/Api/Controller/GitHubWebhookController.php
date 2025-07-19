@@ -11,7 +11,7 @@ use App\Sync\Application\UseCase\GitHubWebhookValidate\GitHubWebhookValidateQuer
 use App\Sync\Application\UseCase\SyncVersions\SyncVersionsCommand;
 use App\Sync\Presentation\Api\Controller\GitHubWebhookController\GitHubWebhookRequestDTO;
 use App\Sync\Presentation\Api\Controller\GitHubWebhookController\GitHubWebhookResponseDTO;
-use Local\Bridge\TypeLang\Attribute\MapRequest;
+use Local\Bridge\RequestMapper\Attribute\MapRequest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Attribute\Route;

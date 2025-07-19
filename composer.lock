@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f1194567d3c807705b74c19487252fb",
+    "content-hash": "f34eab0e174150b7aa41026f4d27236d",
     "packages": [
         {
             "name": "brick/math",
@@ -1859,6 +1859,47 @@
                     "Local\\Component\\HttpFactory\\Tests\\": "tests"
                 }
             },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "local/request-mapper-bundle",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "libs/bridge/request-mapper-bundle",
+                "reference": "d79dd05de8d65feef6ac8aabc9273369e5d6fcc2"
+            },
+            "require": {
+                "local/http-factory-component": "^1.0",
+                "php": "^8.4",
+                "symfony/http-kernel": "^6.4|^7.0",
+                "type-lang/mapper": "^0.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^12.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev",
+                    "dev-main": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Local\\Bridge\\RequestMapper\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Local\\Bridge\\RequestMapper\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
             "transport-options": {
                 "relative": true
             }

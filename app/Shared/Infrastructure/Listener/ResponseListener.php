@@ -13,6 +13,7 @@ use Symfony\Component\HttpKernel\Event\KernelEvent;
 abstract readonly class ResponseListener
 {
     public function __construct(
+        protected bool $debug,
         private ResponseEncoderFactoryInterface $factory,
         private ResponseEncoderInterface $default,
     ) {}

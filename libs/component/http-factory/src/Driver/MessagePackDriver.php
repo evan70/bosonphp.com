@@ -32,22 +32,14 @@ final readonly class MessagePackDriver extends Driver
         return \class_exists(MessagePack::class);
     }
 
-    protected function fromString(string $data): array|object
+    protected function fromString(string $data): mixed
     {
         try {
-            /** @psalm-suppress MixedAssignment */
-            $result = MessagePack::unpack($data);
+            return MessagePack::unpack($data);
         } catch (\Throwable $e) {
             $message = 'An error occurred while parsing request msgpack payload: ' . $e->getMessage();
             throw new \InvalidArgumentException($message, (int) $e->getCode());
         }
-
-        if (\is_object($result) || \is_array($result)) {
-            /** @var array|object */
-            return $result;
-        }
-
-        return (array) $result;
     }
 
     protected function toString(mixed $data): string

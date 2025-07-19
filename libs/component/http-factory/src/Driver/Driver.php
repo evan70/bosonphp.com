@@ -26,7 +26,7 @@ abstract readonly class Driver implements RequestMatcherInterface, ResponseMatch
         return $response;
     }
 
-    public function decode(string $payload): object|array
+    public function decode(string $payload): mixed
     {
         if ($payload === '') {
             return [];
@@ -123,8 +123,6 @@ abstract readonly class Driver implements RequestMatcherInterface, ResponseMatch
 
     /**
      * Transforms request's body string to variant response payload.
-     *
-     * @return array<array-key, list<mixed>|scalar|object>
      */
-    abstract protected function fromString(string $data): array|object;
+    abstract protected function fromString(string $data): mixed;
 }

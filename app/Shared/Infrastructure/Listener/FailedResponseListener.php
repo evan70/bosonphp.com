@@ -36,7 +36,6 @@ final readonly class FailedResponseListener extends ResponseListener
             $response->headers->add($payload->getHeaders());
         }
 
-
         $event->setResponse($response);
     }
 
@@ -53,11 +52,18 @@ final readonly class FailedResponseListener extends ResponseListener
 
     private function processApiV1(\Throwable $payload): ApiResponseDTO
     {
+        $data = null;
+
+        if ($this->debug) {
+            $data = (string) $payload;
+        }
+
         return new ApiFailureResponseDTO(
             error: match (true) {
                 $payload instanceof HttpException => $payload->getMessage(),
                 default => 'Internal Server Error',
             },
+            data: $data,
         );
     }
 }

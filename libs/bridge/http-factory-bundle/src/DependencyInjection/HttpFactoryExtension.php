@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Local\Bridge\HttpFactory\DependencyInjection;
 
-use Local\Bridge\HttpFactory\Listener\ControllerRequestDecoderListener;
+use Local\Component\HttpFactory\RequestDecoderInterface;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Local\Component\HttpFactory\Driver\JsonDriver;
 use Local\Component\HttpFactory\Driver\MessagePackDriver;
@@ -16,7 +16,6 @@ use Local\Component\HttpFactory\ResponseEncoderFactoryInterface;
 use MessagePack\MessagePack;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Yaml\Yaml;
 
 final class HttpFactoryExtension extends Extension
@@ -24,16 +23,8 @@ final class HttpFactoryExtension extends Extension
     public function load(array $configs, ContainerBuilder $container): void
     {
         $this->registerBuiltinDrivers($container);
+        $this->registerDefaultDriver($container);
         $this->registerFactories($container);
-
-        $container->register(ControllerRequestDecoderListener::class, ControllerRequestDecoderListener::class)
-            ->setArgument('$factory', new Reference(RequestDecoderFactoryInterface::class))
-            ->setArgument('$default', new Reference(JsonDriver::class))
-            ->addTag('kernel.event_listener', [
-                'event' => 'kernel.request',
-                'method' => '__invoke',
-                'priority' => 32,
-            ]);
     }
 
     private function registerBuiltinDrivers(ContainerBuilder $container): void
@@ -54,6 +45,11 @@ final class HttpFactoryExtension extends Extension
             ->setArgument('$debug', '%kernel.debug%')
             ->addTag('app.request.decoder')
             ->addTag('app.response.encoder');
+    }
+
+    private function registerDefaultDriver(ContainerBuilder $container): void
+    {
+        $container->setAlias(RequestDecoderInterface::class, JsonDriver::class);
     }
 
     private function registerFactories(ContainerBuilder $container): void

@@ -74,6 +74,9 @@
     "local/http-factory-bundle": {
         "version": "1.0.0"
     },
+    "local/request-mapper-bundle": {
+        "version": "1.0.0"
+    },
     "local/type-lang-mapper-bundle": {
         "version": "1.0.0"
     },

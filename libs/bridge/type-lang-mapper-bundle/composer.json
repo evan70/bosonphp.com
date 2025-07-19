@@ -2,7 +2,7 @@
     "name": "local/type-lang-mapper-bundle",
     "version": "1.0.0",
     "type": "symfony-bundle",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^8.4",
         "symfony/http-kernel": "^6.4|^7.0",

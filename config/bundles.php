@@ -13,4 +13,5 @@ return [
     Local\Bridge\HttpFactory\HttpFactoryBundle::class => ['all' => true],
     Local\Bridge\TypeLang\TypeLangBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
+    Local\Bridge\RequestMapper\RequestMapperBundle::class => ['all' => true],
 ];

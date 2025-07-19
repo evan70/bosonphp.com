@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Local\Bridge\TypeLang\Attribute;
+namespace Local\Bridge\RequestMapper\Attribute;
 
 #[\Attribute(\Attribute::TARGET_PARAMETER)]
 final readonly class MapRequest

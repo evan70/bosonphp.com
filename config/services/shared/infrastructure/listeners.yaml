@@ -9,10 +9,12 @@ services:
 
   App\Shared\Infrastructure\Listener\FailedResponseListener:
     arguments:
+      $debug: '%kernel.debug%'
       $factory: '@Local\Component\HttpFactory\ResponseEncoderFactoryInterface'
       $default: '@Local\Component\HttpFactory\Driver\JsonDriver'
 
   App\Shared\Infrastructure\Listener\SuccessfulResponseListener:
     arguments:
+      $debug: '%kernel.debug%'
       $factory: '@Local\Component\HttpFactory\ResponseEncoderFactoryInterface'
       $default: '@Local\Component\HttpFactory\Driver\JsonDriver'

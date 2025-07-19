@@ -18,6 +18,7 @@
         "knplabs/github-api": "^3.16",
         "league/commonmark": "^2.7",
         "local/http-factory-bundle": "^1.0",
+        "local/request-mapper-bundle": "^1.0",
         "local/set": "^1.0",
         "local/type-lang-mapper-bundle": "^1.0",
         "nyholm/psr7": "^1.8.2",

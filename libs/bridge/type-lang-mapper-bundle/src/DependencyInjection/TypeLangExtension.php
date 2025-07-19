@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Local\Bridge\TypeLang\DependencyInjection;
 
-use Local\Bridge\TypeLang\Listener\ControllerResultNormalizerListener;
 use Local\Bridge\TypeLang\TypeLangPlatform;
-use Local\Bridge\TypeLang\ValueResolver\ControllerDTOValueResolver;
 use Symfony\Component\Cache\Psr16Cache;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -15,7 +13,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use TypeLang\Mapper\DenormalizerInterface;
 use TypeLang\Mapper\Mapper;
 use TypeLang\Mapper\Mapping\Driver\AttributeDriver;
-use TypeLang\Mapper\Mapping\Driver\DocBlockDriver;
 use TypeLang\Mapper\Mapping\Driver\DriverInterface;
 use TypeLang\Mapper\Mapping\Driver\NullDriver;
 use TypeLang\Mapper\Mapping\Driver\Psr16CachedDriver;
@@ -53,20 +50,6 @@ final class TypeLangExtension extends Extension
         $this->registerPlatform($container);
         $this->registerConfiguration($container);
         $this->registerMapper($container);
-
-        $container->register(ControllerResultNormalizerListener::class, ControllerResultNormalizerListener::class)
-            ->setArgument('$normalizer', new Reference(NormalizerInterface::class))
-            ->addTag('kernel.event_listener', [
-                'event' => 'kernel.view',
-                'method' => '__invoke',
-                'priority' => 64,
-            ])
-        ;
-
-        $container->register(ControllerDTOValueResolver::class, ControllerDTOValueResolver::class)
-            ->setArgument('$denormalizer', new Reference(DenormalizerInterface::class))
-            ->addTag('controller.argument_value_resolver')
-        ;
     }
 
     private function registerDriver(ContainerBuilder $container): void
@@ -75,16 +58,7 @@ final class TypeLangExtension extends Extension
 
         $this->registerReflectionDriver($container);
         $this->registerAttributeDriver($container);
-        // $this->registerDocBlockDriver($container);
         $this->registerCachedDriver($container);
-    }
-
-    private function registerDocBlockDriver(ContainerBuilder $container): void
-    {
-        $container->register('type_lang.driver.docblock', DocBlockDriver::class)
-            ->setDecoratedService(DriverInterface::class)
-            ->setArgument('$delegate', new Reference('.inner'))
-        ;
     }
 
     private function registerAttributeDriver(ContainerBuilder $container): void
