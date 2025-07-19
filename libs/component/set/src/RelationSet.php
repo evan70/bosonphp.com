@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Local\Component\Set;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as CollectionInterface;
 
 /**
  * @template TContext of object
  * @template TValue of mixed
+ *
  * @template-extends ReadableRelationSet<TContext, TValue>
  * @template-implements CollectionInterface<array-key, TValue>
  *
@@ -16,6 +18,17 @@ use Doctrine\Common\Collections\Collection as CollectionInterface;
  */
 class RelationSet extends ReadableRelationSet implements CollectionInterface
 {
+    /**
+     * @param TContext $parent
+     * @param CollectionInterface<array-key, TValue> $delegate
+     */
+    public function __construct(
+        object $parent,
+        CollectionInterface $delegate = new ArrayCollection(),
+    ) {
+        parent::__construct($parent, $delegate);
+    }
+
     /**
      * @param TValue $entry
      */

@@ -19,6 +19,12 @@ parameters:
     - var/cache/dev/Symfony/Config
   paths:
     - app
+    # - libs/bridge/http-factory-bundle/src
+    # - libs/bridge/request-mapper-bundle/src
+    # - libs/bridge/response-mapper-bundle/src
+    # - libs/bridge/type-lang-mapper-bundle/src
+    # - libs/component/http-factory/src
+    # - libs/component/set/src
   tmpDir: vendor/.cache.phpstan
   tipsOfTheDay: false
   checkMissingCallableSignature: true

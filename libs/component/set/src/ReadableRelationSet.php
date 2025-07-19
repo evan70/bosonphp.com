@@ -14,6 +14,7 @@ use Local\Component\Set\Internal\ReferencedArrayCollection;
 /**
  * @template TContext of object
  * @template TValue of mixed
+ *
  * @template-implements ReadableCollectionInterface<array-key, TValue>
  * @template-implements SelectableInterface<array-key, TValue>
  *
@@ -21,12 +22,14 @@ use Local\Component\Set\Internal\ReferencedArrayCollection;
  */
 class ReadableRelationSet implements ReadableCollectionInterface, SelectableInterface
 {
-    /**
-     * @param TContext $parent
-     * @param ReadableCollectionInterface<array-key, TValue> $delegate
-     */
     public function __construct(
+        /**
+         * @var TContext
+         */
         protected readonly object $parent,
+        /**
+         * @var ReadableCollectionInterface<array-key, TValue>
+         */
         protected readonly ReadableCollectionInterface $delegate = new ArrayCollection(),
     ) {}
 
