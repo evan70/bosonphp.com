@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *        to a Doctrine bug https://github.com/doctrine/orm/issues/7598
  */
 #[ORM\Entity]
-class PageLink extends Page
+class Link extends Page
 {
     /**
      * @param non-empty-string $title

@@ -149,7 +149,7 @@ final readonly class UpdatePagesUseCase
                 continue;
             }
 
-            // TODO Add support of PageLinks
+            // TODO Add support of Page Links
             if (!$databasePage instanceof Document) {
                 continue;
             }
@@ -180,7 +180,7 @@ final readonly class UpdatePagesUseCase
 
             $this->em->remove($databasePage);
 
-            // TODO Add support of PageLinks
+            // TODO Add support of Page Links
             if (!$databasePage instanceof Document) {
                 continue;
             }

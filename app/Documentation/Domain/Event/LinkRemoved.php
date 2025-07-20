@@ -4,4 +4,4 @@ declare(strict_types=1);
 
 namespace App\Documentation\Domain\Event;
 
-abstract readonly class PageLinkEvent extends PageEvent {}
+final readonly class LinkRemoved extends LinkEvent {}

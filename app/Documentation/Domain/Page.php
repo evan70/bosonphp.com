@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string', enumType: PageType::class)]
 #[ORM\DiscriminatorMap([
     PageType::Document->value => Document::class,
-    PageType::Link->value => PageLink::class,
+    PageType::Link->value => Link::class,
 ])]
 #[ORM\Index(name: 'doc_pages_uri_idx', columns: ['uri'])]
 #[ORM\UniqueConstraint(name: 'doc_pages_uri_unique', columns: ['uri', 'category_id'])]
@@ -98,7 +98,7 @@ abstract class Page implements
      * @api
      */
     public bool $isLink {
-        get => $this instanceof PageLink;
+        get => $this instanceof Link;
     }
 
     /**

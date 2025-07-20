@@ -6,7 +6,7 @@ namespace App\Documentation\Infrastructure\Persistence\Doctrine\Fixture;
 
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Document;
-use App\Documentation\Domain\PageLink;
+use App\Documentation\Domain\Link;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -57,7 +57,7 @@ final class PageFixture extends Fixture implements DependentFixtureInterface
 
             foreach ($titles as $title) {
                 $manager->persist(match ($this->faker->numberBetween(0, 10)) {
-                    0 => new PageLink(
+                    0 => new Link(
                         category: $category,
                         title: $title . ' in ' . $category->title,
                         uri: 'https://www.google.com/search?q='

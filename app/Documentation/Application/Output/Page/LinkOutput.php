@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\Output\Page;
 
-use App\Documentation\Domain\PageLink;
+use App\Documentation\Domain\Link;
 
-final readonly class PageLinkOutput extends PageOutput
+final readonly class LinkOutput extends PageOutput
 {
     /**
      * @param non-empty-string $title
@@ -23,7 +23,7 @@ final readonly class PageLinkOutput extends PageOutput
         );
     }
 
-    public static function fromPageLink(PageLink $page): self
+    public static function fromLink(Link $page): self
     {
         return new self(
             title: $page->title,
