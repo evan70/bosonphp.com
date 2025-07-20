@@ -6,7 +6,14 @@ namespace App\Tests\Context\Database;
 
 use App\Tests\Context\SymfonyContext;
 use Behat\Step\Given;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadataFactory;
+use Doctrine\ORM\Tools\SchemaTool;
+use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
@@ -22,16 +29,69 @@ final class DatabaseContext extends SymfonyContext
         parent::__construct($kernel);
     }
 
-    public function migrateUp(): void
+    public function getSchemaTool(?EntityManagerInterface $em = null): SchemaTool
     {
-        $this->console('doctrine:migrations:migrate')
-            ->execute(['--no-interaction']);
+        return new SchemaTool($em ?? $this->em);
     }
 
-    public function migrateDown(): void
+    public function getMetadataFactory(?EntityManagerInterface $em = null): ClassMetadataFactory
     {
-        $this->console('doctrine:migrations:migrate')
-            ->execute(['first', '--no-interaction']);
+        return ($em ?? $this->em)->getMetadataFactory();
+    }
+
+    public function getConnection(?EntityManagerInterface $em = null): Connection
+    {
+        return ($em ?? $this->em)->getConnection();
+    }
+
+    /**
+     * @return AbstractSchemaManager<AbstractPlatform>
+     * @throws Exception
+     */
+    public function getSchemaManager(?Connection $connection = null): AbstractSchemaManager
+    {
+        $connection ??= $this->getConnection();
+
+        return $connection->createSchemaManager();
+    }
+
+    public function migrationsMigrateLast(): string
+    {
+        $command = $this->console('doctrine:migrations:migrate');
+        $command->execute([], ['interactive' => false]);
+
+        return $this->getConsoleOutput($command);
+    }
+
+    public function migrationsMigrateFirst(): string
+    {
+        $command = $this->console('doctrine:migrations:migrate');
+        $command->execute(['version' => 'first'], ['interactive' => false]);
+
+        return $this->getConsoleOutput($command);
+    }
+
+    public function databaseDrop(): string
+    {
+        $command = $this->console('doctrine:database:drop');
+        $command->execute(['--silent' => true, '--force' => true], ['interactive' => false]);
+
+        return $this->getConsoleOutput($command);
+    }
+
+    public function databaseCreate(): string
+    {
+        $command = $this->console('doctrine:database:create');
+        $command->execute([], ['interactive' => false]);
+
+        return $this->getConsoleOutput($command);
+    }
+
+    public function databaseRecreate(): string
+    {
+        return $this->databaseDrop()
+            . "\n"
+            . $this->databaseCreate();
     }
 
     /**
@@ -40,8 +100,8 @@ final class DatabaseContext extends SymfonyContext
     #[Given('empty database')]
     public function givenEmptyDatabase(): void
     {
-        $this->migrateDown();
-        $this->migrateUp();
+        $this->databaseRecreate();
+        $this->migrationsMigrateLast();
     }
 
     /**

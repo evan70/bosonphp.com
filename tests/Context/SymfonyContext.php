@@ -9,6 +9,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Hook\BeforeScenario;
 use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtensionEnvironment;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -47,6 +48,21 @@ abstract class SymfonyContext implements Context
     protected function console(string $command): CommandTester
     {
         return new CommandTester($this->app->find($command));
+    }
+
+    protected function getConsoleOutput(CommandTester $tester): string
+    {
+        $output = $tester->getOutput();
+
+        if ($output instanceof StreamOutput) {
+            $stream = $output->getStream();
+
+            \rewind($stream);
+
+            return \stream_get_contents($stream);
+        }
+
+        return '';
     }
 
     /**

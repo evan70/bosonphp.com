@@ -19,7 +19,7 @@ final class VarDumperContext extends SymfonyContext
     /**
      * @api
      */
-    //#[BeforeScenario]
+    #[BeforeScenario]
     public function setUpVarDumper(): void
     {
         $_SERVER['VAR_DUMPER_FORMAT'] = 'cli';

@@ -38,6 +38,8 @@ final class VersionDatabaseRepository extends ServiceEntityRepository implements
                     ELSE 3
                 END
             ) AS HIDDEN ordered_status")
+            ->andWhere('ver.status <> :status')
+            ->setParameter('status', Status::Hidden)
             ->addOrderBy('ordered_status', 'ASC')
             ->addOrderBy('ver.name', 'DESC')
             ->setMaxResults(1)

@@ -6,6 +6,7 @@ default:
       contexts:
         # Database
         - App\Tests\Context\Database\DatabaseContext
+        - App\Tests\Context\Database\VersionsDatabaseContext
         # HTTP
         - App\Tests\Context\Http\RequestContext
         - App\Tests\Context\Http\ResponseContext
