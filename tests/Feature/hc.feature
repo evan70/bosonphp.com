@@ -4,4 +4,4 @@ Feature: POST /v1/hc
 
     Scenario: example
         When I send request
-        Then dump response
+        Then response status is 42

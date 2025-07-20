@@ -9,6 +9,8 @@ default:
         # HTTP
         - App\Tests\Context\Http\RequestContext
         - App\Tests\Context\Http\ResponseContext
+        - App\Tests\Context\Http\ResponseStatusContext
+        - App\Tests\Context\Http\ResponseTypeContext
         # Utils
         - App\Tests\Context\Support\VarDumperContext
 
