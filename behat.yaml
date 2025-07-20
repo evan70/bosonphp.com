@@ -1,0 +1,25 @@
+default:
+  suites:
+    default:
+      paths:
+        - '%paths.base%/tests/Feature'
+      contexts:
+        # Database
+        - App\Tests\Context\Database\DatabaseContext
+        # HTTP
+        - App\Tests\Context\Http\RequestContext
+        - App\Tests\Context\Http\ResponseContext
+        # Utils
+        - App\Tests\Context\Support\VarDumperContext
+
+  extensions:
+    App\Tests\Extension\ContextArgumentTransformerExtension:
+      capture:
+        start: '{{'
+        end: '}}'
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/bootstrap.php
+      kernel:
+        class: App\Shared\Infrastructure\Kernel
+        environment: test
+        debug: true

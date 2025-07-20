@@ -1,0 +1,10 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    bind:
+      Symfony\Component\HttpKernel\KernelInterface: '@kernel'
+
+  App\Tests\Context\:
+    resource: '%kernel.project_dir%/tests/Context'
