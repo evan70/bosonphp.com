@@ -2,13 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Context\Http;
+namespace App\Tests\Behat\Context\Http;
 
-use App\Tests\Context\SymfonyContext;
-use App\Tests\Extension\ContextArgumentTransformerExtension\AsTestingContext;
+use App\Tests\Behat\Context\SymfonyContext;
+use App\Tests\Behat\Extension\ContextArgumentTransformerExtension\AsTestingContext;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @api
+ * @see http://behat.org/en/latest/quick_start.html
+ */
 #[AsTestingContext('response')]
 final class ResponseContext extends SymfonyContext
 {

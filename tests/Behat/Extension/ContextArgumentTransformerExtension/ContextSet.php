@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Extension\ContextArgumentTransformerExtension;
+namespace App\Tests\Behat\Extension\ContextArgumentTransformerExtension;
 
 use Behat\Behat\Context\Context;
 use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtensionEnvironment;
 
 /**
  * @internal this is an internal library class, please do not use it in your code
- * @psalm-internal App\Tests\Extension
+ * @psalm-internal App\Tests\Behat\Extension
  *
  * @template-extends \ArrayIterator<non-empty-string, Context>
  */

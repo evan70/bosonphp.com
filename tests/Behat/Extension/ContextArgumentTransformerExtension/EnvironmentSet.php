@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Extension\ContextArgumentTransformerExtension;
+namespace App\Tests\Behat\Extension\ContextArgumentTransformerExtension;
 
 use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtensionEnvironment;
 
 /**
+ * @api
+ *
  * @internal this is an internal library class, please do not use it in your code
- * @psalm-internal App\Tests\Extension
+ * @psalm-internal App\Tests\Behat\Extension
  */
 final readonly class EnvironmentSet
 {

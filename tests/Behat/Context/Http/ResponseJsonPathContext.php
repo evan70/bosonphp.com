@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Context\Http;
+namespace App\Tests\Behat\Context\Http;
 
-use App\Tests\Context\SymfonyContext;
+use App\Tests\Behat\Context\SymfonyContext;
 use Behat\Step\Then;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -22,8 +22,11 @@ use Symfony\Component\JsonPath\Test\JsonPathNotContains;
 use Symfony\Component\JsonPath\Test\JsonPathNotEquals;
 use Symfony\Component\JsonPath\Test\JsonPathNotSame;
 use Symfony\Component\JsonPath\Test\JsonPathSame;
-use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
+/**
+ * @api
+ * @see http://behat.org/en/latest/quick_start.html
+ */
 final class ResponseJsonPathContext extends SymfonyContext
 {
     public JsonCrawler $path {

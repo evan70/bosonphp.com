@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Context\Database;
+namespace App\Tests\Behat\Context\Database;
 
-use App\Tests\Context\SymfonyContext;
+use App\Tests\Behat\Context\SymfonyContext;
 use Behat\Step\Given;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
@@ -13,7 +13,6 @@ use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Tools\SchemaTool;
-use Symfony\Component\Console\Output\StreamOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**

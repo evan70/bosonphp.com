@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Context\Database;
+namespace App\Tests\Behat\Context\Database;
 
 use App\Documentation\Domain\Version\Status;
 use App\Documentation\Domain\Version\Version;
-use App\Tests\Context\SymfonyContext;
-use App\Tests\Extension\ContextArgumentTransformerExtension\AsTestingContext;
+use App\Tests\Behat\Context\SymfonyContext;
+use App\Tests\Behat\Extension\ContextArgumentTransformerExtension\AsTestingContext;
 use Behat\Step\Given;
 
 /**

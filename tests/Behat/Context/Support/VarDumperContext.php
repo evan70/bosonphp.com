@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Context\Support;
+namespace App\Tests\Behat\Context\Support;
 
-use App\Tests\Context\Http\ResponseContext;
-use App\Tests\Context\SymfonyContext;
+use App\Tests\Behat\Context\Http\ResponseContext;
+use App\Tests\Behat\Context\SymfonyContext;
 use Behat\Hook\BeforeScenario;
 use Behat\Step\Then;
 use Symfony\Component\VarDumper\VarDumper;

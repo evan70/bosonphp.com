@@ -6,5 +6,5 @@ services:
     bind:
       Symfony\Component\HttpKernel\KernelInterface: '@kernel'
 
-  App\Tests\Context\:
-    resource: '%kernel.project_dir%/tests/Context'
+  App\Tests\Behat\Context\:
+    resource: '%kernel.project_dir%/tests/Behat/Context'

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Extension;
+namespace App\Tests\Behat\Extension;
 
-use App\Tests\Extension\ContextArgumentTransformerExtension\PlaceholderArgumentTransformer;
+use App\Tests\Behat\Extension\ContextArgumentTransformerExtension\PlaceholderArgumentTransformer;
 use Behat\Behat\Transformation\ServiceContainer\TransformationExtension;
 use Behat\Testwork\ServiceContainer\Extension;
 use Behat\Testwork\ServiceContainer\ExtensionManager;

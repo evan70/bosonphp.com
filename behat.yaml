@@ -5,19 +5,20 @@ default:
         - '%paths.base%/tests/Feature'
       contexts:
         # Database
-        - App\Tests\Context\Database\DatabaseContext
-        - App\Tests\Context\Database\VersionsDatabaseContext
+        - App\Tests\Behat\Context\Database\DatabaseContext
+        - App\Tests\Behat\Context\Database\VersionsDatabaseContext
         # HTTP
-        - App\Tests\Context\Http\RequestContext
-        - App\Tests\Context\Http\ResponseContext
-        - App\Tests\Context\Http\ResponseJsonPathContext
-        - App\Tests\Context\Http\ResponseStatusContext
-        - App\Tests\Context\Http\ResponseTypeContext
+        - App\Tests\Behat\Context\Http\RequestContext
+        - App\Tests\Behat\Context\Http\ResponseContext
+        - App\Tests\Behat\Context\Http\ResponseJsonPathContext
+        - App\Tests\Behat\Context\Http\ResponseJsonSchemaContext
+        - App\Tests\Behat\Context\Http\ResponseStatusContext
+        - App\Tests\Behat\Context\Http\ResponseTypeContext
         # Utils
-        - App\Tests\Context\Support\VarDumperContext
+        - App\Tests\Behat\Context\Support\VarDumperContext
 
   extensions:
-    App\Tests\Extension\ContextArgumentTransformerExtension:
+    App\Tests\Behat\Extension\ContextArgumentTransformerExtension:
       capture:
         start: '{{'
         end: '}}'

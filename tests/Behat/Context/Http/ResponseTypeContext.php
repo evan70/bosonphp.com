@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Context\Http;
+namespace App\Tests\Behat\Context\Http;
 
-use App\Tests\Context\SymfonyContext;
+use App\Tests\Behat\Context\SymfonyContext;
 use Behat\Step\Then;
 use Symfony\Component\HttpFoundation\Response;
 

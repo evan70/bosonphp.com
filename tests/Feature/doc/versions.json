@@ -1,0 +1,14 @@
+{
+    "type": "object",
+    "required": ["data", "version"],
+    "additionalProperties": false,
+    "properties": {
+        "data": {
+            "type": "string"
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^1\\.0$"
+        }
+    }
+}

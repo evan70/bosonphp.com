@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Extension\ContextArgumentTransformerExtension;
+namespace App\Tests\Behat\Extension\ContextArgumentTransformerExtension;
 
 #[\Attribute(\Attribute::TARGET_CLASS)]
 final readonly class AsTestingContext
