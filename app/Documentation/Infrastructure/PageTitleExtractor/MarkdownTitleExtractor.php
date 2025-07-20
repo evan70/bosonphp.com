@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Documentation\Infrastructure\PageTitleExtractor;
 
+use App\Documentation\Domain\Document;
 use App\Documentation\Domain\Page;
-use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageTitleExtractorInterface;
 
 final readonly class MarkdownTitleExtractor implements PageTitleExtractorInterface
@@ -16,7 +16,7 @@ final readonly class MarkdownTitleExtractor implements PageTitleExtractorInterfa
 
     public function extractTitle(Page $page): string
     {
-        if ($page instanceof PageDocument) {
+        if ($page instanceof Document) {
             return $this->findFromContent($page->content->value)
                 ?? $this->delegate->extractTitle($page);
         }

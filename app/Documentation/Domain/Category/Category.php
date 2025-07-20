@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Documentation\Domain\Category;
 
+use App\Documentation\Domain\Document;
 use App\Documentation\Domain\Page;
-use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\Version\Version;
 use App\Shared\Domain\AggregateRootInterface;
 use App\Shared\Domain\Date\CreatedDateProvider;
@@ -72,10 +72,10 @@ class Category implements
     /**
      * Gets first documentation page
      */
-    public ?PageDocument $page {
+    public ?Document $page {
         get {
             foreach ($this->pages as $page) {
-                if ($page instanceof PageDocument) {
+                if ($page instanceof Document) {
                     return $page;
                 }
             }

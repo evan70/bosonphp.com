@@ -24,6 +24,7 @@ final readonly class VersionResponseDTO
 
     /**
      * @param iterable<mixed, VersionOutput> $outputList
+     *
      * @return iterable<array-key, self>
      */
     public static function fromVersionOutputList(iterable $outputList): iterable

@@ -8,10 +8,10 @@ use App\Shared\Domain\ValueObject\StringValueObjectInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Value object representing the content of a {@see PageDocument}.
+ * Value object representing the content of a {@see Document}.
  */
 #[ORM\Embeddable]
-final class PageDocumentContent implements StringValueObjectInterface
+final class DocumentContent implements StringValueObjectInterface
 {
     /**
      * Rendered content string value.
@@ -36,7 +36,7 @@ final class PageDocumentContent implements StringValueObjectInterface
         $this->value = $value;
     }
 
-    public function render(PageDocumentContentRendererInterface $renderer): void
+    public function render(DocumentContentRendererInterface $renderer): void
     {
         $this->rendered = $renderer->renderContent($this);
     }

@@ -5,8 +5,7 @@ declare(strict_types=1);
 namespace App\Documentation\Domain;
 
 use App\Documentation\Domain\Category\Category;
-use App\Documentation\Domain\Content\PageDocumentContent;
-use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
+use App\Documentation\Domain\Content\DocumentContent;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,14 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
  *        to a Doctrine bug https://github.com/doctrine/orm/issues/7598
  */
 #[ORM\Entity]
-class PageDocument extends Page
+class Document extends Page
 {
-    #[ORM\Embedded(class: PageDocumentContent::class, columnPrefix: 'content_')]
-    public PageDocumentContent $content {
+    #[ORM\Embedded(class: DocumentContent::class, columnPrefix: 'content_')]
+    public DocumentContent $content {
         get => $this->content;
         set(string|\Stringable $value) {
             /** @phpstan-ignore-next-line : PHPStan false-positive in isset() */
-            if (!isset($this->content) && $value instanceof PageDocumentContent) {
+            if (!isset($this->content) && $value instanceof DocumentContent) {
                 $this->content = $value;
 
                 return;
@@ -46,7 +45,7 @@ class PageDocument extends Page
         ?string $hash = null,
         ?PageId $id = null,
     ) {
-        $this->content = new PageDocumentContent($content);
+        $this->content = new DocumentContent($content);
 
         parent::__construct(
             title: $title,

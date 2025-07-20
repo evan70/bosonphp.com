@@ -4,5 +4,5 @@ services:
     autowire: true
     autoconfigure: true
 
-  App\Documentation\Domain\Content\PageDocumentContentRendererInterface:
-    class: App\Documentation\Infrastructure\Content\ContentRenderer\MarkdownPageDocumentContentRenderer
+  App\Documentation\Domain\Content\DocumentContentRendererInterface:
+    class: App\Documentation\Infrastructure\Content\ContentRenderer\MarkdownDocumentContentRenderer

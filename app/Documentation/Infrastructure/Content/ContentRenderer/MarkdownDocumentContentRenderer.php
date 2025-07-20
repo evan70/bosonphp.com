@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Documentation\Infrastructure\Content\ContentRenderer;
 
-use App\Documentation\Domain\Content\PageDocumentContent;
-use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
+use App\Documentation\Domain\Content\DocumentContent;
+use App\Documentation\Domain\Content\DocumentContentRendererInterface;
 use League\CommonMark\ConverterInterface;
 
 /**
@@ -14,8 +14,8 @@ use League\CommonMark\ConverterInterface;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Documentation\Infrastructure\Content\ContentRenderer
  */
-final readonly class MarkdownPageDocumentContentRenderer implements
-    PageDocumentContentRendererInterface
+final readonly class MarkdownDocumentContentRenderer implements
+    DocumentContentRendererInterface
 {
     public function __construct(
         private ConverterInterface $converter,
@@ -23,7 +23,7 @@ final readonly class MarkdownPageDocumentContentRenderer implements
 
     public function renderContent(object $target): string
     {
-        assert($target instanceof PageDocumentContent);
+        assert($target instanceof DocumentContent);
 
         $result = $this->converter->convert($target->value);
 

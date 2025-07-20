@@ -6,7 +6,7 @@ namespace App\Documentation\Domain\Event;
 
 use App\Shared\Domain\Bus\EventId;
 
-abstract readonly class PageDocumentEvent extends PageEvent
+abstract readonly class DocumentEvent extends PageEvent
 {
     /**
      * @param non-empty-string $version

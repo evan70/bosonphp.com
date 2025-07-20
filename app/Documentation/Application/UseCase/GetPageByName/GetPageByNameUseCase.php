@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Documentation\Application\UseCase\GetPageByName;
 
 use App\Documentation\Application\Output\Category\CategoryOutput;
-use App\Documentation\Application\Output\Page\PageDocumentOutput;
+use App\Documentation\Application\Output\Page\DocumentOutput;
 use App\Documentation\Application\Output\Version\VersionOutput;
 use App\Documentation\Application\UseCase\GetPageByName\Exception\PageNotFoundException;
 use App\Documentation\Application\UseCase\GetVersionByName\GetVersionByNameOutput;
@@ -40,7 +40,7 @@ final readonly class GetPageByNameUseCase
         return new GetPageByNameOutput(
             version: VersionOutput::fromVersion($page->version),
             category: CategoryOutput::fromCategory($page->category),
-            page: PageDocumentOutput::fromPageDocument($page),
+            page: DocumentOutput::fromDocument($page),
         );
     }
 }

@@ -8,7 +8,7 @@ use App\Documentation\Domain\Repository\PageByNameProviderInterface;
 use Doctrine\Persistence\ObjectRepository;
 
 /**
- * @template-extends ObjectRepository<PageDocument>
+ * @template-extends ObjectRepository<Document>
  */
 interface PageRepositoryInterface extends
     PageByNameProviderInterface,

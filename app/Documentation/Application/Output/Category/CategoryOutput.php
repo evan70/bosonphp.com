@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\Output\Category;
 
-use App\Documentation\Application\Output\Page\PageDocumentOutput;
+use App\Documentation\Application\Output\Page\DocumentOutput;
 use App\Documentation\Application\Output\Page\PageOutput;
 use App\Documentation\Application\Output\Page\PagesListOutput;
 use App\Documentation\Domain\Category\Category;
 
 final class CategoryOutput
 {
-    public ?PageDocumentOutput $page = null {
+    public ?DocumentOutput $page = null {
         /** @phpstan-ignore-next-line : PHPStan false-positive, $items is list<T> */
         get => $this->page ??= \array_find($this->pages->items, static function (PageOutput $page): bool {
-            return $page instanceof PageDocumentOutput;
+            return $page instanceof DocumentOutput;
         });
     }
 

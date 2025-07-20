@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Listener;
 
-use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
-use App\Documentation\Domain\PageDocument;
+use App\Documentation\Domain\Content\DocumentContentRendererInterface;
+use App\Documentation\Domain\Document;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsEntityListener;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
@@ -16,18 +16,18 @@ use Doctrine\ORM\Events;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Documentation\Infrastructure\Listener
  */
-#[AsEntityListener(event: Events::preUpdate, entity: PageDocument::class, priority: 256)]
-#[AsEntityListener(event: Events::prePersist, entity: PageDocument::class, priority: 256)]
-final readonly class RenderContentOnPageDocumentSaveListener
+#[AsEntityListener(event: Events::preUpdate, entity: Document::class, priority: 256)]
+#[AsEntityListener(event: Events::prePersist, entity: Document::class, priority: 256)]
+final readonly class RenderContentOnDocumentSaveListener
 {
     public function __construct(
-        private PageDocumentContentRendererInterface $renderer,
+        private DocumentContentRendererInterface $renderer,
     ) {}
 
     /**
      * @api
      */
-    public function prePersist(PageDocument $document): void
+    public function prePersist(Document $document): void
     {
         $document->content->render($this->renderer);
     }
@@ -35,7 +35,7 @@ final readonly class RenderContentOnPageDocumentSaveListener
     /**
      * @api
      */
-    public function preUpdate(PageDocument $document, PreUpdateEventArgs $event): void
+    public function preUpdate(Document $document, PreUpdateEventArgs $event): void
     {
         if (!$event->hasChangedField('content.value')) {
             return;

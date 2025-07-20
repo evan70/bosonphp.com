@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\InheritanceType('SINGLE_TABLE')]
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string', enumType: PageType::class)]
 #[ORM\DiscriminatorMap([
-    PageType::Document->value => PageDocument::class,
+    PageType::Document->value => Document::class,
     PageType::Link->value => PageLink::class,
 ])]
 #[ORM\Index(name: 'doc_pages_uri_idx', columns: ['uri'])]

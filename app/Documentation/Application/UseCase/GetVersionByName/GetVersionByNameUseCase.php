@@ -42,7 +42,7 @@ final readonly class GetVersionByNameUseCase
      */
     public function __invoke(GetVersionByNameQuery $query): GetVersionByNameOutput
     {
-        return $this->cache->get($this->keyOf($query), function(ItemInterface $item) use ($query): GetVersionByNameOutput {
+        return $this->cache->get($this->keyOf($query), function (ItemInterface $item) use ($query): GetVersionByNameOutput {
             $item->tag(['doc', 'doc.version', 'doc.category', 'doc.page']);
 
             $version = $this->getVersionEntity($query->version)

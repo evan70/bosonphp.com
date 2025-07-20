@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\Output\Page;
 
-use App\Documentation\Domain\PageDocument;
+use App\Documentation\Domain\Document;
 
-final readonly class PageDocumentOutput extends PageOutput
+final readonly class DocumentOutput extends PageOutput
 {
     /**
      * @param non-empty-string $title
@@ -24,7 +24,7 @@ final readonly class PageDocumentOutput extends PageOutput
         );
     }
 
-    public static function fromPageDocument(PageDocument $page): self
+    public static function fromDocument(Document $page): self
     {
         return new self(
             title: $page->title,

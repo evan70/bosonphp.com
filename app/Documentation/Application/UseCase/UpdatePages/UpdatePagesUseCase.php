@@ -6,12 +6,11 @@ namespace App\Documentation\Application\UseCase\UpdatePages;
 
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Documentation\Domain\Category\Category;
-use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
-use App\Documentation\Domain\Event\PageDocumentEvent;
-use App\Documentation\Domain\Event\PageDocumentRemoved;
-use App\Documentation\Domain\Event\PageDocumentUpdated;
+use App\Documentation\Domain\Document;
+use App\Documentation\Domain\Event\DocumentEvent;
+use App\Documentation\Domain\Event\DocumentRemoved;
+use App\Documentation\Domain\Event\DocumentUpdated;
 use App\Documentation\Domain\Page;
-use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageTitleExtractorInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Shared\Domain\Bus\EventBusInterface;
@@ -98,7 +97,7 @@ final readonly class UpdatePagesUseCase
     }
 
     /**
-     * @return iterable<array-key, PageDocumentEvent>
+     * @return iterable<array-key, DocumentEvent>
      */
     public function process(UpdatePagesCommand $command): iterable
     {
@@ -120,7 +119,7 @@ final readonly class UpdatePagesUseCase
 
             // In case of category is not in database
             if ($databasePage === null) {
-                $page = new PageDocument(
+                $page = new Document(
                     category: $category,
                     title: $commandPageUri,
                     uri: $commandPageUri,
@@ -133,7 +132,7 @@ final readonly class UpdatePagesUseCase
 
                 $this->em->persist($page);
 
-                yield new PageDocumentUpdated(
+                yield new DocumentUpdated(
                     version: $command->version,
                     category: $command->category,
                     title: $page->title,
@@ -151,7 +150,7 @@ final readonly class UpdatePagesUseCase
             }
 
             // TODO Add support of PageLinks
-            if (!$databasePage instanceof PageDocument) {
+            if (!$databasePage instanceof Document) {
                 continue;
             }
 
@@ -161,7 +160,7 @@ final readonly class UpdatePagesUseCase
 
             $this->em->persist($databasePage);
 
-            yield new PageDocumentRemoved(
+            yield new DocumentRemoved(
                 version: $command->version,
                 category: $command->category,
                 title: $databasePage->title,
@@ -182,11 +181,11 @@ final readonly class UpdatePagesUseCase
             $this->em->remove($databasePage);
 
             // TODO Add support of PageLinks
-            if (!$databasePage instanceof PageDocument) {
+            if (!$databasePage instanceof Document) {
                 continue;
             }
 
-            yield new PageDocumentRemoved(
+            yield new DocumentRemoved(
                 version: $command->version,
                 category: $command->category,
                 title: $databasePage->title,

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Repository;
 
-use App\Documentation\Domain\PageDocument;
+use App\Documentation\Domain\Document;
 use App\Documentation\Domain\PageRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -15,17 +15,17 @@ use Doctrine\Persistence\ManagerRegistry;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Documentation\Infrastructure\Persistence\Doctrine\Repository
  *
- * @template-extends ServiceEntityRepository<PageDocument>
+ * @template-extends ServiceEntityRepository<Document>
  */
 final class PageDatabaseRepository extends ServiceEntityRepository implements
     PageRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, PageDocument::class);
+        parent::__construct($registry, Document::class);
     }
 
-    public function findByName(string $version, string $name): ?PageDocument
+    public function findByName(string $version, string $name): ?Document
     {
         $query = $this->createQueryBuilder('page')
             ->join('page.category', 'category')
@@ -36,7 +36,7 @@ final class PageDatabaseRepository extends ServiceEntityRepository implements
             ->setParameter('version', $version)
             ->getQuery();
 
-        /** @var PageDocument|null */
+        /** @var Document|null */
         return $query->getOneOrNullResult();
     }
 }

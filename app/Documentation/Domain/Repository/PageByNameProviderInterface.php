@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Documentation\Domain\Repository;
 
-use App\Documentation\Domain\PageDocument;
+use App\Documentation\Domain\Document;
 
 interface PageByNameProviderInterface
 {
-    public function findByName(string $version, string $name): ?PageDocument;
+    public function findByName(string $version, string $name): ?Document;
 }
