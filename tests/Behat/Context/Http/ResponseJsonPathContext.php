@@ -12,8 +12,11 @@ use PHPUnit\Framework\Constraint\Count;
 use PHPUnit\Framework\Constraint\GreaterThan;
 use PHPUnit\Framework\Constraint\IsEqual;
 use PHPUnit\Framework\Constraint\IsIdentical;
+use PHPUnit\Framework\Constraint\IsList;
 use PHPUnit\Framework\Constraint\IsType;
+use PHPUnit\Framework\Constraint\LogicalAnd;
 use PHPUnit\Framework\Constraint\LogicalNot;
+use PHPUnit\Framework\Constraint\LogicalOr;
 use PHPUnit\Framework\Constraint\RegularExpression;
 use PHPUnit\Framework\Constraint\StringContains;
 use PHPUnit\Framework\NativeType;
@@ -394,6 +397,17 @@ final class ResponseJsonPathContext extends SymfonyContext
         $this->assertJsonPathNotMatches($path, new IsType(NativeType::Numeric));
     }
 
+    private function isObjectTypeConstraint(): Constraint
+    {
+        return LogicalOr::fromConstraints(
+            new IsType(NativeType::Object),
+            LogicalAnd::fromConstraints(
+                new IsType(NativeType::Array),
+                new LogicalNot(new IsList()),
+            ),
+        );
+    }
+
     /**
      * @api
      *
@@ -402,7 +416,7 @@ final class ResponseJsonPathContext extends SymfonyContext
     #[Then('/^json path "(?P<path>.+?)" is object$/')]
     public function thenPathIsObject(string $path): void
     {
-        $this->assertJsonPathMatches($path, new IsType(NativeType::Object));
+        $this->assertJsonPathMatches($path, $this->isObjectTypeConstraint());
     }
 
     /**
@@ -413,7 +427,7 @@ final class ResponseJsonPathContext extends SymfonyContext
     #[Then('/^json path "(?P<path>.+?)" is not object$/')]
     public function thenPathIsNotObject(string $path): void
     {
-        $this->assertJsonPathNotMatches($path, new IsType(NativeType::Object));
+        $this->assertJsonPathNotMatches($path, $this->isObjectTypeConstraint());
     }
 
     /**
