@@ -130,7 +130,7 @@ final class RequestContext extends SymfonyContext
     }
 
     #[When('/^(?:I )?send request$/')]
-    public function send(): Response
+    public function whenSend(): Response
     {
         $response = $this->kernel->handle($this->current);
 

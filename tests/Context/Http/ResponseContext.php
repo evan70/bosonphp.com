@@ -20,7 +20,7 @@ final class ResponseContext extends SymfonyContext
             if ($this->history->isEmpty()) {
                 $requests = $this->context(RequestContext::class);
 
-                return $requests->send();
+                return $requests->whenSend();
             }
 
             /** @var Response */
