@@ -1,10 +1,11 @@
 
-services:
-  _defaults:
-    autowire: true
-    autoconfigure: true
-    bind:
-      Symfony\Component\HttpKernel\KernelInterface: '@kernel'
+when@test:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+      bind:
+        Symfony\Component\HttpKernel\KernelInterface: '@kernel'
 
-  App\Tests\Behat\Context\:
-    resource: '%kernel.project_dir%/tests/Behat/Context'
+    App\Tests\Behat\Context\:
+      resource: '%kernel.project_dir%/tests/Behat/Context'
