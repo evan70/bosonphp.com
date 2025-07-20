@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateVersions;
 
-use App\Documentation\Application\UseCase\UpdateVersions\UpdateVersionsCommand\VersionIndex;
-use App\Documentation\Domain\Version\Event\VersionCreated;
-use App\Documentation\Domain\Version\Event\VersionDisabled;
-use App\Documentation\Domain\Version\Event\VersionEnabled;
 use App\Documentation\Domain\Version\Event\VersionEvent;
-use App\Documentation\Domain\Version\Event\VersionUpdated;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
-use App\Documentation\Domain\Version\Version;
+use App\Documentation\Domain\Version\Service\VersionsComputer\ExternalVersionInfo;
+use App\Documentation\Domain\Version\Service\VersionsToCreateComputer;
+use App\Documentation\Domain\Version\Service\VersionsToUpdateComputer;
 use App\Shared\Domain\Bus\EventBusInterface;
-use App\Shared\Domain\Bus\EventId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -22,41 +18,11 @@ final readonly class UpdateVersionsUseCase
 {
     public function __construct(
         private VersionsListProviderInterface $versionsListProvider,
+        private VersionsToCreateComputer $createdVersionsComputer,
+        private VersionsToUpdateComputer $updatedVersionsComputer,
         private EntityManagerInterface $em,
         private EventBusInterface $events,
     ) {}
-
-    /**
-     * @param iterable<mixed, VersionIndex> $versions
-     *
-     * @return array<non-empty-string, VersionIndex>
-     */
-    private function getCommandVersionsGroupByName(iterable $versions): array
-    {
-        $result = [];
-
-        foreach ($versions as $version) {
-            $result[$version->name] = $version;
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param iterable<mixed, Version> $versions
-     *
-     * @return list<non-empty-string>
-     */
-    private function getActualVersionNames(iterable $versions): array
-    {
-        $result = [];
-
-        foreach ($versions as $version) {
-            $result[] = $version->name;
-        }
-
-        return $result;
-    }
 
     public function __invoke(UpdateVersionsCommand $command): void
     {
@@ -68,74 +34,45 @@ final readonly class UpdateVersionsUseCase
     }
 
     /**
+     * @return list<ExternalVersionInfo>
+     */
+    private function getExternalVersionsInfoList(UpdateVersionsCommand $command): array
+    {
+        $result = [];
+
+        foreach ($command->versions as $index) {
+            $result[] = new ExternalVersionInfo(
+                hash: $index->hash,
+                name: $index->name,
+            );
+        }
+
+        return $result;
+    }
+
+    /**
      * @return iterable<array-key, VersionEvent>
      */
     private function process(UpdateVersionsCommand $command): iterable
     {
-        $databaseVersions = $this->versionsListProvider->getAll(hidden: true);
-        $commandVersionsByName = $this->getCommandVersionsGroupByName($command->versions);
+        $existing = $this->versionsListProvider->getAll(hidden: true);
+        $updated = $this->getExternalVersionsInfoList($command);
 
-        foreach ($databaseVersions as $databaseVersion) {
-            // In case of version is present in command
-            $commandVersion = $commandVersionsByName[$databaseVersion->name] ?? null;
+        $updatedVersionsResult = $this->updatedVersionsComputer->compute($existing, $updated);
 
-            // Enable previously hidden existent version
-            // In case of version is not HIDDEN,
-            if ($commandVersion !== null) {
-                // Skip in case hash is equals to stored one
-                if ($databaseVersion->hash === $commandVersion->hash) {
-                    continue;
-                }
-
-                $databaseVersion->hash = $commandVersion->hash;
-
-                if ($databaseVersion->isHidden) {
-                    $databaseVersion->enable();
-
-                    yield new VersionEnabled($databaseVersion->name);
-                }
-
-                $this->em->persist($databaseVersion);
-
-                yield new VersionUpdated(
-                    name: $databaseVersion->name,
-                    id: EventId::createFrom($command->id),
-                );
-            }
-
-            // Disable non-existent version
-            if ($commandVersion === null) {
-                $databaseVersion->disable();
-
-                yield new VersionDisabled(
-                    name: $databaseVersion->name,
-                    id: EventId::createFrom($command->id),
-                );
-            }
+        foreach ($updatedVersionsResult->versions as $updatedVersion) {
+            $this->em->persist($updatedVersion);
         }
 
-        $actualVersionNames = $this->getActualVersionNames($databaseVersions);
+        yield from $updatedVersionsResult->events;
 
-        foreach ($command->versions as $commandVersion) {
-            // In case of version is present in database
-            $isPresent = \in_array($commandVersion->name, $actualVersionNames, true);
+        $createdVersionsResult = $this->createdVersionsComputer->compute($existing, $updated);
 
-            // Skip this case
-            if ($isPresent) {
-                continue;
-            }
-
-            // TODO Should be moved to domain service?
-            $this->em->persist(new Version(
-                name: $commandVersion->name,
-                hash: $commandVersion->hash,
-            ));
-
-            yield new VersionCreated(
-                name: $commandVersion->name,
-                id: EventId::createFrom($command->id),
-            );
+        foreach ($createdVersionsResult->versions as $createdVersion) {
+            $this->em->persist($createdVersion);
         }
+
+        yield from $createdVersionsResult->events;
 
         $this->em->flush();
     }

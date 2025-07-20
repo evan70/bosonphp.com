@@ -3,3 +3,6 @@ services:
   _defaults:
     autowire: true
     autoconfigure: true
+
+  App\Documentation\Domain\Version\Service\:
+    resource: '%kernel.project_dir%/app/Documentation/Domain/Version/Service'

@@ -8,7 +8,7 @@ use App\Shared\Domain\Bus\EventId;
 
 /**
  * Base event class for all page-related events in the Documentation domain.
- * 
+ *
  * This abstract class provides common properties for page events including
  * version, category, title, URI, and event ID. All page-related domain events
  * should extend this class to ensure consistency in event structure.
