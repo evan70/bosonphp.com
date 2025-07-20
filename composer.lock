@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12a646fb85e1691bfc1f2cc9f40aa784",
+    "content-hash": "af92a8773f58848238caaacc35df7b17",
     "packages": [
         {
             "name": "brick/math",
@@ -12344,6 +12344,75 @@
                 }
             ],
             "time": "2025-07-05T07:45:19+00:00"
+        },
+        {
+            "name": "symfony/json-path",
+            "version": "v7.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/json-path.git",
+                "reference": "4c81bf79f803b6b2eebbe9a1b3894c78fc3b9283"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/json-path/zipball/4c81bf79f803b6b2eebbe9a1b3894c78fc3b9283",
+                "reference": "4c81bf79f803b6b2eebbe9a1b3894c78fc3b9283",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2",
+                "symfony/polyfill-ctype": "^1.8",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "conflict": {
+                "symfony/json-streamer": ">=7.4"
+            },
+            "require-dev": {
+                "symfony/json-streamer": "7.3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\JsonPath\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Daubois",
+                    "email": "alex.daubois@gmail.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Eases JSON navigation using the JSONPath syntax as described in RFC 9535",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/json-path/tree/v7.3.1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-06-16T07:30:43+00:00"
         },
         {
             "name": "symfony/process",

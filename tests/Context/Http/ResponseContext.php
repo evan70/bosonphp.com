@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 #[AsTestingContext('response')]
 final class ResponseContext extends SymfonyContext
 {
+    /**
+     * Gets current response
+     */
     public Response $current {
         get {
             if ($this->history->isEmpty()) {
@@ -26,6 +29,13 @@ final class ResponseContext extends SymfonyContext
     }
 
     /**
+     * Gets current response content
+     */
+    public string $content {
+        get => (string) $this->current->getContent();
+    }
+
+    /**
      * @var \SplStack<Response>
      */
     public \SplStack $history {
@@ -33,7 +43,8 @@ final class ResponseContext extends SymfonyContext
     }
 
     public string $assertResponseMessage {
-        get => \sprintf('in response %s', $this->current->getContent() ?: '<empty>');
+        /** @phpstan-ignore-next-line : Allow short ternary */
+        get => \sprintf('in response %s', $this->content ?: '<empty>');
     }
 
     /**

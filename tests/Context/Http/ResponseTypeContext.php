@@ -209,7 +209,7 @@ final class ResponseTypeContext extends SymfonyContext
 
         $responses->assertResponseIs(
             type: 'json',
-            handler: fn(Response $response): bool
+            handler: static fn(Response $response): bool
                 => $response->headers->get('Content-Type') === 'application/json'
                     && \json_validate((string) $response->getContent()) !== false,
         );
