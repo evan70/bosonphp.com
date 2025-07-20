@@ -31,6 +31,10 @@ final readonly class RenderContentOnArticleSaveListener
      */
     public function preUpdate(Article $article, PreUpdateEventArgs $event): void
     {
+        if (!$event->hasChangedField('content.value')) {
+            return;
+        }
+
         $article->content->render($this->renderer);
     }
 }

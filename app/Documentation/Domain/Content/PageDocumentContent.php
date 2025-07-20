@@ -27,25 +27,18 @@ final class PageDocumentContent implements StringValueObjectInterface
         get => $this->value;
         set(string|\Stringable $value) {
             $this->value = (string) $value;
-            $this->rendered = $this->contentRenderer->renderContent($this);
+            $this->rendered = '';
         }
     }
 
-    public function __construct(
-        string|\Stringable $value,
-        private readonly PageDocumentContentRendererInterface $contentRenderer,
-    ) {
+    public function __construct(string|\Stringable $value = '')
+    {
         $this->value = $value;
     }
 
     public function render(PageDocumentContentRendererInterface $renderer): void
     {
         $this->rendered = $renderer->renderContent($this);
-    }
-
-    public static function empty(PageDocumentContentRendererInterface $contentRenderer): self
-    {
-        return new self('', $contentRenderer);
     }
 
     public function toString(): string

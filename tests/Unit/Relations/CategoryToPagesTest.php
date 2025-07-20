@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Relations;
 
 use App\Documentation\Domain\Category\Category;
-use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\Version\Version;
 
@@ -15,9 +14,8 @@ final class CategoryToPagesTest extends RelationsTestCase
     {
         $version = new Version('v1.0');
         $category = new Category($version, 'Test Category');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content');
 
         self::assertSame($category, $page->category);
         self::assertTrue($category->pages->contains($page));
@@ -27,9 +25,8 @@ final class CategoryToPagesTest extends RelationsTestCase
     {
         $version = new Version('v1.0');
         $category = new Category($version, 'Test Category');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content');
 
         $category->pages->add($page);
         $category->pages->add($page);
@@ -47,9 +44,8 @@ final class CategoryToPagesTest extends RelationsTestCase
         $version = new Version('v1.0');
         $category1 = new Category($version, 'Category 1');
         $category2 = new Category($version, 'Category 2');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content');
 
         $category2->pages->add($page);
 
@@ -65,9 +61,8 @@ final class CategoryToPagesTest extends RelationsTestCase
         $version = new Version('v1.0');
         $category1 = new Category($version, 'Category 1');
         $category2 = new Category($version, 'Category 2');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content');
 
         // Act - Change category property directly
         $page->category = $category2;
@@ -85,9 +80,8 @@ final class CategoryToPagesTest extends RelationsTestCase
     {
         $version = new Version('v1.0');
         $category = new Category($version, 'Test Category');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content');
 
         $category->pages->removeElement($page);
 
@@ -98,11 +92,10 @@ final class CategoryToPagesTest extends RelationsTestCase
     {
         $version = new Version('v1.0');
         $category = new Category($version, 'Test Category');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page1 = new PageDocument($category, 'Page 1', 'test-uri-1', 'Content 1', $contentRenderer);
-        $page2 = new PageDocument($category, 'Page 2', 'test-uri-2', 'Content 2', $contentRenderer);
-        $page3 = new PageDocument($category, 'Page 3', 'test-uri-3', 'Content 3', $contentRenderer);
+        $page1 = new PageDocument($category, 'Page 1', 'test-uri-1', 'Content 1');
+        $page2 = new PageDocument($category, 'Page 2', 'test-uri-2', 'Content 2');
+        $page3 = new PageDocument($category, 'Page 3', 'test-uri-3', 'Content 3');
 
         $category->pages->add($page1);
         $category->pages->add($page2);
@@ -120,9 +113,8 @@ final class CategoryToPagesTest extends RelationsTestCase
         $category1 = new Category($version, 'Category 1');
         $category2 = new Category($version, 'Category 2');
         $category3 = new Category($version, 'Category 3');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content');
 
         // Act - Move from category1 to category2
         $page->category = $category2;
@@ -146,9 +138,8 @@ final class CategoryToPagesTest extends RelationsTestCase
     {
         $version = new Version('v1.0');
         $category = new Category($version, 'Test Category');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content');
 
         $initialPagesCount = $category->pages->count();
 
@@ -165,9 +156,8 @@ final class CategoryToPagesTest extends RelationsTestCase
     {
         $version = new Version('v1.0');
         $category = new Category($version, 'Test Category');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content');
 
         // Act & Assert
         $this->expectException(\TypeError::class);
@@ -178,9 +168,8 @@ final class CategoryToPagesTest extends RelationsTestCase
     {
         $version = new Version('v1.0');
         $category = new Category($version, 'Test Category');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category, 'Test Page', 'test-uri', 'Test content');
 
         self::assertSame($category, $page->category);
         self::assertTrue($category->pages->contains($page));
@@ -192,9 +181,8 @@ final class CategoryToPagesTest extends RelationsTestCase
         $version = new Version('v1.0');
         $category1 = new Category($version, 'Category 1');
         $category2 = new Category($version, 'Category 2');
-        $contentRenderer = $this->createMock(PageDocumentContentRendererInterface::class);
 
-        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content', $contentRenderer);
+        $page = new PageDocument($category1, 'Test Page', 'test-uri', 'Test content');
 
         // Verify initial state
         self::assertTrue($category1->pages->contains($page));

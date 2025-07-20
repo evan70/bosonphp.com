@@ -31,7 +31,7 @@ final class ArticleContent implements StringValueObjectInterface
         }
     }
 
-    public function __construct(string|\Stringable $value)
+    public function __construct(string|\Stringable $value = '')
     {
         $this->value = $value;
     }
@@ -39,11 +39,6 @@ final class ArticleContent implements StringValueObjectInterface
     public function render(ArticleContentRendererInterface $renderer): void
     {
         $this->rendered = $renderer->renderContent($this);
-    }
-
-    public static function empty(): self
-    {
-        return new self('');
     }
 
     public function toString(): string

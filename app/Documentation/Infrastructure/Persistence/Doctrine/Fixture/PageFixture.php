@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Documentation\Infrastructure\Persistence\Doctrine\Fixture;
 
 use App\Documentation\Domain\Category\Category;
-use App\Documentation\Domain\Content\PageDocumentContentRendererInterface;
 use App\Documentation\Domain\PageDocument;
 use App\Documentation\Domain\PageLink;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -41,7 +40,6 @@ final class PageFixture extends Fixture implements DependentFixtureInterface
 
     public function __construct(
         private readonly Generator $faker,
-        private readonly PageDocumentContentRendererInterface $renderer,
     ) {}
 
     public function load(ObjectManager $manager): void
@@ -74,12 +72,7 @@ final class PageFixture extends Fixture implements DependentFixtureInterface
                             ->toString(),
                         content: $this->faker->markdownContent(
                             $this->faker->numberBetween(5, 50),
-                        )
-                            . "\n\n"
-                            . '> `category:` ' . $category->title . "\n>\n"
-                            . '> `category_id:` ' . $category->id . "\n>\n"
-                            . '> `ver:` ' . $category->version->name . "\n>\n",
-                        contentRenderer: $this->renderer,
+                        ),
                         order: $this->faker->numberBetween(0, 10),
                     ),
                 });

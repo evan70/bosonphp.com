@@ -22,7 +22,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 #[AsEventListener(event: VersionDisabled::class)]
 #[AsEventListener(event: VersionEnabled::class)]
 #[AsEventListener(event: VersionUpdated::class)]
-final readonly class OnVersionChangedListener
+final readonly class ClearCacheOnVersionChangedListener
 {
     public function __construct(
         private TagAwareCacheInterface $cache,

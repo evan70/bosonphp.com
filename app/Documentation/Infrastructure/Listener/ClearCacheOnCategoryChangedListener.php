@@ -20,7 +20,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 #[AsEventListener(event: CategoryCreated::class)]
 #[AsEventListener(event: CategoryRemoved::class)]
 #[AsEventListener(event: CategoryUpdated::class)]
-final readonly class OnCategoryChangedListener
+final readonly class ClearCacheOnCategoryChangedListener
 {
     public function __construct(
         private TagAwareCacheInterface $cache,

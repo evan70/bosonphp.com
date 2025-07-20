@@ -30,7 +30,7 @@ use Symfony\Contracts\Cache\TagAwareCacheInterface;
 #[AsEventListener(event: PageLinkCreated::class)]
 #[AsEventListener(event: PageLinkRemoved::class)]
 #[AsEventListener(event: PageLinkUpdated::class)]
-final readonly class OnPageChangedListener
+final readonly class ClearCacheOnPageChangedListener
 {
     public function __construct(
         private TagAwareCacheInterface $cache,

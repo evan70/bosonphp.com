@@ -28,7 +28,6 @@ final readonly class UpdatePagesUseCase
 {
     public function __construct(
         private VersionByNameProviderInterface $versionByNameProvider,
-        private PageDocumentContentRendererInterface $contentRenderer,
         private PageTitleExtractorInterface $titleExtractor,
         private EntityManagerInterface $em,
         private QueryBusInterface $queries,
@@ -126,7 +125,6 @@ final readonly class UpdatePagesUseCase
                     title: $commandPageUri,
                     uri: $commandPageUri,
                     content: $this->getContent($command, $commandPage->name),
-                    contentRenderer: $this->contentRenderer,
                     order: $order,
                     hash: $commandPage->hash,
                 );

@@ -42,15 +42,11 @@ class PageDocument extends Page
         string $title,
         string $uri,
         string|\Stringable $content,
-        PageDocumentContentRendererInterface $contentRenderer,
         int $order = 0,
         ?string $hash = null,
         ?PageId $id = null,
     ) {
-        $this->content = new PageDocumentContent(
-            value: $content,
-            contentRenderer: $contentRenderer,
-        );
+        $this->content = new PageDocumentContent($content);
 
         parent::__construct(
             title: $title,
