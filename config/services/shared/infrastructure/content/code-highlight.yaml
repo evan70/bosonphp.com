@@ -1,0 +1,18 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  Tempest\Highlight\Theme:
+    class: Tempest\Highlight\Themes\InlineTheme
+    arguments:
+      $themePath: '%kernel.project_dir%/vendor/tempest/highlight/src/Themes/Css/one-dark-pro.css'
+
+  Tempest\Highlight\Highlighter:
+    arguments:
+      $theme: '@Tempest\Highlight\Theme'
+
+  Tempest\Highlight\CommonMark\HighlightExtension:
+    arguments:
+      $highlighter: '@Tempest\Highlight\Highlighter'

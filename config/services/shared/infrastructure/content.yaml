@@ -1,4 +1,7 @@
 
+imports:
+  - { resource: content/*.yaml }
+
 services:
   _defaults:
     autowire: true
@@ -34,6 +37,7 @@ services:
       - ['addExtension', ['@League\CommonMark\Extension\GithubFlavoredMarkdownExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\ExternalLink\ExternalLinkExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension']]
+      - ['addExtension', ['@Tempest\Highlight\CommonMark\HighlightExtension']]
       - ['addRenderer', [League\CommonMark\Extension\CommonMark\Node\Block\Heading, '@App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\RemoveH1TitleNodeRenderer']]
       - ['addEventListener', ['League\CommonMark\Event\DocumentParsedEvent', '@App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\NormalizeInternalLinksProcessor']]
 

@@ -11,11 +11,11 @@
     <title>{% block title %}Boson{% endblock %}</title>
     {% block stylesheets %}
         <!-- styles -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+        >
     {% endblock %}
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    >
     <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
 </head>
 <body lang="{{ app.request.locale|slice(0, 2) }}">
