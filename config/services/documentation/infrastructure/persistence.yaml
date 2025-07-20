@@ -1,0 +1,8 @@
+
+imports:
+  - { resource: persistence/*.yaml }
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true

@@ -9,7 +9,7 @@ use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Category\Event\CategoryCreated;
 use App\Documentation\Domain\Category\Event\CategoryRemoved;
 use App\Documentation\Domain\Category\Event\CategoryUpdated;
-use App\Documentation\Domain\Category\Event\UpdateCategoryEvent;
+use App\Documentation\Domain\Category\Event\CategoryEvent;
 use App\Documentation\Domain\Category\Repository\CategoryListProviderInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Documentation\Domain\Version\Version;
@@ -66,7 +66,7 @@ final readonly class UpdateCategoriesUseCase
     }
 
     /**
-     * @return iterable<array-key, UpdateCategoryEvent>
+     * @return iterable<array-key, CategoryEvent>
      */
     public function process(UpdateCategoriesCommand $command): iterable
     {

@@ -6,7 +6,7 @@ namespace App\Documentation\Domain\Category\Event;
 
 use App\Shared\Domain\Bus\EventId;
 
-abstract readonly class UpdateCategoryEvent
+abstract readonly class CategoryEvent
 {
     public function __construct(
         /**

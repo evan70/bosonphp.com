@@ -10,6 +10,8 @@ use App\Documentation\Domain\Version\Repository\CurrentVersionProviderInterface;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Documentation\Domain\Version\Version;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 #[AsMessageHandler(bus: 'query.bus')]
 final readonly class GetVersionByNameUseCase
@@ -17,6 +19,7 @@ final readonly class GetVersionByNameUseCase
     public function __construct(
         private CurrentVersionProviderInterface $currentVersion,
         private VersionByNameProviderInterface $versionsByName,
+        private TagAwareCacheInterface $cache,
     ) {}
 
     private function getVersionEntity(?string $version): ?Version
@@ -28,16 +31,26 @@ final readonly class GetVersionByNameUseCase
         return $this->versionsByName->findVersionByName($version);
     }
 
+    private function keyOf(GetVersionByNameQuery $query): string
+    {
+        return \hash('xxh3', GetVersionByNameQuery::class . '::' . $query->version);
+    }
+
     /**
      * @throws VersionNotFoundException
+     * @throws \Throwable
      */
     public function __invoke(GetVersionByNameQuery $query): GetVersionByNameOutput
     {
-        $version = $this->getVersionEntity($query->version)
-            ?? throw new VersionNotFoundException();
+        return $this->cache->get($this->keyOf($query), function(ItemInterface $item) use ($query): GetVersionByNameOutput {
+            $item->tag(['doc', 'doc.version', 'doc.category', 'doc.page']);
 
-        return new GetVersionByNameOutput(
-            version: VersionOutput::fromVersion($version),
-        );
+            $version = $this->getVersionEntity($query->version)
+                ?? throw new VersionNotFoundException();
+
+            return new GetVersionByNameOutput(
+                version: VersionOutput::fromVersion($version),
+            );
+        });
     }
 }

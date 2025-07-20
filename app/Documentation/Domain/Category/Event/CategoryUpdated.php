@@ -5,4 +5,4 @@ declare(strict_types=1);
 namespace App\Documentation\Domain\Category\Event;
 
 final readonly class CategoryUpdated extends
-    UpdateCategoryEvent {}
+    CategoryEvent {}

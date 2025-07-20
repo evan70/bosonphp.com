@@ -3,5 +3,5 @@ services:
     autowire: true
     autoconfigure: true
 
-  App\Documentation\Infrastructure\Persistence\Doctrine\Listener\:
-    resource: '%kernel.project_dir%/app/Documentation/Infrastructure/Persistence/Doctrine/Listener'
+  App\Documentation\Infrastructure\Listener\:
+    resource: '%kernel.project_dir%/app/Documentation/Infrastructure/Listener'
