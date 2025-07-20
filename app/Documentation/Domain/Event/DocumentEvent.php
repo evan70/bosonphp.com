@@ -6,6 +6,13 @@ namespace App\Documentation\Domain\Event;
 
 use App\Shared\Domain\Bus\EventId;
 
+/**
+ * Base event class for all document-related events in the Documentation domain.
+ * 
+ * This abstract class extends PageEvent and adds document-specific properties
+ * such as content. All document-related domain events should extend this class
+ * to ensure consistency in event structure and provide access to document content.
+ */
 abstract readonly class DocumentEvent extends PageEvent
 {
     /**
