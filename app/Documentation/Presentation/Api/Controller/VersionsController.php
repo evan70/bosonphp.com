@@ -35,8 +35,17 @@ final readonly class VersionsController
         }
 
         return new VersionsResponseDTO(
-            current: new VersionResponseDTO(
-                version: $currentVersionResult->version->name,
+            current: VersionResponseDTO::fromVersionOutput(
+                output: $currentVersionResult->version,
+            ),
+            stable: VersionResponseDTO::fromVersionOutputList(
+                outputList: $versionsListResult->versions->stable,
+            ),
+            dev: VersionResponseDTO::fromVersionOutputList(
+                outputList: $versionsListResult->versions->dev,
+            ),
+            deprecated: VersionResponseDTO::fromVersionOutputList(
+                outputList: $versionsListResult->versions->deprecated,
             ),
         );
     }

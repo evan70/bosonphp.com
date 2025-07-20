@@ -5,11 +5,29 @@
     "properties": {
         "data": {
             "type": "object",
-            "required": ["current"],
+            "required": ["current", "dev", "stable", "deprecated"],
             "additionalProperties": false,
             "properties": {
                 "current": {
                     "$ref": "#/$defs/version"
+                },
+                "dev": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/version"
+                    }
+                },
+                "stable": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/version"
+                    }
+                },
+                "deprecated": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/version"
+                    }
                 }
             }
         },
