@@ -12,12 +12,13 @@ use Behat\Step\Given;
 
 /**
  * @api
+ *
  * @see http://behat.org/en/latest/quick_start.html
  */
 #[AsTestingContext('version')]
 final class VersionsDatabaseContext extends SymfonyContext
 {
-    public ?Version $version {
+    public ?Version $current {
         get {
             if ($this->history->isEmpty()) {
                 return null;

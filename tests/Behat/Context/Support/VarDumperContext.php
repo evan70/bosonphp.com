@@ -12,6 +12,7 @@ use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @api
+ *
  * @see http://behat.org/en/latest/quick_start.html
  */
 final class VarDumperContext extends SymfonyContext

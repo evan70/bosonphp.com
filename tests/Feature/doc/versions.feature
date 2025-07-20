@@ -23,4 +23,4 @@ Feature: GET /v1/doc/versions
         Then response is successful
         And response is json
         And response matches the schema file "versions.json"
-        And dump response body
+        And json path "$.data.current.version" is "{{ version.current.name }}"

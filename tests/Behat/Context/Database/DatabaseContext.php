@@ -17,6 +17,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @api
+ *
  * @see http://behat.org/en/latest/quick_start.html
  */
 final class DatabaseContext extends SymfonyContext

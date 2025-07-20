@@ -14,13 +14,11 @@ use PHPUnit\Framework\Assert;
 
 /**
  * @api
+ *
  * @see http://behat.org/en/latest/quick_start.html
  */
 final class ResponseJsonSchemaContext extends SymfonyContext
 {
-    /**
-     * @var string|null
-     */
     private ?string $file = null;
 
     /**
@@ -35,8 +33,9 @@ final class ResponseJsonSchemaContext extends SymfonyContext
     }
 
     /**
-     * @throws \JsonException
      * @api
+     *
+     * @throws \JsonException
      */
     #[Then('response matches the schema:')]
     public function thenResponseMatchesTheSchema(PyStringNode $schema): self
@@ -49,8 +48,9 @@ final class ResponseJsonSchemaContext extends SymfonyContext
     }
 
     /**
-     * @throws \JsonException
      * @api
+     *
+     * @throws \JsonException
      */
     #[Then('/^response matches the schema "(.+?)"$/')]
     public function thenResponseMatchesTheSchemaWith(string $schema): self
@@ -63,8 +63,9 @@ final class ResponseJsonSchemaContext extends SymfonyContext
     }
 
     /**
-     * @throws \JsonException
      * @api
+     *
+     * @throws \JsonException
      */
     #[Then('/^response matches the schema file "(.+?)"$/')]
     public function thenResponseMatchesTheSchemaFile(string $schema): self

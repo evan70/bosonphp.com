@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @api
+ *
  * @see http://behat.org/en/latest/quick_start.html
  */
 #[AsTestingContext('response')]
@@ -53,6 +54,7 @@ final class ResponseContext extends SymfonyContext
 
     /**
      * @api
+     *
      * @param callable(Response):bool $handler
      */
     public function assertResponseIs(string $type, callable $handler): void

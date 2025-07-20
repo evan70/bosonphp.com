@@ -4,6 +4,7 @@ $files = PhpCsFixer\Finder::create()
     ->in([
         __DIR__ . '/app',
         __DIR__ . '/libs',
+        __DIR__ . '/tests',
     ])
     ->filter(static fn (\SplFileInfo $file): bool
         => !\in_array(\realpath($file->getPathname()), [
@@ -153,6 +154,7 @@ return new PhpCsFixer\Config()
         'phpdoc_no_useless_inheritdoc' => true,
         'phpdoc_order' => [
             'order' => [
+                'api',
                 'internal',
                 'psalm-internal',
                 'template',
@@ -181,6 +183,12 @@ return new PhpCsFixer\Config()
                     'template-covariant',
                     'template-extends',
                     'template-implements',
+                    'extends',
+                    'implements',
+                    'require-implements',
+                    'require-extends',
+                    'phpstan-require-implements',
+                    'phpstan-require-extends',
                     'psalm-require-implements',
                     'psalm-require-extends',
                 ],

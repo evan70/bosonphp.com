@@ -14,7 +14,6 @@ use Local\Component\Set\Internal\ReferencedArrayCollection;
 /**
  * @template TContext of object
  * @template TValue of mixed
- *
  * @template-implements ReadableCollectionInterface<array-key, TValue>
  * @template-implements SelectableInterface<array-key, TValue>
  *

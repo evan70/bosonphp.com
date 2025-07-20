@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @api
+ *
  * @see http://behat.org/en/latest/quick_start.html
  */
 final class ResponseStatusContext extends SymfonyContext
@@ -43,6 +44,7 @@ final class ResponseStatusContext extends SymfonyContext
 
     /**
      * @api
+     *
      * @param list<int> $codes
      */
     public function assertResponseStatusOneOf(array $codes): void

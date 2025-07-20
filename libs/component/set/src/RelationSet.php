@@ -10,7 +10,6 @@ use Doctrine\Common\Collections\Collection as CollectionInterface;
 /**
  * @template TContext of object
  * @template TValue of mixed
- *
  * @template-extends ReadableRelationSet<TContext, TValue>
  * @template-implements CollectionInterface<array-key, TValue>
  *

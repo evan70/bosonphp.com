@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @api
+ *
  * @see http://behat.org/en/latest/quick_start.html
  */
 final class ResponseTypeContext extends SymfonyContext
