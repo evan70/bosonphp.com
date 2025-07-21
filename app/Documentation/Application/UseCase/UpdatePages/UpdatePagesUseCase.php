@@ -4,21 +4,16 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdatePages;
 
-use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
+use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\DocumentIndex;
+use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\LinkIndex;
 use App\Documentation\Domain\Category\Category;
-use App\Documentation\Domain\Document;
-use App\Documentation\Domain\Event\DocumentEvent;
-use App\Documentation\Domain\Event\DocumentRemoved;
-use App\Documentation\Domain\Event\DocumentUpdated;
-use App\Documentation\Domain\Page;
-use App\Documentation\Domain\PageTitleExtractorInterface;
+use App\Documentation\Domain\Event\PageEvent;
+use App\Documentation\Domain\Service\DocumentInfo;
+use App\Documentation\Domain\Service\LinkInfo;
+use App\Documentation\Domain\Service\PageInfo;
+use App\Documentation\Domain\Service\PagesChangeSetComputer;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
 use App\Shared\Domain\Bus\EventBusInterface;
-use App\Shared\Domain\Bus\EventId;
-use App\Shared\Domain\Bus\QueryBusInterface;
-use App\Shared\Domain\Bus\QueryId;
-use App\Sync\Application\UseCase\GetExternalDocumentByName\GetExternalDocumentByNameOutput;
-use App\Sync\Application\UseCase\GetExternalDocumentByName\GetExternalDocumentByNameQuery;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -27,9 +22,8 @@ final readonly class UpdatePagesUseCase
 {
     public function __construct(
         private VersionByNameProviderInterface $versionByNameProvider,
-        private PageTitleExtractorInterface $titleExtractor,
+        private PagesChangeSetComputer $pagesChangeSetComputer,
         private EntityManagerInterface $em,
-        private QueryBusInterface $queries,
         private EventBusInterface $events,
     ) {}
 
@@ -60,44 +54,34 @@ final readonly class UpdatePagesUseCase
     }
 
     /**
-     * @return array<non-empty-string, Page>
+     * @return list<PageInfo>
      */
-    private function getDatabasePagesGroupByUri(Category $category): array
+    private function getExternalPagesInfoList(UpdatePagesCommand $command): array
     {
         $result = [];
 
-        foreach ($category->pages as $page) {
-            $result[$page->uri] = $page;
+        foreach ($command->pages as $index) {
+            $result[] = match (true) {
+                $index instanceof DocumentIndex => new DocumentInfo(
+                    hash: $index->hash,
+                    path: $index->path,
+                ),
+                $index instanceof LinkIndex => new LinkInfo(
+                    hash: $index->hash,
+                    uri: $index->uri,
+                ),
+                default => throw new \InvalidArgumentException(\sprintf(
+                    'Unsupported page index type %s',
+                    $index::class,
+                )),
+            };
         }
 
         return $result;
     }
 
     /**
-     * @return array<non-empty-string, PageIndex>
-     */
-    private function getCommandPagesGroupByUri(UpdatePagesCommand $command): array
-    {
-        $result = [];
-
-        foreach ($command->pages as $page) {
-            $result[$this->getUriByPath($page)] = $page;
-        }
-
-        return $result;
-    }
-
-    /**
-     * @return non-empty-string
-     */
-    private function getUriByPath(PageIndex $index): string
-    {
-        /** @var non-empty-string */
-        return \pathinfo($index->name, \PATHINFO_FILENAME);
-    }
-
-    /**
-     * @return iterable<array-key, DocumentEvent>
+     * @return iterable<array-key, PageEvent>
      */
     public function process(UpdatePagesCommand $command): iterable
     {
@@ -108,108 +92,25 @@ final readonly class UpdatePagesUseCase
             return [];
         }
 
-        $databasePages = $this->getDatabasePagesGroupByUri($category);
-        $commandPages = $this->getCommandPagesGroupByUri($command);
+        $pagesChangeSetPlan = $this->pagesChangeSetComputer->compute(
+            category: $category,
+            updated: $this->getExternalPagesInfoList($command),
+        );
 
-        $index = 0;
-        foreach ($commandPages as $commandPageUri => $commandPage) {
-            $order = \min($index++, 32767);
-
-            $databasePage = $databasePages[$commandPageUri] ?? null;
-
-            // In case of category is not in database
-            if ($databasePage === null) {
-                $page = new Document(
-                    category: $category,
-                    title: $commandPageUri,
-                    uri: $commandPageUri,
-                    content: $this->getContent($command, $commandPage->name),
-                    order: $order,
-                    hash: $commandPage->hash,
-                );
-
-                $page->title = $this->titleExtractor->extractTitle($page);
-
-                $this->em->persist($page);
-
-                yield new DocumentUpdated(
-                    version: $command->version,
-                    category: $command->category,
-                    title: $page->title,
-                    uri: $page->uri,
-                    content: $page->content->value,
-                    id: EventId::createFrom($command->id),
-                );
-
-                continue;
-            }
-
-            // Skip in case hash is equals to the command one
-            if ($databasePage->hash === $commandPage->hash) {
-                continue;
-            }
-
-            // TODO Add support of Page Links
-            if (!$databasePage instanceof Document) {
-                continue;
-            }
-
-            $databasePage->order = $order;
-            $databasePage->hash = $commandPage->hash;
-            $databasePage->content = $this->getContent($command, $commandPage->name);
-
-            $this->em->persist($databasePage);
-
-            yield new DocumentRemoved(
-                version: $command->version,
-                category: $command->category,
-                title: $databasePage->title,
-                uri: $commandPage->name,
-                content: $databasePage->content->value,
-                id: EventId::createFrom($command->id),
-            );
+        foreach ($pagesChangeSetPlan->updated as $updatedPage) {
+            $this->em->persist($updatedPage);
         }
 
-        // Remove unexistence pages
-        foreach ($databasePages as $databasePageUri => $databasePage) {
-            $containsInCommand = isset($commandPages[$databasePageUri]);
-
-            if ($containsInCommand) {
-                continue;
-            }
-
-            $this->em->remove($databasePage);
-
-            // TODO Add support of Page Links
-            if (!$databasePage instanceof Document) {
-                continue;
-            }
-
-            yield new DocumentRemoved(
-                version: $command->version,
-                category: $command->category,
-                title: $databasePage->title,
-                uri: $databasePage->uri,
-                content: $databasePage->content->value,
-                id: EventId::createFrom($command->id),
-            );
+        foreach ($pagesChangeSetPlan->created as $createdPage) {
+            $this->em->persist($createdPage);
         }
+
+        foreach ($pagesChangeSetPlan->removed as $removedPage) {
+            $this->em->remove($removedPage);
+        }
+
+        yield from $pagesChangeSetPlan->events;
 
         $this->em->flush();
-    }
-
-    /**
-     * @param non-empty-string $path
-     */
-    private function getContent(UpdatePagesCommand $command, string $path): string
-    {
-        /** @var GetExternalDocumentByNameOutput $result */
-        $result = $this->queries->get(new GetExternalDocumentByNameQuery(
-            version: $command->version,
-            path: $path,
-            id: QueryId::createFrom($command->id),
-        ));
-
-        return $result->document->content;
     }
 }

@@ -40,7 +40,7 @@ class Document extends Page
         Category $category,
         string $title,
         string $uri,
-        string|\Stringable $content,
+        string|\Stringable $content = '',
         int $order = 0,
         ?string $hash = null,
         ?PageId $id = null,

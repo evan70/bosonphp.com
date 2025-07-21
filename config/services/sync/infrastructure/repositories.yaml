@@ -58,16 +58,16 @@ services:
   #   External Documentation
   # ----------------------------------------------------------------------------
 
-  App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository:
+  App\Sync\Infrastructure\Persistence\Repository\ExternalPageGitHubRepository:
     arguments:
       $owner: '%app.sync.github_owner%'
       $repository: '%app.sync.github_repository%'
 
-  App\Sync\Domain\ExternalDocumentRepositoryInterface:
-    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository
+  App\Sync\Domain\ExternalPageRepositoryInterface:
+    alias: ExternalPageGitHubRepository
 
-  App\Sync\Domain\Repository\ExternalDocumentReferencesListProviderInterface:
-    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository
+  App\Sync\Domain\Repository\ExternalPageReferencesListProviderInterface:
+    alias: ExternalPageGitHubRepository
 
   App\Sync\Domain\Repository\ExternalDocumentByNameProviderInterface:
-    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository
+    alias: ExternalPageGitHubRepository

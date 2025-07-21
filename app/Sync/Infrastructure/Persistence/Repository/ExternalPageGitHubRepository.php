@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Sync\Infrastructure\Persistence\Repository;
 
 use App\Sync\Domain\ExternalDocument;
-use App\Sync\Domain\ExternalDocumentId;
-use App\Sync\Domain\ExternalDocumentRepositoryInterface;
+use App\Sync\Domain\ExternalPageId;
+use App\Sync\Domain\ExternalPageRepositoryInterface;
 use App\Sync\Domain\Version\ExternalVersion;
 use App\Sync\Infrastructure\Persistence\Repository\ExternalDocumentGitHubRepository\LazyInitializedExternalDocumentContent;
 use Github\Exception\RuntimeException;
@@ -47,8 +47,8 @@ use Github\Exception\RuntimeException;
  * @internal this is an internal library class, please do not use it in your code
  * @psalm-internal App\Sync\Infrastructure\Persistence\Repository
  */
-final readonly class ExternalDocumentGitHubRepository extends GitHubRepository implements
-    ExternalDocumentRepositoryInterface
+final readonly class ExternalPageGitHubRepository extends GitHubRepository implements
+    ExternalPageRepositoryInterface
 {
     public function getAll(string|ExternalVersion $version): iterable
     {
@@ -67,9 +67,9 @@ final readonly class ExternalDocumentGitHubRepository extends GitHubRepository i
             }
 
             yield new ExternalDocument(
-                id: ExternalDocumentId::createFromVersionAndPath($version, $item['path']),
+                id: ExternalPageId::createFromVersionAndPath($version, $item['path']),
                 hash: $item['sha'],
-                name: $item['path'],
+                path: $item['path'],
                 content: new LazyInitializedExternalDocumentContent(
                     version: $version,
                     page: $item['path'],
@@ -99,9 +99,9 @@ final readonly class ExternalDocumentGitHubRepository extends GitHubRepository i
         }
 
         return new ExternalDocument(
-            id: ExternalDocumentId::createFromVersionAndPath($version, $response['path']),
+            id: ExternalPageId::createFromVersionAndPath($version, $response['path']),
             hash: $response['sha'],
-            name: $response['path'],
+            path: $response['path'],
             content: self::decodeContent($response),
         );
     }

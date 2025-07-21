@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Sync\Domain;
 
-use App\Shared\Domain\AggregateRootInterface;
-
-final class ExternalDocument implements AggregateRootInterface
+final class ExternalDocument extends ExternalPage
 {
+    /**
+     * @param non-empty-lowercase-string $hash
+     */
     public function __construct(
-        public ExternalDocumentId $id,
-        /**
-         * @var non-empty-lowercase-string
-         */
-        public readonly string $hash,
+        ExternalPageId $id,
+        string $hash,
         /**
          * @var non-empty-string
          */
-        public readonly string $name,
+        public readonly string $path,
         public string|\Stringable $content {
             get {
                 if ($this->content instanceof \Stringable) {
@@ -27,5 +25,7 @@ final class ExternalDocument implements AggregateRootInterface
                 return $this->content;
             }
         },
-    ) {}
+    ) {
+        parent::__construct($id, $hash);
+    }
 }

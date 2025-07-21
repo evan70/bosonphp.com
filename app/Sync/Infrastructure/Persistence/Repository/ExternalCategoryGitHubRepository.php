@@ -8,8 +8,10 @@ use App\Sync\Domain\Category\ExternalCategory;
 use App\Sync\Domain\Category\ExternalCategoryId;
 use App\Sync\Domain\Category\ExternalCategoryRepositoryInterface;
 use App\Sync\Domain\ExternalDocument;
+use App\Sync\Domain\ExternalLink;
+use App\Sync\Domain\ExternalPageId;
 use App\Sync\Domain\Repository\ExternalDocumentByNameProviderInterface;
-use App\Sync\Domain\Repository\ExternalDocumentReferencesListProviderInterface;
+use App\Sync\Domain\Repository\ExternalPageReferencesListProviderInterface;
 use App\Sync\Domain\Version\ExternalVersion;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\ReadableCollection;
@@ -35,7 +37,7 @@ final readonly class ExternalCategoryGitHubRepository implements
          */
         private string $navigation,
         private ExternalDocumentByNameProviderInterface $docByNameProvider,
-        private ExternalDocumentReferencesListProviderInterface $docsListProvider,
+        private ExternalPageReferencesListProviderInterface $docsListProvider,
     ) {}
 
     /**
@@ -105,15 +107,22 @@ final readonly class ExternalCategoryGitHubRepository implements
 
             $reflection->getProperty('pages')
                 ->setRawValue($instance, new \ReflectionClass(ArrayCollection::class)
-                    ->newLazyProxy(function () use ($references, $category): ReadableCollection {
+                    ->newLazyProxy(function () use ($references, $category, $version, $page): ReadableCollection {
                         $pages = [];
 
-                        foreach ($category['pages'] ?? [] as $document) {
+                        foreach ($category['pages'] ?? [] as $path) {
                             $found = $references->findFirst(static fn(int|string $key, ExternalDocument $doc): bool
-                                => $doc->name === $document);
+                                => $doc->path === $path);
 
                             if ($found !== null) {
                                 $pages[] = $found;
+                            } else {
+                                $pages[] = new ExternalLink(
+                                    id: ExternalPageId::createFromVersionAndPath($version, $path),
+                                    // Use navigation page hash
+                                    hash: $page->hash,
+                                    uri: $path,
+                                );
                             }
                         }
 

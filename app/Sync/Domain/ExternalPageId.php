@@ -6,7 +6,7 @@ namespace App\Sync\Domain;
 
 use App\Shared\Domain\Id\Hash64Id;
 
-final readonly class ExternalDocumentId extends Hash64Id
+final readonly class ExternalPageId extends Hash64Id
 {
     /**
      * @param non-empty-string $version

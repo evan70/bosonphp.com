@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Sync\Domain\Category;
 
 use App\Shared\Domain\AggregateRootInterface;
-use App\Sync\Domain\ExternalDocument;
+use App\Sync\Domain\ExternalPage;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\ReadableCollection;
 
 final readonly class ExternalCategory implements AggregateRootInterface
 {
     /**
-     * @var ReadableCollection<array-key, ExternalDocument>
+     * @var ReadableCollection<array-key, ExternalPage>
      */
     public ReadableCollection $pages;
 

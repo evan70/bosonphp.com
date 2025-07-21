@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace App\Sync\Application\UseCase\SyncPages;
 
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesCommand;
+use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\DocumentIndex;
+use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\LinkIndex;
 use App\Documentation\Application\UseCase\UpdatePages\UpdatePagesIndexCommand\PageIndex;
 use App\Shared\Domain\Bus\CommandBusInterface;
 use App\Shared\Domain\Bus\CommandId;
 use App\Sync\Domain\Category\ExternalCategory;
 use App\Sync\Domain\Category\Repository\ExternalCategoriesListProviderInterface;
 use App\Sync\Domain\ExternalDocument;
+use App\Sync\Domain\ExternalLink;
+use App\Sync\Domain\ExternalPage;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler(bus: 'command.bus')]
@@ -35,7 +39,7 @@ final readonly class SyncPagesUseCase
     }
 
     /**
-     * @return iterable<array-key, ExternalDocument>
+     * @return iterable<array-key, ExternalPage>
      */
     private function getPages(SyncPagesCommand $command): iterable
     {
@@ -51,15 +55,25 @@ final readonly class SyncPagesUseCase
     /**
      * @return list<PageIndex>
      */
-    private function createPagesIndices(SyncPagesCommand $command): array
+    private function createPageIndices(SyncPagesCommand $command): array
     {
         $result = [];
 
         foreach ($this->getPages($command) as $page) {
-            $result[] = new PageIndex(
-                hash: $page->hash,
-                name: $page->name,
-            );
+            $result[] = match (true) {
+                $page instanceof ExternalDocument => new DocumentIndex(
+                    hash: $page->hash,
+                    path: $page->path,
+                ),
+                $page instanceof ExternalLink => new LinkIndex(
+                    hash: $page->hash,
+                    uri: $page->uri,
+                ),
+                default => throw new \InvalidArgumentException(\sprintf(
+                    'Unsupported external page type %s',
+                    $page::class,
+                )),
+            };
         }
 
         return $result;
@@ -67,7 +81,7 @@ final readonly class SyncPagesUseCase
 
     public function __invoke(SyncPagesCommand $command): void
     {
-        $indices = $this->createPagesIndices($command);
+        $indices = $this->createPageIndices($command);
 
         $this->commands->send(new UpdatePagesCommand(
             version: $command->version,

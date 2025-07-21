@@ -37,7 +37,7 @@ final readonly class CategoriesChangeSetComputer
      * @param iterable<mixed, Category> $categories
      * @return array<non-empty-string, Category>
      */
-    protected function categoriesGroupByTitle(iterable $categories): array
+    private function categoriesGroupByTitle(iterable $categories): array
     {
         $result = [];
 
@@ -56,7 +56,7 @@ final readonly class CategoriesChangeSetComputer
      * @param iterable<mixed, CategoryInfo> $categories
      * @return array<non-empty-string, CategoryInfo>
      */
-    protected function categoryInfosGroupByName(iterable $categories): array
+    private function categoryInfosGroupByName(iterable $categories): array
     {
         $result = [];
 
