@@ -6,3 +6,6 @@ services:
 
   App\Documentation\Domain\Version\Service\:
     resource: '%kernel.project_dir%/app/Documentation/Domain/Version/Service'
+
+  App\Documentation\Domain\Category\Service\:
+    resource: '%kernel.project_dir%/app/Documentation/Domain/Category/Service'

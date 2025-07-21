@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Domain\Version\Service;
+namespace App\Documentation\Domain\Version\Service\VersionsChangeSetComputer;
 
 use App\Documentation\Domain\Version\Event\VersionDisabled;
 use App\Documentation\Domain\Version\Event\VersionEnabled;
 use App\Documentation\Domain\Version\Event\VersionEvent;
 use App\Documentation\Domain\Version\Event\VersionUpdated;
-use App\Documentation\Domain\Version\Service\VersionsComputer\ComputedVersionsResult;
-use App\Documentation\Domain\Version\Service\VersionsComputer\VersionInfo;
+use App\Documentation\Domain\Version\Service\VersionInfo;
 use App\Documentation\Domain\Version\Version;
 
 /**
@@ -21,76 +20,11 @@ use App\Documentation\Domain\Version\Version;
  */
 final readonly class VersionsToUpdateComputer extends VersionsComputer
 {
-    /**
-     * Computes which versions need to be updated or disabled based on external data.
-     *
-     * This method compares existing versions with external version data and identifies:
-     * - Versions that need hash updates
-     * - Hidden versions that need to be enabled
-     * - Versions that need to be disabled (no longer in external data)
-     *
-     * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, VersionInfo> $updated External version data to compare against
-     *
-     * @return ComputedVersionsResult Result containing updated versions to persist and update events
-     */
-    public function compute(iterable $existing, iterable $updated): ComputedVersionsResult
+    public function process(array $existing, array $updated): iterable
     {
-        $events = [];
-        $versions = [];
-
-        foreach ($this->process($existing, $updated) as $entity => $event) {
-            $events[] = $event;
-            $versions[$entity->name] = $entity;
-        }
-
-        return new ComputedVersionsResult(
-            versions: \array_values($versions),
-            events: $events,
-        );
-    }
-
-    /**
-     * Groups external version information by name for efficient lookup.
-     *
-     * This method creates an associative array where the key is the version name
-     * and the value is the ExternalVersionInfo. This allows for O(1) lookup when
-     * checking if a version exists in external data.
-     *
-     * @param iterable<mixed, VersionInfo> $versions External version data to group
-     *
-     * @return array<non-empty-string, VersionInfo> External version data indexed by name
-     */
-    protected function externalVersionInfoGroupByName(iterable $versions): array
-    {
-        $result = [];
-
-        foreach ($versions as $info) {
-            $result[$info->name] = $info;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Processes existing versions to determine which need updates or should be disabled.
-     *
-     * This method iterates through existing versions and checks if each version
-     * exists in external data. If it exists, it processes updates; if not, it
-     * processes disabling the version.
-     *
-     * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, VersionInfo> $updated External version data to compare against
-     *
-     * @return iterable<Version, VersionEvent> Pairs of updated versions and their events
-     */
-    private function process(iterable $existing, iterable $updated): iterable
-    {
-        $externalVersionInfoIndex = $this->externalVersionInfoGroupByName($updated);
-
         foreach ($existing as $version) {
             // Fetch updated INFO from index
-            $updatedVersionInfo = $externalVersionInfoIndex[$version->name] ?? null;
+            $updatedVersionInfo = $updated[$version->name] ?? null;
 
             if ($updatedVersionInfo !== null) {
                 yield from $this->processExisting($version, $updatedVersionInfo);

@@ -4,17 +4,11 @@ declare(strict_types=1);
 
 namespace App\Documentation\Application\UseCase\UpdateCategories;
 
-use App\Documentation\Application\UseCase\UpdateCategories\UpdateCategoriesCommand\CategoryIndex;
-use App\Documentation\Domain\Category\Category;
-use App\Documentation\Domain\Category\Event\CategoryCreated;
 use App\Documentation\Domain\Category\Event\CategoryEvent;
-use App\Documentation\Domain\Category\Event\CategoryRemoved;
-use App\Documentation\Domain\Category\Event\CategoryUpdated;
-use App\Documentation\Domain\Category\Repository\CategoryListProviderInterface;
+use App\Documentation\Domain\Category\Service\CategoriesChangeSetComputer;
+use App\Documentation\Domain\Category\Service\CategoryInfo;
 use App\Documentation\Domain\Version\Repository\VersionByNameProviderInterface;
-use App\Documentation\Domain\Version\Version;
 use App\Shared\Domain\Bus\EventBusInterface;
-use App\Shared\Domain\Bus\EventId;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -23,38 +17,10 @@ final readonly class UpdateCategoriesUseCase
 {
     public function __construct(
         private VersionByNameProviderInterface $versionByNameProvider,
-        private CategoryListProviderInterface $categoryListProvider,
+        private CategoriesChangeSetComputer $categoriesChangeSetComputer,
         private EntityManagerInterface $em,
         private EventBusInterface $events,
     ) {}
-
-    /**
-     * @return array<non-empty-string, Category>
-     */
-    private function getDatabaseCategoriesGroupByName(Version $version): array
-    {
-        $result = [];
-
-        foreach ($this->categoryListProvider->getAll($version) as $category) {
-            $result[$category->title] = $category;
-        }
-
-        return $result;
-    }
-
-    /**
-     * @return array<non-empty-string, CategoryIndex>
-     */
-    private function getCommandCategoriesGroupByName(UpdateCategoriesCommand $command): array
-    {
-        $result = [];
-
-        foreach ($command->categories as $category) {
-            $result[$category->name] = $category;
-        }
-
-        return $result;
-    }
 
     public function __invoke(UpdateCategoriesCommand $command): void
     {
@@ -63,6 +29,25 @@ final readonly class UpdateCategoriesUseCase
         foreach ($events as $event) {
             $this->events->dispatch($event);
         }
+    }
+
+    /**
+     * @return list<CategoryInfo>
+     */
+    private function getExternalCategoriesInfoList(UpdateCategoriesCommand $command): array
+    {
+        $result = [];
+
+        foreach ($command->categories as $index) {
+            $result[] = new CategoryInfo(
+                hash: $index->hash,
+                name: $index->name,
+                description: $index->description,
+                icon: $index->icon,
+            );
+        }
+
+        return $result;
     }
 
     /**
@@ -77,70 +62,24 @@ final readonly class UpdateCategoriesUseCase
             return [];
         }
 
-        $databaseCategories = $this->getDatabaseCategoriesGroupByName($version);
-        $commandCategories = $this->getCommandCategoriesGroupByName($command);
+        $categoriesChangeSetPlan = $this->categoriesChangeSetComputer->compute(
+            version: $version,
+            updated: $this->getExternalCategoriesInfoList($command),
+        );
 
-        $index = 0;
-        foreach ($commandCategories as $commandCategoryName => $commandCategory) {
-            $order = \min($index++, 32767);
-
-            $databaseCategory = $databaseCategories[$commandCategoryName] ?? null;
-
-            // In case of category is not in database
-            if ($databaseCategory === null) {
-                $this->em->persist(new Category(
-                    version: $version,
-                    title: $commandCategoryName,
-                    description: $commandCategory->description,
-                    icon: $commandCategory->icon,
-                    order: $order,
-                    hash: $commandCategory->hash,
-                ));
-
-                yield new CategoryCreated(
-                    version: $version->name,
-                    name: $commandCategory->name,
-                    id: EventId::createFrom($command->id),
-                );
-
-                continue;
-            }
-
-            // Skip in case hash is equals to the command one
-            if ($databaseCategory->hash === $commandCategory->hash) {
-                continue;
-            }
-
-            $databaseCategory->hash = $commandCategory->hash;
-            $databaseCategory->order = $order;
-            $databaseCategory->description = $commandCategory->description;
-            $databaseCategory->icon = $commandCategory->icon;
-
-            $this->em->persist($databaseCategory);
-
-            yield new CategoryUpdated(
-                version: $version->name,
-                name: $commandCategory->name,
-                id: EventId::createFrom($command->id),
-            );
+        foreach ($categoriesChangeSetPlan->updated as $updatedCategory) {
+            $this->em->persist($updatedCategory);
         }
 
-        // Remove unexistence categories
-        foreach ($databaseCategories as $databaseCategoryName => $databaseCategory) {
-            $containsInCommand = isset($commandCategories[$databaseCategoryName]);
-
-            if ($containsInCommand) {
-                continue;
-            }
-
-            $this->em->remove($databaseCategory);
-
-            yield new CategoryRemoved(
-                version: $version->name,
-                name: $databaseCategoryName,
-                id: EventId::createFrom($command->id),
-            );
+        foreach ($categoriesChangeSetPlan->created as $createdCategory) {
+            $this->em->persist($createdCategory);
         }
+
+        foreach ($categoriesChangeSetPlan->removed as $removedCategory) {
+            $this->em->remove($removedCategory);
+        }
+
+        yield from $categoriesChangeSetPlan->events;
 
         $this->em->flush();
     }

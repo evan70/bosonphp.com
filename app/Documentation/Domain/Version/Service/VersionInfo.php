@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Documentation\Domain\Version\Service\VersionsComputer;
+namespace App\Documentation\Domain\Version\Service;
 
 /**
- * Value object representing external version information.
+ * Value object representing version information.
  *
  * This value object encapsulates data about a version that comes from
  * an external source (e.g., Git repository, external API). It contains

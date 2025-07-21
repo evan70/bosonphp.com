@@ -6,9 +6,8 @@ namespace App\Documentation\Application\UseCase\UpdateVersions;
 
 use App\Documentation\Domain\Version\Event\VersionEvent;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
-use App\Documentation\Domain\Version\Service\VersionsComputer\VersionInfo;
-use App\Documentation\Domain\Version\Service\VersionsToCreateComputer;
-use App\Documentation\Domain\Version\Service\VersionsToUpdateComputer;
+use App\Documentation\Domain\Version\Service\VersionInfo;
+use App\Documentation\Domain\Version\Service\VersionsChangeSetComputer;
 use App\Shared\Domain\Bus\EventBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
@@ -18,8 +17,7 @@ final readonly class UpdateVersionsUseCase
 {
     public function __construct(
         private VersionsListProviderInterface $versionsListProvider,
-        private VersionsToCreateComputer $createdVersionsComputer,
-        private VersionsToUpdateComputer $updatedVersionsComputer,
+        private VersionsChangeSetComputer $versionsChangeSetComputer,
         private EntityManagerInterface $em,
         private EventBusInterface $events,
     ) {}
@@ -55,24 +53,20 @@ final readonly class UpdateVersionsUseCase
      */
     private function process(UpdateVersionsCommand $command): iterable
     {
-        $existing = $this->versionsListProvider->getAll(hidden: true);
-        $updated = $this->getExternalVersionsInfoList($command);
+        $versionsChangePlan = $this->versionsChangeSetComputer->compute(
+            $this->versionsListProvider->getAll(hidden: true),
+            $this->getExternalVersionsInfoList($command),
+        );
 
-        $updatedVersionsResult = $this->updatedVersionsComputer->compute($existing, $updated);
-
-        foreach ($updatedVersionsResult->versions as $updatedVersion) {
+        foreach ($versionsChangePlan->updated as $updatedVersion) {
             $this->em->persist($updatedVersion);
         }
 
-        yield from $updatedVersionsResult->events;
-
-        $createdVersionsResult = $this->createdVersionsComputer->compute($existing, $updated);
-
-        foreach ($createdVersionsResult->versions as $createdVersion) {
+        foreach ($versionsChangePlan->created as $createdVersion) {
             $this->em->persist($createdVersion);
         }
 
-        yield from $createdVersionsResult->events;
+        yield from $versionsChangePlan->events;
 
         $this->em->flush();
     }
