@@ -13,21 +13,25 @@ final readonly class CategoryInfo
     public function __construct(
         /**
          * Hash of the category (e.g., content hash)
+         *
          * @var non-empty-lowercase-string
          */
         public string $hash,
         /**
          * Name of the category (e.g., 'API')
+         *
          * @var non-empty-string
          */
         public string $name,
         /**
          * Description of the category (optional)
+         *
          * @var non-empty-string|null
          */
         public ?string $description = null,
         /**
          * Icon for the category (optional)
+         *
          * @var non-empty-string|null
          */
         public ?string $icon = null,

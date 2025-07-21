@@ -22,6 +22,7 @@ final readonly class PagesChangeSetComputer
      * Groups system pages by their title for efficient lookup.
      *
      * @param iterable<mixed, Page> $pages
+     *
      * @return array<non-empty-string, Page>
      */
     private function pagesGroupByUri(iterable $pages): array
@@ -39,6 +40,7 @@ final readonly class PagesChangeSetComputer
 
     /**
      * @param non-empty-string $name
+     *
      * @return non-empty-string
      */
     private function pageInfoNameToUri(string $name): string
@@ -51,6 +53,7 @@ final readonly class PagesChangeSetComputer
      * Groups external page information by name for efficient lookup.
      *
      * @param iterable<mixed, PageInfo> $pages
+     *
      * @return array<non-empty-string, PageInfo>
      */
     private function pageInfosGroupByUri(iterable $pages): array
@@ -62,7 +65,7 @@ final readonly class PagesChangeSetComputer
                 $info instanceof DocumentInfo => $this->pageInfoNameToUri($info->path),
                 $info instanceof LinkInfo => $info->uri,
                 default => throw new \InvalidArgumentException(\sprintf(
-                'Unsupported page info type %s',
+                    'Unsupported page info type %s',
                     $info::class,
                 )),
             };

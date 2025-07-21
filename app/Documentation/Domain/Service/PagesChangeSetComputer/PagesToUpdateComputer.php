@@ -63,6 +63,7 @@ final readonly class PagesToUpdateComputer implements PagesComputerInterface
 
     /**
      * @param int<0, 32767> $order
+     *
      * @return iterable<Document, DocumentEvent>
      */
     private function updateDocument(int $order, Category $category, Page $document, DocumentInfo $info): iterable
@@ -89,6 +90,7 @@ final readonly class PagesToUpdateComputer implements PagesComputerInterface
 
     /**
      * @param int<0, 32767> $order
+     *
      * @return iterable<Link, LinkEvent>
      */
     private function updateLink(int $order, Category $category, Page $link, LinkInfo $info): iterable

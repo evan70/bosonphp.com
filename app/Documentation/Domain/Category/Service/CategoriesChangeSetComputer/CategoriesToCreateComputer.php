@@ -6,7 +6,6 @@ namespace App\Documentation\Domain\Category\Service\CategoriesChangeSetComputer;
 
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Category\Event\CategoryCreated;
-use App\Documentation\Domain\Category\Service\CategoryInfo;
 use App\Documentation\Domain\Version\Version;
 
 /**

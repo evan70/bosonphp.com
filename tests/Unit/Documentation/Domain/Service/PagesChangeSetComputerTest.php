@@ -8,9 +8,14 @@ use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Document;
 use App\Documentation\Domain\Event\DocumentCreated;
 use App\Documentation\Domain\Event\DocumentUpdated;
+use App\Documentation\Domain\Event\LinkCreated;
+use App\Documentation\Domain\Event\LinkRemoved;
+use App\Documentation\Domain\Event\LinkUpdated;
+use App\Documentation\Domain\Link;
 use App\Documentation\Domain\Page;
 use App\Documentation\Domain\PageTitleExtractorInterface;
 use App\Documentation\Domain\Service\DocumentInfo;
+use App\Documentation\Domain\Service\LinkInfo;
 use App\Documentation\Domain\Service\PagesChangeSetComputer;
 use App\Documentation\Domain\Service\PagesChangeSetComputer\PagesToCreateComputer;
 use App\Documentation\Domain\Service\PagesChangeSetComputer\PagesToRemoveComputer;
@@ -24,15 +29,8 @@ use App\Sync\Domain\ExternalDocument;
 use App\Sync\Domain\ExternalPageId;
 use App\Tests\Unit\TestCase;
 use PHPUnit\Framework\Attributes\Before;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
-use App\Documentation\Domain\Service\LinkInfo;
-use App\Documentation\Domain\Link;
-use App\Documentation\Domain\Event\LinkCreated;
-use App\Documentation\Domain\Event\LinkUpdated;
-use App\Documentation\Domain\Event\LinkRemoved;
 
-#[CoversClass(PagesChangeSetComputer::class)]
 final class PagesChangeSetComputerTest extends TestCase
 {
     private readonly PagesChangeSetComputer $computer;

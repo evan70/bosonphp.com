@@ -35,6 +35,7 @@ final readonly class CategoriesChangeSetComputer
      * Groups system categories by their title for efficient lookup.
      *
      * @param iterable<mixed, Category> $categories
+     *
      * @return array<non-empty-string, Category>
      */
     private function categoriesGroupByTitle(iterable $categories): array
@@ -54,6 +55,7 @@ final readonly class CategoriesChangeSetComputer
      * Groups external category information by name for efficient lookup.
      *
      * @param iterable<mixed, CategoryInfo> $categories
+     *
      * @return array<non-empty-string, CategoryInfo>
      */
     private function categoryInfosGroupByName(iterable $categories): array

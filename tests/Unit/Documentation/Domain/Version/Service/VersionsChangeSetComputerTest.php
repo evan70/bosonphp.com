@@ -14,10 +14,8 @@ use App\Documentation\Domain\Version\Service\VersionsChangeSetComputer\VersionsT
 use App\Documentation\Domain\Version\Service\VersionsChangeSetComputer\VersionsToUpdateComputer;
 use App\Documentation\Domain\Version\Version;
 use App\Tests\Unit\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 
-#[CoversClass(VersionsChangeSetComputer::class)]
 final class VersionsChangeSetComputerTest extends TestCase
 {
     private VersionsChangeSetComputer $computer;

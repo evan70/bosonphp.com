@@ -29,6 +29,7 @@ final readonly class VersionsChangeSetComputer
      * Groups external version information by name for efficient lookup.
      *
      * @param iterable<mixed, VersionInfo> $versions
+     *
      * @return array<non-empty-string, VersionInfo>
      */
     private function versionInfosGroupByName(iterable $versions): array
@@ -48,6 +49,7 @@ final readonly class VersionsChangeSetComputer
      * Groups system versions by their name for efficient lookup.
      *
      * @param iterable<mixed, Version> $versions
+     *
      * @return array<non-empty-string, Version>
      */
     private function versionsGroupByName(iterable $versions): array

@@ -14,10 +14,8 @@ use App\Documentation\Domain\Category\Service\CategoriesChangeSetComputer\Catego
 use App\Documentation\Domain\Category\Service\CategoryInfo;
 use App\Documentation\Domain\Version\Version;
 use App\Tests\Unit\TestCase;
-use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
 
-#[CoversClass(CategoriesChangeSetComputer::class)]
 final class CategoriesChangeSetComputerTest extends TestCase
 {
     private CategoriesChangeSetComputer $computer;

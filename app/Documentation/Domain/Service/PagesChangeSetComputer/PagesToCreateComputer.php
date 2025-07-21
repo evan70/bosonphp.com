@@ -58,6 +58,7 @@ final readonly class PagesToCreateComputer implements PagesComputerInterface
     /**
      * @param int<0, 32767> $order
      * @param non-empty-string $uri
+     *
      * @return iterable<Document, DocumentEvent>
      */
     private function createDocument(int $order, Category $category, DocumentInfo $info, string $uri): iterable
@@ -84,6 +85,7 @@ final readonly class PagesToCreateComputer implements PagesComputerInterface
 
     /**
      * @param int<0, 32767> $order
+     *
      * @return iterable<Link, LinkEvent>
      */
     private function createLink(int $order, Category $category, LinkInfo $info): iterable
