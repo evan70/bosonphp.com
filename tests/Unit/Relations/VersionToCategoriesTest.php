@@ -6,9 +6,11 @@ namespace App\Tests\Unit\Relations;
 
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Version\Version;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class VersionToCategoriesTest extends RelationsTestCase
 {
+    #[TestDox('Category references its version')]
     public function testCategoryReferencesVersion(): void
     {
         $version = new Version('v1.0');
@@ -18,6 +20,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertTrue($version->categories->contains($category));
     }
 
+    #[TestDox('Category is unique in version collection')]
     public function testCategoryUniqueInCollection(): void
     {
         $version = new Version('v1.0');
@@ -34,6 +37,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertTrue($version->categories->contains($category));
     }
 
+    #[TestDox('Category can change its version')]
     public function testCategoryChangeVersion(): void
     {
         $version1 = new Version('v1.0');
@@ -50,6 +54,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertSame($category->version, $version2);
     }
 
+    #[TestDox('Changing category version property updates collections')]
     public function testCategoryVersionPropertyChange(): void
     {
         $version1 = new Version('v1.0');
@@ -69,6 +74,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertSame($category->version, $version2);
     }
 
+    #[TestDox('Category can be removed from version')]
     public function testCategoryRemoval(): void
     {
         $version = new Version('v1.0');
@@ -79,6 +85,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertFalse($version->categories->contains($category));
     }
 
+    #[TestDox('Multiple categories in one version')]
     public function testMultipleCategories(): void
     {
         $version = new Version('v1.0');
@@ -96,6 +103,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertCount(3, $version->categories);
     }
 
+    #[TestDox('Category can move between versions')]
     public function testCategoryMoveBetweenVersions(): void
     {
         $version1 = new Version('v1.0');
@@ -122,6 +130,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertTrue($version3->categories->contains($category));
     }
 
+    #[TestDox('Setting same version does not change collection')]
     public function testSameVersionNoChange(): void
     {
         $version = new Version('v1.0');
@@ -138,6 +147,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertSame($initialCategoriesCount, $version->categories->count());
     }
 
+    #[TestDox('Setting null version throws exception')]
     public function testNullVersionThrowsException(): void
     {
         $version = new Version('v1.0');
@@ -148,6 +158,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         $category->version = null;
     }
 
+    #[TestDox('Category is auto-added to version on creation')]
     public function testAutoAddOnCreation(): void
     {
         $version = new Version('v1.0');
@@ -158,6 +169,7 @@ final class VersionToCategoriesTest extends RelationsTestCase
         self::assertCount(1, $version->categories);
     }
 
+    #[TestDox('Changing property updates version collection')]
     public function testPropertyChangeUpdatesCollection(): void
     {
         $version1 = new Version('v1.0');

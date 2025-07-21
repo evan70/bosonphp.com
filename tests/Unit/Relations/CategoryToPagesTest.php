@@ -7,9 +7,11 @@ namespace App\Tests\Unit\Relations;
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Document;
 use App\Documentation\Domain\Version\Version;
+use PHPUnit\Framework\Attributes\TestDox;
 
 final class CategoryToPagesTest extends RelationsTestCase
 {
+    #[TestDox('Page references its category')]
     public function testPageReferencesCategory(): void
     {
         $version = new Version('v1.0');
@@ -21,6 +23,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertTrue($category->pages->contains($page));
     }
 
+    #[TestDox('Page is unique in category collection')]
     public function testPageUniqueInCollection(): void
     {
         $version = new Version('v1.0');
@@ -39,6 +42,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertTrue($category->pages->contains($page));
     }
 
+    #[TestDox('Page can change its category')]
     public function testPageChangeCategory(): void
     {
         $version = new Version('v1.0');
@@ -56,6 +60,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertSame($page->category, $category2);
     }
 
+    #[TestDox('Changing page category property updates collections')]
     public function testPageCategoryPropertyChange(): void
     {
         $version = new Version('v1.0');
@@ -76,6 +81,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertSame($page->category, $category2);
     }
 
+    #[TestDox('Page can be removed from category')]
     public function testPageRemoval(): void
     {
         $version = new Version('v1.0');
@@ -88,6 +94,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertFalse($category->pages->contains($page));
     }
 
+    #[TestDox('Multiple pages in one category')]
     public function testMultiplePages(): void
     {
         $version = new Version('v1.0');
@@ -107,6 +114,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertCount(3, $category->pages);
     }
 
+    #[TestDox('Page can move between categories')]
     public function testPageMoveBetweenCategories(): void
     {
         $version = new Version('v1.0');
@@ -134,6 +142,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertTrue($category3->pages->contains($page));
     }
 
+    #[TestDox('Setting same category does not change collection')]
     public function testSameCategoryNoChange(): void
     {
         $version = new Version('v1.0');
@@ -152,6 +161,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertSame($initialPagesCount, $category->pages->count());
     }
 
+    #[TestDox('Setting null category throws exception')]
     public function testNullCategoryThrowsException(): void
     {
         $version = new Version('v1.0');
@@ -164,6 +174,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         $page->category = null;
     }
 
+    #[TestDox('Page is auto-added to category on creation')]
     public function testAutoAddOnCreation(): void
     {
         $version = new Version('v1.0');
@@ -176,6 +187,7 @@ final class CategoryToPagesTest extends RelationsTestCase
         self::assertCount(1, $category->pages);
     }
 
+    #[TestDox('Changing property updates category collection')]
     public function testPropertyChangeUpdatesCollection(): void
     {
         $version = new Version('v1.0');
