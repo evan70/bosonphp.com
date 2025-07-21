@@ -9,7 +9,7 @@ use App\Documentation\Domain\Version\Event\VersionEnabled;
 use App\Documentation\Domain\Version\Event\VersionEvent;
 use App\Documentation\Domain\Version\Event\VersionUpdated;
 use App\Documentation\Domain\Version\Service\VersionsComputer\ComputedVersionsResult;
-use App\Documentation\Domain\Version\Service\VersionsComputer\ExternalVersionInfo;
+use App\Documentation\Domain\Version\Service\VersionsComputer\VersionInfo;
 use App\Documentation\Domain\Version\Version;
 
 /**
@@ -30,7 +30,7 @@ final readonly class VersionsToUpdateComputer extends VersionsComputer
      * - Versions that need to be disabled (no longer in external data)
      *
      * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, ExternalVersionInfo> $updated External version data to compare against
+     * @param iterable<mixed, VersionInfo> $updated External version data to compare against
      *
      * @return ComputedVersionsResult Result containing updated versions to persist and update events
      */
@@ -57,9 +57,9 @@ final readonly class VersionsToUpdateComputer extends VersionsComputer
      * and the value is the ExternalVersionInfo. This allows for O(1) lookup when
      * checking if a version exists in external data.
      *
-     * @param iterable<mixed, ExternalVersionInfo> $versions External version data to group
+     * @param iterable<mixed, VersionInfo> $versions External version data to group
      *
-     * @return array<non-empty-string, ExternalVersionInfo> External version data indexed by name
+     * @return array<non-empty-string, VersionInfo> External version data indexed by name
      */
     protected function externalVersionInfoGroupByName(iterable $versions): array
     {
@@ -80,7 +80,7 @@ final readonly class VersionsToUpdateComputer extends VersionsComputer
      * processes disabling the version.
      *
      * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, ExternalVersionInfo> $updated External version data to compare against
+     * @param iterable<mixed, VersionInfo> $updated External version data to compare against
      *
      * @return iterable<Version, VersionEvent> Pairs of updated versions and their events
      */
@@ -108,11 +108,11 @@ final readonly class VersionsToUpdateComputer extends VersionsComputer
      * hidden versions) and generates appropriate events.
      *
      * @param Version $version Existing version to process
-     * @param ExternalVersionInfo $info External version data for comparison
+     * @param VersionInfo $info External version data for comparison
      *
      * @return iterable<Version, VersionEvent> Updated version and its events
      */
-    private function processExisting(Version $version, ExternalVersionInfo $info): iterable
+    private function processExisting(Version $version, VersionInfo $info): iterable
     {
         // Skip in case of hash is equals to stored one
         if ($version->hash === $info->hash) {

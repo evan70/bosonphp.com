@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Documentation\Domain\Version\Service;
 
 use App\Documentation\Domain\Version\Service\VersionsComputer\ComputedVersionsResult;
-use App\Documentation\Domain\Version\Service\VersionsComputer\ExternalVersionInfo;
+use App\Documentation\Domain\Version\Service\VersionsComputer\VersionInfo;
 use App\Documentation\Domain\Version\Version;
 
 /**
@@ -20,7 +20,7 @@ abstract readonly class VersionsComputer
      * and external version data to determine what changes need to be made.
      *
      * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, ExternalVersionInfo> $updated External version data to compare against
+     * @param iterable<mixed, VersionInfo> $updated External version data to compare against
      *
      * @return ComputedVersionsResult Result containing versions to persist and events to dispatch
      */

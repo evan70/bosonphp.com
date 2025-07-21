@@ -6,7 +6,7 @@ namespace App\Documentation\Application\UseCase\UpdateVersions;
 
 use App\Documentation\Domain\Version\Event\VersionEvent;
 use App\Documentation\Domain\Version\Repository\VersionsListProviderInterface;
-use App\Documentation\Domain\Version\Service\VersionsComputer\ExternalVersionInfo;
+use App\Documentation\Domain\Version\Service\VersionsComputer\VersionInfo;
 use App\Documentation\Domain\Version\Service\VersionsToCreateComputer;
 use App\Documentation\Domain\Version\Service\VersionsToUpdateComputer;
 use App\Shared\Domain\Bus\EventBusInterface;
@@ -34,14 +34,14 @@ final readonly class UpdateVersionsUseCase
     }
 
     /**
-     * @return list<ExternalVersionInfo>
+     * @return list<VersionInfo>
      */
     private function getExternalVersionsInfoList(UpdateVersionsCommand $command): array
     {
         $result = [];
 
         foreach ($command->versions as $index) {
-            $result[] = new ExternalVersionInfo(
+            $result[] = new VersionInfo(
                 hash: $index->hash,
                 name: $index->name,
             );

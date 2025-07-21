@@ -12,7 +12,7 @@ namespace App\Documentation\Domain\Version\Service\VersionsComputer;
  * the version name and hash for comparison with existing versions in
  * the system.
  */
-final readonly class ExternalVersionInfo
+final readonly class VersionInfo
 {
     public function __construct(
         /**

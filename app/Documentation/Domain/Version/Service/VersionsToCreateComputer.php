@@ -7,7 +7,7 @@ namespace App\Documentation\Domain\Version\Service;
 use App\Documentation\Domain\Version\Event\VersionCreated;
 use App\Documentation\Domain\Version\Event\VersionEvent;
 use App\Documentation\Domain\Version\Service\VersionsComputer\ComputedVersionsResult;
-use App\Documentation\Domain\Version\Service\VersionsComputer\ExternalVersionInfo;
+use App\Documentation\Domain\Version\Service\VersionsComputer\VersionInfo;
 use App\Documentation\Domain\Version\Version;
 
 /**
@@ -28,7 +28,7 @@ final readonly class VersionsToCreateComputer extends VersionsComputer
      * a VersionCreated event.
      *
      * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, ExternalVersionInfo> $updated External version data to compare against
+     * @param iterable<mixed, VersionInfo> $updated External version data to compare against
      *
      * @return ComputedVersionsResult Result containing new versions to persist and creation events
      */
@@ -78,7 +78,7 @@ final readonly class VersionsToCreateComputer extends VersionsComputer
      * Version entity and generates a VersionCreated event.
      *
      * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, ExternalVersionInfo> $updated External version data to process
+     * @param iterable<mixed, VersionInfo> $updated External version data to process
      *
      * @return iterable<Version, VersionEvent> Pairs of new versions and their creation events
      */
