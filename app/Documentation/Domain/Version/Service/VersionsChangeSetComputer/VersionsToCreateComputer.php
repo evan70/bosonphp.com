@@ -27,15 +27,8 @@ final readonly class VersionsToCreateComputer extends VersionsComputer
                 continue;
             }
 
-            // Actualize index: If there are duplicate versions
-            // to update, they will NOT be re-created.
-            $existingVersion = $existing[$info->name] = new Version(
-                name: $info->name,
-                hash: $info->hash,
-            );
-
             // Create an entity
-            yield $existingVersion => new VersionCreated($info->name);
+            yield new Version($info->name, hash: $info->hash) => new VersionCreated($info->name);
         }
     }
 }
