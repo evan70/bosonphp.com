@@ -8,23 +8,28 @@ use App\Documentation\Domain\Version\Service\VersionsChangeSetComputer\VersionsT
 use App\Documentation\Domain\Version\Service\VersionsChangeSetComputer\VersionsToUpdateComputer;
 use App\Documentation\Domain\Version\Version;
 
+/**
+ * Computes the set of changes (create, update) required to synchronize
+ * system versions with external version data.
+ */
 final readonly class VersionsChangeSetComputer
 {
     public function __construct(
+        /**
+         * Strategy for updating existing versions
+         */
         private VersionsToUpdateComputer $updates,
+        /**
+         * Strategy for creating new versions
+         */
         private VersionsToCreateComputer $creations,
     ) {}
 
     /**
      * Groups external version information by name for efficient lookup.
      *
-     * This method creates an associative array where the key is the version name
-     * and the value is the ExternalVersionInfo. This allows for O(1) lookup when
-     * checking if a version exists in external data.
-     *
-     * @param iterable<mixed, VersionInfo> $versions External version data to group
-     *
-     * @return array<non-empty-string, VersionInfo> External version data indexed by name
+     * @param iterable<mixed, VersionInfo> $versions
+     * @return array<non-empty-string, VersionInfo>
      */
     private function versionInfosGroupByName(iterable $versions): array
     {
@@ -40,15 +45,10 @@ final readonly class VersionsChangeSetComputer
     }
 
     /**
-     * Groups versions by their name for efficient lookup.
+     * Groups system versions by their name for efficient lookup.
      *
-     * This method creates an associative array where the key is the version name
-     * and the value is the Version entity. This allows for O(1) lookup when
-     * checking if a version already exists.
-     *
-     * @param iterable<mixed, Version> $versions Versions to group
-     *
-     * @return array<non-empty-string, Version> Versions indexed by name
+     * @param iterable<mixed, Version> $versions
+     * @return array<non-empty-string, Version>
      */
     private function versionsGroupByName(iterable $versions): array
     {
@@ -64,8 +64,11 @@ final readonly class VersionsChangeSetComputer
     }
 
     /**
+     * Computes the plan of changes (created, updated, events) to synchronize
+     * system versions with the provided external version data.
+     *
      * @param iterable<mixed, Version> $existing Existing versions in the system
-     * @param iterable<mixed, VersionInfo> $updated external version data to
+     * @param iterable<mixed, VersionInfo> $updated External version data to
      *        compare against
      */
     public function compute(iterable $existing, iterable $updated): VersionsChangePlan

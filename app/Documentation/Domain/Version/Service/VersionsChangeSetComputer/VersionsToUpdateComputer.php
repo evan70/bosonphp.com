@@ -12,14 +12,13 @@ use App\Documentation\Domain\Version\Service\VersionInfo;
 use App\Documentation\Domain\Version\Version;
 
 /**
- * Domain service responsible for computing which versions need to be updated or disabled.
- *
- * This service analyzes existing versions against external version data and determines
- * which versions need to be updated (hash changes, status changes) or disabled
- * (no longer present in external data). It generates appropriate events for each change.
+ * Computes which versions need to be updated.
  */
-final readonly class VersionsToUpdateComputer extends VersionsComputer
+final readonly class VersionsToUpdateComputer implements VersionsComputerInterface
 {
+    /**
+     * Determines which versions should be updated (including enable or disable).
+     */
     public function process(array $existing, array $updated): iterable
     {
         foreach ($existing as $version) {
@@ -35,16 +34,10 @@ final readonly class VersionsToUpdateComputer extends VersionsComputer
     }
 
     /**
-     * Processes an existing version that is also present in external data.
+     * Handles update logic for a version present in both system and
+     * external data.
      *
-     * This method handles version updates when the version exists both in the system
-     * and in external data. It checks for hash changes and status changes (enabling
-     * hidden versions) and generates appropriate events.
-     *
-     * @param Version $version Existing version to process
-     * @param VersionInfo $info External version data for comparison
-     *
-     * @return iterable<Version, VersionEvent> Updated version and its events
+     * @return iterable<Version, VersionEvent>
      */
     private function processExisting(Version $version, VersionInfo $info): iterable
     {
@@ -67,15 +60,9 @@ final readonly class VersionsToUpdateComputer extends VersionsComputer
     }
 
     /**
-     * Processes an existing version that is no longer present in external data.
+     * Handles disabling logic for a version missing in external data.
      *
-     * This method handles version disabling when a version exists in the system
-     * but is no longer present in external data. It disables the version and
-     * generates appropriate events.
-     *
-     * @param Version $version Existing version to process
-     *
-     * @return iterable<Version, VersionEvent> Disabled version and its events
+     * @return iterable<Version, VersionEvent>
      */
     private function processNotExisting(Version $version): iterable
     {

@@ -8,14 +8,13 @@ use App\Documentation\Domain\Version\Event\VersionCreated;
 use App\Documentation\Domain\Version\Version;
 
 /**
- * Domain service responsible for computing which versions need to be created.
- *
- * This service analyzes external version data and determines which versions
- * don't exist in the system and need to be created. It generates the appropriate
- * VersionCreated events for each new version.
+ * Computes which versions need to be created based on external data.
  */
-final readonly class VersionsToCreateComputer extends VersionsComputer
+final readonly class VersionsToCreateComputer implements VersionsComputerInterface
 {
+    /**
+     * Determines which versions are missing in the system and should be created.
+     */
     public function process(array $existing, array $updated): iterable
     {
         foreach ($updated as $info) {
@@ -28,7 +27,8 @@ final readonly class VersionsToCreateComputer extends VersionsComputer
             }
 
             // Create an entity
-            yield new Version($info->name, hash: $info->hash) => new VersionCreated($info->name);
+            yield new Version($info->name, hash: $info->hash)
+                => new VersionCreated($info->name);
         }
     }
 }
