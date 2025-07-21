@@ -10,17 +10,31 @@ use App\Documentation\Domain\Category\Service\CategoriesChangeSetComputer\Catego
 use App\Documentation\Domain\Category\Service\CategoriesChangeSetComputer\CategoriesToUpdateComputer;
 use App\Documentation\Domain\Version\Version;
 
+/**
+ * Computes the set of changes (create, update, remove) required to synchronize
+ * system categories with external category data.
+ */
 final readonly class CategoriesChangeSetComputer
 {
     public function __construct(
+        /**
+         * Strategy for updating existing categories
+         */
         private CategoriesToUpdateComputer $updates,
+        /**
+         * Strategy for creating new categories
+         */
         private CategoriesToCreateComputer $creations,
+        /**
+         * Strategy for removing categories
+         */
         private CategoriesToRemoveComputer $removements,
     ) {}
 
     /**
-     * @param iterable<mixed, Category> $categories
+     * Groups system categories by their title for efficient lookup.
      *
+     * @param iterable<mixed, Category> $categories
      * @return array<non-empty-string, Category>
      */
     protected function categoriesGroupByTitle(iterable $categories): array
@@ -37,8 +51,9 @@ final readonly class CategoriesChangeSetComputer
     }
 
     /**
-     * @param iterable<mixed, CategoryInfo> $categories
+     * Groups external category information by name for efficient lookup.
      *
+     * @param iterable<mixed, CategoryInfo> $categories
      * @return array<non-empty-string, CategoryInfo>
      */
     protected function categoryInfosGroupByName(iterable $categories): array
@@ -55,8 +70,10 @@ final readonly class CategoriesChangeSetComputer
     }
 
     /**
-     * @param iterable<mixed, CategoryInfo> $updated external category data to
-     *        compare against
+     * Computes the plan of changes (created, updated, removed, events) to synchronize
+     * system categories with the provided external category data.
+     *
+     * @param iterable<mixed, CategoryInfo> $updated External category data to compare against
      */
     public function compute(Version $version, iterable $updated): CategoriesChangePlan
     {

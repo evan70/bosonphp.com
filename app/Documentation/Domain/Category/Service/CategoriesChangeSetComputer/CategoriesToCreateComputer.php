@@ -6,10 +6,18 @@ namespace App\Documentation\Domain\Category\Service\CategoriesChangeSetComputer;
 
 use App\Documentation\Domain\Category\Category;
 use App\Documentation\Domain\Category\Event\CategoryCreated;
+use App\Documentation\Domain\Category\Service\CategoryInfo;
 use App\Documentation\Domain\Version\Version;
 
-final readonly class CategoriesToCreateComputer extends CategoriesComputer
+/**
+ * Computes which categories need to be created based on external data.
+ */
+final readonly class CategoriesToCreateComputer implements CategoriesComputerInterface
 {
+    /**
+     * Determines which categories are missing in the system
+     * and should be created.
+     */
     public function process(Version $version, array $existing, array $updated): iterable
     {
         $index = 0;

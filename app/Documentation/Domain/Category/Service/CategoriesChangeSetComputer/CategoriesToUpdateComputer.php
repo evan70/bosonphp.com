@@ -7,8 +7,14 @@ namespace App\Documentation\Domain\Category\Service\CategoriesChangeSetComputer;
 use App\Documentation\Domain\Category\Event\CategoryUpdated;
 use App\Documentation\Domain\Version\Version;
 
-final readonly class CategoriesToUpdateComputer extends CategoriesComputer
+/**
+ * Computes which categories need to be updated based on external data.
+ */
+final readonly class CategoriesToUpdateComputer implements CategoriesComputerInterface
 {
+    /**
+     * Determines which categories should be updated.
+     */
     public function process(Version $version, array $existing, array $updated): iterable
     {
         $index = 0;
