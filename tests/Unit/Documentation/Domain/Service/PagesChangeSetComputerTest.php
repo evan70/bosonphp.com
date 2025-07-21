@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Documentation\Domain\Service;
 
 use App\Documentation\Domain\Category\Category;
-use App\Documentation\Domain\Category\CategoryPagesSet;
 use App\Documentation\Domain\Document;
 use App\Documentation\Domain\Event\DocumentCreated;
 use App\Documentation\Domain\Event\DocumentUpdated;
@@ -27,6 +26,11 @@ use App\Tests\Unit\TestCase;
 use PHPUnit\Framework\Attributes\Before;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\TestDox;
+use App\Documentation\Domain\Service\LinkInfo;
+use App\Documentation\Domain\Link;
+use App\Documentation\Domain\Event\LinkCreated;
+use App\Documentation\Domain\Event\LinkUpdated;
+use App\Documentation\Domain\Event\LinkRemoved;
 
 #[CoversClass(PagesChangeSetComputer::class)]
 final class PagesChangeSetComputerTest extends TestCase
@@ -308,5 +312,145 @@ final class PagesChangeSetComputerTest extends TestCase
 
         self::assertCount(1, $plan->created);
         self::assertSame('uri1', $plan->created[0]->title);
+    }
+
+    #[TestDox('Creates link if it does not exist')]
+    public function testOnlyCreateLink(): void
+    {
+        $category = $this->createCategory();
+
+        $plan = $this->computer->compute($category, [
+            new LinkInfo('hash1', 'link1'),
+        ]);
+
+        self::assertCount(1, $plan->created);
+        self::assertInstanceOf(Link::class, $plan->created[0]);
+        self::assertSame('link1', $plan->created[0]->title);
+        self::assertCount(0, $plan->updated);
+        self::assertCount(0, $plan->removed);
+        self::assertCount(1, $plan->events);
+        self::assertInstanceOf(LinkCreated::class, $plan->events[0]);
+    }
+
+    #[TestDox('Updates link if hash changes')]
+    public function testOnlyUpdateLink(): void
+    {
+        $category = $this->createCategory();
+
+        new Link($category, 'link1', 'link1', 0, 'old_hash');
+
+        $plan = $this->computer->compute($category, [
+            new LinkInfo('new_hash', 'link1'),
+        ]);
+
+        self::assertCount(0, $plan->created);
+        self::assertCount(1, $plan->updated);
+        self::assertInstanceOf(Link::class, $plan->updated[0]);
+        self::assertSame('link1', $plan->updated[0]->title);
+        self::assertSame('new_hash', $plan->updated[0]->hash);
+        self::assertCount(0, $plan->removed);
+        self::assertCount(1, $plan->events);
+        self::assertInstanceOf(LinkUpdated::class, $plan->events[0]);
+    }
+
+    #[TestDox('Removes link if missing in input')]
+    public function testRemoveLink(): void
+    {
+        $category = $this->createCategory();
+
+        new Link($category, 'link1', 'link1', 0, 'hash1');
+
+        $plan = $this->computer->compute($category, []);
+
+        self::assertCount(0, $plan->created);
+        self::assertCount(0, $plan->updated);
+        self::assertCount(1, $plan->removed);
+        self::assertInstanceOf(Link::class, $plan->removed[0]);
+        self::assertSame('link1', $plan->removed[0]->title);
+        self::assertCount(1, $plan->events);
+        self::assertInstanceOf(LinkRemoved::class, $plan->events[0]);
+    }
+
+    #[TestDox('Handles duplicate link uris in input and existing')]
+    public function testDuplicateLinks(): void
+    {
+        $category = $this->createCategory();
+
+        new Link($category, 'link1', 'link1', 0, 'old_hash');
+        new Link($category, 'link1', 'link1', 0, 'old_hash');
+
+        $plan = $this->computer->compute($category, [
+            new LinkInfo('new_hash', 'link1'),
+            new LinkInfo('hash2', 'link2'),
+            new LinkInfo('hash2', 'link2'),
+        ]);
+
+        self::assertCount(1, $plan->created);
+        self::assertCount(1, $plan->updated);
+        self::assertSame('link2', $plan->created[0]->title);
+        self::assertSame('link1', $plan->updated[0]->title);
+    }
+
+    #[TestDox('Order of input does not affect result for links')]
+    public function testOrderOfInputDoesNotAffectResultForLinks(): void
+    {
+        $category1 = $this->createCategory();
+
+        new Link($category1, 'link1', 'link1', 0, 'old_hash');
+        new Link($category1, 'link2', 'link2', 0, 'old_hash2');
+
+        $plan1 = $this->computer->compute($category1, [
+            new LinkInfo('new_hash', 'link1'),
+            new LinkInfo('hash2', 'link2'),
+        ]);
+
+        $category2 = $this->createCategory();
+        new Link($category2, 'link2', 'link2', 0, 'old_hash2');
+        new Link($category2, 'link1', 'link1', 0, 'old_hash');
+
+        $plan2 = $this->computer->compute($category2, [
+            new LinkInfo('hash2', 'link2'),
+            new LinkInfo('new_hash', 'link1'),
+        ]);
+
+        $names1 = [$plan1->updated[0]->title, $plan1->created[0]->title];
+        $names2 = [$plan2->updated[0]->title, $plan2->created[0]->title];
+
+        \sort($names1);
+        \sort($names2);
+
+        self::assertSame($names1, $names2);
+    }
+
+    #[TestDox('Removes and updates links simultaneously')]
+    public function testRemoveAndUpdateLinksSimultaneously(): void
+    {
+        $category = $this->createCategory();
+
+        new Link($category, 'link1', 'link1', 0, 'hash1');
+        new Link($category, 'link2', 'link2', 0, 'hash2');
+
+        $plan = $this->computer->compute($category, [
+            new LinkInfo('new_hash', 'link1'),
+        ]);
+
+        self::assertCount(1, $plan->updated);
+        self::assertSame('link1', $plan->updated[0]->title);
+        self::assertCount(1, $plan->removed);
+        self::assertSame('link2', $plan->removed[0]->title);
+    }
+
+    #[TestDox('Handles duplicate uris with different hash in input for links')]
+    public function testDuplicateLinksWithDifferentHash(): void
+    {
+        $category = $this->createCategory();
+
+        $plan = $this->computer->compute($category, [
+            new LinkInfo('hash1', 'link1'),
+            new LinkInfo('hash2', 'link1'),
+        ]);
+
+        self::assertCount(1, $plan->created);
+        self::assertSame('link1', $plan->created[0]->title);
     }
 }
