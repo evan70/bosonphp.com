@@ -2,7 +2,7 @@
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const B=globalThis,j=B.ShadowRoot&&(B.ShadyCSS===void 0||B.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,I=Symbol(),q=new WeakMap;let ee=class{constructor(e,t,i){if(this._$cssResult$=!0,i!==I)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(j&&e===void 0){const i=t!==void 0&&t.length===1;i&&(e=q.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),i&&q.set(t,e))}return e}toString(){return this.cssText}};const re=n=>new ee(typeof n=="string"?n:n+"",void 0,I),u=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((i,s,o)=>i+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+n[o+1],n[0]);return new ee(t,n,I)},ae=(n,e)=>{if(j)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const i=document.createElement("style"),s=B.litNonce;s!==void 0&&i.setAttribute("nonce",s),i.textContent=t.cssText,n.appendChild(i)}},V=j?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const i of e.cssRules)t+=i.cssText;return re(t)})(n):n;/**
+ */const T=globalThis,I=T.ShadowRoot&&(T.ShadyCSS===void 0||T.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,j=Symbol(),q=new WeakMap;let ee=class{constructor(e,t,i){if(this._$cssResult$=!0,i!==j)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(I&&e===void 0){const i=t!==void 0&&t.length===1;i&&(e=q.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),i&&q.set(t,e))}return e}toString(){return this.cssText}};const re=n=>new ee(typeof n=="string"?n:n+"",void 0,j),p=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((i,s,o)=>i+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+n[o+1],n[0]);return new ee(t,n,j)},ae=(n,e)=>{if(I)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const i=document.createElement("style"),s=T.litNonce;s!==void 0&&i.setAttribute("nonce",s),i.textContent=t.cssText,n.appendChild(i)}},V=I?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const i of e.cssRules)t+=i.cssText;return re(t)})(n):n;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -12,11 +12,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */const D=globalThis,M=D.trustedTypes,Y=M?M.createPolicy("lit-html",{createHTML:n=>n}):void 0,ie="$lit$",y=`lit$${Math.random().toFixed(9).slice(2)}$`,se="?"+y,fe=`<${se}>`,w=document,P=()=>w.createComment(""),C=n=>n===null||typeof n!="object"&&typeof n!="function",L=Array.isArray,ve=n=>L(n)||typeof n?.[Symbol.iterator]=="function",R=`[ 	
 \f\r]`,S=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,K=/-->/g,J=/>/g,b=RegExp(`>|${R}(?:([^\\s"'>=/]+)(${R}*=${R}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),Z=/'/g,X=/"/g,ne=/^(?:script|style|textarea|title)$/i,xe=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),c=xe(1),A=Symbol.for("lit-noChange"),m=Symbol.for("lit-nothing"),Q=new WeakMap,$=w.createTreeWalker(w,129);function oe(n,e){if(!L(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return Y!==void 0?Y.createHTML(e):e}const ye=(n,e)=>{const t=n.length-1,i=[];let s,o=e===2?"<svg>":e===3?"<math>":"",r=S;for(let h=0;h<t;h++){const a=n[h];let p,f,l=-1,v=0;for(;v<a.length&&(r.lastIndex=v,f=r.exec(a),f!==null);)v=r.lastIndex,r===S?f[1]==="!--"?r=K:f[1]!==void 0?r=J:f[2]!==void 0?(ne.test(f[2])&&(s=RegExp("</"+f[2],"g")),r=b):f[3]!==void 0&&(r=b):r===b?f[0]===">"?(r=s??S,l=-1):f[1]===void 0?l=-2:(l=r.lastIndex-f[2].length,p=f[1],r=f[3]===void 0?b:f[3]==='"'?X:Z):r===X||r===Z?r=b:r===K||r===J?r=S:(r=b,s=void 0);const x=r===b&&n[h+1].startsWith("/>")?" ":"";o+=r===S?a+fe:l>=0?(i.push(p),a.slice(0,l)+ie+a.slice(l)+y+x):a+y+(l===-2?h:x)}return[oe(n,o+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),i]};class H{constructor({strings:e,_$litType$:t},i){let s;this.parts=[];let o=0,r=0;const h=e.length-1,a=this.parts,[p,f]=ye(e,t);if(this.el=H.createElement(p,i),$.currentNode=this.el.content,t===2||t===3){const l=this.el.content.firstChild;l.replaceWith(...l.childNodes)}for(;(s=$.nextNode())!==null&&a.length<h;){if(s.nodeType===1){if(s.hasAttributes())for(const l of s.getAttributeNames())if(l.endsWith(ie)){const v=f[r++],x=s.getAttribute(l).split(y),T=/([.?@])?(.*)/.exec(v);a.push({type:1,index:o,name:T[2],strings:x,ctor:T[1]==="."?$e:T[1]==="?"?we:T[1]==="@"?_e:N}),s.removeAttribute(l)}else l.startsWith(y)&&(a.push({type:6,index:o}),s.removeAttribute(l));if(ne.test(s.tagName)){const l=s.textContent.split(y),v=l.length-1;if(v>0){s.textContent=M?M.emptyScript:"";for(let x=0;x<v;x++)s.append(l[x],P()),$.nextNode(),a.push({type:2,index:++o});s.append(l[v],P())}}}else if(s.nodeType===8)if(s.data===se)a.push({type:2,index:o});else{let l=-1;for(;(l=s.data.indexOf(y,l+1))!==-1;)a.push({type:7,index:o}),l+=y.length-1}o++}}static createElement(e,t){const i=w.createElement("template");return i.innerHTML=e,i}}function k(n,e,t=n,i){if(e===A)return e;let s=i!==void 0?t._$Co?.[i]:t._$Cl;const o=C(e)?void 0:e._$litDirective$;return s?.constructor!==o&&(s?._$AO?.(!1),o===void 0?s=void 0:(s=new o(n),s._$AT(n,t,i)),i!==void 0?(t._$Co??=[])[i]=s:t._$Cl=s),s!==void 0&&(e=k(n,s._$AS(n,e.values),s,i)),e}class be{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:i}=this._$AD,s=(e?.creationScope??w).importNode(t,!0);$.currentNode=s;let o=$.nextNode(),r=0,h=0,a=i[0];for(;a!==void 0;){if(r===a.index){let p;a.type===2?p=new O(o,o.nextSibling,this,e):a.type===1?p=new a.ctor(o,a.name,a.strings,this,e):a.type===6&&(p=new Ae(o,this,e)),this._$AV.push(p),a=i[++h]}r!==a?.index&&(o=$.nextNode(),r++)}return $.currentNode=w,s}p(e){let t=0;for(const i of this._$AV)i!==void 0&&(i.strings!==void 0?(i._$AI(e,i,t),t+=i.strings.length-2):i._$AI(e[t])),t++}}class O{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,i,s){this.type=2,this._$AH=m,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=i,this.options=s,this._$Cv=s?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=k(this,e,t),C(e)?e===m||e==null||e===""?(this._$AH!==m&&this._$AR(),this._$AH=m):e!==this._$AH&&e!==A&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ve(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==m&&C(this._$AH)?this._$AA.nextSibling.data=e:this.T(w.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:i}=e,s=typeof i=="number"?this._$AC(e):(i.el===void 0&&(i.el=H.createElement(oe(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===s)this._$AH.p(t);else{const o=new be(s,this),r=o.u(this.options);o.p(t),this.T(r),this._$AH=o}}_$AC(e){let t=Q.get(e.strings);return t===void 0&&Q.set(e.strings,t=new H(e)),t}k(e){L(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let i,s=0;for(const o of e)s===t.length?t.push(i=new O(this.O(P()),this.O(P()),this,this.options)):i=t[s],i._$AI(o),s++;s<t.length&&(this._$AR(i&&i._$AB.nextSibling,s),t.length=s)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const i=e.nextSibling;e.remove(),e=i}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class N{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,i,s,o){this.type=1,this._$AH=m,this._$AN=void 0,this.element=e,this.name=t,this._$AM=s,this.options=o,i.length>2||i[0]!==""||i[1]!==""?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=m}_$AI(e,t=this,i,s){const o=this.strings;let r=!1;if(o===void 0)e=k(this,e,t,0),r=!C(e)||e!==this._$AH&&e!==A,r&&(this._$AH=e);else{const h=e;let a,p;for(e=o[0],a=0;a<o.length-1;a++)p=k(this,h[i+a],t,a),p===A&&(p=this._$AH[a]),r||=!C(p)||p!==this._$AH[a],p===m?e=m:e!==m&&(e+=(p??"")+o[a+1]),this._$AH[a]=p}r&&!s&&this.j(e)}j(e){e===m?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class $e extends N{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===m?void 0:e}}class we extends N{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==m)}}class _e extends N{constructor(e,t,i,s,o){super(e,t,i,s,o),this.type=5}_$AI(e,t=this){if((e=k(this,e,t,0)??m)===A)return;const i=this._$AH,s=e===m&&i!==m||e.capture!==i.capture||e.once!==i.once||e.passive!==i.passive,o=e!==m&&(i===m||s);s&&this.element.removeEventListener(this.name,this,i),o&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Ae{constructor(e,t,i){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(e){k(this,e)}}const ke=D.litHtmlPolyfillSupport;ke?.(H,O),(D.litHtmlVersions??=[]).push("3.3.1");const Se=(n,e,t)=>{const i=t?.renderBefore??e;let s=i._$litPart$;if(s===void 0){const o=t?.renderBefore??null;i._$litPart$=s=new O(e.insertBefore(P(),o),o,void 0,t??{})}return s._$AI(n),s};/**
+\f\r"'\`<>=]|("|')|))|$)`,"g"),Z=/'/g,X=/"/g,ne=/^(?:script|style|textarea|title)$/i,xe=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),l=xe(1),A=Symbol.for("lit-noChange"),u=Symbol.for("lit-nothing"),Q=new WeakMap,$=w.createTreeWalker(w,129);function oe(n,e){if(!L(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return Y!==void 0?Y.createHTML(e):e}const ye=(n,e)=>{const t=n.length-1,i=[];let s,o=e===2?"<svg>":e===3?"<math>":"",r=S;for(let h=0;h<t;h++){const a=n[h];let m,f,c=-1,v=0;for(;v<a.length&&(r.lastIndex=v,f=r.exec(a),f!==null);)v=r.lastIndex,r===S?f[1]==="!--"?r=K:f[1]!==void 0?r=J:f[2]!==void 0?(ne.test(f[2])&&(s=RegExp("</"+f[2],"g")),r=b):f[3]!==void 0&&(r=b):r===b?f[0]===">"?(r=s??S,c=-1):f[1]===void 0?c=-2:(c=r.lastIndex-f[2].length,m=f[1],r=f[3]===void 0?b:f[3]==='"'?X:Z):r===X||r===Z?r=b:r===K||r===J?r=S:(r=b,s=void 0);const x=r===b&&n[h+1].startsWith("/>")?" ":"";o+=r===S?a+fe:c>=0?(i.push(m),a.slice(0,c)+ie+a.slice(c)+y+x):a+y+(c===-2?h:x)}return[oe(n,o+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),i]};class H{constructor({strings:e,_$litType$:t},i){let s;this.parts=[];let o=0,r=0;const h=e.length-1,a=this.parts,[m,f]=ye(e,t);if(this.el=H.createElement(m,i),$.currentNode=this.el.content,t===2||t===3){const c=this.el.content.firstChild;c.replaceWith(...c.childNodes)}for(;(s=$.nextNode())!==null&&a.length<h;){if(s.nodeType===1){if(s.hasAttributes())for(const c of s.getAttributeNames())if(c.endsWith(ie)){const v=f[r++],x=s.getAttribute(c).split(y),B=/([.?@])?(.*)/.exec(v);a.push({type:1,index:o,name:B[2],strings:x,ctor:B[1]==="."?$e:B[1]==="?"?we:B[1]==="@"?_e:N}),s.removeAttribute(c)}else c.startsWith(y)&&(a.push({type:6,index:o}),s.removeAttribute(c));if(ne.test(s.tagName)){const c=s.textContent.split(y),v=c.length-1;if(v>0){s.textContent=M?M.emptyScript:"";for(let x=0;x<v;x++)s.append(c[x],P()),$.nextNode(),a.push({type:2,index:++o});s.append(c[v],P())}}}else if(s.nodeType===8)if(s.data===se)a.push({type:2,index:o});else{let c=-1;for(;(c=s.data.indexOf(y,c+1))!==-1;)a.push({type:7,index:o}),c+=y.length-1}o++}}static createElement(e,t){const i=w.createElement("template");return i.innerHTML=e,i}}function k(n,e,t=n,i){if(e===A)return e;let s=i!==void 0?t._$Co?.[i]:t._$Cl;const o=C(e)?void 0:e._$litDirective$;return s?.constructor!==o&&(s?._$AO?.(!1),o===void 0?s=void 0:(s=new o(n),s._$AT(n,t,i)),i!==void 0?(t._$Co??=[])[i]=s:t._$Cl=s),s!==void 0&&(e=k(n,s._$AS(n,e.values),s,i)),e}class be{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:i}=this._$AD,s=(e?.creationScope??w).importNode(t,!0);$.currentNode=s;let o=$.nextNode(),r=0,h=0,a=i[0];for(;a!==void 0;){if(r===a.index){let m;a.type===2?m=new O(o,o.nextSibling,this,e):a.type===1?m=new a.ctor(o,a.name,a.strings,this,e):a.type===6&&(m=new Ae(o,this,e)),this._$AV.push(m),a=i[++h]}r!==a?.index&&(o=$.nextNode(),r++)}return $.currentNode=w,s}p(e){let t=0;for(const i of this._$AV)i!==void 0&&(i.strings!==void 0?(i._$AI(e,i,t),t+=i.strings.length-2):i._$AI(e[t])),t++}}class O{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,i,s){this.type=2,this._$AH=u,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=i,this.options=s,this._$Cv=s?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=k(this,e,t),C(e)?e===u||e==null||e===""?(this._$AH!==u&&this._$AR(),this._$AH=u):e!==this._$AH&&e!==A&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ve(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==u&&C(this._$AH)?this._$AA.nextSibling.data=e:this.T(w.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:i}=e,s=typeof i=="number"?this._$AC(e):(i.el===void 0&&(i.el=H.createElement(oe(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===s)this._$AH.p(t);else{const o=new be(s,this),r=o.u(this.options);o.p(t),this.T(r),this._$AH=o}}_$AC(e){let t=Q.get(e.strings);return t===void 0&&Q.set(e.strings,t=new H(e)),t}k(e){L(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let i,s=0;for(const o of e)s===t.length?t.push(i=new O(this.O(P()),this.O(P()),this,this.options)):i=t[s],i._$AI(o),s++;s<t.length&&(this._$AR(i&&i._$AB.nextSibling,s),t.length=s)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const i=e.nextSibling;e.remove(),e=i}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class N{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,i,s,o){this.type=1,this._$AH=u,this._$AN=void 0,this.element=e,this.name=t,this._$AM=s,this.options=o,i.length>2||i[0]!==""||i[1]!==""?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=u}_$AI(e,t=this,i,s){const o=this.strings;let r=!1;if(o===void 0)e=k(this,e,t,0),r=!C(e)||e!==this._$AH&&e!==A,r&&(this._$AH=e);else{const h=e;let a,m;for(e=o[0],a=0;a<o.length-1;a++)m=k(this,h[i+a],t,a),m===A&&(m=this._$AH[a]),r||=!C(m)||m!==this._$AH[a],m===u?e=u:e!==u&&(e+=(m??"")+o[a+1]),this._$AH[a]=m}r&&!s&&this.j(e)}j(e){e===u?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class $e extends N{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===u?void 0:e}}class we extends N{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==u)}}class _e extends N{constructor(e,t,i,s,o){super(e,t,i,s,o),this.type=5}_$AI(e,t=this){if((e=k(this,e,t,0)??u)===A)return;const i=this._$AH,s=e===u&&i!==u||e.capture!==i.capture||e.once!==i.once||e.passive!==i.passive,o=e!==u&&(i===u||s);s&&this.element.removeEventListener(this.name,this,i),o&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Ae{constructor(e,t,i){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(e){k(this,e)}}const ke=D.litHtmlPolyfillSupport;ke?.(H,O),(D.litHtmlVersions??=[]).push("3.3.1");const Se=(n,e,t)=>{const i=t?.renderBefore??e;let s=i._$litPart$;if(s===void 0){const o=t?.renderBefore??null;i._$litPart$=s=new O(e.insertBefore(P(),o),o,void 0,t??{})}return s._$AI(n),s};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const W=globalThis;class d extends _{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Se(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return A}}d._$litElement$=!0,d.finalized=!0,W.litElementHydrateSupport?.({LitElement:d});const Ee=W.litElementPolyfillSupport;Ee?.({LitElement:d});(W.litElementVersions??=[]).push("4.2.1");const g=u`
+ */const W=globalThis;class d extends _{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Se(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return A}}d._$litElement$=!0,d.finalized=!0,W.litElementHydrateSupport?.({LitElement:d});const Ee=W.litElementPolyfillSupport;Ee?.({LitElement:d});(W.litElementVersions??=[]).push("4.2.1");const g=p`
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-poppins);
     color: var(--color-headline-1);
@@ -38,7 +38,7 @@
   * {
     box-sizing: border-box;
   }
-`;class Pe extends d{static styles=[g,u`
+`;class Pe extends d{static styles=[g,p`
     .container {
       position: relative;
       height: 100%;
@@ -70,7 +70,7 @@
       bottom: 0;
       right: 0;
     }
-  `];render(){return c`
+  `];render(){return l`
       <div class="container">
         <div class="inner">
           <div class="topLeft"></div>
@@ -79,7 +79,29 @@
           <div class="bottomRight"></div>
         </div>
       </div>
-    `}}customElements.define("dots-container",Pe);class Ce extends d{static properties={isScrolled:{type:Boolean},isDocsOpen:{type:Boolean}};static styles=[g,u`
+    `}}customElements.define("dots-container",Pe);class Ce extends d{static properties={href:{type:String},image:{type:String}};static styles=[g,p`
+    .logo {
+      height: inherit;
+      border-right: 1px solid var(--border-color-1);
+      padding: 0 3em;
+      display: flex;
+      align-items: center;
+      transition: background .2s ease;
+
+      &:hover {
+        background: var(--bg-1-hover);
+      }
+
+      .img {
+        height: 50%;
+      }
+    }
+    `];constructor(){super(),this.href="/",this.image="/images/logo.svg"}render(){return l`
+            <a class="logo" href="${this.href}">
+                <h1 style="display: none">BosonPHP</h1>
+                <img class="img" src="${this.image}" alt="logo" />
+            </a>
+        `}}customElements.define("boson-header-logo",Ce);class He extends d{static properties={isScrolled:{type:Boolean},isDocsOpen:{type:Boolean}};static styles=[g,p`
     .container {
       height: 100px;
       position: fixed;
@@ -90,12 +112,16 @@
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border-color-1);
-      padding-bottom: 1px;
       transition-duration: 0.2s;
       background: var(--bg-1-opacity);
       backdrop-filter: blur(14px);
       z-index: 10;
     }
+
+    boson-header-logo {
+        height: 100%;
+    }
+
     .dots {
       transition-duration: 0.2s;
       height: 100px;
@@ -110,22 +136,6 @@
     }
     .container .dots:nth-child(1) {
       border-right: 1px solid var(--border-color-1);
-    }
-    .logo {
-      align-self: stretch;
-      border-right: 1px solid var(--border-color-1);
-      padding: 0 3em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition-duration: 0.2s;
-    }
-    .img {
-      transition-duration: 0.2s;
-      height: 50px;
-    }
-    .isScrolled .logo .img {
-      height: 40px;
     }
     .nav {
       flex: 1;
@@ -173,9 +183,6 @@
     .externalLink:hover {
       background: var(--bg-1-hover);
     }
-    .logo:hover {
-      background: var(--bg-1-hover);
-    }
     .docs {
       position: relative;
     }
@@ -196,47 +203,51 @@
     .isOpen {
       opacity: 1;
     }
-  `];constructor(){super(),this.isScrolled=!1,this.isDocsOpen=!1,this.handleScroll=this.handleScroll.bind(this),this.handleClickOutside=this.handleClickOutside.bind(this)}connectedCallback(){super.connectedCallback(),window.addEventListener("scroll",this.handleScroll),this.handleScroll()}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("scroll",this.handleScroll),document.removeEventListener("mousedown",this.handleClickOutside)}updated(e){e.has("isDocsOpen")&&(this.isDocsOpen?document.addEventListener("mousedown",this.handleClickOutside):document.removeEventListener("mousedown",this.handleClickOutside))}handleScroll(){const e=window.pageYOffset||document.documentElement.scrollTop;this.isScrolled=e>0}handleClickOutside(e){const t=this.shadowRoot.querySelector(".docs"),i=e.composedPath();this.isDocsOpen&&t&&!i.includes(t)&&(this.isDocsOpen=!1)}toggleDocs(){this.isDocsOpen=!this.isDocsOpen}render(){return c`
-      <header class="container ${this.isScrolled?"isScrolled":""}">
-        <div class="dots">
-          <dots-container></dots-container>
-        </div>
-        <a class="logo" href="/">
-          <img class="img" src="/images/logo.svg" alt="logo"/>
-        </a>
-        <div class="nav">
-          <a class="link" href="/">Nativeness</a>
-          <a class="link" href="/">Solves</a>
-          <a class="link" href="/">How It Works</a>
-          <a class="link" href="/">Advantages</a>
-          <div class="docs">
-            <button
-              class="button link ${this.isDocsOpen?"isActive":""}"
-              @click=${this.toggleDocs}
-            >
-              Documentation
-              <img class="${this.isDocsOpen?"isRotated":""}" src="/images/icons/arrow_up_header.svg" alt="arrow_up"/>
-            </button>
-            <div class="docsContent ${this.isDocsOpen?"isOpen":""}">
-              <a class="link" href="/">Link 1</a>
-              <a class="link" href="/">Link 2</a>
-              <a class="link" href="/">Link 3</a>
-            </div>
-          </div>
-        </div>
-        <a class="externalLink" href="/">
-          <img src="/images/icons/github.svg" alt="github"/>
-          GitHub
-        </a>
-        <a class="externalLink" href="/">
-          Get Started
-          <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right"/>
-        </a>
-        <div class="dots">
-          <dots-container></dots-container>
-        </div>
-      </header>
-    `}}customElements.define("app-header",Ce);class He extends d{static styles=[g,u`
+  `];constructor(){super(),this.isScrolled=!1,this.isDocsOpen=!1,this.handleScroll=this.handleScroll.bind(this),this.handleClickOutside=this.handleClickOutside.bind(this)}connectedCallback(){super.connectedCallback(),window.addEventListener("scroll",this.handleScroll),this.handleScroll()}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("scroll",this.handleScroll),document.removeEventListener("mousedown",this.handleClickOutside)}updated(e){e.has("isDocsOpen")&&(this.isDocsOpen?document.addEventListener("mousedown",this.handleClickOutside):document.removeEventListener("mousedown",this.handleClickOutside))}handleScroll(){const e=window.pageYOffset||document.documentElement.scrollTop;this.isScrolled=e>0}handleClickOutside(e){const t=this.shadowRoot.querySelector(".docs"),i=e.composedPath();this.isDocsOpen&&t&&!i.includes(t)&&(this.isDocsOpen=!1)}toggleDocs(){this.isDocsOpen=!this.isDocsOpen}render(){return l`
+            <header class="container ${this.isScrolled?"isScrolled":""}">
+                <div class="dots">
+                    <dots-container></dots-container>
+                </div>
+
+                <boson-header-logo></boson-header-logo>
+
+                <div class="nav">
+                    <a class="link" href="/">Nativeness</a>
+                    <a class="link" href="/">Solves</a>
+                    <a class="link" href="/">How It Works</a>
+                    <a class="link" href="/">Advantages</a>
+                    <div class="docs">
+                        <button
+                                class="button link ${this.isDocsOpen?"isActive":""}"
+                                @click=${this.toggleDocs}
+                        >
+                            Documentation
+                            <img class="${this.isDocsOpen?"isRotated":""}" src="/images/icons/arrow_up_header.svg"
+                                 alt="arrow_up"/>
+                        </button>
+                        <div class="docsContent ${this.isDocsOpen?"isOpen":""}">
+                            <a class="link" href="/">Link 1</a>
+                            <a class="link" href="/">Link 2</a>
+                            <a class="link" href="/">Link 3</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="externalLink" href="/">
+                    <img src="/images/icons/github.svg" alt="github"/>
+                    GitHub
+                </a>
+
+                <a class="externalLink" href="/">
+                    Get Started
+                    <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right"/>
+                </a>
+
+                <div class="dots">
+                    <dots-container></dots-container>
+                </div>
+            </header>
+        `}}customElements.define("app-header",He);class Oe extends d{static styles=[g,p`
     .container {
       display: flex;
       flex-direction: column;
@@ -319,7 +330,7 @@
     .credits img {
       height: 24px;
     }
-  `];render(){return c`
+  `];render(){return l`
       <footer class="container">
         <div class="content">
           <div class="top">
@@ -371,7 +382,7 @@
           <img src="/images/credits.png" alt="credits"/>
         </div>
       </footer>
-    `}}customElements.define("app-footer",He);class Oe extends d{static properties={href:{type:String},text:{type:String}};static styles=[g,u`
+    `}}customElements.define("app-footer",Oe);class Be extends d{static properties={href:{type:String},text:{type:String}};static styles=[g,p`
     .button {
       transition-duration: 0.2s;
       background: var(--grey-bg);
@@ -397,14 +408,14 @@
       align-items: center;
       background: var(--color-headline-1);
     }
-  `];constructor(){super(),this.href="/",this.text=""}render(){return c`
+  `];constructor(){super(),this.href="/",this.text=""}render(){return l`
       <a href="${this.href}" class="button">
         <span class="text">${this.text}</span>
         <div class="box">
           <img class="img" src="/images/icons/arrow_secondary.svg" alt="arrow_secondary" />
         </div>
       </a>
-    `}}customElements.define("button-secondary",Oe);class Te extends d{static properties={href:{type:String},text:{type:String}};static styles=[g,u`
+    `}}customElements.define("button-secondary",Be);class Te extends d{static properties={href:{type:String},text:{type:String}};static styles=[g,p`
     .button {
       transition-duration: 0.2s;
       background: var(--red-bg);
@@ -430,14 +441,14 @@
       align-items: center;
       background: var(--red);
     }
-  `];constructor(){super(),this.href="/",this.text=""}render(){return c`
+  `];constructor(){super(),this.href="/",this.text=""}render(){return l`
       <a href="${this.href}" class="button">
         <span class="text">${this.text}</span>
         <div class="box">
           <img class="img" src="/images/icons/arrow_primary.svg" alt="arrow_primary" />
         </div>
       </a>
-    `}}customElements.define("button-primary",Te);class Be extends d{static styles=[g,u`
+    `}}customElements.define("button-primary",Te);class Me extends d{static styles=[g,p`
     .container {
       display: flex;
       flex-direction: column;
@@ -495,7 +506,7 @@
     .bottom span {
       text-transform: uppercase;
     }
-  `];render(){return c`
+  `];render(){return l`
       <section class="container">
         <div class="top">
           <div class="text">
@@ -516,7 +527,7 @@
           <img src="/images/icons/arrow_down.svg" alt="arrow_down"/>
         </a>
       </section>
-    `}}customElements.define("hero-section",Be);class Me extends d{static properties={name:{type:String}};static styles=[g,u`
+    `}}customElements.define("hero-section",Me);class ze extends d{static properties={name:{type:String}};static styles=[g,p`
     .container {
       display: flex;
       gap: 1em;
@@ -526,12 +537,12 @@
     .name {
       text-transform: uppercase;
     }
-  `];constructor(){super(),this.name=""}render(){return c`
+  `];constructor(){super(),this.name=""}render(){return l`
       <div class="container">
         <img class="img" src="/images/icons/subtitle.svg" alt="subtitle" />
         <span class="name">${this.name}</span>
       </div>
-    `}}customElements.define("subtitle-component",Me);class ze extends d{static styles=[g,u`
+    `}}customElements.define("subtitle-component",ze);class Ne extends d{static styles=[g,p`
     .container {
       display: flex;
       flex-direction: column;
@@ -569,7 +580,7 @@
       justify-content: center;
       align-items: center;
     }
-  `];render(){return c`
+  `];render(){return l`
       <section class="container">
         <div class="top">
           <div class="left">
@@ -587,7 +598,7 @@
           TODO
         </div>
       </section>
-    `}}customElements.define("nativeness-section",ze);class Ne extends d{static styles=[g,u`
+    `}}customElements.define("nativeness-section",Ne);class Re extends d{static styles=[g,p`
     .container {
       display: flex;
       flex-direction: column;
@@ -660,7 +671,7 @@
     .solves h2 {
       font-weight: 500;
     }
-  `];render(){return c`
+  `];render(){return l`
       <section class="container">
         <div class="top">
           <div class="left">
@@ -707,7 +718,7 @@
           </div>
         </div>
       </section>
-    `}}customElements.define("solves-section",Ne);class Re extends d{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[g,u`
+    `}}customElements.define("solves-section",Re);class Ue extends d{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[g,p`
     .accordion {
       display: flex;
       height: 24rem;
@@ -797,39 +808,39 @@
         opacity: 1;
       }
     }
-  `];constructor(){super(),this.content=[],this.openIndex=0}handleElementClick(e){this.openIndex=e}renderElement(e,t){const i=this.openIndex===t;return c`
+  `];constructor(){super(),this.content=[],this.openIndex=0}handleElementClick(e){this.openIndex=e}renderElement(e,t){const i=this.openIndex===t;return l`
       <div
         class="element ${i?"elementOpen":"elementClosed"}"
         @click=${()=>this.handleElementClick(t)}
       >
         <div class="elementContent">
-          ${i?c`
+          ${i?l`
             <div class="openTop">
               <span class="number">0${t+1}</span>
               <h3 class="headline">${e.headline}</h3>
             </div>
-          `:c`
+          `:l`
             <div class="closedTop">
               <span class="number">0${t+1}</span>
             </div>
           `}
 
-          ${i?c`
+          ${i?l`
             <div class="content">
               <p class="text">${e.text}</p>
             </div>
-          `:c`
+          `:l`
             <div class="collapsedContent">
               <img src="/images/icons/plus.svg" alt="plus"/>
             </div>
           `}
         </div>
       </div>
-    `}render(){return c`
+    `}render(){return l`
       <div class="accordion">
         ${this.content.map((e,t)=>this.renderElement(e,t))}
       </div>
-    `}}customElements.define("horizontal-accordion",Re);class Ue extends d{static styles=[g,u`
+    `}}customElements.define("horizontal-accordion",Ue);class Ie extends d{static styles=[g,p`
     .container {
       display: flex;
       flex-direction: column;
@@ -880,7 +891,7 @@
       display: flex;
       flex: 1;
     }
-  `];get content(){return[{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a falications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson antly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create and resource consumption, significantly outperforming Electron in terms of performance."}]}render(){return c`
+  `];get content(){return[{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a falications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson antly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create and resource consumption, significantly outperforming Electron in terms of performance."}]}render(){return l`
       <section class="container">
         <div class="top">
           <div class="left">
@@ -907,7 +918,7 @@
           </div>
         </div>
       </section>
-    `}}customElements.define("how-it-works-section",Ue);class je extends d{static styles=[g,u`
+    `}}customElements.define("how-it-works-section",Ie);class je extends d{static styles=[g,p`
     .container {
       background: url("/images/right_choice_bg.png");
       background-size: 100% auto;
@@ -933,7 +944,7 @@
       justify-content: center;
       align-items: center;
     }
-  `];render(){return c`
+  `];render(){return l`
       <section class="container">
         <div class="top">
           <h1>Why is Boson PHP</h1>
@@ -944,7 +955,7 @@
           TODO
         </div>
       </section>
-    `}}customElements.define("right-choice-section",je);class Ie extends d{static styles=[g,u`
+    `}}customElements.define("right-choice-section",je);class De extends d{static styles=[g,p`
     .container {
       display: flex;
       justify-content: center;
@@ -1005,7 +1016,7 @@
       font-size: max(1rem, min(.55vw + .55rem, 2rem));
       line-height: 1.75;
     }
-  `];get elements(){return[{text:"For many businesses, mobile devices are the main audience segment. Web applications are good. Desktop clients are great. Mobile applications are wonderful.",icon:"rocket",headline:"Reaching new audiences"},{text:"The same PHP code — but now it works on a mobile device. Budget savings and faster launch.",icon:"clients",headline:"New clients without rewriting code"},{headline:"Convenient for B2B and B2C",icon:"case",text:"Internal CRM, chat applications, offline utilities, task managers, task trackers, dashboards — you can carry everything in your pocket."},{headline:"Without pain and extra stacks",icon:"convenient",text:"One stack. One language. One project. PHP from start to launch in the App Store."}]}renderElement(e){return c`
+  `];get elements(){return[{text:"For many businesses, mobile devices are the main audience segment. Web applications are good. Desktop clients are great. Mobile applications are wonderful.",icon:"rocket",headline:"Reaching new audiences"},{text:"The same PHP code — but now it works on a mobile device. Budget savings and faster launch.",icon:"clients",headline:"New clients without rewriting code"},{headline:"Convenient for B2B and B2C",icon:"case",text:"Internal CRM, chat applications, offline utilities, task managers, task trackers, dashboards — you can carry everything in your pocket."},{headline:"Without pain and extra stacks",icon:"convenient",text:"One stack. One language. One project. PHP from start to launch in the App Store."}]}renderElement(e){return l`
       <div class="element">
         <div class="top">
           <img class="icon" src="/images/icons/${e.icon}.svg" alt="${e.headline}" />
@@ -1013,7 +1024,7 @@
         </div>
         <p class="text">${e.text}</p>
       </div>
-    `}render(){return c`
+    `}render(){return l`
       <section class="container">
         <div class="left">
           <div class="wrapper">
@@ -1031,7 +1042,7 @@
           ${this.elements.map(e=>this.renderElement(e))}
         </div>
       </section>
-    `}}customElements.define("mobile-development-section",Ie);class De extends d{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[g,u`
+    `}}customElements.define("mobile-development-section",De);class Le extends d{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[g,p`
     .container {
       display: flex;
       max-width: 100vw;
@@ -1131,7 +1142,7 @@
         width: 100%;
       }
     }
-  `];constructor(){super(),this.slides=[],this.currentIndex=0,this.slidesPerView=1,this.autoplayInterval=null}connectedCallback(){super.connectedCallback(),this.updateSlidesPerView(),this.startAutoplay(),window.addEventListener("resize",this.updateSlidesPerView.bind(this))}disconnectedCallback(){super.disconnectedCallback(),this.stopAutoplay(),window.removeEventListener("resize",this.updateSlidesPerView.bind(this))}updateSlidesPerView(){this.slidesPerView=window.innerWidth>=768?3:1,this.requestUpdate()}startAutoplay(){this.stopAutoplay(),this.autoplayInterval=setInterval(()=>{this.slideNext()},3e3)}stopAutoplay(){this.autoplayInterval&&(clearInterval(this.autoplayInterval),this.autoplayInterval=null)}slidePrev(){this.currentIndex=this.currentIndex<=0?this.slides.length-this.slidesPerView:this.currentIndex-1,this.requestUpdate()}slideNext(){this.currentIndex=this.currentIndex>=this.slides.length-this.slidesPerView?0:this.currentIndex+1,this.requestUpdate()}getTransform(){const e=100/this.slidesPerView;return`translateX(-${this.currentIndex*e}%)`}renderSlide(e,t){return c`
+  `];constructor(){super(),this.slides=[],this.currentIndex=0,this.slidesPerView=1,this.autoplayInterval=null}connectedCallback(){super.connectedCallback(),this.updateSlidesPerView(),this.startAutoplay(),window.addEventListener("resize",this.updateSlidesPerView.bind(this))}disconnectedCallback(){super.disconnectedCallback(),this.stopAutoplay(),window.removeEventListener("resize",this.updateSlidesPerView.bind(this))}updateSlidesPerView(){this.slidesPerView=window.innerWidth>=768?3:1,this.requestUpdate()}startAutoplay(){this.stopAutoplay(),this.autoplayInterval=setInterval(()=>{this.slideNext()},3e3)}stopAutoplay(){this.autoplayInterval&&(clearInterval(this.autoplayInterval),this.autoplayInterval=null)}slidePrev(){this.currentIndex=this.currentIndex<=0?this.slides.length-this.slidesPerView:this.currentIndex-1,this.requestUpdate()}slideNext(){this.currentIndex=this.currentIndex>=this.slides.length-this.slidesPerView?0:this.currentIndex+1,this.requestUpdate()}getTransform(){const e=100/this.slidesPerView;return`translateX(-${this.currentIndex*e}%)`}renderSlide(e,t){return l`
       <div class="slideWrapper">
         <div class="slide">
           <img class="quote" src="/images/icons/quote.svg" alt="quote"/>
@@ -1145,7 +1156,7 @@
           </div>
         </div>
       </div>
-    `}render(){return c`
+    `}render(){return l`
       <div class="container">
         <button class="sliderButton" @click=${this.slidePrev}>
           <div class="dots">
@@ -1167,7 +1178,7 @@
           <span>Next</span>
         </button>
       </div>
-    `}}customElements.define("slider-component",De);class Le extends d{static styles=[g,u`
+    `}}customElements.define("slider-component",Le);class We extends d{static styles=[g,p`
     .container {
       position: relative;
       display: flex;
@@ -1199,7 +1210,7 @@
       filter: blur(140px);
       z-index: -1;
     }
-  `];get slides(){return[{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building irst meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev4",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."}]}render(){return c`
+  `];get slides(){return[{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building irst meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev4",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."}]}render(){return l`
       <section class="container">
         <div class="top">
           <subtitle-component name="Testimonials"></subtitle-component>
@@ -1212,7 +1223,7 @@
           <slider-component .slides=${this.slides}></slider-component>
         </div>
       </section>
-    `}}customElements.define("testimonials-section",Le);class We extends d{static styles=[g,u`
+    `}}customElements.define("testimonials-section",We);class qe extends d{static styles=[g,p`
     .container {
       padding-bottom: 8em;
       background: url("/images/hero.svg");
@@ -1236,7 +1247,7 @@
       font-weight: 500;
       line-height: 1.1;
     }
-  `];render(){return c`
+  `];render(){return l`
       <section class="container">
         <div class="wrapper">
           <div class="text">
@@ -1248,7 +1259,7 @@
           <button-primary text="Try Boson For Free" href="/"></button-primary>
         </div>
       </section>
-    `}}customElements.define("call-to-action-section",We);class qe extends d{static styles=[g,u`
+    `}}customElements.define("call-to-action-section",qe);class Ve extends d{static styles=[g,p`
         .page {
             display: flex;
             flex-direction: column;
@@ -1259,7 +1270,7 @@
             display: flex;
             flex-direction: column;
         }
-    `];render(){return c`
+    `];render(){return l`
             <main class="page">
                 <hero-section></hero-section>
                 <nativeness-section></nativeness-section>
@@ -1272,4 +1283,4 @@
                 <testimonials-section></testimonials-section>
                 <call-to-action-section></call-to-action-section>
             </main>
-        `}}customElements.define("home-page",qe);
+        `}}customElements.define("home-page",Ve);

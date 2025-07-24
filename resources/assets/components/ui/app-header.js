@@ -1,16 +1,15 @@
-import { LitElement, html, css } from 'lit';
+import {css, html, LitElement} from 'lit';
 import './dots-container.js';
+import './header/logo.js';
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class AppHeader extends LitElement {
     static properties = {
-        isScrolled: { type: Boolean },
-        isDocsOpen: { type: Boolean }
+        isScrolled: {type: Boolean},
+        isDocsOpen: {type: Boolean},
     };
 
-    static styles = [
-        sharedStyles,
-        css`
+    static styles = [sharedStyles, css`
     .container {
       height: 100px;
       position: fixed;
@@ -21,12 +20,16 @@ export class AppHeader extends LitElement {
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid var(--border-color-1);
-      padding-bottom: 1px;
       transition-duration: 0.2s;
       background: var(--bg-1-opacity);
       backdrop-filter: blur(14px);
       z-index: 10;
     }
+
+    boson-header-logo {
+        height: 100%;
+    }
+
     .dots {
       transition-duration: 0.2s;
       height: 100px;
@@ -41,22 +44,6 @@ export class AppHeader extends LitElement {
     }
     .container .dots:nth-child(1) {
       border-right: 1px solid var(--border-color-1);
-    }
-    .logo {
-      align-self: stretch;
-      border-right: 1px solid var(--border-color-1);
-      padding: 0 3em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition-duration: 0.2s;
-    }
-    .img {
-      transition-duration: 0.2s;
-      height: 50px;
-    }
-    .isScrolled .logo .img {
-      height: 40px;
     }
     .nav {
       flex: 1;
@@ -102,9 +89,6 @@ export class AppHeader extends LitElement {
       transition-duration: 0.2s;
     }
     .externalLink:hover {
-      background: var(--bg-1-hover);
-    }
-    .logo:hover {
       background: var(--bg-1-hover);
     }
     .docs {
@@ -178,46 +162,50 @@ export class AppHeader extends LitElement {
 
     render() {
         return html`
-      <header class="container ${this.isScrolled ? 'isScrolled' : ''}">
-        <div class="dots">
-          <dots-container></dots-container>
-        </div>
-        <a class="logo" href="/">
-          <img class="img" src="/images/logo.svg" alt="logo"/>
-        </a>
-        <div class="nav">
-          <a class="link" href="/">Nativeness</a>
-          <a class="link" href="/">Solves</a>
-          <a class="link" href="/">How It Works</a>
-          <a class="link" href="/">Advantages</a>
-          <div class="docs">
-            <button
-              class="button link ${this.isDocsOpen ? 'isActive' : ''}"
-              @click=${this.toggleDocs}
-            >
-              Documentation
-              <img class="${this.isDocsOpen ? 'isRotated' : ''}" src="/images/icons/arrow_up_header.svg" alt="arrow_up"/>
-            </button>
-            <div class="docsContent ${this.isDocsOpen ? 'isOpen' : ''}">
-              <a class="link" href="/">Link 1</a>
-              <a class="link" href="/">Link 2</a>
-              <a class="link" href="/">Link 3</a>
-            </div>
-          </div>
-        </div>
-        <a class="externalLink" href="/">
-          <img src="/images/icons/github.svg" alt="github"/>
-          GitHub
-        </a>
-        <a class="externalLink" href="/">
-          Get Started
-          <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right"/>
-        </a>
-        <div class="dots">
-          <dots-container></dots-container>
-        </div>
-      </header>
-    `;
+            <header class="container ${this.isScrolled ? 'isScrolled' : ''}">
+                <div class="dots">
+                    <dots-container></dots-container>
+                </div>
+
+                <boson-header-logo></boson-header-logo>
+
+                <div class="nav">
+                    <a class="link" href="/">Nativeness</a>
+                    <a class="link" href="/">Solves</a>
+                    <a class="link" href="/">How It Works</a>
+                    <a class="link" href="/">Advantages</a>
+                    <div class="docs">
+                        <button
+                                class="button link ${this.isDocsOpen ? 'isActive' : ''}"
+                                @click=${this.toggleDocs}
+                        >
+                            Documentation
+                            <img class="${this.isDocsOpen ? 'isRotated' : ''}" src="/images/icons/arrow_up_header.svg"
+                                 alt="arrow_up"/>
+                        </button>
+                        <div class="docsContent ${this.isDocsOpen ? 'isOpen' : ''}">
+                            <a class="link" href="/">Link 1</a>
+                            <a class="link" href="/">Link 2</a>
+                            <a class="link" href="/">Link 3</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="externalLink" href="/">
+                    <img src="/images/icons/github.svg" alt="github"/>
+                    GitHub
+                </a>
+
+                <a class="externalLink" href="/">
+                    Get Started
+                    <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right"/>
+                </a>
+
+                <div class="dots">
+                    <dots-container></dots-container>
+                </div>
+            </header>
+        `;
     }
 }
 
