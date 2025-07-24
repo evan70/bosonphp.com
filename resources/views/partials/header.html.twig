@@ -11,14 +11,33 @@
 {% endif %}
 
 <app-header>
+    <boson-header-button slot="logo" href="{{ path('home') }}">
+        <img class="logo" src="/images/logo.svg" alt="logo" />
+    </boson-header-button>
+
+    <boson-header-link
+            {{ app.current_route starts with 'doc.' ? 'active' : '' }}
+            href="{{ path('doc.index') }}">References</boson-header-link>
+
+    <boson-header-link
+            {{ app.current_route starts with 'blog.' ? 'active' : '' }}
+            href="{{ path('blog.index') }}">Blog</boson-header-link>
+
+    <boson-header-button slot="aside" external href="https://github.com/boson-php/boson">
+        <img src="/images/icons/github.svg" alt="github"/>
+        GitHub
+    </boson-header-button>
+
+    <boson-header-button slot="aside" href="{{ path('doc.show', {
+        version: docs_version.name,
+        page: 'introduction'
+    }) }}">
+        Get Started
+        <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right" />
+    </boson-header-button>
+
+    {# TODO
     <ul>
-        <li>
-            {% if app.current_route == 'home' %}
-                <span>Home</span>
-            {% else %}
-                <a href="{{ path('home') }}">Home</a>
-            {% endif %}
-        </li>
         <li>
             <details class="dropdown">
                 <summary role="button" class="outline secondary">
@@ -94,4 +113,5 @@
             </form>
         </li>
     </ul>
+    #}
 </app-header>

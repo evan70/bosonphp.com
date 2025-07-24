@@ -1,6 +1,9 @@
 import {css, html, LitElement} from 'lit';
+
 import './dots-container.js';
-import './header/logo.js';
+import './header/button.js';
+import './header/link.js';
+
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class AppHeader extends LitElement {
@@ -12,6 +15,7 @@ export class AppHeader extends LitElement {
     static styles = [sharedStyles, css`
     .container {
       height: 100px;
+      line-height: 100px;
       position: fixed;
       top: 0;
       left: 0;
@@ -24,27 +28,26 @@ export class AppHeader extends LitElement {
       background: var(--bg-1-opacity);
       backdrop-filter: blur(14px);
       z-index: 10;
+
+      .dots {
+        height: inherit;
+        aspect-ratio: 1 / 1;
+
+        &:nth-child(1) {
+          border-right: 1px solid var(--border-color-1);
+        }
+      }
+
+      &.isScrolled {
+        height: 70px;
+        line-height: 70px;
+      }
     }
 
-    boson-header-logo {
+    ::slotted(*) {
         height: 100%;
     }
 
-    .dots {
-      transition-duration: 0.2s;
-      height: 100px;
-      width: 100px;
-    }
-    .isScrolled {
-      height: 70px;
-    }
-    .isScrolled .dots {
-      height: 70px;
-      width: 70px;
-    }
-    .container .dots:nth-child(1) {
-      border-right: 1px solid var(--border-color-1);
-    }
     .nav {
       flex: 1;
       padding: 0 3em;
@@ -54,6 +57,7 @@ export class AppHeader extends LitElement {
       align-self: stretch;
       align-items: center;
     }
+
     .button {
       all: unset;
       cursor: pointer;
@@ -61,36 +65,16 @@ export class AppHeader extends LitElement {
       align-items: center;
       gap: 0.25em;
     }
+
     .isActive {
       color: var(--red);
     }
-    .button img {
-      transition-duration: 0.2s;
-    }
+
     .isRotated {
       transform: rotate(180deg);
     }
-    .link {
-      color: var(--color-paragraph-1);
-      transition-duration: 0.2s;
-      text-transform: uppercase;
-    }
-    .link:hover {
-      color: var(--red);
-    }
-    .externalLink {
-      padding: 0 3em;
-      border-right: 1px solid var(--border-color-1);
-      align-self: stretch;
-      display: flex;
-      align-items: center;
-      gap: 0.75em;
-      text-transform: uppercase;
-      transition-duration: 0.2s;
-    }
-    .externalLink:hover {
-      background: var(--bg-1-hover);
-    }
+
+
     .docs {
       position: relative;
     }
@@ -167,13 +151,11 @@ export class AppHeader extends LitElement {
                     <dots-container></dots-container>
                 </div>
 
-                <boson-header-logo></boson-header-logo>
+                <slot name="logo"></slot>
 
                 <div class="nav">
-                    <a class="link" href="/">Nativeness</a>
-                    <a class="link" href="/">Solves</a>
-                    <a class="link" href="/">How It Works</a>
-                    <a class="link" href="/">Advantages</a>
+                    <slot></slot>
+
                     <div class="docs">
                         <button
                                 class="button link ${this.isDocsOpen ? 'isActive' : ''}"
@@ -191,15 +173,7 @@ export class AppHeader extends LitElement {
                     </div>
                 </div>
 
-                <a class="externalLink" href="/">
-                    <img src="/images/icons/github.svg" alt="github"/>
-                    GitHub
-                </a>
-
-                <a class="externalLink" href="/">
-                    Get Started
-                    <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right"/>
-                </a>
+                <slot name="aside"></slot>
 
                 <div class="dots">
                     <dots-container></dots-container>

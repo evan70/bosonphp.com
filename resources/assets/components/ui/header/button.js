@@ -1,26 +1,28 @@
 import {css, html, LitElement} from 'lit';
 import {sharedStyles} from "../../../utils/sharedStyles.js";
 
-export class BosonHeaderLogo extends LitElement {
+export class BosonHeaderButton extends LitElement {
     static properties = {
         href: {type: String},
-        image: {type: String},
+        external: {type: Boolean},
     };
 
     static styles = [sharedStyles, css`
-    .logo {
+    .button {
       height: inherit;
       border-right: 1px solid var(--border-color-1);
       padding: 0 3em;
       display: flex;
       align-items: center;
       transition: background .2s ease;
+      text-transform: uppercase;
+      gap: 0.75em;
 
       &:hover {
         background: var(--bg-1-hover);
       }
 
-      .img {
+      ::slotted(img.logo) {
         height: 50%;
       }
     }
@@ -30,17 +32,18 @@ export class BosonHeaderLogo extends LitElement {
         super();
 
         this.href = '/';
-        this.image = '/images/logo.svg';
+        this.external = false;
     }
 
     render() {
         return html`
-            <a class="logo" href="${this.href}">
-                <h1 style="display: none">BosonPHP</h1>
-                <img class="img" src="${this.image}" alt="logo" />
+            <a class="button"
+                href="${this.href}"
+                target="${this.external ? '_blank' : '_self'}">
+                <slot></slot>
             </a>
         `;
     }
 }
 
-customElements.define('boson-header-logo', BosonHeaderLogo);
+customElements.define('boson-header-button', BosonHeaderButton);
