@@ -1,0 +1,25 @@
+{
+  "base": "/build/",
+  "entryPoints": {
+    "app": {
+      "css": [
+        "/build/assets/app-DdV-WN9J.css"
+      ],
+      "dynamic": [],
+      "js": [
+        "/build/assets/app-DrbWea4n.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "8.2.0",
+    8,
+    2,
+    0
+  ],
+  "viteServer": null
+}

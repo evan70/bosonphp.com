@@ -1,3 +1,6 @@
-import "./app.css";
+import './app.css'
 
-console.log("Happy coding !!");
+import './components/ui/app-header.js';
+import './components/ui/app-footer.js';
+import './components/ui/dots-container.js';
+import './pages/home-page.js'

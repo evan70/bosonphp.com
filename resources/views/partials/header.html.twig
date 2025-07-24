@@ -10,12 +10,7 @@
     {% set docs_categories = docs_version.categories ?? [] %}
 {% endif %}
 
-<nav>
-    <ul>
-        <li>
-            <h1>Logo</h1>
-        </li>
-    </ul>
+<app-header>
     <ul>
         <li>
             {% if app.current_route == 'home' %}
@@ -99,4 +94,4 @@
             </form>
         </li>
     </ul>
-</nav>
+</app-header>
