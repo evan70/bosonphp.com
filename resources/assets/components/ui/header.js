@@ -6,56 +6,53 @@ import './header/button.js';
 import './header/link.js';
 import './header/dropdown.js';
 
-import {sharedStyles} from "../../utils/sharedStyles.js";
-
-export class AppHeader extends LitElement {
+export class BosonHeader extends LitElement {
     static properties = {
         isScrolled: {type: Boolean},
-        isDocsOpen: {type: Boolean},
     };
 
-    static styles = [sharedStyles, css`
-    .container {
-      height: 100px;
-      line-height: 100px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-color-1);
-      transition-duration: 0.2s;
-      background: var(--bg-1-opacity);
-      backdrop-filter: blur(14px);
-      z-index: 10;
-    }
+    static styles = [css`
+        .container {
+            height: 100px;
+            line-height: 100px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color-1);
+            transition-duration: 0.2s;
+            background: var(--bg-1-opacity);
+            backdrop-filter: blur(14px);
+            z-index: 10;
+        }
 
-    .container.scrolled {
-      height: 70px;
-      line-height: 70px;
-    }
+        .container.scrolled {
+            height: 70px;
+            line-height: 70px;
+        }
 
-    .dots,
-    ::slotted(*) {
-      height: 100%;
-    }
+        .dots,
+        ::slotted(*) {
+            height: 100%;
+        }
 
-    .dots:nth-child(1) {
-      border-right: 1px solid var(--border-color-1);
-    }
+        .dots:nth-child(1) {
+            border-right: 1px solid var(--border-color-1);
+        }
 
-    .nav {
-      flex: 1;
-      padding: 0 3em;
-      display: flex;
-      gap: 3em;
-      border-right: 1px solid var(--border-color-1);
-      align-self: stretch;
-      align-items: center;
-    }
-  `];
+        .nav {
+            flex: 1;
+            padding: 0 3em;
+            display: flex;
+            gap: 3em;
+            border-right: 1px solid var(--border-color-1);
+            align-self: stretch;
+            align-items: center;
+        }
+    `];
 
     constructor() {
         super();
@@ -105,4 +102,4 @@ export class AppHeader extends LitElement {
     }
 }
 
-customElements.define('app-header', AppHeader);
+customElements.define('boson-header', BosonHeader);

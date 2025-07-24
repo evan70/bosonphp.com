@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import {css, html, LitElement} from 'lit';
 
 import '../components/sections/hero-section.js';
 import '../components/sections/nativeness-section.js';
@@ -8,12 +8,11 @@ import '../components/sections/right-choice-section.js';
 import '../components/sections/mobile-development-section.js';
 import '../components/sections/testimonials-section.js';
 import '../components/sections/call-to-action-section.js';
+
 import {sharedStyles} from "../utils/sharedStyles.js";
 
 export class HomePage extends LitElement {
-    static styles = [
-        sharedStyles,
-        css`
+    static styles = [sharedStyles, css`
         .page {
             display: flex;
             flex-direction: column;

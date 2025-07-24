@@ -8,24 +8,24 @@ export class BosonHeaderButton extends LitElement {
     };
 
     static styles = [sharedStyles, css`
-    .button {
-      height: inherit;
-      border-right: 1px solid var(--border-color-1);
-      padding: 0 3em;
-      display: flex;
-      align-items: center;
-      transition: background .2s ease;
-      text-transform: uppercase;
-      gap: 0.75em;
-    }
+        .button {
+            height: inherit;
+            border-right: 1px solid var(--border-color-1);
+            padding: 0 3em;
+            display: flex;
+            align-items: center;
+            transition: background .2s ease;
+            text-transform: uppercase;
+            gap: 0.75em;
+        }
 
-    .button:hover {
-      background: var(--bg-1-hover);
-    }
+        .button:hover {
+            background: var(--bg-1-hover);
+        }
 
-    ::slotted(img.logo) {
-      height: 50%;
-    }
+        ::slotted(img.logo) {
+            height: 50%;
+        }
     `];
 
     constructor() {
@@ -38,8 +38,8 @@ export class BosonHeaderButton extends LitElement {
     render() {
         return html`
             <a class="button"
-                href="${this.href}"
-                target="${this.external ? '_blank' : '_self'}">
+               href="${this.href}"
+               target="${this.external ? '_blank' : '_self'}">
                 <slot></slot>
             </a>
         `;

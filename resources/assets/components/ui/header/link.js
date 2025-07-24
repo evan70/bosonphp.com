@@ -9,23 +9,23 @@ export class BosonHeaderLink extends LitElement {
     };
 
     static styles = [sharedStyles, css`
-    .link {
-      color: var(--color-paragraph-1);
-      transition-duration: 0.2s;
-      text-transform: uppercase;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-    }
+        .link {
+            color: var(--color-paragraph-1);
+            transition-duration: 0.2s;
+            text-transform: uppercase;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+        }
 
-    .link.active,
-    .link:hover {
-      color: var(--red);
-    }
+        .link.active,
+        .link:hover {
+            color: var(--red);
+        }
 
-    ::slotted(img) {
-      margin-right: 15px;
-    }
+        ::slotted(img) {
+            margin-right: 15px;
+        }
     `];
 
     constructor() {

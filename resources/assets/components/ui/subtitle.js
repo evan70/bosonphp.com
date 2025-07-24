@@ -1,24 +1,23 @@
-import { LitElement, html, css } from 'lit';
+import {css, html, LitElement} from 'lit';
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class Subtitle extends LitElement {
     static properties = {
-        name: { type: String }
+        name: {type: String}
     };
 
-    static styles = [
-        sharedStyles,
-        css`
-    .container {
-      display: flex;
-      gap: 1em;
-      justify-content: center;
-      align-items: center;
-    }
-    .name {
-      text-transform: uppercase;
-    }
-  `];
+    static styles = [sharedStyles, css`
+        .container {
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .name {
+            text-transform: uppercase;
+        }
+    `];
 
     constructor() {
         super();
@@ -27,11 +26,11 @@ export class Subtitle extends LitElement {
 
     render() {
         return html`
-      <div class="container">
-        <img class="img" src="/images/icons/subtitle.svg" alt="subtitle" />
-        <span class="name">${this.name}</span>
-      </div>
-    `;
+            <div class="container">
+                <img class="img" src="/images/icons/subtitle.svg" alt="subtitle"/>
+                <span class="name">${this.name}</span>
+            </div>
+        `;
     }
 }
 
