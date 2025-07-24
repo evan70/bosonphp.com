@@ -69,6 +69,7 @@ final class PageFixture extends Fixture implements DependentFixtureInterface
                         title: $title . ' in ' . $category->title,
                         uri: new AsciiSlugger()
                             ->slug($title . ' in ' . $category->title)
+                            ->lower()
                             ->toString(),
                         content: $this->faker->markdownContent(
                             $this->faker->numberBetween(5, 50),

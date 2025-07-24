@@ -31,8 +31,7 @@
             >
                 {% if docs_category.icon is not null %}
                     <img src="{{ docs_category.icon }}"
-                         width="16" height="16" />
-                    &nbsp;
+                         width="16" height="16" alt="{{ docs_category.title }}" />
                 {% endif %}
 
                 {{ docs_category.title }}
@@ -53,7 +52,6 @@
             </boson-header-link>
         {% endfor %}
     </boson-header-dropdown>
-
 
     <boson-header-button slot="aside" external href="https://github.com/boson-php/boson">
         <img src="/images/icons/github.svg" alt="github"/>

@@ -38,6 +38,7 @@ export class BosonHeaderDropdown extends LitElement {
       border-right-color: transparent;
       border-bottom-color: transparent;
       transition: .2s ease;
+      border-radius: 1px;
 
       position: absolute;
       top: 50%;
@@ -53,7 +54,7 @@ export class BosonHeaderDropdown extends LitElement {
       line-height: 42px;
       background: var(--bg-dark);
       border: 1px solid var(--grey-bg);
-      padding: 10px 15px;
+      padding: 10px 20px;
       display: flex;
       min-width: 200px;
       flex-direction: column;
