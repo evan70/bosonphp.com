@@ -34,6 +34,11 @@ export class BosonHeader extends LitElement {
             line-height: 70px;
         }
 
+        .header-padding {
+            width: 100%;
+            height: 100px;
+        }
+
         .dots,
         ::slotted(*) {
             height: 100%;
@@ -58,7 +63,6 @@ export class BosonHeader extends LitElement {
         super();
 
         this.isScrolled = false;
-        this.isDocsOpen = false;
 
         this.handleScroll = this.handleScroll.bind(this);
     }
@@ -98,6 +102,7 @@ export class BosonHeader extends LitElement {
                     <dots-container></dots-container>
                 </div>
             </header>
+            <div class="header-padding"></div>
         `;
     }
 }

@@ -16,21 +16,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
 </head>
 <body lang="{{ app.request.locale|slice(0, 2) }}">
-    <header class="container">
-        {% block header %}
-            {% include 'partials/header.html.twig' %}
-        {% endblock %}
-    </header>
+    {% block header %}
+        {% include 'partials/header.html.twig' %}
+    {% endblock %}
 
-    <main class="container">
-        {% block body %}{% endblock %}
-    </main>
+    {% block body %}{% endblock %}
 
-    <footer class="container">
-        {% block footer %}
-            {% include 'partials/footer.html.twig' %}
-        {% endblock %}
-    </footer>
+    {% block footer %}
+        {% include 'partials/footer.html.twig' %}
+    {% endblock %}
 
     {% block javascripts %}
         <!-- scripts -->

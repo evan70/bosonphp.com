@@ -11,8 +11,7 @@ export class HeroSection extends LitElement {
             display: flex;
             flex-direction: column;
             width: var(--content-width);
-            margin: 10em auto 0;
-            gap: 3em;
+            margin: 0 auto;
         }
 
         .top {
@@ -22,6 +21,7 @@ export class HeroSection extends LitElement {
             flex: 1;
             gap: 2em;
             justify-content: space-between;
+            padding: 8em 0;
         }
 
         .text {
@@ -93,6 +93,7 @@ export class HeroSection extends LitElement {
                     </div>
                     <img class="img" src="/images/hero.svg" alt="hero"/>
                 </div>
+
                 <a href="#nativeness" class="bottom">
                     <span>Discover more about boson</span>
                     <img src="/images/icons/arrow_down.svg" alt="arrow_down"/>
