@@ -64,10 +64,10 @@ services:
       $repository: '%app.sync.github_repository%'
 
   App\Sync\Domain\ExternalPageRepositoryInterface:
-    alias: ExternalPageGitHubRepository
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalPageGitHubRepository
 
   App\Sync\Domain\Repository\ExternalPageReferencesListProviderInterface:
-    alias: ExternalPageGitHubRepository
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalPageGitHubRepository
 
   App\Sync\Domain\Repository\ExternalDocumentByNameProviderInterface:
-    alias: ExternalPageGitHubRepository
+    alias: App\Sync\Infrastructure\Persistence\Repository\ExternalPageGitHubRepository
