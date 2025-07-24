@@ -11,10 +11,7 @@
     <title>{% block title %}Boson{% endblock %}</title>
     {% block stylesheets %}
         <!-- styles -->
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-        >
+        {{ vite_entry_link_tags('app') }}
     {% endblock %}
     <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png">
 </head>
@@ -35,6 +32,7 @@
 
     {% block javascripts %}
         <!-- scripts -->
+        {{ vite_entry_script_tags('app') }}
     {% endblock %}
 </body>
 </html>

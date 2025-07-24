@@ -23,6 +23,7 @@
         "local/set": "^1.0",
         "local/type-lang-mapper-bundle": "^1.0",
         "nyholm/psr7": "^1.8.2",
+        "pentatrion/vite-bundle": "^8.2",
         "ramsey/uuid": "^4.9",
         "symfony/clock": "7.3.*",
         "symfony/console": "7.3.*",
