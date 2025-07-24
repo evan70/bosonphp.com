@@ -13,11 +13,12 @@ export class BosonHeaderLink extends LitElement {
       color: var(--color-paragraph-1);
       transition-duration: 0.2s;
       text-transform: uppercase;
+      white-space: nowrap;
+    }
 
-      &.active,
-      &:hover {
-        color: var(--red);
-      }
+    .link.active,
+    .link:hover {
+      color: var(--red);
     }
     `];
 

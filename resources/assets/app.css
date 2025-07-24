@@ -4,6 +4,8 @@
 }
 
 :root {
+  --bg-dark: #000;
+
   --bg-1: #0A0A0A;
   --bg-1-opacity: rgba(10, 10, 10, 0.5);
   --bg-1-hover: #121212;

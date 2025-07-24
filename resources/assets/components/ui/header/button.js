@@ -17,14 +17,14 @@ export class BosonHeaderButton extends LitElement {
       transition: background .2s ease;
       text-transform: uppercase;
       gap: 0.75em;
+    }
 
-      &:hover {
-        background: var(--bg-1-hover);
-      }
+    .button:hover {
+      background: var(--bg-1-hover);
+    }
 
-      ::slotted(img.logo) {
-        height: 50%;
-      }
+    ::slotted(img.logo) {
+      height: 50%;
     }
     `];
 

@@ -15,13 +15,45 @@
         <img class="logo" src="/images/logo.svg" alt="logo" />
     </boson-header-button>
 
-    <boson-header-link
-            {{ app.current_route starts with 'doc.' ? 'active' : '' }}
-            href="{{ path('doc.index') }}">References</boson-header-link>
+    <boson-header-dropdown href="{{ path('doc.index') }}">
+        <boson-header-link slot="summary"
+                {{ app.current_route starts with 'doc.' ? 'active' : '' }}
+                href="{{ path('doc.index') }}">References</boson-header-link>
 
-    <boson-header-link
-            {{ app.current_route starts with 'blog.' ? 'active' : '' }}
-            href="{{ path('blog.index') }}">Blog</boson-header-link>
+        {% for docs_category in docs_categories %}
+            <boson-header-link
+                {% if docs_category.page is not null and docs_version is not null %}
+                    href="{{ path('doc.show', {
+                        page: docs_category.page.uri,
+                        version: docs_version.name
+                    }) }}"
+                {% endif %}
+            >
+                {% if docs_category.icon is not null %}
+                    <img src="{{ docs_category.icon }}"
+                         width="16" height="16" />
+                    &nbsp;
+                {% endif %}
+
+                {{ docs_category.title }}
+            </boson-header-link>
+        {% endfor %}
+    </boson-header-dropdown>
+
+    <boson-header-dropdown href="{{ path('blog.index') }}">
+        <boson-header-link slot="summary"
+                {{ app.current_route starts with 'blog.' ? 'active' : '' }}
+                href="{{ path('blog.index') }}">Blog</boson-header-link>
+
+        {% for blog_category in blog_categories %}
+            <boson-header-link href="{{ path('blog.index_by_category', {
+                slug: blog_category.uri
+            }) }}">
+                {{ blog_category.title }}
+            </boson-header-link>
+        {% endfor %}
+    </boson-header-dropdown>
+
 
     <boson-header-button slot="aside" external href="https://github.com/boson-php/boson">
         <img src="/images/icons/github.svg" alt="github"/>
