@@ -6,7 +6,6 @@
 
 {% block body %}
 
-
     <boson-breadcrumbs>
         <a href="{{ path('home') }}">Home</a>
 
@@ -17,8 +16,8 @@
 
         <span>
             {% if category.icon is not null %}
-                <img width="18" height="18"
-                     src="{{ category.icon }}" />
+                <img width="18" height="18" src="{{ category.icon }}" />
+                &nbsp;
             {% endif %}
             {% if category.description is not null %}
                 <span data-tooltip="{{ category.description }}">{{ category.title }}</span>

@@ -1,5 +1,5 @@
-<details class="dropdown">
-    <summary role="button" class="outline secondary">
+<boson-header-dropdown href="{{ path('doc.index') }}">
+    <span slot="summary">
         {% if app.current_route == 'doc.index_by_version' or app.current_route == 'doc.index' %}
             <span>
                 Documentation ({{ version.name }})
@@ -8,55 +8,61 @@
             <a href="{{ path('doc.index_by_version', { version: version.name }) }}">
                 Documentation ({{ version.name }})
             </a>
-        {% endif %}
-    </summary>
-    <ul>
+         {% endif %}
+    </span>
+
+    {% if page is defined %}
+
         {% for dev in versions.dev %}
-            <li>
-                {% if page is defined %}
-                    <a href="{{ path('doc.show', { page: page.uri, version: dev.name }) }}">
-                        {{ dev.name }} (dev)
-                    </a>
-                {% else %}
-                    <a href="{{ path('doc.index_by_version', { version: dev.name }) }}">
-                        {{ dev.name }} (dev)
-                    </a>
-                {% endif %}
-            </li>
+            <a href="{{ path('doc.show', { page: page.uri, version: dev.name }) }}">
+                {{ dev.name }} (dev)
+            </a>
         {% endfor %}
 
         {% for stable in versions.stable %}
-            <li>
-                {% if page is defined %}
-                    <a href="{{ path('doc.show', { page: page.uri, version: stable.name }) }}">
-                        {{ stable.name }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('doc.index_by_version', { version: stable.name }) }}">
-                        {{ stable.name }}
-                    </a>
-                {% endif %}
-            </li>
+            <a href="{{ path('doc.show', { page: page.uri, version: stable.name }) }}">
+                {{ stable.name }}
+            </a>
         {% endfor %}
 
         {% if versions.deprecated|length > 0 %}
-        <li>
             <strong>Unmaintained Versions</strong>
-        </li>
         {% endif %}
 
         {% for deprecated in versions.deprecated %}
-            <li>
-                {% if page is defined %}
-                    <a href="{{ path('doc.show', { page: page.uri, version: deprecated.name }) }}">
-                        {{ deprecated.name }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('doc.index_by_version', { version: deprecated.name }) }}">
-                        {{ deprecated.name }}
-                    </a>
-                {% endif %}
-            </li>
+            <a href="{{ path('doc.show', { page: page.uri, version: deprecated.name }) }}">
+                {{ deprecated.name }}
+            </a>
         {% endfor %}
-    </ul>
-</details>
+
+    {% else %}
+
+        {% for dev in versions.dev %}
+            <a href="{{ path('doc.index_by_version', { version: dev.name }) }}">
+                {{ dev.name }} (dev)
+            </a>
+        {% endfor %}
+
+        {% for stable in versions.stable %}
+            <a href="{{ path('doc.index_by_version', { version: stable.name }) }}">
+                {{ stable.name }}
+            </a>
+        {% endfor %}
+
+        {% if versions.deprecated|length > 0 %}
+            <strong>Unmaintained Versions</strong>
+        {% endif %}
+
+        {% for deprecated in versions.deprecated %}
+            <a href="{{ path('doc.index_by_version', { version: deprecated.name }) }}">
+                {{ deprecated.name }}
+            </a>
+        {% endfor %}
+
+    {% endif %}
+
+
+
+
+
+</boson-header-dropdown>

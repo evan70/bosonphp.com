@@ -43,7 +43,9 @@ export class BosonBreadcrumbs extends LitElement {
         }
 
         ::slotted(*) {
-            display: block;
+            display: flex;
+            align-items: center;
+            height: 100%;
             position: relative;
             padding: 0 30px 0 55px;
             transition: background .2s ease;
@@ -72,10 +74,6 @@ export class BosonBreadcrumbs extends LitElement {
             right: -52px;
             border-radius: 2px;
             border-left-color: var(--color-border);
-        }
-
-        ::slotted(*:last-child) {
-            color: var(--color-text-secondary);
         }
 
         ::slotted(*:last-child)::after,
