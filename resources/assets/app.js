@@ -12,13 +12,15 @@ import './components/sections/right-choice-section.js';
 import './components/sections/solves-section.js';
 import './components/sections/testimonials-section.js';
 
+import './components/ui/header.js';
 import './components/ui/header/button.js';
 import './components/ui/header/dropdown.js';
 import './components/ui/header/link.js';
 
+import './components/ui/breadcrumbs.js';
+
 import './components/ui/dots-container.js';
 import './components/ui/footer.js';
-import './components/ui/header.js';
 import './components/ui/horizontal-accordion.js';
 import './components/ui/slider.js';
 import './components/ui/subtitle.js';

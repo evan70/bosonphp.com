@@ -1,6 +1,6 @@
 <details class="dropdown">
     <summary role="button" class="outline secondary">
-        {% if app.current_route == 'doc.index_by_version' %}
+        {% if app.current_route == 'doc.index_by_version' or app.current_route == 'doc.index' %}
             <span>
                 Documentation ({{ version.name }})
             </span>

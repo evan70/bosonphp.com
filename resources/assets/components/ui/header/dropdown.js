@@ -38,12 +38,10 @@ export class BosonHeaderDropdown extends LitElement {
             border-bottom-color: transparent;
             transition: .2s ease;
             border-radius: 1px;
-
             position: absolute;
             top: 50%;
-            right: -14px;
+            right: -20px;
             margin-top: -2.2px;
-
             transform-origin: 2px 2px;
             transform: rotate(225deg);
         }

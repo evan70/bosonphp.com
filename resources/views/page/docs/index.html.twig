@@ -6,20 +6,16 @@
 
 {% block body %}
 
-    <h1>Documentation</h1>
+    <boson-breadcrumbs>
+        <a href="{{ path('home') }}">Home</a>
 
-    <nav>
-        <ul>
-            <li><a href="{{ path('home') }}">Home</a></li>
-            <li style="color: #5d6b89">&gt;</li>
-            <li>
-                {% include 'page/docs/partials/version_selector.html.twig' with {
-                    version: version,
-                    versions: versions,
-                } %}
-            </li>
-        </ul>
-    </nav>
+        {% include 'page/docs/partials/version_selector.html.twig' with {
+            version: version,
+            versions: versions,
+        } %}
+    </boson-breadcrumbs>
+
+    <h1>Documentation</h1>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;" class="grid">
         {% for category in version.categories %}
