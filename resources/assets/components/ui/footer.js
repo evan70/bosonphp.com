@@ -1,5 +1,4 @@
 import {css, html, LitElement} from 'lit';
-import './dots-container.js';
 
 export class BosonFooter extends LitElement {
     static styles = [css`
@@ -9,8 +8,8 @@ export class BosonFooter extends LitElement {
         }
 
         .content {
-            border-top: 1px solid var(--border-color-1);
-            border-bottom: 1px solid var(--border-color-1);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
             display: flex;
             flex-direction: column;
             position: relative;
@@ -18,7 +17,7 @@ export class BosonFooter extends LitElement {
 
         .top {
             display: flex;
-            border-bottom: 1px solid var(--border-color-1);
+            border-bottom: 1px solid var(--color-border);
         }
 
         .bottom {
@@ -47,7 +46,7 @@ export class BosonFooter extends LitElement {
         }
 
         .holder:nth-child(1) {
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
         }
 
         ::slotted(a) {
@@ -56,25 +55,25 @@ export class BosonFooter extends LitElement {
             justify-content: center;
             align-items: center;
             width: 230px;
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             transition-duration: 0.2s;
         }
 
         ::slotted(a:hover) {
-            background: var(--bg-1-hover);
+            background: var(--color-bg-hover);
         }
 
         [name="secondary-link"]::slotted(a) {
-            color: var(--color-paragraph-1) !important;
+            color: var(--color-text-secondary) !important;
         }
 
         [name="secondary-link"]::slotted(a:hover) {
-            background: var(--bg-1-hover) !important;
+            background: var(--color-bg-hover) !important;
         }
 
         .dots-main {
             flex: 1;
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             padding: 1em;
         }
 
@@ -87,13 +86,13 @@ export class BosonFooter extends LitElement {
 
         .copyright {
             flex: 1;
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             display: flex;
             align-items: center;
             margin-left: 3em;
             font-size: max(1rem, min(.55rem + .55vw, 2rem));
             line-height: 1.75;
-            color: var(--color-paragraph-1);
+            color: var(--color-text-secondary);
         }
 
         .credits {

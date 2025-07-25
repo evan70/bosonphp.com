@@ -1,4 +1,5 @@
 import {css, html, LitElement} from 'lit';
+
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class HorizontalAccordion extends LitElement {
@@ -15,7 +16,7 @@ export class HorizontalAccordion extends LitElement {
         }
 
         .element {
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             transition-duration: 0.3s;
         }
 
@@ -29,7 +30,7 @@ export class HorizontalAccordion extends LitElement {
         }
 
         .elementClosed:hover {
-            background: var(--bg-1-hover);
+            background: var(--color-bg-hover);
         }
 
         .elementOpen .elementContent {
@@ -80,16 +81,16 @@ export class HorizontalAccordion extends LitElement {
 
         .number {
             font-size: max(1.5rem, min(2rem + 1vw, 2rem));
-            color: var(--red);
+            color: var(--color-text-brand);
             transition-duration: 0.2s;
         }
 
         .elementClosed .elementContent .closedTop .number {
-            color: var(--color-paragraph-1);
+            color: var(--color-text-secondary);
         }
 
         .elementClosed:hover .elementContent .closedTop .number {
-            color: var(--red);
+            color: var(--color-text-brand);
         }
 
         .collapsedContent {

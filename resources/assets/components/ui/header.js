@@ -1,11 +1,5 @@
 import {css, html, LitElement} from 'lit';
 
-import './dots-container.js';
-
-import './header/button.js';
-import './header/link.js';
-import './header/dropdown.js';
-
 export class BosonHeader extends LitElement {
     static properties = {
         isScrolled: {type: Boolean},
@@ -22,9 +16,9 @@ export class BosonHeader extends LitElement {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border-color-1);
+            border-bottom: 1px solid var(--color-border);
             transition-duration: 0.2s;
-            background: var(--bg-1-opacity);
+            background: var(--color-bg-opacity);
             backdrop-filter: blur(14px);
             z-index: 10;
         }
@@ -45,7 +39,7 @@ export class BosonHeader extends LitElement {
         }
 
         .dots:nth-child(1) {
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
         }
 
         .nav {
@@ -53,7 +47,7 @@ export class BosonHeader extends LitElement {
             padding: 0 3em;
             display: flex;
             gap: 3em;
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             align-self: stretch;
             align-items: center;
         }

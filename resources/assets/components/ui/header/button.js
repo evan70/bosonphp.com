@@ -1,4 +1,5 @@
 import {css, html, LitElement} from 'lit';
+
 import {sharedStyles} from "../../../utils/sharedStyles.js";
 
 export class BosonHeaderButton extends LitElement {
@@ -10,7 +11,7 @@ export class BosonHeaderButton extends LitElement {
     static styles = [sharedStyles, css`
         .button {
             height: inherit;
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             padding: 0 3em;
             display: flex;
             align-items: center;
@@ -20,7 +21,7 @@ export class BosonHeaderButton extends LitElement {
         }
 
         .button:hover {
-            background: var(--bg-1-hover);
+            background: var(--color-bg-hover);
         }
 
         ::slotted(img.logo) {

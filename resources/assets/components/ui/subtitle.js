@@ -1,4 +1,5 @@
 import {css, html, LitElement} from 'lit';
+
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class Subtitle extends LitElement {

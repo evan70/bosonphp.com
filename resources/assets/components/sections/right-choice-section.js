@@ -21,7 +21,7 @@ export class RightChoiceSection extends LitElement {
         }
 
         .red {
-            color: var(--red);
+            color: var(--color-text-brand);
         }
 
         .content {

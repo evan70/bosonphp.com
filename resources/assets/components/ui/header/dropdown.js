@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import './link.js';
+
 import {sharedStyles} from "../../../utils/sharedStyles.js";
 
 export class BosonHeaderDropdown extends LitElement {
@@ -33,7 +33,7 @@ export class BosonHeaderDropdown extends LitElement {
             width: 3px;
             height: 3px;
             display: block;
-            border: solid 2px var(--red);
+            border: solid 2px var(--color-text-brand);
             border-right-color: transparent;
             border-bottom-color: transparent;
             transition: .2s ease;
@@ -51,8 +51,8 @@ export class BosonHeaderDropdown extends LitElement {
         .dropdown-list {
             position: absolute;
             line-height: 42px;
-            background: var(--bg-dark);
-            border: 1px solid var(--grey-bg);
+            background: var(--color-bg-layer);
+            border: 1px solid var(--color-border);
             padding: 10px 20px;
             display: flex;
             min-width: 200px;

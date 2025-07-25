@@ -1,4 +1,5 @@
 import {css, html, LitElement} from 'lit';
+
 import {sharedStyles} from "../../../utils/sharedStyles.js";
 
 export class BosonHeaderLink extends LitElement {
@@ -10,7 +11,7 @@ export class BosonHeaderLink extends LitElement {
 
     static styles = [sharedStyles, css`
         .link {
-            color: var(--color-paragraph-1);
+            color: var(--color-text-secondary);
             transition-duration: 0.2s;
             text-transform: uppercase;
             white-space: nowrap;
@@ -20,7 +21,7 @@ export class BosonHeaderLink extends LitElement {
 
         .link.active,
         .link:hover {
-            color: var(--red);
+            color: var(--color-text-brand);
         }
 
         ::slotted(img) {

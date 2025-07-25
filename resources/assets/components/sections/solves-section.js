@@ -1,8 +1,5 @@
 import {css, html, LitElement} from 'lit';
 
-import '../ui/subtitle.js';
-import '../ui/dots-container.js';
-
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class SolvesSection extends LitElement {
@@ -16,7 +13,7 @@ export class SolvesSection extends LitElement {
         .top {
             display: flex;
             justify-content: space-between;
-            width: var(--content-width);
+            width: var(--width-content);
             margin: 0 auto;
         }
 
@@ -34,7 +31,7 @@ export class SolvesSection extends LitElement {
         }
 
         .red {
-            color: var(--red);
+            color: var(--color-text-brand);
         }
 
         .right {
@@ -60,8 +57,8 @@ export class SolvesSection extends LitElement {
         .content {
             display: flex;
             padding: 1px 0;
-            border-bottom: 1px solid var(--border-color-1);
-            border-top: 1px solid var(--border-color-1);
+            border-bottom: 1px solid var(--color-border);
+            border-top: 1px solid var(--color-border);
         }
 
         .dots {
@@ -69,7 +66,7 @@ export class SolvesSection extends LitElement {
         }
 
         .content .dots:nth-child(1) {
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
         }
 
         .inner {
@@ -78,7 +75,7 @@ export class SolvesSection extends LitElement {
         }
 
         .solves {
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             padding: 4em;
             gap: 1.25em;
             display: flex;

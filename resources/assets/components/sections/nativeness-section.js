@@ -1,7 +1,5 @@
 import {css, html, LitElement} from 'lit';
 
-import '../ui/subtitle.js';
-
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class NativenessSection extends LitElement {
@@ -14,7 +12,7 @@ export class NativenessSection extends LitElement {
 
         .top {
             display: flex;
-            width: var(--content-width);
+            width: var(--width-content);
             margin: 0 auto;
             gap: 3em;
         }

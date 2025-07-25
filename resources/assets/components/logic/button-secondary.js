@@ -4,13 +4,14 @@ import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class ButtonSecondary extends LitElement {
     static properties = {
-        href: {type: String}, text: {type: String}
+        href: {type: String},
+        text: {type: String},
     };
 
     static styles = [sharedStyles, css`
         .button {
             transition-duration: 0.2s;
-            background: var(--grey-bg);
+            background: var(--color-bg-button-secondary);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,12 +21,12 @@ export class ButtonSecondary extends LitElement {
         }
 
         .button:hover {
-            background: var(--grey-bg-hover);
+            background: var(--color-bg-button-secondary-hover);
         }
 
         .text {
             margin-left: 1em;
-            color: var(--color-headline-1);
+            color: var(--color-text-button-secondary);
         }
 
         .box {
@@ -34,7 +35,7 @@ export class ButtonSecondary extends LitElement {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--color-headline-1);
+            background: var(--color-text-button-secondary);
         }
     `];
 

@@ -1,5 +1,5 @@
 import {css, html, LitElement} from 'lit';
-import './dots-container.js';
+
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class Slider extends LitElement {
@@ -14,9 +14,9 @@ export class Slider extends LitElement {
             display: flex;
             max-width: 100vw;
             overflow: hidden;
-            border-top: 1px solid var(--border-color-1);
-            border-bottom: 1px solid var(--border-color-1);
-            background: var(--bg-1);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-bg);
         }
 
         .sliderContent {
@@ -40,15 +40,15 @@ export class Slider extends LitElement {
         }
 
         .sliderButton:hover {
-            background-color: var(--bg-1-hover);
+            background-color: var(--color-bg-hover);
         }
 
         .sliderButton:nth-child(1) {
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
         }
 
         .sliderButton:nth-last-child(1) {
-            border-left: 1px solid var(--border-color-1);
+            border-left: 1px solid var(--color-border);
         }
 
         .dots {
@@ -70,7 +70,7 @@ export class Slider extends LitElement {
 
         .slide {
             padding: 3em;
-            border-right: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
             display: flex;
             flex-direction: column;
             gap: 2em;
@@ -110,7 +110,7 @@ export class Slider extends LitElement {
         }
 
         .role {
-            color: var(--red);
+            color: var(--color-text-brand);
             text-transform: uppercase;
         }
 

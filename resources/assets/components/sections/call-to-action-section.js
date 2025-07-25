@@ -1,7 +1,5 @@
 import {css, html, LitElement} from 'lit';
 
-import '../logic/button-primary.js';
-
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class CallToActionSection extends LitElement {
@@ -13,7 +11,7 @@ export class CallToActionSection extends LitElement {
         }
 
         .wrapper {
-            width: var(--content-width);
+            width: var(--width-content);
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -22,7 +20,7 @@ export class CallToActionSection extends LitElement {
         }
 
         .red {
-            color: var(--red);
+            color: var(--color-text-brand);
         }
 
         .text h1 {

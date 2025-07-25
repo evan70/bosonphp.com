@@ -1,8 +1,5 @@
 import {css, html, LitElement} from 'lit';
 
-import '../ui/subtitle.js';
-import '../ui/slider.js';
-
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class TestimonialsSection extends LitElement {

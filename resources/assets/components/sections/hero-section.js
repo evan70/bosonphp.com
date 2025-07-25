@@ -1,8 +1,5 @@
 import {css, html, LitElement} from 'lit';
 
-import '../logic/button-secondary.js';
-import '../logic/button-primary.js';
-
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class HeroSection extends LitElement {
@@ -10,7 +7,7 @@ export class HeroSection extends LitElement {
         .container {
             display: flex;
             flex-direction: column;
-            width: var(--content-width);
+            width: var(--width-content);
             margin: 0 auto;
         }
 
@@ -41,7 +38,7 @@ export class HeroSection extends LitElement {
         }
 
         .headlines h1:nth-child(1) {
-            color: var(--red);
+            color: var(--color-text-brand);
         }
 
         .description {
@@ -62,12 +59,12 @@ export class HeroSection extends LitElement {
             align-items: center;
             justify-content: space-between;
             transition-duration: 0.2s;
-            border-top: 1px solid var(--grey-bg);
+            border-top: 1px solid var(--color-border);
         }
 
         .bottom:hover {
             padding: 3em 2em;
-            background-color: var(--grey-bg);
+            background-color: var(--color-bg-hover);
         }
 
         .bottom span {

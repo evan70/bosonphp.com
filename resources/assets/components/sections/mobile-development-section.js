@@ -1,8 +1,5 @@
 import {css, html, LitElement} from 'lit';
 
-import '../ui/subtitle.js';
-import '../logic/button-primary.js';
-
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class MobileDevelopmentSection extends LitElement {
@@ -11,7 +8,7 @@ export class MobileDevelopmentSection extends LitElement {
             display: flex;
             justify-content: center;
             position: relative;
-            border-top: 1px solid var(--border-color-1);
+            border-top: 1px solid var(--color-border);
         }
 
         .left {
@@ -20,8 +17,8 @@ export class MobileDevelopmentSection extends LitElement {
             flex-direction: column;
             align-self: stretch;
             position: relative;
-            border-right: 1px solid var(--border-color-1);
-            border-bottom: 1px solid var(--border-color-1);
+            border-right: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
         }
 
         .wrapper {
@@ -41,7 +38,7 @@ export class MobileDevelopmentSection extends LitElement {
         }
 
         .red {
-            color: var(--red);
+            color: var(--color-text-brand);
         }
 
         .description {
@@ -56,7 +53,7 @@ export class MobileDevelopmentSection extends LitElement {
         }
 
         .element {
-            border-bottom: 1px solid var(--border-color-1);
+            border-bottom: 1px solid var(--color-border);
             padding: 4em;
             display: flex;
             flex-direction: column;

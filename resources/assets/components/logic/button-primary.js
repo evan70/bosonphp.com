@@ -11,7 +11,7 @@ export class ButtonPrimary extends LitElement {
     static styles = [sharedStyles, css`
         .button {
             transition-duration: 0.2s;
-            background: var(--red-bg);
+            background: var(--color-bg-button);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,12 +21,12 @@ export class ButtonPrimary extends LitElement {
         }
 
         .button:hover {
-            background: var(--red-bg-hover);
+            background: var(--color-bg-button-hover);
         }
 
         .text {
             margin-left: 1em;
-            color: var(--red);
+            color: var(--color-text-button);
         }
 
         .box {
@@ -35,7 +35,7 @@ export class ButtonPrimary extends LitElement {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: var(--red);
+            background: var(--color-text-button);
         }
     `];
 
