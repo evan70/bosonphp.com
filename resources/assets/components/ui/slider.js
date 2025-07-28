@@ -107,6 +107,7 @@ export class Slider extends LitElement {
 
         .name {
             font-weight: 500;
+            font-size: 1.2rem;
         }
 
         .role {
@@ -191,7 +192,7 @@ export class Slider extends LitElement {
                     <div class="bottom">
                         <img class="pfp" src="/images/${slide.pfp}" alt="${slide.name}"/>
                         <div class="info">
-                            <h3 class="name">${slide.name}</h3>
+                            <span class="name">${slide.name}</span>
                             <p class="role">${slide.role}</p>
                         </div>
                     </div>

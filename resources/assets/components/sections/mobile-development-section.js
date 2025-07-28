@@ -46,12 +46,6 @@ export class MobileDevelopmentSection extends LitElement {
             line-height: 1.75;
         }
 
-        .headline h1 {
-            font-size: max(3rem, min(1vw + 3.5rem, 5rem));
-            font-weight: 500;
-            line-height: 1.1;
-        }
-
         .element {
             border-bottom: 1px solid var(--color-border);
             padding: 4em;
@@ -67,7 +61,7 @@ export class MobileDevelopmentSection extends LitElement {
         }
 
         .name {
-            font-weight: 500;
+            text-transform: uppercase;
         }
 
         .text {
@@ -101,7 +95,7 @@ export class MobileDevelopmentSection extends LitElement {
             <div class="element">
                 <div class="top">
                     <img class="icon" src="/images/icons/${element.icon}.svg" alt="${element.headline}"/>
-                    <h2 class="name">${element.headline}</h2>
+                    <h5 class="name">${element.headline}</h5>
                 </div>
                 <p class="text">${element.text}</p>
             </div>
@@ -115,9 +109,7 @@ export class MobileDevelopmentSection extends LitElement {
                     <div class="wrapper">
                         <subtitle-component name="Mobile Development"></subtitle-component>
                         <div class="headline">
-                            <h1>Expand Your</h1>
-                            <h1>Business Horizons:</h1>
-                            <h1 class="red">PHP Mobile Apps</h1>
+                            <h2>Expand Your Business Horizons: <span class="red">PHP Mobile Apps</span></h2>
                         </div>
                         <p class="description">With Boson PHP Mobile, you can run your PHP app on Android and iOS -
                             without learning Swift, Kotlin or React Native.</p>

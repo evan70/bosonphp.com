@@ -24,12 +24,6 @@ export class HowItWorksSection extends LitElement {
             gap: 2em;
         }
 
-        .text h1 {
-            font-size: max(3rem, min(1vw + 3.5rem, 5rem));
-            font-weight: 500;
-            line-height: 1.1;
-        }
-
         .right {
             display: flex;
             flex-direction: column;
@@ -91,8 +85,7 @@ export class HowItWorksSection extends LitElement {
                     <div class="left">
                         <subtitle-component name="How It Works"></subtitle-component>
                         <div class="text">
-                            <h1>Under the Hood of</h1>
-                            <h1>Boson PHP</h1>
+                            <h2>Under the Hood of</br>Boson PHP</h2>
                         </div>
                     </div>
                     <div class="right">

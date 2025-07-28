@@ -21,6 +21,10 @@ export class HeroSection extends LitElement {
             padding: 8em 0;
         }
 
+        .white {
+            color: var(--color-text);
+        }
+
         .text {
             flex: 3;
             display: flex;
@@ -33,11 +37,10 @@ export class HeroSection extends LitElement {
         }
 
         .headlines {
-            font-size: clamp(4rem, 1vw + 4.5rem, 7rem);
             line-height: 1.1;
         }
 
-        .headlines h1:nth-child(1) {
+        .headlines h1 {
             color: var(--color-text-brand);
         }
 
@@ -78,8 +81,7 @@ export class HeroSection extends LitElement {
                 <div class="top">
                     <div class="text">
                         <div class="headlines">
-                            <h1>Go Native.</h1>
-                            <h1>Stay PHP</h1>
+                            <h1>Go Native. </br><span class="white">Stay PHP</span></h1>
                         </div>
                         <p class="description">Turn your PHP project into cross-platform, compact, fast, native
                             applications for Windows, macOS, Linux, Android and iOS.</p>

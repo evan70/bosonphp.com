@@ -58,24 +58,23 @@ export class BosonHeader extends LitElement {
 
         this.isScrolled = false;
 
-        this.onScroll = this.onScroll.bind(this);
+        this.handleScroll = this.handleScroll.bind(this);
     }
 
     connectedCallback() {
         super.connectedCallback();
-        window.addEventListener('scroll', this.onScroll);
-        this.onScroll();
+        window.addEventListener('scroll', this.handleScroll);
+        this.handleScroll();
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
-        window.removeEventListener('scroll', this.onScroll);
+        window.removeEventListener('scroll', this.handleScroll);
     }
 
-    onScroll() {
+    handleScroll() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        this.isScrolled = scrollTop > 30;
+        this.isScrolled = scrollTop > 0;
     }
 
     render() {

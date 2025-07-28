@@ -22,12 +22,6 @@ export class CallToActionSection extends LitElement {
         .red {
             color: var(--color-text-brand);
         }
-
-        .text h1 {
-            font-size: max(2rem, min(2rem + 1vw, 5rem));
-            font-weight: 500;
-            line-height: 1.1;
-        }
     `];
 
     render() {
@@ -35,10 +29,12 @@ export class CallToActionSection extends LitElement {
             <section class="container">
                 <div class="wrapper">
                     <div class="text">
-                        <h1>If you are a PHP developer, you can already</h1>
-                        <h1>make native cross-platform applications.</h1>
-                        <h1>Boson PHP makes it possible!</h1>
-                        <h1 class="red">Get started right now!</h1>
+                        <h3>
+                            If you are a PHP developer, you can already</br>
+                            make native cross-platform applications.</br>
+                            Boson PHP makes it possible!</br>
+                            <span class="red">Get started right now!</span>
+                        </h3>
                     </div>
                     <button-primary text="Try Boson For Free" href="/"></button-primary>
                 </div>

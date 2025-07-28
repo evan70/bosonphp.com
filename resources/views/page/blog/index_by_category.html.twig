@@ -6,13 +6,15 @@
 
 {% block body %}
 
-    <boson-breadcrumbs>
-        <a href="{{ path('home') }}">Home</a>
-        <a href="{{ path('blog.index') }}">Blog</a>
-        <span>{{ category.title }}</span>
-    </boson-breadcrumbs>
-
     <h1>&laquo{{ category.title }}&raquo; blog posts</h1>
+
+    <nav aria-label="breadcrumb">
+        <ul>
+            <li><a href="{{ path('home') }}">Home</a></li>
+            <li><a href="{{ path('blog.index') }}">Blog</a></li>
+            <li>{{ category.title }}</li>
+        </ul>
+    </nav>
 
     <div style="display: grid; grid-template-columns: 2fr 1fr;">
         <section>

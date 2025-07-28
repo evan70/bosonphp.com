@@ -23,12 +23,6 @@ export class TestimonialsSection extends LitElement {
             text-align: center;
         }
 
-        .headline h1 {
-            font-size: max(3rem, min(3.5rem + 1vw, 5rem));
-            font-weight: 500;
-            line-height: 1.1;
-        }
-
         .container:before {
             content: '';
             position: absolute;
@@ -86,8 +80,7 @@ export class TestimonialsSection extends LitElement {
                 <div class="top">
                     <subtitle-component name="Testimonials"></subtitle-component>
                     <div class="headline">
-                        <h1>Developers that</h1>
-                        <h1>believe in us</h1>
+                        <h2>Developers that </br>believe in us</h2>
                     </div>
                 </div>
                 <div class="content">

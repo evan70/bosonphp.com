@@ -74,11 +74,6 @@ export class HorizontalAccordion extends LitElement {
             line-height: 1.75;
         }
 
-        .headline {
-            font-size: max(1.5rem, min(2rem + 1vw, 2.25rem));
-            font-weight: 500;
-        }
-
         .number {
             font-size: max(1.5rem, min(2rem + 1vw, 2rem));
             color: var(--color-text-brand);
@@ -138,7 +133,7 @@ export class HorizontalAccordion extends LitElement {
                     ${isOpen ? html`
                         <div class="openTop">
                             <span class="number">0${index + 1}</span>
-                            <h3 class="headline">${item.headline}</h3>
+                            <h4 class="headline">${item.headline}</h4>
                         </div>
                     ` : html`
                         <div class="closedTop">

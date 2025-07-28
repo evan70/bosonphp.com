@@ -17,7 +17,7 @@ export class BosonHeaderDropdown extends LitElement {
 
         .dropdown {
             position: relative;
-            padding-right: 20px;
+            padding-right: 24px;
         }
 
         .dropdown:hover .dropdown-summary::after {
@@ -38,10 +38,12 @@ export class BosonHeaderDropdown extends LitElement {
             border-bottom-color: transparent;
             transition: .2s ease;
             border-radius: 1px;
+
             position: absolute;
             top: 50%;
-            right: -20px;
+            right: -14px;
             margin-top: -2.2px;
+
             transform-origin: 2px 2px;
             transform: rotate(225deg);
         }
@@ -56,18 +58,7 @@ export class BosonHeaderDropdown extends LitElement {
             min-width: 200px;
             flex-direction: column;
             flex-wrap: nowrap;
-            top: 50%;
-            margin-top: 15px;
-        }
-
-        ::slotted(*) {
-            white-space: nowrap;
-        }
-
-        ::slotted(strong) {
-            text-transform: uppercase;
-            color: var(--color-text-secondary);
-            font-size: 90%;
+            margin-top: -20px;
         }
     `];
 

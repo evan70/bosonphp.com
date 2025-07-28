@@ -52,7 +52,7 @@
   /**
    * Main border color
    */
-  --color-border: #212225;
+  --color-border: rgba(255, 255, 255, 0.05);
 
   /**
    * Overlay Text
