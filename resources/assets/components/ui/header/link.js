@@ -17,11 +17,12 @@ export class BosonHeaderLink extends LitElement {
             white-space: nowrap;
             display: flex;
             align-items: center;
+            padding: 0 20px;
         }
 
         .link.active,
         .link:hover {
-            color: var(--color-text-brand);
+            background: var(--color-border-nono-transparent);
         }
 
         ::slotted(img) {

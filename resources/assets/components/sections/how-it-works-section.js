@@ -55,6 +55,7 @@ export class HowItWorksSection extends LitElement {
 
         .inner {
             display: flex;
+            flex-direction: column;
             flex: 1;
         }
     `];
