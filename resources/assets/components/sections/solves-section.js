@@ -84,6 +84,34 @@ export class SolvesSection extends LitElement {
         .solves h5 {
             text-transform: uppercase;
         }
+
+        @media (orientation: portrait) {
+            .top {
+                flex-direction: column;
+                margin: 0 1em;
+                gap: 3em;
+            }
+            .dots {
+                display: none;
+            }
+            .inner {
+                flex-direction: column;
+            }
+            .solves {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 3em 2em;
+                text-align: center;
+                border-bottom: 1px solid var(--color-border);
+            }
+            .solves:nth-last-child(1) {
+                border-bottom: 1px solid transparent;
+            }
+            .solves > img {
+                align-self: center;
+            }
+        }
     `];
 
     render() {
