@@ -64,97 +64,197 @@ export class RightChoiceSection extends LitElement {
         }
 
         .inner {
-            width: 55%;
-            transition: transform 0.25s ease;
+            width: 620px;
+            transition: transform 0.5s ease;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             gap: 1em;
         }
+        .progress {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 3em;
+            align-self: stretch;
+            border-top: 1px solid var(--color-border);
+            gap: 1em;
+        }
+        .el {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+        }
+        .dots {
+            height: 14px;
+            width: 5px;
+        }
+        .dots.red {
+            background-image: url("/images/icons/dots_red.svg");
+        }
+        .dots.grey {
+            background-image: url("/images/icons/dots_grey.svg");
+        }
+        .progress-text {
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+        }
     `];
 
     static animationConfig = {
-        triggerOffset: -0.8,
-        animationDistance: 115,
-        speed: 4.5,
+        blockDuration: 3000,
+        transitionDuration: 500,
+        animationDistance: 800,
     };
 
     constructor() {
         super();
-        this.handleScroll = this.handleScroll.bind(this);
-        this.isIntersecting = false;
+
+        this.animationState = {
+            currentStage: 0,
+            progressDirection: 1,
+            startTime: 0,
+            animationId: null
+        };
+
+        this.elements = {
+            topLeft: null,
+            topRight: null,
+            bottomLeft: null,
+            bottomRight: null,
+            progressDots: null
+        };
     }
 
     firstUpdated() {
-        this.observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    this.isIntersecting = entry.isIntersecting;
-                    if (this.isIntersecting) {
-                        window.addEventListener('scroll', this.handleScroll, { passive: true });
-                        this.handleScroll();
-                    } else {
-                        window.removeEventListener('scroll', this.handleScroll);
-                    }
-                });
-            },
-            {
-                rootMargin: '50px 0px 50px 0px',
-                threshold: 0.1
-            }
-        );
+        this.elements.topLeft = this.shadowRoot.querySelector('.content-top .content-left .inner');
+        this.elements.topRight = this.shadowRoot.querySelector('.content-top .content-right .inner');
+        this.elements.bottomLeft = this.shadowRoot.querySelector('.content-bottom .content-left .inner');
+        this.elements.bottomRight = this.shadowRoot.querySelector('.content-bottom .content-right .inner');
+        this.elements.progressDots = this.shadowRoot.querySelectorAll('.dots');
 
-        this.observer.observe(this);
+        this.startAnimation();
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
-        if (this.observer) {
-            this.observer.disconnect();
-        }
-        window.removeEventListener('scroll', this.handleScroll);
+        this.stopAnimation();
     }
 
-    handleScroll() {
-        if (!this.isIntersecting) return;
+    startAnimation() {
+        this.animationState.startTime = Date.now();
+        this.animate();
+    }
 
-        const rect = this.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
+    stopAnimation() {
+        if (this.animationState.animationId) {
+            cancelAnimationFrame(this.animationState.animationId);
+            this.animationState.animationId = null;
+        }
+    }
+
+    animate() {
         const config = RightChoiceSection.animationConfig;
+        const currentTime = Date.now();
+        const elapsed = currentTime - this.animationState.startTime;
 
-        const triggerPoint = windowHeight * config.triggerOffset;
-        const elementTop = rect.top;
-        const elementHeight = rect.height;
+        const totalCycleDuration = (config.blockDuration * 4) + (config.transitionDuration * 4);
+        const cyclePosition = elapsed % totalCycleDuration;
 
-        let progress = Math.max(0, Math.min(1,
-            (triggerPoint - elementTop) / (elementHeight * 0.5)
-        )) * config.speed;
+        const phase1End = config.blockDuration;
+        const phase2End = phase1End + config.transitionDuration;
+        const phase3End = phase2End + config.blockDuration;
+        const phase4End = phase3End + config.transitionDuration;
+        const phase5End = phase4End + config.blockDuration;
+        const phase6End = phase5End + config.transitionDuration;
+        const phase7End = phase6End + config.blockDuration;
+        const phase8End = phase7End + config.transitionDuration;
 
-        this.animateElements(progress);
+        let progressValue = 0;
+        let elementStage = 0;
+
+        if (cyclePosition < phase1End) {
+            const phaseProgress = cyclePosition / config.blockDuration;
+            progressValue = phaseProgress * 0.5;
+            elementStage = 0;
+        } else if (cyclePosition < phase2End) {
+            const transitionElapsed = cyclePosition - phase1End;
+            const transitionProgress = transitionElapsed / config.transitionDuration;
+            progressValue = 0.5;
+            elementStage = transitionProgress;
+        } else if (cyclePosition < phase3End) {
+            const phaseProgress = (cyclePosition - phase2End) / config.blockDuration;
+            progressValue = 0.5 + (phaseProgress * 0.5);
+            elementStage = 1;
+        } else if (cyclePosition < phase4End) {
+            const transitionElapsed = cyclePosition - phase3End;
+            const transitionProgress = transitionElapsed / config.transitionDuration;
+            progressValue = 1.0;
+            elementStage = 1 - transitionProgress;
+        } else if (cyclePosition < phase5End) {
+            const phaseProgress = (cyclePosition - phase4End) / config.blockDuration;
+            progressValue = 1.0 - (phaseProgress * 0.5);
+            elementStage = 0;
+        } else if (cyclePosition < phase6End) {
+            const transitionElapsed = cyclePosition - phase5End;
+            const transitionProgress = transitionElapsed / config.transitionDuration;
+            progressValue = 0.5;
+            elementStage = transitionProgress;
+        } else if (cyclePosition < phase7End) {
+            const phaseProgress = (cyclePosition - phase6End) / config.blockDuration;
+            progressValue = 0.5 - (phaseProgress * 0.5);
+            elementStage = 1;
+        } else {
+            const transitionElapsed = cyclePosition - phase7End;
+            const transitionProgress = transitionElapsed / config.transitionDuration;
+            progressValue = 0;
+            elementStage = 1 - transitionProgress;
+        }
+
+        this.animateElements(elementStage);
+        this.updateProgressBar(progressValue);
+
+        this.animationState.animationId = requestAnimationFrame(() => this.animate());
     }
 
     animateElements(progress) {
         const config = RightChoiceSection.animationConfig;
         const maxTranslate = config.animationDistance;
 
-        const topLeft = this.shadowRoot.querySelector('.content-top .content-left .inner');
-        const topRight = this.shadowRoot.querySelector('.content-top .content-right .inner');
-        const bottomLeft = this.shadowRoot.querySelector('.content-bottom .content-left .inner');
-        const bottomRight = this.shadowRoot.querySelector('.content-bottom .content-right .inner');
-
-        if (!topLeft || !topRight || !bottomLeft || !bottomRight) return;
+        if (!this.elements.topLeft || !this.elements.topRight ||
+            !this.elements.bottomLeft || !this.elements.bottomRight) {
+            return;
+        }
 
         const topLeftTranslate = progress * maxTranslate;
-        topLeft.style.transform = `translateX(${topLeftTranslate}%)`;
-
         const topRightTranslate = Math.min(0, -maxTranslate + (progress * maxTranslate));
-        topRight.style.transform = `translateX(${topRightTranslate}%)`;
-
         const bottomRightTranslate = -(progress * maxTranslate);
-        bottomRight.style.transform = `translateX(${bottomRightTranslate}%)`;
-
         const bottomLeftTranslate = Math.max(0, maxTranslate - (progress * maxTranslate));
-        bottomLeft.style.transform = `translateX(${bottomLeftTranslate}%)`;
+
+        this.elements.topLeft.style.transform = `translateX(${topLeftTranslate}px)`;
+        this.elements.topRight.style.transform = `translateX(${topRightTranslate}px)`;
+        this.elements.bottomRight.style.transform = `translateX(${bottomRightTranslate}px)`;
+        this.elements.bottomLeft.style.transform = `translateX(${bottomLeftTranslate}px)`;
+    }
+
+    updateProgressBar(progressValue) {
+        if (!this.elements.progressDots || this.elements.progressDots.length === 0) {
+            return;
+        }
+
+        const totalDots = this.elements.progressDots.length; // Should be 30
+        const activeDots = Math.floor(progressValue * totalDots);
+
+        this.elements.progressDots.forEach((dot, index) => {
+            if (index < activeDots) {
+                dot.classList.remove('grey');
+                dot.classList.add('red');
+            } else {
+                dot.classList.remove('red');
+                dot.classList.add('grey');
+            }
+        });
     }
 
     render() {
@@ -191,6 +291,43 @@ export class RightChoiceSection extends LitElement {
                                 <button-primary href="/" text="Read More"></button-primary>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div class="el">
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                    </div>
+                    <span class="progress-text">STAGE</span>
+                    <div class="el">
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
+                        <div class="dots grey"></div>
                     </div>
                 </div>
             </section>
