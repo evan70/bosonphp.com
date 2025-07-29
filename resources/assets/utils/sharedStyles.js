@@ -46,4 +46,25 @@ export const sharedStyles = css`
     * {
         box-sizing: border-box;
     }
+    @media (orientation: portrait) {
+        h1 {
+            font-size: 5rem;
+        }
+        h2 {
+            font-size: clamp(3rem, 1vw + 3.5rem, 5rem);
+        }
+        h3 {
+            font-size: max(2rem, min(2rem + 1vw, 5rem));
+        }
+        h4 {
+            font-size: max(1.5rem, min(2rem + 1vw, 2.25rem));
+        }
+        h5 {
+        }
+        h6 {
+        }
+        p {
+            font-size: 1.25rem;
+        }
+    }
 `;

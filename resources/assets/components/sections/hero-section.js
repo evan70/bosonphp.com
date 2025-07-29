@@ -73,6 +73,27 @@ export class HeroSection extends LitElement {
         .bottom span {
             text-transform: uppercase;
         }
+
+        @media (orientation: portrait) {
+            .top {
+                flex-direction: column;
+                padding: 5em 0;
+            }
+            .text {
+                margin: 0 1em;
+            }
+            .buttons {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1em;
+            }
+            .img {
+                max-width: 90vw;
+            }
+            .bottom {
+                padding: 3em 1em;
+            }
+        }
     `];
 
     render() {

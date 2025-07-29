@@ -105,6 +105,49 @@ export class BosonFooter extends LitElement {
         .credits img {
             height: 24px;
         }
+        @media (orientation: portrait) {
+            .dots-left, .dots-right, .holder {
+                display: none;
+            }
+            .top {
+                flex-direction: row-reverse;
+                flex-wrap: wrap;
+            }
+            .top > a {
+                background: red;
+            }
+            ::slotted(a) {
+                width: unset;
+                flex: 34%;
+            }
+            .bottom {
+                flex-direction: column-reverse;
+            }
+            ::slotted(.social) {
+                flex: 21%;
+            }
+            [name="secondary-link"]::slotted(a) {
+                flex: 1;
+                padding: 1.5em 0;
+                border-bottom: 1px solid var(--color-border);
+            }
+            .copyright {
+                padding: 1.5em 0;
+                margin-left: 0;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .dots-main {
+                flex: 1;
+                min-width: 90vw;
+                height: 100px;
+                border-top: 1px solid var(--color-border);
+                border-bottom: 1px solid var(--color-border);
+            }
+        }
     `];
 
     render() {

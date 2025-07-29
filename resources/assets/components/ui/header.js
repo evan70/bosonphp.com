@@ -51,6 +51,18 @@ export class BosonHeader extends LitElement {
             align-self: stretch;
             align-items: center;
         }
+
+        @media (orientation: portrait) {
+            .dots {
+                display: none;
+            }
+            .nav {
+                display: none;
+            }
+            .aside {
+                display: none;
+            }
+        }
     `];
 
     constructor() {
@@ -90,7 +102,7 @@ export class BosonHeader extends LitElement {
                     <slot></slot>
                 </div>
 
-                <slot name="aside"></slot>
+                <slot class="aside" name="aside"></slot>
 
                 <div class="dots">
                     <dots-container></dots-container>

@@ -292,6 +292,44 @@ export class NativenessSection extends LitElement {
         #technology-3 > .sticky > .tech-logo {
             background-image: url("/images/icons/symfony.svg");
         }
+        @media (orientation: portrait) {
+            .top {
+                flex-direction: column;
+                margin: 0 1em;
+            }
+            .system-edge {
+                display: none;
+            }
+            .wtf {
+
+            }
+            .border-top {
+                border-color: var(--color-border) !important;
+            }
+            .full {
+                border-color: var(--color-border) !important;
+            }
+            .half {
+                display: none;
+                border-color: var(--color-border) !important;
+            }
+            .half {
+                border-left-color: transparent !important;
+                border-right-color: transparent !important;
+            }
+            .systems {
+                flex-wrap: wrap;
+            }
+            .systems > div {
+                flex: 34%;
+            }
+            .technologies {
+                flex-direction: column;
+            }
+            .icon::before {
+                width: 95vw;
+            }
+        }
     `];
 
     static properties = {
