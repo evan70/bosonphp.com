@@ -487,8 +487,8 @@
             z-index: 1;
             position: absolute;
             content: "";
-            width: 580px;
-            height: 580px;
+            width: 640px;
+            height: 640px;
             background: radial-gradient(50% 50% at 50% 50%, var(--color-text-brand) 0%, var(--color-bg) 100%);
             opacity: 0.1;
         }
