@@ -10,12 +10,18 @@ export class Subtitle extends LitElement {
             justify-content: center;
             align-items: center;
         }
+
+        .img {
+            height: 16px;
+            user-select: none;
+        }
     `];
 
     render() {
         return html`
             <div class="container">
                 <img class="img" src="/images/icons/subtitle.svg" alt="subtitle"/>
+
                 <h6 class="name">
                     <slot></slot>
                 </h6>
@@ -24,4 +30,4 @@ export class Subtitle extends LitElement {
     }
 }
 
-customElements.define('subtitle-component', Subtitle);
+customElements.define('boson-subtitle', Subtitle);

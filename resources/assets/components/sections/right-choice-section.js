@@ -4,10 +4,14 @@ import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class RightChoiceSection extends LitElement {
     static styles = [sharedStyles, css`
+        :host {
+            margin-top: calc(var(--landing-layout-gap) * -1);
+        }
+
         .container {
             background-size: 100% auto;
             background: url("/images/right_choice_bg.png") no-repeat top;
-            height: 200vh;
+            min-height: 200vh;
             display: flex;
             flex-direction: column;
         }
@@ -19,6 +23,10 @@ export class RightChoiceSection extends LitElement {
             justify-content: center;
             align-items: center;
             text-align: center;
+        }
+
+        .top h2 {
+            font-size: var(--font-size-h1);
         }
 
         .red {
@@ -262,7 +270,11 @@ export class RightChoiceSection extends LitElement {
         return html`
             <section class="container">
                 <div class="top">
-                    <h1>Why is Boson PHP</br> <span class="red">the right choice</span> </br>for you?</h1>
+                    <h2>
+                        Why is Boson PHP</br>
+                        <span class="red">the right choice</span> </br>
+                        for you?
+                    </h2>
                 </div>
                 <div class="content">
                     <div class="content-top">
@@ -281,17 +293,30 @@ export class RightChoiceSection extends LitElement {
                     <div class="content-bottom">
                         <div class="content-left">
                             <div class="inner">
-                                <p>No need PHP, and that's all you need. Write code once and your app is available everywhere.</p>
-                                <button-secondary href="/">
+                                <p>
+                                    No need PHP, and that's all you need. Write
+                                    code once and your app is available everywhere.
+                                </p>
+
+                                <boson-button href="/">
                                     Read More
-                                </button-secondary>
+                                </boson-button>
                             </div>
                         </div>
                         <div class="sep"></div>
                         <div class="content-right">
                             <div class="inner">
-                                <p>No need to learn other languages! You already know PHP, and that's all you need. Write code once for the Web and create native apps on Windows, macOS, Linux, Android, and iOS. The same code, and your app is available everywhere.</p>
-                                <button-primary href="/">Read More</button-primary>
+                                <p>
+                                    No need to learn other languages! You already
+                                    know PHP, and that's all you need. Write code
+                                    once for the Web and create native apps on Windows,
+                                    macOS, Linux, Android, and iOS. The same code,
+                                    and your app is available everywhere.
+                                </p>
+
+                                <boson-button href="/">
+                                    Read More
+                                </boson-button>
                             </div>
                         </div>
                     </div>

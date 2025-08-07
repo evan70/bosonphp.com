@@ -14,34 +14,6 @@ export class NativenessSection extends LitElement {
             margin-bottom: 2em;
         }
 
-        .top {
-            display: flex;
-            margin: 0 auto;
-            gap: 3em;
-            max-width: var(--width-max);
-            width: var(--width-content);
-        }
-
-        .left {
-            display: flex;
-            flex-direction: column;
-            flex: 3;
-            align-items: flex-start;
-            gap: 2em;
-        }
-
-        .title {
-            line-height: 1.1;
-            font-weight: 500;
-        }
-
-        .right {
-            flex: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
         .content {
             display: flex;
             justify-content: center;
@@ -138,6 +110,8 @@ export class NativenessSection extends LitElement {
             gap: 1.5em;
             padding: 5em 0;
             background: var(--color-bg);
+            font-family: var(--font-title), sans-serif;
+            color: var(--color-text-secondary);
         }
 
         .system::before {
@@ -162,6 +136,7 @@ export class NativenessSection extends LitElement {
 
         .system-active {
             border-color: transparent;
+            color: var(--color-text);
         }
 
         .system-active::before {
@@ -384,22 +359,6 @@ export class NativenessSection extends LitElement {
     render() {
         return html`
             <section class="container">
-                <div class="top">
-                    <div class="left">
-                        <slot></slot>
-                        <subtitle-component>
-                            Nativeness
-                        </subtitle-component>
-
-                        <h2 class="title">
-                            Familiar PHP. Now for desktop and mobile applications.
-                        </h2>
-                    </div>
-                    <div class="right">
-                        <p>"What makes you think PHP is only for the web?"</p>
-                        <p>– Boson is changing the rules of the game!</p>
-                    </div>
-                </div>
                 <div class="content">
                     <div class="icon"></div>
                     <div class="border-top"></div>
@@ -415,19 +374,19 @@ export class NativenessSection extends LitElement {
                         <div class="system-edge"></div>
                         <div id="system-1" class="${this._getSystemClass(1)}">
                             <div class="logo"></div>
-                            <span class="name">Windows App</span>
+                            <span class="name">Windows</span>
                         </div>
                         <div id="system-2" class="${this._getSystemClass(2)}">
                             <div class="logo"></div>
-                            <span class="name">Linux App</span>
+                            <span class="name">Linux</span>
                         </div>
                         <div id="system-3" class="${this._getSystemClass(3)}">
                             <div class="logo"></div>
-                            <span class="name">macOS & iOS App</span>
+                            <span class="name">macOS & iOS</span>
                         </div>
                         <div id="system-4" class="${this._getSystemClass(4)}">
                             <div class="logo"></div>
-                            <span class="name">Android App</span>
+                            <span class="name">Android</span>
                         </div>
                         <div class="system-edge"></div>
                     </div>
@@ -435,7 +394,7 @@ export class NativenessSection extends LitElement {
                         <div class="technology" id="technology-1">
                             <div class="sticky">
                                 <div class="tech-logo"></div>
-                                <span class="tech-name">Do you write in pure PHP?</span>
+                                <h6 class="tech-name">Do you write in pure PHP?</h6>
                                 <span class="tech-description">Boson loves it too!</span>
                             </div>
                         </div>
@@ -443,7 +402,7 @@ export class NativenessSection extends LitElement {
                             <div class="dots-container"><dots-container></dots-container></div>
                             <div class="sticky">
                                 <div class="tech-logo"></div>
-                                <span class="tech-name">Do you work with Laravel?</span>
+                                <h6 class="tech-name">Do you work with Laravel?</h6>
                                 <span class="tech-description">Use familiar Blade, Livewire, Inertia or Eloquent for UI and logic. Your routes and controllers work just like on the web.</span>
 
                             </div>
@@ -453,7 +412,7 @@ export class NativenessSection extends LitElement {
                             <div style="top: 150px" class="dots-container"><dots-container></dots-container></div>
                             <div class="sticky">
                                 <div class="tech-logo"></div>
-                                <span class="tech-name">Do you prefer Symfony or Yii?</span>
+                                <h6 class="tech-name">Do you prefer Symfony or Yii?</h6>
                                 <span class="tech-description">Just plug in Boson. Your components and services are ready to work in Desktop or mobile application.</span>
                             </div>
                         </div>

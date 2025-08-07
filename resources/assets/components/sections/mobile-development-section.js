@@ -97,16 +97,7 @@ export class MobileDevelopmentSection extends LitElement {
             <section class="container">
                 <div class="left">
                     <div class="wrapper">
-                        <subtitle-component>
-                            Mobile Development
-                        </subtitle-component>
-
-                        <div class="headline">
-                            <h2>Expand Your Business Horizons: <span class="red">PHP Mobile Apps</span></h2>
-                        </div>
-                        <p class="description">With Boson PHP Mobile, you can run your PHP app on Android and iOS -
-                            without learning Swift, Kotlin or React Native.</p>
-                        <button-primary href="/">Read More</button-primary>
+                        <slot></slot>
                     </div>
                 </div>
                 <div class="right">

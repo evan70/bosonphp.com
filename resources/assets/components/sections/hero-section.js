@@ -75,6 +75,7 @@ export class HeroSection extends LitElement {
             width: 100%;
             transition-duration: 0.2s;
             font-family: var(--font-title), sans-serif;
+            font-size: var(--font-size-secondary);
             letter-spacing: .1em;
         }
 
@@ -87,6 +88,10 @@ export class HeroSection extends LitElement {
             align-items: center;
             justify-content: space-between;
             padding: 3em 0;
+        }
+
+        .bottom .discover-icon {
+            user-select: none;
         }
 
         .bottom .discover:hover {
@@ -161,7 +166,9 @@ export class HeroSection extends LitElement {
                             <span class="discover-text">
                                 <slot name="discovery"></slot>
                             </span>
-                            <img class="discover-icon" src="/images/icons/arrow_down.svg" alt="arrow_down"/>
+
+                            <img class="discover-icon"
+                                 src="/images/icons/arrow_down.svg" alt="down arrow"/>
                         </span>
                     </a>
                 </aside>

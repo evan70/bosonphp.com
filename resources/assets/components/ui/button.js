@@ -2,7 +2,7 @@ import {css, html, LitElement} from 'lit';
 
 import {sharedStyles} from "../../utils/sharedStyles.js";
 
-export class ButtonPrimary extends LitElement {
+export class Button extends LitElement {
     static properties = {
         href: {type: String},
         type: {type: String},
@@ -12,14 +12,12 @@ export class ButtonPrimary extends LitElement {
     static styles = [sharedStyles, css`
         .button {
             font-family: var(--font-title), sans-serif;
+            font-size: var(--font-size-secondary);
             letter-spacing: 1px;
             color: var(--color-text-button);
             transition-duration: 0.2s;
             background: var(--color-bg-button);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2em;
+            display: inline-block;
             padding: 0 2em;
             text-transform: uppercase;
             line-height: 56px;
@@ -31,6 +29,13 @@ export class ButtonPrimary extends LitElement {
             background: var(--color-bg-button-hover);
         }
 
+        .button-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
+        }
+
         .icon {
             aspect-ratio: 1 / 1;
             height: 32px;
@@ -39,6 +44,7 @@ export class ButtonPrimary extends LitElement {
             align-items: center;
             background: var(--color-text-button);
             margin: 0 -1em 0 -.5em;
+            user-select: none;
         }
 
         .button.button-secondary {
@@ -70,14 +76,16 @@ export class ButtonPrimary extends LitElement {
     render() {
         return html`
             <a href="${this.href}" class="button button-${this.type}">
-                <slot></slot>
+                <span class="button-content">
+                    <slot></slot>
 
-                <span class="icon" style="${this.icon === '' ? 'display:none': ''}">
-                    <img class="img" src="${this.icon}" alt="arrow" />
+                    <span class="icon" style="${this.icon === '' ? 'display:none': ''}">
+                        <img class="img" src="${this.icon}" alt="arrow" />
+                    </span>
                 </span>
             </a>
         `;
     }
 }
 
-customElements.define('button-primary', ButtonPrimary);
+customElements.define('boson-button', Button);

@@ -5,7 +5,7 @@ export class LandingLayout extends LitElement {
         .landing-layout {
             display: flex;
             flex-direction: column;
-            gap: 8em;
+            gap: var(--landing-layout-gap);
         }
     `];
 

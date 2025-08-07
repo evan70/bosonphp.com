@@ -10,48 +10,8 @@ export class SolvesSection extends LitElement {
             gap: 4em;
         }
 
-        .top {
-            display: flex;
-            justify-content: space-between;
-            margin: 0 auto;
-            max-width: var(--width-max);
-            width: var(--width-content);
-        }
-
-        .left {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 2em;
-        }
-
-        .red {
-            color: var(--color-text-brand);
-        }
-
-        .right {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            max-width: clamp(650px, 40vw, 800px);
-            gap: 1em;
-        }
-
-        .el {
-            display: flex;
-            gap: 1em;
-            align-items: flex-start;
-            margin: .4em 0;
-        }
-
-        .el p {
-            padding: 0;
-            margin: 0;
-        }
-
         .content {
             display: flex;
-            padding: 1px 0;
             border-bottom: 1px solid var(--color-border);
             border-top: 1px solid var(--color-border);
         }
@@ -118,28 +78,6 @@ export class SolvesSection extends LitElement {
     render() {
         return html`
             <section class="container">
-                <div class="top">
-                    <div class="left">
-                        <subtitle-component>
-                            Solves
-                        </subtitle-component>
-
-                        <div class="text">
-                            <h2>What <span class="red">you can</span> do with Boson?</h2>
-                        </div>
-                    </div>
-                    <div class="right">
-                        <div class="el">
-                            <img src="/images/icons/check.svg" alt="check"/>
-                            <p>Compile an application for the desired desktop platform based on an existing PHP
-                                project.</p>
-                        </div>
-                        <div class="el">
-                            <img src="/images/icons/check.svg" alt="check"/>
-                            <p>Create a mobile app. Expand your business and reach a new target audience.</p>
-                        </div>
-                    </div>
-                </div>
                 <div class="content">
                     <div class="dots">
                         <dots-container></dots-container>

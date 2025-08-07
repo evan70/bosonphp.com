@@ -12,29 +12,112 @@
                 applications for Windows, macOS, Linux, Android and iOS.
             </span>
 
-            <button-primary slot="buttons" href="/" icon="/images/icons/arrow_primary.svg">
+            <boson-button slot="buttons" href="/" icon="/images/icons/arrow_primary.svg">
                 Try Boson for Free
-            </button-primary>
+            </boson-button>
 
-            <button-primary slot="buttons" type="secondary" href="/" icon="/images/icons/arrow_secondary.svg">
+            <boson-button slot="buttons" type="secondary" href="/" icon="/images/icons/arrow_secondary.svg">
                 Watch Presentation
-            </button-primary>
+            </boson-button>
 
             <span slot="discovery">
                 Discover more about boson
             </span>
         </hero-section>
 
-        <nativeness-section>
-            <div id="nativeness" style="position:relative;top:-100px"></div>
-        </nativeness-section>
+        <segment-section>
+            <span id="nativeness" class="anchor"></span>
+
+            <span slot="section">
+                Nativeness
+            </span>
+
+            <span slot="title">
+                Familiar PHP. Now for desktop applications.
+            </span>
+
+            <p>
+                "What makes you think PHP is only for the web?"<br />
+                – Boson is changing the rules of the game!
+            </p>
+        </segment-section>
+
+        <nativeness-section></nativeness-section>
+
+        <segment-section>
+             <span slot="section">
+                Solves
+            </span>
+
+            <span slot="title">
+                What you <span class="emphasis">can do</span> with <br/>
+                Boson?
+            </span>
+
+            <ul>
+                <li>
+                    Compile an application for the desired desktop platform
+                    based on an existing PHP project.
+                </li>
+                <li>
+                    Create a mobile app. Expand your business and reach
+                    a new target audience.
+                </li>
+            </ul>
+        </segment-section>
+
         <solves-section></solves-section>
-        <div>
-            <how-it-works-section></how-it-works-section>
-            <right-choice-section></right-choice-section>
-            <mobile-development-section></mobile-development-section>
-        </div>
+
+        <segment-section>
+             <span slot="section">
+                How It Works
+            </span>
+
+            <span slot="title">
+                Under the Hood of <br />
+                Boson
+            </span>
+
+            <p>
+                Why Boson? Because it's not Electron! And much simpler =)
+            </p>
+
+            <p>
+                Want to know what makes Boson so compact, fast and versatile?
+                We don't use Electron. Instead, our solution is based on simple,
+                yet robust and up-to-date technologies that provide native
+                performance and lightweight across all platforms.
+            </p>
+        </segment-section>
+
+        <how-it-works-section></how-it-works-section>
+
+        <right-choice-section></right-choice-section>
+
+        <mobile-development-section>
+            <segment-section vertical>
+                <span slot="section">
+                    Mobile Development
+                </span>
+
+                <span slot="title">
+                    Expand Your Business Horizons: <br />
+                    <span class="emphasis">PHP Mobile Apps</span>
+                </span>
+
+                <p>
+                    With Boson PHP Mobile, you can run your PHP app on Android
+                    and iOS - without learning Swift, Kotlin or React Native.
+                </p>
+
+                <boson-button href="/">
+                    Read More
+                </boson-button>
+            </segment-section>
+        </mobile-development-section>
+
         <testimonials-section></testimonials-section>
+
         <call-to-action-section>
             <h3>
                 If you are a PHP developer, you can already</br>
@@ -43,7 +126,7 @@
             </h3>
             <h4 class="red">Get started right now!</h4>
 
-            <button-primary slot="footer" href="/">Try Boson For Free</button-primary>
+            <boson-button slot="footer" href="/">Try Boson For Free</boson-button>
         </call-to-action-section>
     </boson-landing-layout>
 

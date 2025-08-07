@@ -1,0 +1,100 @@
+import {css, html, LitElement} from 'lit';
+
+import {sharedStyles} from "../../utils/sharedStyles.js";
+
+export class SegmentSection extends LitElement {
+    static properties = {
+        vertical: {type: Boolean},
+    };
+
+    static styles = [sharedStyles, css`
+        .container {
+            display: flex;
+            flex-direction: row;
+            margin: var(--landing-layout-gap) auto 0 auto;
+            gap: 3em;
+            max-width: min(var(--width-max), 90vw);
+        }
+
+        .container.container-vertical {
+            flex-direction: column;
+        }
+
+        .segment-title {
+            display: flex;
+            flex-direction: column;
+            flex: 3;
+            align-items: flex-start;
+            gap: 2em;
+        }
+
+        .segment-content {
+            flex: 2;
+            display: block;
+            color: var(--color-text-secondary);
+        }
+
+        .segment-title .segment-subtitle {
+            display: flex;
+            gap: 1em;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .segment-title .segment-subtitle .segment-name {
+            font-size: var(--font-size-secondary);
+        }
+
+        .segment-title .segment-subtitle svg {
+            user-select: none;
+        }
+
+        .segment-title .segment-subtitle path {
+            fill: var(--color-text-brand);
+        }
+
+        ::slotted(.anchor) {
+            position: relative;
+            top: -250px;
+        }
+
+        ::slotted(ul) {
+            list-style-image: url(/images/icons/check.svg);
+        }
+    `];
+
+    constructor() {
+        super();
+
+        this.vertical = false;
+    }
+
+    render() {
+        return html`
+            <section class="container ${this.vertical ? 'container-vertical' : ''}">
+                <hgroup class="segment-title">
+                    <div class="segment-subtitle">
+                        <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.20167 0L1.03888 14H0L3.15125 0H4.20167Z" />
+                            <path d="M12 0L8.8372 14H7.79833L10.9496 0H12Z" />
+                        </svg>
+
+                        <h6 class="segment-name">
+                            <slot name="section"></slot>
+                        </h6>
+                    </div>
+
+                    <h2 class="title">
+                        <slot name="title"></slot>
+                    </h2>
+                </hgroup>
+
+                <aside class="segment-content">
+                    <slot></slot>
+                </aside>
+            </section>
+        `;
+    }
+}
+
+customElements.define('segment-section', SegmentSection);
