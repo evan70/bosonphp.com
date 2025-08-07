@@ -5,13 +5,18 @@ import {sharedStyles} from "../../utils/sharedStyles.js";
 export class Button extends LitElement {
     static properties = {
         href: {type: String},
+        external: {type: Boolean},
         type: {type: String},
         icon: {type: String},
+        active: {type: Boolean},
     };
 
     static styles = [sharedStyles, css`
         :host {
             display: inline-block;
+            line-height: 56px;
+            height: 56px;
+            justify-content: center;
         }
 
         .button {
@@ -19,20 +24,21 @@ export class Button extends LitElement {
             font-size: var(--font-size-secondary);
             letter-spacing: 1px;
             color: var(--color-text-button);
-            transition-duration: 0.2s;
+            transition-duration: .1s;
             background: var(--color-bg-button);
             text-transform: uppercase;
-            line-height: 56px;
+            height: 100%;
             padding: 0 2em;
-            height: 56px;
             display: flex;
-            justify-content: center;
+            gap: 1em;
+            justify-content: inherit;
             align-items: center;
-            gap: 2em;
             white-space: nowrap;
         }
 
+        .button-active,
         .button:hover {
+            transition-duration: 0s;
             background: var(--color-bg-button-hover);
         }
 
@@ -43,15 +49,18 @@ export class Button extends LitElement {
             justify-content: center;
             align-items: center;
             background: var(--color-text-button);
-            margin: 0 -1em 0 -.5em;
+            margin: 0 -1em 0 0;
             user-select: none;
         }
+
+        /** SECONDARY */
 
         .button.button-secondary {
             background: var(--color-bg-button-secondary);
             color: var(--color-text);
         }
 
+        .button.button-secondary.button-active,
         .button.button-secondary:hover {
             background: var(--color-bg-button-secondary-hover);
         }
@@ -63,6 +72,33 @@ export class Button extends LitElement {
         .button.button-secondary .icon {
             background: var(--color-text-button-secondary);
         }
+
+        /** GHOST */
+
+        .button.button-ghost {
+            background: rgba(var(--color-bg-hover), 0);
+            color: var(--color-text-secondary );
+        }
+
+        .button.button-ghost.button-active,
+        .button.button-ghost:hover {
+            background: var(--color-bg-hover);
+            color: var(--color-text);
+        }
+
+        .button.button-ghost .text {
+            color: var(--color-text-button-secondary);
+        }
+
+        .button.button-ghost .icon {
+            background: var(--color-text-button-secondary);
+        }
+
+        /** OTHER */
+
+        ::slotted(img.logo) {
+            height: 50%;
+        }
     `];
 
     constructor() {
@@ -71,11 +107,15 @@ export class Button extends LitElement {
         this.href = '/';
         this.type = 'primary';
         this.icon = '';
+        this.external = false;
+        this.active = false;
     }
 
     render() {
         return html`
-            <a href="${this.href}" class="button button-${this.type}">
+            <a href="${this.href}"
+               class="button button-${this.type} ${this.active ? 'button-active' : ''}"
+               target="${this.external ? '_blank' : '_self'}">
                 <slot></slot>
 
                 <span class="icon" style="${this.icon === '' ? 'display:none': ''}">

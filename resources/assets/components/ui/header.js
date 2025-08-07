@@ -35,7 +35,13 @@ export class BosonHeader extends LitElement {
 
         .dots,
         ::slotted(*) {
-            height: 100%;
+            height: 100% !important;
+            max-height: 100% !important;
+            line-height: inherit !important;
+        }
+
+        ::slotted(.logo) {
+            border-right: solid 1px var(--color-border);
         }
 
         .dots:nth-child(1) {

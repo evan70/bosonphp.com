@@ -1,8 +1,8 @@
 import {css, html, LitElement} from 'lit';
 
-import {sharedStyles} from "../../../utils/sharedStyles.js";
+import {sharedStyles} from "../../utils/sharedStyles.js";
 
-export class BosonHeaderDropdown extends LitElement {
+export class BosonDropdown extends LitElement {
     static properties = {};
 
     static styles = [sharedStyles, css`
@@ -30,7 +30,7 @@ export class BosonHeaderDropdown extends LitElement {
             min-width: 200px;
             flex-direction: column;
             flex-wrap: nowrap;
-            margin-top: -20px;
+            margin-top: -21px;
         }
 
         .dropdown-list::before {
@@ -42,6 +42,16 @@ export class BosonHeaderDropdown extends LitElement {
             z-index: -1;
             height: 100%;
             width: 100%;
+        }
+
+        .dropdown-list ::slotted(boson-button) {
+            justify-content: flex-start;
+            height: 32px;
+            line-height: 32px;
+        }
+
+        details:hover > summary ::slotted(boson-button) {
+            background: var(--color-border);
         }
     `];
 
@@ -75,4 +85,4 @@ export class BosonHeaderDropdown extends LitElement {
     }
 }
 
-customElements.define('boson-header-dropdown', BosonHeaderDropdown);
+customElements.define('boson-dropdown', BosonDropdown);

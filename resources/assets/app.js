@@ -12,10 +12,7 @@ import './components/sections/solves-section.js';
 import './components/sections/testimonials-section.js';
 
 
-import './components/ui/header/button.js';
-import './components/ui/header/dropdown.js';
-import './components/ui/header/link.js';
-
+import './components/ui/dropdown.js';
 import './components/ui/button.js';
 import './components/ui/dots-container.js';
 import './components/ui/footer.js';

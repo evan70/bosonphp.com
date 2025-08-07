@@ -11,17 +11,19 @@
 {% endif %}
 
 <boson-header>
-    <boson-header-button slot="logo" href="{{ path('home') }}">
+    <boson-button class="logo" type="ghost" slot="logo" href="{{ path('home') }}">
         <img class="logo" src="/images/logo.svg" alt="logo" />
-    </boson-header-button>
+    </boson-button>
 
-    <boson-header-dropdown href="{{ path('doc.index') }}">
-        <boson-header-link slot="summary"
-                {{ app.current_route starts with 'doc.' ? 'active' : '' }}
-                href="{{ path('doc.index') }}">References</boson-header-link>
+    <boson-dropdown href="{{ path('doc.index') }}">
+        <boson-button type="ghost" slot="summary"
+            {{ app.current_route starts with 'doc.' ? 'active' : '' }}
+            href="{{ path('doc.index') }}">
+            References
+        </boson-button>
 
         {% for docs_category in docs_categories %}
-            <boson-header-link
+            <boson-button type="ghost"
                 {% if docs_category.page is not null and docs_version is not null %}
                     href="{{ path('doc.show', {
                         page: docs_category.page.uri,
@@ -35,34 +37,37 @@
                 {% endif %}
 
                 {{ docs_category.title }}
-            </boson-header-link>
+            </boson-button>
         {% endfor %}
-    </boson-header-dropdown>
+    </boson-dropdown>
 
-    <boson-header-dropdown href="{{ path('blog.index') }}">
-        <boson-header-link slot="summary"
-                {{ app.current_route starts with 'blog.' ? 'active' : '' }}
-                href="{{ path('blog.index') }}">Blog</boson-header-link>
+    <boson-dropdown href="{{ path('blog.index') }}">
+        <boson-button type="ghost" slot="summary"
+            {{ app.current_route starts with 'blog.' ? 'active' : '' }}
+            href="{{ path('blog.index') }}">
+            Blog
+        </boson-button>
 
         {% for blog_category in blog_categories %}
-            <boson-header-link href="{{ path('blog.index_by_category', {
+        <boson-button type="ghost"
+                href="{{ path('blog.index_by_category', {
                 slug: blog_category.uri
             }) }}">
                 {{ blog_category.title }}
-            </boson-header-link>
+        </boson-button>
         {% endfor %}
-    </boson-header-dropdown>
+    </boson-dropdown>
 
-    <boson-header-button slot="aside" external href="https://github.com/boson-php/boson">
+    <boson-button type="ghost" slot="aside" external href="https://github.com/boson-php/boson">
         <img src="/images/icons/github.svg" alt="github"/>
         GitHub
-    </boson-header-button>
+    </boson-button>
 
-    <boson-header-button slot="aside" href="{{ path('doc.show', {
+    <boson-button type="ghost" slot="aside" href="{{ path('doc.show', {
         version: docs_version.name,
         page: 'introduction'
     }) }}">
         Get Started
         <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right" />
-    </boson-header-button>
+    </boson-button>
 </boson-header>
