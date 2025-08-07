@@ -40,11 +40,11 @@ export class Logo extends LitElement {
         }
 
         .square.outer {
-            background: #888;
+            background: #8B8B8B;
         }
 
         .square.inner {
-            background: #ff4500;
+            background: #F93904;
         }
 
         .square.dimmed {
@@ -340,7 +340,6 @@ export class Logo extends LitElement {
     }
 
     startAnimations() {
-        // Animate random squares
         this.squares.forEach((square) => {
             if (Math.random() > 0.7) {
                 square.classList.add('dimmed');

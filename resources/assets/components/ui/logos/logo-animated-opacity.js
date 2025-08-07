@@ -39,11 +39,11 @@ export class Logo extends LitElement {
         }
 
         .square.outer {
-            background: #888;
+            background: #8B8B8B;
         }
 
         .square.inner {
-            background: #ff4500;
+            background: #F93904;
         }
 
         .square.dimmed {

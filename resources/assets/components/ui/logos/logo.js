@@ -39,18 +39,17 @@ export class Logo extends LitElement {
         }
 
         .square.outer {
-            background: #888;
+            background: #8B8B8B;
         }
 
         .square.inner {
-            background: #ff4500;
+            background: #F93904;
         }
 
         .square.dimmed {
             opacity: 0.1;
         }
 
-        /* Ensure circle fits within container */
         @media (max-aspect-ratio: 1/1) {
             .circle-wrapper {
                 width: 100%;
@@ -71,26 +70,20 @@ export class Logo extends LitElement {
         this.squares = [];
         this.animationIntervals = [];
 
-        // Simple configuration
         this.config = {
-            // Circle dimensions
             outerRadius: 260,
             innerRadius: 60,
-            gapBetweenCircles: 5, // Gap between inner and outer circles
+            gapBetweenCircles: 5,
 
-            // Layers
-            outerLayers: 9,  // Number of layers in outer ring
-            innerLayers: 5,  // Number of layers in inner circle
+            outerLayers: 9,
+            innerLayers: 5,
 
-            // Square properties
             squareSize: 4,
-            squareSpacing: 12, // Same spacing for both circles
+            squareSpacing: 12,
 
-            // Colors
             outerColor: '#8B8B8B',
             innerColor: '#F93904',
 
-            // Base size for scaling
             baseSize: 600
         };
     }
@@ -117,7 +110,6 @@ export class Logo extends LitElement {
         const squareSize = this.config.squareSize * scale;
         const spacing = this.config.squareSpacing * scale;
 
-        // Create outer ring layers
         const outerRadius = this.config.outerRadius * scale;
         const outerInnerRadius = outerRadius - (this.config.outerLayers - 1) * spacing;
 
@@ -143,16 +135,13 @@ export class Logo extends LitElement {
             }
         }
 
-        // Calculate inner circle position (with gap from outer ring)
         const maxInnerRadius = outerInnerRadius - this.config.gapBetweenCircles * scale;
         const innerRadius = Math.min(this.config.innerRadius * scale, maxInnerRadius);
 
-        // Create inner circle layers
         for (let layer = 0; layer < this.config.innerLayers; layer++) {
             const radius = innerRadius - layer * spacing;
             if (radius <= 0) break;
 
-            // For the center, just place one square
             if (radius < spacing) {
                 const square = document.createElement('div');
                 square.className = 'square inner';
