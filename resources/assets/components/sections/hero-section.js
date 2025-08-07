@@ -73,6 +73,10 @@ export class HeroSection extends LitElement {
         .bottom span {
             text-transform: uppercase;
         }
+        .logo-container {
+            display: flex;
+            aspect-ratio: 1/1;
+        }
 
         @media (orientation: portrait) {
             .top {
@@ -111,7 +115,13 @@ export class HeroSection extends LitElement {
                             <button-secondary text="Watch Presentation" href="/"></button-secondary>
                         </div>
                     </div>
-                    <img class="img" src="/images/hero.svg" alt="hero"/>
+                    <div class="img">
+                        <div class="logo-container">
+<!--                            <logo-component></logo-component>-->
+                            <logo-animated-transform-component></logo-animated-transform-component>
+<!--                            <logo-animated-opacity-component></logo-animated-opacity-component>-->
+                        </div>
+                    </div>
                 </div>
 
                 <a href="#nativeness" class="bottom">
