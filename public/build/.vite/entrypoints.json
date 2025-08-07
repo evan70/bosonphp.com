@@ -3,11 +3,11 @@
   "entryPoints": {
     "app": {
       "css": [
-        "/build/assets/app-kBsH1CfG.css"
+        "/build/assets/app-B1gMeK1w.css"
       ],
       "dynamic": [],
       "js": [
-        "/build/assets/app-BIeT9n9W.js"
+        "/build/assets/app-CF0iCtEt.js"
       ],
       "legacy": false,
       "preload": []
