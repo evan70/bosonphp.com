@@ -10,6 +10,10 @@ export class Button extends LitElement {
     };
 
     static styles = [sharedStyles, css`
+        :host {
+            display: inline-block;
+        }
+
         .button {
             font-family: var(--font-title), sans-serif;
             font-size: var(--font-size-secondary);
@@ -17,23 +21,19 @@ export class Button extends LitElement {
             color: var(--color-text-button);
             transition-duration: 0.2s;
             background: var(--color-bg-button);
-            display: inline-block;
-            padding: 0 2em;
             text-transform: uppercase;
             line-height: 56px;
+            padding: 0 2em;
             height: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
             white-space: nowrap;
         }
 
         .button:hover {
             background: var(--color-bg-button-hover);
-        }
-
-        .button-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2em;
         }
 
         .icon {
@@ -76,12 +76,10 @@ export class Button extends LitElement {
     render() {
         return html`
             <a href="${this.href}" class="button button-${this.type}">
-                <span class="button-content">
-                    <slot></slot>
+                <slot></slot>
 
-                    <span class="icon" style="${this.icon === '' ? 'display:none': ''}">
-                        <img class="img" src="${this.icon}" alt="arrow" />
-                    </span>
+                <span class="icon" style="${this.icon === '' ? 'display:none': ''}">
+                    <img class="img" src="${this.icon}" alt="arrow" />
                 </span>
             </a>
         `;

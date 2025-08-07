@@ -54,6 +54,10 @@ export class SegmentSection extends LitElement {
             top: -250px;
         }
 
+        ::slotted(boson-button) {
+            margin-top: 1em;
+        }
+
         ::slotted(ul) {
             list-style-image: url(/images/icons/check.svg);
         }

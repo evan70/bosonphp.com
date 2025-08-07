@@ -63,6 +63,10 @@
             top: -250px;
         }
 
+        ::slotted(boson-button) {
+            margin-top: 1em;
+        }
+
         ::slotted(ul) {
             list-style-image: url(/images/icons/check.svg);
         }
@@ -1214,6 +1218,10 @@
                 <slot></slot>
             </a>
         `}}customElements.define("boson-header-link",We);class Xe extends g{static properties={href:{type:String},type:{type:String},icon:{type:String}};static styles=[$,v`
+        :host {
+            display: inline-block;
+        }
+
         .button {
             font-family: var(--font-title), sans-serif;
             font-size: var(--font-size-secondary);
@@ -1221,23 +1229,19 @@
             color: var(--color-text-button);
             transition-duration: 0.2s;
             background: var(--color-bg-button);
-            display: inline-block;
-            padding: 0 2em;
             text-transform: uppercase;
             line-height: 56px;
+            padding: 0 2em;
             height: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2em;
             white-space: nowrap;
         }
 
         .button:hover {
             background: var(--color-bg-button-hover);
-        }
-
-        .button-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2em;
         }
 
         .icon {
@@ -1269,12 +1273,10 @@
         }
     `];constructor(){super(),this.href="/",this.type="primary",this.icon=""}render(){return p`
             <a href="${this.href}" class="button button-${this.type}">
-                <span class="button-content">
-                    <slot></slot>
+                <slot></slot>
 
-                    <span class="icon" style="${this.icon===""?"display:none":""}">
-                        <img class="img" src="${this.icon}" alt="arrow" />
-                    </span>
+                <span class="icon" style="${this.icon===""?"display:none":""}">
+                    <img class="img" src="${this.icon}" alt="arrow" />
                 </span>
             </a>
         `}}customElements.define("boson-button",Xe);class Ve extends g{static styles=[$,v`
