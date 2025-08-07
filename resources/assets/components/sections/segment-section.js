@@ -26,7 +26,9 @@ export class SegmentSection extends LitElement {
 
         .segment-content {
             flex: 2;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
             color: var(--color-text-secondary);
         }
 
