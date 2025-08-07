@@ -83,7 +83,10 @@ export class HowItWorksSection extends LitElement {
             <section class="container">
                 <div class="top">
                     <div class="left">
-                        <subtitle-component name="How It Works"></subtitle-component>
+                        <subtitle-component>
+                            How It Works
+                        </subtitle-component>
+
                         <div class="text">
                             <h2>Under the Hood of</br>Boson PHP</h2>
                         </div>

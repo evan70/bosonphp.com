@@ -3,8 +3,31 @@
 {% block body %}
 
     <boson-landing-layout>
-        <hero-section></hero-section>
-        <nativeness-section></nativeness-section>
+        <hero-section>
+            <h1 slot="title">Go Native.</h1>
+            <h2 slot="title">Stay PHP.</h2>
+
+            <span slot="description">
+                Turn your PHP project into cross-platform, compact, fast, native
+                applications for Windows, macOS, Linux, Android and iOS.
+            </span>
+
+            <button-primary slot="buttons" href="/" icon="/images/icons/arrow_primary.svg">
+                Try Boson for Free
+            </button-primary>
+
+            <button-primary slot="buttons" type="secondary" href="/" icon="/images/icons/arrow_secondary.svg">
+                Watch Presentation
+            </button-primary>
+
+            <span slot="discovery">
+                Discover more about boson
+            </span>
+        </hero-section>
+
+        <nativeness-section>
+            <div id="nativeness" style="position:relative;top:-100px"></div>
+        </nativeness-section>
         <solves-section></solves-section>
         <div>
             <how-it-works-section></how-it-works-section>

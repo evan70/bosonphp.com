@@ -120,7 +120,10 @@ export class SolvesSection extends LitElement {
             <section class="container">
                 <div class="top">
                     <div class="left">
-                        <subtitle-component name="Solves"></subtitle-component>
+                        <subtitle-component>
+                            Solves
+                        </subtitle-component>
+
                         <div class="text">
                             <h2>What <span class="red">you can</span> do with Boson?</h2>
                         </div>

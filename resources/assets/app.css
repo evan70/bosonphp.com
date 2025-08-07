@@ -31,7 +31,7 @@
   /**
    * Layer (dropdowns, popups, etc) element background colors
    */
-  --color-bg-layer: #0a0c15;
+  --color-bg-layer: #0d1119;
   --color-bg-layer-opacity: rgba(var(--color-bg-layer), .5);
   --color-bg-layer-hover: #0A0A0A;
 
@@ -64,7 +64,7 @@
   --font-main: Inter, var(--font-fallback-main);
 
   --font-size: 16px;
-  --font-line-height: 1.6;
+  --font-line-height: 1.7;
 
   --font-size-secondary: 15px;
   --font-line-height-secondary: 160%;

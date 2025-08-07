@@ -43,12 +43,18 @@ export class HeroSection extends LitElement {
             line-height: 1.1;
         }
 
-        .headlines h1 {
-            color: var(--color-text-brand);
+        .headlines ::slotted(h1),
+        .headlines ::slotted(h2) {
+            font-size: var(--font-size-h1) !important;
+        }
+
+        .headlines ::slotted(h1) {
+            color: var(--color-text-brand) !important;
         }
 
         .description {
             width: 80%;
+            color: var(--color-text-secondary);
         }
 
         .buttons {
@@ -69,6 +75,7 @@ export class HeroSection extends LitElement {
             width: 100%;
             transition-duration: 0.2s;
             font-family: var(--font-title), sans-serif;
+            letter-spacing: .1em;
         }
 
         .bottom .discover-container {
@@ -100,17 +107,21 @@ export class HeroSection extends LitElement {
                 flex-direction: column;
                 padding: 5em 0;
             }
+
             .text {
                 margin: 0 1em;
             }
+
             .buttons {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1em;
             }
+
             .img {
                 max-width: 90vw;
             }
+
             .bottom {
                 padding: 3em 1em;
             }
@@ -123,25 +134,23 @@ export class HeroSection extends LitElement {
                 <div class="top">
                     <div class="text">
                         <div class="headlines">
-                            <h1>Go Native. </br><span class="white">Stay PHP</span></h1>
+                            <hgroup>
+                                <slot name="title"></slot>
+                            </hgroup>
                         </div>
-                        <p class="description">Turn your PHP project into cross-platform, compact, fast, native
-                            applications for Windows, macOS, Linux, Android and iOS.</p>
-                        <div class="buttons">
-                            <button-primary href="/" icon="/images/icons/arrow_primary.svg">
-                                Try Boson for Free
-                            </button-primary>
 
-                            <button-primary type="secondary" href="/" icon="/images/icons/arrow_secondary.svg">
-                                Watch Presentation
-                            </button-primary>
+                        <p class="description">
+                            <slot name="description"></slot>
+                        </p>
+
+                        <div class="buttons">
+                            <slot name="buttons"></slot>
                         </div>
                     </div>
+
                     <div class="img">
                         <div class="logo-container">
-<!--                            <logo-component></logo-component>-->
-                            <logo-animated-transform-component></logo-animated-transform-component>
-<!--                            <logo-animated-opacity-component></logo-animated-opacity-component>-->
+                            <boson-logo></boson-logo>
                         </div>
                     </div>
                 </div>
@@ -149,7 +158,9 @@ export class HeroSection extends LitElement {
                 <aside class="bottom">
                     <a href="#nativeness" class="discover">
                         <span class="discover-container">
-                            <span class="discover-text">Discover more about boson</span>
+                            <span class="discover-text">
+                                <slot name="discovery"></slot>
+                            </span>
                             <img class="discover-icon" src="/images/icons/arrow_down.svg" alt="arrow_down"/>
                         </span>
                     </a>

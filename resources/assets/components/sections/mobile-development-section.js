@@ -97,7 +97,10 @@ export class MobileDevelopmentSection extends LitElement {
             <section class="container">
                 <div class="left">
                     <div class="wrapper">
-                        <subtitle-component name="Mobile Development"></subtitle-component>
+                        <subtitle-component>
+                            Mobile Development
+                        </subtitle-component>
+
                         <div class="headline">
                             <h2>Expand Your Business Horizons: <span class="red">PHP Mobile Apps</span></h2>
                         </div>

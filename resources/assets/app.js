@@ -23,7 +23,5 @@ import './components/ui/horizontal-accordion.js';
 import './components/ui/slider.js';
 import './components/ui/subtitle.js';
 import './components/ui/logos/logo.js';
-import './components/ui/logos/logo-animated-opacity.js';
-import './components/ui/logos/logo-animated-transform.js';
 
 import './layout/landing.js';

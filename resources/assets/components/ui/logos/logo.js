@@ -1,7 +1,7 @@
 import {css, html, LitElement} from 'lit';
 import {sharedStyles} from "../../../utils/sharedStyles.js";
 
-export class Logo extends LitElement {
+export class BosonLogo extends LitElement {
     static styles = [sharedStyles, css`
         .container {
             width: 100%;
@@ -36,6 +36,7 @@ export class Logo extends LitElement {
             position: absolute;
             transition: opacity 0.5s ease;
             opacity: 1;
+            will-change: transform;
         }
 
         .square.outer {
@@ -48,6 +49,7 @@ export class Logo extends LitElement {
 
         .square.dimmed {
             opacity: 0.1;
+            border-radius: 50%;
         }
 
         @media (max-aspect-ratio: 1/1) {
@@ -68,34 +70,182 @@ export class Logo extends LitElement {
     constructor() {
         super();
         this.squares = [];
+        this.squareData = [];
         this.animationIntervals = [];
+        this.mouseX = 0;
+        this.mouseY = 0;
+        this.targetMouseX = 0;
+        this.targetMouseY = 0;
+        this.containerRect = null;
+        this.animationFrame = null;
+        this.isMouseOver = false;
 
         this.config = {
             outerRadius: 260,
             innerRadius: 60,
-            gapBetweenCircles: 5,
+            gapBetweenCircles: 10,
 
             outerLayers: 9,
             innerLayers: 5,
 
             squareSize: 4,
-            squareSpacing: 12,
+            squareSpacing: 10,
 
             outerColor: '#8B8B8B',
             innerColor: '#F93904',
 
-            baseSize: 600
+            baseSize: 550,
+
+            mouseRadius: 200,
+            animationStrength: 35,
+            smoothing: .1
         };
     }
 
-    firstUpdated() {
+    firstUpdated(_changedProperties) {
         this.createSquares();
         this.startAnimations();
+        this.setupMouseTracking();
+        this.updateContainerRect();
+
+        this.animate();
+
+        this.resizeObserver = new ResizeObserver(() => {
+            this.updateContainerRect();
+        });
+
+        this.resizeObserver.observe(this.shadowRoot.querySelector('.dot-container'));
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
         this.animationIntervals.forEach(interval => clearInterval(interval));
+        this.removeMouseTracking();
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+        }
+        if (this.resizeObserver) {
+            this.resizeObserver.disconnect();
+        }
+    }
+
+    updateContainerRect() {
+        const container = this.shadowRoot.querySelector('.dot-container');
+        if (container) {
+            this.containerRect = container.getBoundingClientRect();
+        }
+    }
+
+    setupMouseTracking() {
+        const container = this.shadowRoot.querySelector('.container');
+        if (!container) return;
+
+        this.handleMouseMove = this.handleMouseMove.bind(this);
+        this.handleMouseLeave = this.handleMouseLeave.bind(this);
+        this.handleMouseEnter = this.handleMouseEnter.bind(this);
+
+        container.addEventListener('mousemove', this.handleMouseMove);
+        container.addEventListener('mouseleave', this.handleMouseLeave);
+        container.addEventListener('mouseenter', this.handleMouseEnter);
+    }
+
+    removeMouseTracking() {
+        const container = this.shadowRoot.querySelector('.container');
+        if (!container) return;
+
+        container.removeEventListener('mousemove', this.handleMouseMove);
+        container.removeEventListener('mouseleave', this.handleMouseLeave);
+        container.removeEventListener('mouseenter', this.handleMouseEnter);
+    }
+
+    handleMouseMove(event) {
+        if (!this.containerRect) {
+            this.updateContainerRect();
+        }
+
+        this.targetMouseX = event.clientX - this.containerRect.left;
+        this.targetMouseY = event.clientY - this.containerRect.top;
+    }
+
+    handleMouseEnter() {
+        this.isMouseOver = true;
+        if (!this.containerRect) {
+            this.updateContainerRect();
+        }
+    }
+
+    handleMouseLeave() {
+        this.isMouseOver = false;
+
+        this.mouseX = -1000;
+        this.mouseY = -1000;
+        this.updateSquarePositions();
+    }
+
+    animate() {
+        if (this.isMouseOver) {
+            this.mouseX += (this.targetMouseX - this.mouseX) * this.config.smoothing;
+            this.mouseY += (this.targetMouseY - this.mouseY) * this.config.smoothing;
+            this.updateSquarePositions();
+        } else {
+            this.mouseX = -1000;
+            this.mouseY = -1000;
+            this.resetSquaresToOriginal();
+        }
+
+        this.animationFrame = requestAnimationFrame(() => this.animate());
+    }
+
+    resetSquaresToOriginal() {
+        this.squareData.forEach((data, index) => {
+            const square = this.squares[index];
+            const currentTransform = square.style.transform;
+
+            const match = currentTransform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);
+
+            if (match) {
+                const currentX = parseFloat(match[1]) || 0;
+                const currentY = parseFloat(match[2]) || 0;
+
+                const newX = currentX * (1 - this.config.smoothing);
+                const newY = currentY * (1 - this.config.smoothing);
+
+                if (Math.abs(newX) < 0.1 && Math.abs(newY) < 0.1) {
+                    square.style.transform = 'translate(-50%, -50%)';
+                } else {
+                    square.style.transform = `translate(calc(-50% + ${newX}px), calc(-50% + ${newY}px))`;
+                }
+            }
+        });
+    }
+
+    updateSquarePositions() {
+        const mouseRadiusSq = this.config.mouseRadius * this.config.mouseRadius;
+
+        this.squareData.forEach((data, index) => {
+            const square = this.squares[index];
+
+            const dx = data.originalX - this.mouseX;
+            const dy = data.originalY - this.mouseY;
+            const distanceSq = dx * dx + dy * dy;
+
+            if (distanceSq < mouseRadiusSq && distanceSq > 0) {
+                const distance = Math.sqrt(distanceSq);
+
+                const pushStrength = ((this.config.mouseRadius - distance) / this.config.mouseRadius) * this.config.animationStrength;
+
+                const invDistance = .7 / distance;
+                const directionX = dx * invDistance;
+                const directionY = dy * invDistance;
+
+                const offsetX = directionX * pushStrength;
+                const offsetY = directionY * pushStrength;
+
+                square.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
+            } else {
+                square.style.transform = 'translate(-50%, -50%)';
+            }
+        });
     }
 
     createSquares() {
@@ -131,7 +281,13 @@ export class Logo extends LitElement {
                 square.style.height = `${squareSize}px`;
                 square.style.transform = 'translate(-50%, -50%)';
                 container.appendChild(square);
+
                 this.squares.push(square);
+                this.squareData.push({
+                    originalX: x,
+                    originalY: y,
+                    element: square
+                });
             }
         }
 
@@ -151,7 +307,13 @@ export class Logo extends LitElement {
                 square.style.height = `${squareSize}px`;
                 square.style.transform = 'translate(-50%, -50%)';
                 container.appendChild(square);
+
                 this.squares.push(square);
+                this.squareData.push({
+                    originalX: centerX,
+                    originalY: centerY,
+                    element: square
+                });
                 break;
             }
 
@@ -171,22 +333,25 @@ export class Logo extends LitElement {
                 square.style.height = `${squareSize}px`;
                 square.style.transform = 'translate(-50%, -50%)';
                 container.appendChild(square);
+
                 this.squares.push(square);
+                this.squareData.push({
+                    originalX: x,
+                    originalY: y,
+                    element: square
+                });
             }
         }
     }
 
     startAnimations() {
-        // Animate random squares
         this.squares.forEach((square) => {
-            // Start some squares dimmed
-            if (Math.random() > 0.7) {
+            if (Math.random() > 0.9) {
                 square.classList.add('dimmed');
             }
 
-            // Random animation interval for each square
             const interval = setInterval(() => {
-                if (Math.random() > 0.8) {
+                if (Math.random() > 0.9) {
                     square.classList.toggle('dimmed');
                 }
             }, 1000 + Math.random() * 2000);
@@ -206,4 +371,4 @@ export class Logo extends LitElement {
     }
 }
 
-customElements.define('logo-component', Logo);
+customElements.define('boson-logo', BosonLogo);

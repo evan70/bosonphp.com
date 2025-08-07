@@ -386,7 +386,11 @@ export class NativenessSection extends LitElement {
             <section class="container">
                 <div class="top">
                     <div class="left">
-                        <subtitle-component name="Nativeness"></subtitle-component>
+                        <slot></slot>
+                        <subtitle-component>
+                            Nativeness
+                        </subtitle-component>
+
                         <h2 class="title">
                             Familiar PHP. Now for desktop and mobile applications.
                         </h2>

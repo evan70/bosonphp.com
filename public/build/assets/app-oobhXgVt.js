@@ -2,21 +2,21 @@
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const D=globalThis,Y=D.ShadowRoot&&(D.ShadyCSS===void 0||D.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,X=Symbol(),Q=new WeakMap;let ce=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==X)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(Y&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=Q.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&Q.set(t,e))}return e}toString(){return this.cssText}};const de=n=>new ce(typeof n=="string"?n:n+"",void 0,X),b=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,i,o)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+n[o+1],n[0]);return new ce(t,n,X)},fe=(n,e)=>{if(Y)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),i=D.litNonce;i!==void 0&&s.setAttribute("nonce",i),s.textContent=t.cssText,n.appendChild(s)}},ee=Y?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return de(t)})(n):n;/**
+ */const L=globalThis,F=L.ShadowRoot&&(L.ShadyCSS===void 0||L.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,X=Symbol(),Q=new WeakMap;let de=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==X)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(F&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=Q.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&Q.set(t,e))}return e}toString(){return this.cssText}};const ce=n=>new de(typeof n=="string"?n:n+"",void 0,X),f=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,i,o)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+n[o+1],n[0]);return new de(t,n,X)},ve=(n,e)=>{if(F)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),i=L.litNonce;i!==void 0&&s.setAttribute("nonce",i),s.textContent=t.cssText,n.appendChild(s)}},ee=F?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return ce(t)})(n):n;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:ve,defineProperty:ye,getOwnPropertyDescriptor:xe,getOwnPropertyNames:be,getOwnPropertySymbols:we,getPrototypeOf:$e}=Object,N=globalThis,te=N.trustedTypes,_e=te?te.emptyScript:"",Se=N.reactiveElementPolyfillSupport,I=(n,e)=>n,W={toAttribute(n,e){switch(e){case Boolean:n=n?_e:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},he=(n,e)=>!ve(n,e),se={attribute:!0,type:String,converter:W,reflect:!1,useDefault:!1,hasChanged:he};Symbol.metadata??=Symbol("metadata"),N.litPropertyMetadata??=new WeakMap;let M=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=se){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),i=this.getPropertyDescriptor(e,s,t);i!==void 0&&ye(this.prototype,e,i)}}static getPropertyDescriptor(e,t,s){const{get:i,set:o}=xe(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:i,set(r){const c=i?.call(this);o?.call(this,r),this.requestUpdate(e,c,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??se}static _$Ei(){if(this.hasOwnProperty(I("elementProperties")))return;const e=$e(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(I("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(I("properties"))){const t=this.properties,s=[...be(t),...we(t)];for(const i of s)this.createProperty(i,t[i])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,i]of t)this.elementProperties.set(s,i)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);i!==void 0&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const i of s)t.unshift(ee(i))}else e!==void 0&&t.push(ee(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return fe(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),i=this.constructor._$Eu(e,s);if(i!==void 0&&s.reflect===!0){const o=(s.converter?.toAttribute!==void 0?s.converter:W).toAttribute(t,s.type);this._$Em=e,o==null?this.removeAttribute(i):this.setAttribute(i,o),this._$Em=null}}_$AK(e,t){const s=this.constructor,i=s._$Eh.get(e);if(i!==void 0&&this._$Em!==i){const o=s.getPropertyOptions(i),r=typeof o.converter=="function"?{fromAttribute:o.converter}:o.converter?.fromAttribute!==void 0?o.converter:W;this._$Em=i;const c=r.fromAttribute(t,o.type);this[i]=c??this._$Ej?.get(i)??c,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const i=this.constructor,o=this[e];if(s??=i.getPropertyOptions(e),!((s.hasChanged??he)(o,t)||s.useDefault&&s.reflect&&o===this._$Ej?.get(e)&&!this.hasAttribute(i._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:i,wrapped:o},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),o!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),i===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[i,o]of this._$Ep)this[i]=o;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[i,o]of s){const{wrapped:r}=o,c=this[i];r!==!0||this._$AL.has(i)||c===void 0||this.C(i,void 0,o,c)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};M.elementStyles=[],M.shadowRootOptions={mode:"open"},M[I("elementProperties")]=new Map,M[I("finalized")]=new Map,Se?.({ReactiveElement:M}),(N.reactiveElementVersions??=[]).push("2.1.1");/**
+ */const{is:fe,defineProperty:ye,getOwnPropertyDescriptor:xe,getOwnPropertyNames:be,getOwnPropertySymbols:we,getPrototypeOf:$e}=Object,U=globalThis,te=U.trustedTypes,_e=te?te.emptyScript:"",ke=U.reactiveElementPolyfillSupport,H=(n,e)=>n,Y={toAttribute(n,e){switch(e){case Boolean:n=n?_e:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},he=(n,e)=>!fe(n,e),se={attribute:!0,type:String,converter:Y,reflect:!1,useDefault:!1,hasChanged:he};Symbol.metadata??=Symbol("metadata"),U.litPropertyMetadata??=new WeakMap;let E=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=se){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),i=this.getPropertyDescriptor(e,s,t);i!==void 0&&ye(this.prototype,e,i)}}static getPropertyDescriptor(e,t,s){const{get:i,set:o}=xe(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:i,set(r){const l=i?.call(this);o?.call(this,r),this.requestUpdate(e,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??se}static _$Ei(){if(this.hasOwnProperty(H("elementProperties")))return;const e=$e(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(H("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(H("properties"))){const t=this.properties,s=[...be(t),...we(t)];for(const i of s)this.createProperty(i,t[i])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,i]of t)this.elementProperties.set(s,i)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);i!==void 0&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const i of s)t.unshift(ee(i))}else e!==void 0&&t.push(ee(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ve(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),i=this.constructor._$Eu(e,s);if(i!==void 0&&s.reflect===!0){const o=(s.converter?.toAttribute!==void 0?s.converter:Y).toAttribute(t,s.type);this._$Em=e,o==null?this.removeAttribute(i):this.setAttribute(i,o),this._$Em=null}}_$AK(e,t){const s=this.constructor,i=s._$Eh.get(e);if(i!==void 0&&this._$Em!==i){const o=s.getPropertyOptions(i),r=typeof o.converter=="function"?{fromAttribute:o.converter}:o.converter?.fromAttribute!==void 0?o.converter:Y;this._$Em=i;const l=r.fromAttribute(t,o.type);this[i]=l??this._$Ej?.get(i)??l,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const i=this.constructor,o=this[e];if(s??=i.getPropertyOptions(e),!((s.hasChanged??he)(o,t)||s.useDefault&&s.reflect&&o===this._$Ej?.get(e)&&!this.hasAttribute(i._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:i,wrapped:o},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),o!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),i===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[i,o]of this._$Ep)this[i]=o;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[i,o]of s){const{wrapped:r}=o,l=this[i];r!==!0||this._$AL.has(i)||l===void 0||this.C(i,void 0,o,l)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};E.elementStyles=[],E.shadowRootOptions={mode:"open"},E[H("elementProperties")]=new Map,E[H("finalized")]=new Map,ke?.({ReactiveElement:E}),(U.reactiveElementVersions??=[]).push("2.1.1");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const V=globalThis,O=V.trustedTypes,ie=O?O.createPolicy("lit-html",{createHTML:n=>n}):void 0,pe="$lit$",A=`lit$${Math.random().toFixed(9).slice(2)}$`,me="?"+A,ke=`<${me}>`,P=document,L=()=>P.createComment(""),T=n=>n===null||typeof n!="object"&&typeof n!="function",J=Array.isArray,Ae=n=>J(n)||typeof n?.[Symbol.iterator]=="function",F=`[ 	
-\f\r]`,B=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,oe=/-->/g,ne=/>/g,E=RegExp(`>|${F}(?:([^\\s"'>=/]+)(${F}*=${F}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),re=/'/g,ae=/"/g,ue=/^(?:script|style|textarea|title)$/i,Ee=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),f=Ee(1),q=Symbol.for("lit-noChange"),$=Symbol.for("lit-nothing"),le=new WeakMap,C=P.createTreeWalker(P,129);function ge(n,e){if(!J(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return ie!==void 0?ie.createHTML(e):e}const Ce=(n,e)=>{const t=n.length-1,s=[];let i,o=e===2?"<svg>":e===3?"<math>":"",r=B;for(let c=0;c<t;c++){const d=n[c];let u,g,m=-1,p=0;for(;p<d.length&&(r.lastIndex=p,g=r.exec(d),g!==null);)p=r.lastIndex,r===B?g[1]==="!--"?r=oe:g[1]!==void 0?r=ne:g[2]!==void 0?(ue.test(g[2])&&(i=RegExp("</"+g[2],"g")),r=E):g[3]!==void 0&&(r=E):r===E?g[0]===">"?(r=i??B,m=-1):g[1]===void 0?m=-2:(m=r.lastIndex-g[2].length,u=g[1],r=g[3]===void 0?E:g[3]==='"'?ae:re):r===ae||r===re?r=E:r===oe||r===ne?r=B:(r=E,i=void 0);const h=r===E&&n[c+1].startsWith("/>")?" ":"";o+=r===B?d+ke:m>=0?(s.push(u),d.slice(0,m)+pe+d.slice(m)+A+h):d+A+(m===-2?c:h)}return[ge(n,o+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class H{constructor({strings:e,_$litType$:t},s){let i;this.parts=[];let o=0,r=0;const c=e.length-1,d=this.parts,[u,g]=Ce(e,t);if(this.el=H.createElement(u,s),C.currentNode=this.el.content,t===2||t===3){const m=this.el.content.firstChild;m.replaceWith(...m.childNodes)}for(;(i=C.nextNode())!==null&&d.length<c;){if(i.nodeType===1){if(i.hasAttributes())for(const m of i.getAttributeNames())if(m.endsWith(pe)){const p=g[r++],h=i.getAttribute(m).split(A),v=/([.?@])?(.*)/.exec(p);d.push({type:1,index:o,name:v[2],strings:h,ctor:v[1]==="."?Me:v[1]==="?"?qe:v[1]==="@"?Re:U}),i.removeAttribute(m)}else m.startsWith(A)&&(d.push({type:6,index:o}),i.removeAttribute(m));if(ue.test(i.tagName)){const m=i.textContent.split(A),p=m.length-1;if(p>0){i.textContent=O?O.emptyScript:"";for(let h=0;h<p;h++)i.append(m[h],L()),C.nextNode(),d.push({type:2,index:++o});i.append(m[p],L())}}}else if(i.nodeType===8)if(i.data===me)d.push({type:2,index:o});else{let m=-1;for(;(m=i.data.indexOf(A,m+1))!==-1;)d.push({type:7,index:o}),m+=A.length-1}o++}}static createElement(e,t){const s=P.createElement("template");return s.innerHTML=e,s}}function R(n,e,t=n,s){if(e===q)return e;let i=s!==void 0?t._$Co?.[s]:t._$Cl;const o=T(e)?void 0:e._$litDirective$;return i?.constructor!==o&&(i?._$AO?.(!1),o===void 0?i=void 0:(i=new o(n),i._$AT(n,t,s)),s!==void 0?(t._$Co??=[])[s]=i:t._$Cl=i),i!==void 0&&(e=R(n,i._$AS(n,e.values),i,s)),e}class Pe{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:s}=this._$AD,i=(e?.creationScope??P).importNode(t,!0);C.currentNode=i;let o=C.nextNode(),r=0,c=0,d=s[0];for(;d!==void 0;){if(r===d.index){let u;d.type===2?u=new z(o,o.nextSibling,this,e):d.type===1?u=new d.ctor(o,d.name,d.strings,this,e):d.type===6&&(u=new Be(o,this,e)),this._$AV.push(u),d=s[++c]}r!==d?.index&&(o=C.nextNode(),r++)}return C.currentNode=P,i}p(e){let t=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,t),t+=s.strings.length-2):s._$AI(e[t])),t++}}class z{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,s,i){this.type=2,this._$AH=$,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=s,this.options=i,this._$Cv=i?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=R(this,e,t),T(e)?e===$||e==null||e===""?(this._$AH!==$&&this._$AR(),this._$AH=$):e!==this._$AH&&e!==q&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):Ae(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==$&&T(this._$AH)?this._$AA.nextSibling.data=e:this.T(P.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:s}=e,i=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=H.createElement(ge(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===i)this._$AH.p(t);else{const o=new Pe(i,this),r=o.u(this.options);o.p(t),this.T(r),this._$AH=o}}_$AC(e){let t=le.get(e.strings);return t===void 0&&le.set(e.strings,t=new H(e)),t}k(e){J(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let s,i=0;for(const o of e)i===t.length?t.push(s=new z(this.O(L()),this.O(L()),this,this.options)):s=t[i],s._$AI(o),i++;i<t.length&&(this._$AR(s&&s._$AB.nextSibling,i),t.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const s=e.nextSibling;e.remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class U{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,s,i,o){this.type=1,this._$AH=$,this._$AN=void 0,this.element=e,this.name=t,this._$AM=i,this.options=o,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=$}_$AI(e,t=this,s,i){const o=this.strings;let r=!1;if(o===void 0)e=R(this,e,t,0),r=!T(e)||e!==this._$AH&&e!==q,r&&(this._$AH=e);else{const c=e;let d,u;for(e=o[0],d=0;d<o.length-1;d++)u=R(this,c[s+d],t,d),u===q&&(u=this._$AH[d]),r||=!T(u)||u!==this._$AH[d],u===$?e=$:e!==$&&(e+=(u??"")+o[d+1]),this._$AH[d]=u}r&&!i&&this.j(e)}j(e){e===$?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class Me extends U{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===$?void 0:e}}class qe extends U{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==$)}}class Re extends U{constructor(e,t,s,i,o){super(e,t,s,i,o),this.type=5}_$AI(e,t=this){if((e=R(this,e,t,0)??$)===q)return;const s=this._$AH,i=e===$&&s!==$||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,o=e!==$&&(s===$||i);i&&this.element.removeEventListener(this.name,this,s),o&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Be{constructor(e,t,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){R(this,e)}}const Ie=V.litHtmlPolyfillSupport;Ie?.(H,z),(V.litHtmlVersions??=[]).push("3.3.1");const Le=(n,e,t)=>{const s=t?.renderBefore??e;let i=s._$litPart$;if(i===void 0){const o=t?.renderBefore??null;s._$litPart$=i=new z(e.insertBefore(L(),o),o,void 0,t??{})}return i._$AI(n),i};/**
+ */const V=globalThis,O=V.trustedTypes,ie=O?O.createPolicy("lit-html",{createHTML:n=>n}):void 0,pe="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,me="?"+_,Ae=`<${me}>`,S=document,I=()=>S.createComment(""),q=n=>n===null||typeof n!="object"&&typeof n!="function",J=Array.isArray,Se=n=>J(n)||typeof n?.[Symbol.iterator]=="function",W=`[ 	
+\f\r]`,T=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,oe=/-->/g,ne=/>/g,k=RegExp(`>|${W}(?:([^\\s"'>=/]+)(${W}*=${W}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),re=/'/g,ae=/"/g,ue=/^(?:script|style|textarea|title)$/i,Ee=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),p=Ee(1),P=Symbol.for("lit-noChange"),b=Symbol.for("lit-nothing"),le=new WeakMap,A=S.createTreeWalker(S,129);function ge(n,e){if(!J(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return ie!==void 0?ie.createHTML(e):e}const Pe=(n,e)=>{const t=n.length-1,s=[];let i,o=e===2?"<svg>":e===3?"<math>":"",r=T;for(let l=0;l<t;l++){const a=n[l];let c,m,d=-1,v=0;for(;v<a.length&&(r.lastIndex=v,m=r.exec(a),m!==null);)v=r.lastIndex,r===T?m[1]==="!--"?r=oe:m[1]!==void 0?r=ne:m[2]!==void 0?(ue.test(m[2])&&(i=RegExp("</"+m[2],"g")),r=k):m[3]!==void 0&&(r=k):r===k?m[0]===">"?(r=i??T,d=-1):m[1]===void 0?d=-2:(d=r.lastIndex-m[2].length,c=m[1],r=m[3]===void 0?k:m[3]==='"'?ae:re):r===ae||r===re?r=k:r===oe||r===ne?r=T:(r=k,i=void 0);const h=r===k&&n[l+1].startsWith("/>")?" ":"";o+=r===T?a+Ae:d>=0?(s.push(c),a.slice(0,d)+pe+a.slice(d)+_+h):a+_+(d===-2?l:h)}return[ge(n,o+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class z{constructor({strings:e,_$litType$:t},s){let i;this.parts=[];let o=0,r=0;const l=e.length-1,a=this.parts,[c,m]=Pe(e,t);if(this.el=z.createElement(c,s),A.currentNode=this.el.content,t===2||t===3){const d=this.el.content.firstChild;d.replaceWith(...d.childNodes)}for(;(i=A.nextNode())!==null&&a.length<l;){if(i.nodeType===1){if(i.hasAttributes())for(const d of i.getAttributeNames())if(d.endsWith(pe)){const v=m[r++],h=i.getAttribute(d).split(_),y=/([.?@])?(.*)/.exec(v);a.push({type:1,index:o,name:y[2],strings:h,ctor:y[1]==="."?Me:y[1]==="?"?Be:y[1]==="@"?Re:N}),i.removeAttribute(d)}else d.startsWith(_)&&(a.push({type:6,index:o}),i.removeAttribute(d));if(ue.test(i.tagName)){const d=i.textContent.split(_),v=d.length-1;if(v>0){i.textContent=O?O.emptyScript:"";for(let h=0;h<v;h++)i.append(d[h],I()),A.nextNode(),a.push({type:2,index:++o});i.append(d[v],I())}}}else if(i.nodeType===8)if(i.data===me)a.push({type:2,index:o});else{let d=-1;for(;(d=i.data.indexOf(_,d+1))!==-1;)a.push({type:7,index:o}),d+=_.length-1}o++}}static createElement(e,t){const s=S.createElement("template");return s.innerHTML=e,s}}function C(n,e,t=n,s){if(e===P)return e;let i=s!==void 0?t._$Co?.[s]:t._$Cl;const o=q(e)?void 0:e._$litDirective$;return i?.constructor!==o&&(i?._$AO?.(!1),o===void 0?i=void 0:(i=new o(n),i._$AT(n,t,s)),s!==void 0?(t._$Co??=[])[s]=i:t._$Cl=i),i!==void 0&&(e=C(n,i._$AS(n,e.values),i,s)),e}class Ce{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:s}=this._$AD,i=(e?.creationScope??S).importNode(t,!0);A.currentNode=i;let o=A.nextNode(),r=0,l=0,a=s[0];for(;a!==void 0;){if(r===a.index){let c;a.type===2?c=new D(o,o.nextSibling,this,e):a.type===1?c=new a.ctor(o,a.name,a.strings,this,e):a.type===6&&(c=new Te(o,this,e)),this._$AV.push(c),a=s[++l]}r!==a?.index&&(o=A.nextNode(),r++)}return A.currentNode=S,i}p(e){let t=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,t),t+=s.strings.length-2):s._$AI(e[t])),t++}}class D{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,s,i){this.type=2,this._$AH=b,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=s,this.options=i,this._$Cv=i?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=C(this,e,t),q(e)?e===b||e==null||e===""?(this._$AH!==b&&this._$AR(),this._$AH=b):e!==this._$AH&&e!==P&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):Se(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==b&&q(this._$AH)?this._$AA.nextSibling.data=e:this.T(S.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:s}=e,i=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=z.createElement(ge(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===i)this._$AH.p(t);else{const o=new Ce(i,this),r=o.u(this.options);o.p(t),this.T(r),this._$AH=o}}_$AC(e){let t=le.get(e.strings);return t===void 0&&le.set(e.strings,t=new z(e)),t}k(e){J(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let s,i=0;for(const o of e)i===t.length?t.push(s=new D(this.O(I()),this.O(I()),this,this.options)):s=t[i],s._$AI(o),i++;i<t.length&&(this._$AR(s&&s._$AB.nextSibling,i),t.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const s=e.nextSibling;e.remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class N{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,s,i,o){this.type=1,this._$AH=b,this._$AN=void 0,this.element=e,this.name=t,this._$AM=i,this.options=o,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=b}_$AI(e,t=this,s,i){const o=this.strings;let r=!1;if(o===void 0)e=C(this,e,t,0),r=!q(e)||e!==this._$AH&&e!==P,r&&(this._$AH=e);else{const l=e;let a,c;for(e=o[0],a=0;a<o.length-1;a++)c=C(this,l[s+a],t,a),c===P&&(c=this._$AH[a]),r||=!q(c)||c!==this._$AH[a],c===b?e=b:e!==b&&(e+=(c??"")+o[a+1]),this._$AH[a]=c}r&&!i&&this.j(e)}j(e){e===b?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class Me extends N{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===b?void 0:e}}class Be extends N{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==b)}}class Re extends N{constructor(e,t,s,i,o){super(e,t,s,i,o),this.type=5}_$AI(e,t=this){if((e=C(this,e,t,0)??b)===P)return;const s=this._$AH,i=e===b&&s!==b||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,o=e!==b&&(s===b||i);i&&this.element.removeEventListener(this.name,this,s),o&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Te{constructor(e,t,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){C(this,e)}}const He=V.litHtmlPolyfillSupport;He?.(z,D),(V.litHtmlVersions??=[]).push("3.3.1");const Ie=(n,e,t)=>{const s=t?.renderBefore??e;let i=s._$litPart$;if(i===void 0){const o=t?.renderBefore??null;s._$litPart$=i=new D(e.insertBefore(I(),o),o,void 0,t??{})}return i._$AI(n),i};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const K=globalThis;class y extends M{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Le(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return q}}y._$litElement$=!0,y.finalized=!0,K.litElementHydrateSupport?.({LitElement:y});const Te=K.litElementPolyfillSupport;Te?.({LitElement:y});(K.litElementVersions??=[]).push("4.2.1");const He="h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:700}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:600}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:500}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:500}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}.description{color:var(--color-text-secondary)}a{color:inherit;text-decoration:none}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}",w=de(He);class ze extends y{static properties={href:{type:String},type:{type:String},icon:{type:String}};static styles=[w,b`
+ */const K=globalThis;class g extends E{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Ie(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return P}}g._$litElement$=!0,g.finalized=!0,K.litElementHydrateSupport?.({LitElement:g});const qe=K.litElementPolyfillSupport;qe?.({LitElement:g});(K.litElementVersions??=[]).push("4.2.1");const ze="h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:700}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:600}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:500}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:500}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}a{color:inherit;text-decoration:none}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}",w=ce(ze);class De extends g{static properties={href:{type:String},type:{type:String},icon:{type:String}};static styles=[w,f`
         .button {
             font-family: var(--font-title), sans-serif;
             letter-spacing: 1px;
@@ -64,7 +64,7 @@
         .button.button-secondary .icon {
             background: var(--color-text-button-secondary);
         }
-    `];constructor(){super(),this.href="/",this.type="primary",this.icon=""}render(){return f`
+    `];constructor(){super(),this.href="/",this.type="primary",this.icon=""}render(){return p`
             <a href="${this.href}" class="button button-${this.type}">
                 <slot></slot>
 
@@ -72,7 +72,7 @@
                     <img class="img" src="${this.icon}" alt="arrow" />
                 </span>
             </a>
-        `}}customElements.define("button-primary",ze);class De extends y{static properties={href:{type:String},text:{type:String}};static styles=[w,b`
+        `}}customElements.define("button-primary",De);class Le extends g{static properties={href:{type:String},text:{type:String}};static styles=[w,f`
         .button {
             transition-duration: 0.2s;
             background: var(--color-bg-button-secondary);
@@ -101,7 +101,7 @@
             align-items: center;
             background: var(--color-text-button-secondary);
         }
-    `];constructor(){super(),this.href="/",this.text=""}render(){return f`
+    `];constructor(){super(),this.href="/",this.text=""}render(){return p`
             <a href="${this.href}" class="button">
                 <span class="text">
                     ${this.text}
@@ -111,7 +111,7 @@
                     <img class="img" src="/images/icons/arrow_secondary.svg" alt="arrow_secondary"/>
                 </div>
             </a>
-        `}}customElements.define("button-secondary",De);class G extends y{static styles=[w,b`
+        `}}customElements.define("button-secondary",Le);class Z extends g{static styles=[w,f`
         .container {
             padding-bottom: 8em;
             background-size: 900px 900px;
@@ -131,7 +131,7 @@
         ::slotted(.red) {
             color: var(--color-text-brand) !important;
         }
-    `];render(){return console.log(window.s=G.styles),f`
+    `];render(){return console.log(window.s=Z.styles),p`
             <section class="container">
                 <div class="wrapper">
                     <div class="text">
@@ -141,7 +141,7 @@
                     <slot name="footer"></slot>
                 </div>
             </section>
-        `}}customElements.define("call-to-action-section",G);class Oe extends y{static styles=[w,b`
+        `}}customElements.define("call-to-action-section",Z);class Oe extends g{static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -181,12 +181,18 @@
             line-height: 1.1;
         }
 
-        .headlines h1 {
-            color: var(--color-text-brand);
+        .headlines ::slotted(h1),
+        .headlines ::slotted(h2) {
+            font-size: var(--font-size-h1) !important;
+        }
+
+        .headlines ::slotted(h1) {
+            color: var(--color-text-brand) !important;
         }
 
         .description {
             width: 80%;
+            color: var(--color-text-secondary);
         }
 
         .buttons {
@@ -207,6 +213,7 @@
             width: 100%;
             transition-duration: 0.2s;
             font-family: var(--font-title), sans-serif;
+            letter-spacing: .1em;
         }
 
         .bottom .discover-container {
@@ -238,45 +245,47 @@
                 flex-direction: column;
                 padding: 5em 0;
             }
+
             .text {
                 margin: 0 1em;
             }
+
             .buttons {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1em;
             }
+
             .img {
                 max-width: 90vw;
             }
+
             .bottom {
                 padding: 3em 1em;
             }
         }
-    `];render(){return f`
+    `];render(){return p`
             <section class="container">
                 <div class="top">
                     <div class="text">
                         <div class="headlines">
-                            <h1>Go Native. </br><span class="white">Stay PHP</span></h1>
+                            <hgroup>
+                                <slot name="title"></slot>
+                            </hgroup>
                         </div>
-                        <p class="description">Turn your PHP project into cross-platform, compact, fast, native
-                            applications for Windows, macOS, Linux, Android and iOS.</p>
-                        <div class="buttons">
-                            <button-primary href="/" icon="/images/icons/arrow_primary.svg">
-                                Try Boson for Free
-                            </button-primary>
 
-                            <button-primary type="secondary" href="/" icon="/images/icons/arrow_secondary.svg">
-                                Watch Presentation
-                            </button-primary>
+                        <p class="description">
+                            <slot name="description"></slot>
+                        </p>
+
+                        <div class="buttons">
+                            <slot name="buttons"></slot>
                         </div>
                     </div>
+
                     <div class="img">
                         <div class="logo-container">
-<!--                            <logo-component></logo-component>-->
-                            <logo-animated-transform-component></logo-animated-transform-component>
-<!--                            <logo-animated-opacity-component></logo-animated-opacity-component>-->
+                            <boson-logo></boson-logo>
                         </div>
                     </div>
                 </div>
@@ -284,13 +293,15 @@
                 <aside class="bottom">
                     <a href="#nativeness" class="discover">
                         <span class="discover-container">
-                            <span class="discover-text">Discover more about boson</span>
+                            <span class="discover-text">
+                                <slot name="discovery"></slot>
+                            </span>
                             <img class="discover-icon" src="/images/icons/arrow_down.svg" alt="arrow_down"/>
                         </span>
                     </a>
                 </aside>
             </section>
-        `}}customElements.define("hero-section",Oe);class je extends y{static styles=[w,b`
+        `}}customElements.define("hero-section",Oe);class je extends g{static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -344,11 +355,14 @@
             flex-direction: column;
             flex: 1;
         }
-    `];get content(){return[{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a falications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson antly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create and resource consumption, significantly outperforming Electron in terms of performance."}]}render(){return f`
+    `];get content(){return[{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a falications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson antly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance."},{headline:"Saucer: The Core of Performance",text:"At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create and resource consumption, significantly outperforming Electron in terms of performance."}]}render(){return p`
             <section class="container">
                 <div class="top">
                     <div class="left">
-                        <subtitle-component name="How It Works"></subtitle-component>
+                        <subtitle-component>
+                            How It Works
+                        </subtitle-component>
+
                         <div class="text">
                             <h2>Under the Hood of</br>Boson PHP</h2>
                         </div>
@@ -372,7 +386,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("how-it-works-section",je);class Ne extends y{static styles=[w,b`
+        `}}customElements.define("how-it-works-section",je);class Ue extends g{static styles=[w,f`
         .container {
             display: flex;
             justify-content: center;
@@ -427,7 +441,7 @@
         .name {
             text-transform: uppercase;
         }
-    `];get elements(){return[{text:"For many businesses, mobile devices are the main audience segment. Web applications are good. Desktop clients are great. Mobile applications are wonderful.",icon:"rocket",headline:"Reaching new audiences"},{text:"The same PHP code — but now it works on a mobile device. Budget savings and faster launch.",icon:"clients",headline:"New clients without rewriting code"},{headline:"Convenient for B2B and B2C",icon:"case",text:"Internal CRM, chat applications, offline utilities, task managers, task trackers, dashboards — you can carry everything in your pocket."},{headline:"Without pain and extra stacks",icon:"convenient",text:"One stack. One language. One project. PHP from start to launch in the App Store."}]}renderElement(e){return f`
+    `];get elements(){return[{text:"For many businesses, mobile devices are the main audience segment. Web applications are good. Desktop clients are great. Mobile applications are wonderful.",icon:"rocket",headline:"Reaching new audiences"},{text:"The same PHP code — but now it works on a mobile device. Budget savings and faster launch.",icon:"clients",headline:"New clients without rewriting code"},{headline:"Convenient for B2B and B2C",icon:"case",text:"Internal CRM, chat applications, offline utilities, task managers, task trackers, dashboards — you can carry everything in your pocket."},{headline:"Without pain and extra stacks",icon:"convenient",text:"One stack. One language. One project. PHP from start to launch in the App Store."}]}renderElement(e){return p`
             <div class="element">
                 <div class="top">
                     <img class="icon" src="/images/icons/${e.icon}.svg" alt="${e.headline}"/>
@@ -435,11 +449,14 @@
                 </div>
                 <p class="text">${e.text}</p>
             </div>
-        `}render(){return f`
+        `}render(){return p`
             <section class="container">
                 <div class="left">
                     <div class="wrapper">
-                        <subtitle-component name="Mobile Development"></subtitle-component>
+                        <subtitle-component>
+                            Mobile Development
+                        </subtitle-component>
+
                         <div class="headline">
                             <h2>Expand Your Business Horizons: <span class="red">PHP Mobile Apps</span></h2>
                         </div>
@@ -452,7 +469,7 @@
                     ${this.elements.map(e=>this.renderElement(e))}
                 </div>
             </section>
-        `}}customElements.define("mobile-development-section",Ne);class Z extends y{static cfg={delay:2e3};static styles=[w,b`
+        `}}customElements.define("mobile-development-section",Ue);class G extends g{static cfg={delay:2e3};static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -769,11 +786,15 @@
                 width: 95vw;
             }
         }
-    `];static properties={activeIndex:{type:Number,state:!0}};constructor(){super(),this.activeIndex=1,this._intervalId=null}connectedCallback(){super.connectedCallback(),this._startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this._stopAnimation()}_startAnimation(){this._intervalId=setInterval(()=>{this.activeIndex=this.activeIndex===4?1:this.activeIndex+1},Z.cfg.delay)}_stopAnimation(){this._intervalId&&(clearInterval(this._intervalId),this._intervalId=null)}_getBorderClass(e){const t=[];return this.activeIndex===e&&t.push("border-active"),this.activeIndex===1&&e===2&&t.push("border-top-active"),this.activeIndex===4&&e===3&&t.push("border-top-active"),t.join(" ")}_getSystemClass(e){return this.activeIndex===e?"system system-active":"system"}render(){return f`
+    `];static properties={activeIndex:{type:Number,state:!0}};constructor(){super(),this.activeIndex=1,this._intervalId=null}connectedCallback(){super.connectedCallback(),this._startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this._stopAnimation()}_startAnimation(){this._intervalId=setInterval(()=>{this.activeIndex=this.activeIndex===4?1:this.activeIndex+1},G.cfg.delay)}_stopAnimation(){this._intervalId&&(clearInterval(this._intervalId),this._intervalId=null)}_getBorderClass(e){const t=[];return this.activeIndex===e&&t.push("border-active"),this.activeIndex===1&&e===2&&t.push("border-top-active"),this.activeIndex===4&&e===3&&t.push("border-top-active"),t.join(" ")}_getSystemClass(e){return this.activeIndex===e?"system system-active":"system"}render(){return p`
             <section class="container">
                 <div class="top">
                     <div class="left">
-                        <subtitle-component name="Nativeness"></subtitle-component>
+                        <slot></slot>
+                        <subtitle-component>
+                            Nativeness
+                        </subtitle-component>
+
                         <h2 class="title">
                             Familiar PHP. Now for desktop and mobile applications.
                         </h2>
@@ -843,7 +864,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("nativeness-section",Z);class j extends y{static styles=[w,b`
+        `}}customElements.define("nativeness-section",G);class j extends g{static styles=[w,f`
         .container {
             background-size: 100% auto;
             background: url("/images/right_choice_bg.png") no-repeat top;
@@ -941,7 +962,7 @@
             color: var(--color-text-secondary);
             font-family: var(--font-title), sans-serif;
         }
-    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=j.animationConfig,s=Date.now()-this.animationState.startTime,i=e.blockDuration*4+e.transitionDuration*4,o=s%i,r=e.blockDuration,c=r+e.transitionDuration,d=c+e.blockDuration,u=d+e.transitionDuration,g=u+e.blockDuration,m=g+e.transitionDuration,p=m+e.blockDuration;p+e.transitionDuration;let h=0,v=0;if(o<r)h=o/e.blockDuration*.5,v=0;else if(o<c){const a=(o-r)/e.transitionDuration;h=.5,v=a}else if(o<d)h=.5+(o-c)/e.blockDuration*.5,v=1;else if(o<u){const a=(o-d)/e.transitionDuration;h=1,v=1-a}else if(o<g)h=1-(o-u)/e.blockDuration*.5,v=0;else if(o<m){const a=(o-g)/e.transitionDuration;h=.5,v=a}else if(o<p)h=.5-(o-m)/e.blockDuration*.5,v=1;else{const a=(o-p)/e.transitionDuration;h=0,v=1-a}this.animateElements(v),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=j.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const i=e*s,o=Math.min(0,-s+e*s),r=-(e*s),c=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${i}px)`,this.elements.topRight.style.transform=`translateX(${o}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${c}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((i,o)=>{o<s?(i.classList.remove("grey"),i.classList.add("red")):(i.classList.remove("red"),i.classList.add("grey"))})}render(){return f`
+    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=j.animationConfig,s=Date.now()-this.animationState.startTime,i=e.blockDuration*4+e.transitionDuration*4,o=s%i,r=e.blockDuration,l=r+e.transitionDuration,a=l+e.blockDuration,c=a+e.transitionDuration,m=c+e.blockDuration,d=m+e.transitionDuration,v=d+e.blockDuration;v+e.transitionDuration;let h=0,y=0;if(o<r)h=o/e.blockDuration*.5,y=0;else if(o<l){const u=(o-r)/e.transitionDuration;h=.5,y=u}else if(o<a)h=.5+(o-l)/e.blockDuration*.5,y=1;else if(o<c){const u=(o-a)/e.transitionDuration;h=1,y=1-u}else if(o<m)h=1-(o-c)/e.blockDuration*.5,y=0;else if(o<d){const u=(o-m)/e.transitionDuration;h=.5,y=u}else if(o<v)h=.5-(o-d)/e.blockDuration*.5,y=1;else{const u=(o-v)/e.transitionDuration;h=0,y=1-u}this.animateElements(y),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=j.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const i=e*s,o=Math.min(0,-s+e*s),r=-(e*s),l=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${i}px)`,this.elements.topRight.style.transform=`translateX(${o}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${l}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((i,o)=>{o<s?(i.classList.remove("grey"),i.classList.add("red")):(i.classList.remove("red"),i.classList.add("grey"))})}render(){return p`
             <section class="container">
                 <div class="top">
                     <h1>Why is Boson PHP</br> <span class="red">the right choice</span> </br>for you?</h1>
@@ -1016,7 +1037,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("right-choice-section",j);class Ue extends y{static styles=[w,b`
+        `}}customElements.define("right-choice-section",j);class Ne extends g{static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -1126,11 +1147,14 @@
                 align-self: center;
             }
         }
-    `];render(){return f`
+    `];render(){return p`
             <section class="container">
                 <div class="top">
                     <div class="left">
-                        <subtitle-component name="Solves"></subtitle-component>
+                        <subtitle-component>
+                            Solves
+                        </subtitle-component>
+
                         <div class="text">
                             <h2>What <span class="red">you can</span> do with Boson?</h2>
                         </div>
@@ -1178,7 +1202,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("solves-section",Ue);class Fe extends y{static styles=[w,b`
+        `}}customElements.define("solves-section",Ne);class We extends g{static styles=[w,f`
         .container {
             position: relative;
             display: flex;
@@ -1208,10 +1232,13 @@
             filter: blur(140px);
             z-index: -1;
         }
-    `];get slides(){return[{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building irst meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev4",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."}]}render(){return f`
+    `];get slides(){return[{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building irst meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev4",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."}]}render(){return p`
             <section class="container">
                 <div class="top">
-                    <subtitle-component name="Testimonials"></subtitle-component>
+                    <subtitle-component>
+                        Testimonials
+                    </subtitle-component>
+
                     <div class="headline">
                         <h2>Developers that </br>believe in us</h2>
                     </div>
@@ -1220,7 +1247,7 @@
                     <slider-component .slides=${this.slides}></slider-component>
                 </div>
             </section>
-        `}}customElements.define("testimonials-section",Fe);class We extends y{static properties={href:{type:String},external:{type:Boolean}};static styles=[w,b`
+        `}}customElements.define("testimonials-section",We);class Ye extends g{static properties={href:{type:String},external:{type:Boolean}};static styles=[w,f`
         .button {
             height: inherit;
             font-family: var(--font-title), sans-serif;
@@ -1241,13 +1268,13 @@
         ::slotted(img.logo) {
             height: 50%;
         }
-    `];constructor(){super(),this.href="/",this.external=!1}render(){return f`
+    `];constructor(){super(),this.href="/",this.external=!1}render(){return p`
             <a class="button"
                href="${this.href}"
                target="${this.external?"_blank":"_self"}">
                 <slot></slot>
             </a>
-        `}}customElements.define("boson-header-button",We);class Ye extends y{static properties={};static styles=[w,b`
+        `}}customElements.define("boson-header-button",Ye);class Fe extends g{static properties={};static styles=[w,f`
         details > summary {
             list-style-type: '';
         }
@@ -1285,7 +1312,7 @@
             height: 100%;
             width: 100%;
         }
-    `];constructor(){super()}onMouseEnter(e){e.target.setAttribute("open","open")}onMouseLeave(e){e.target.removeAttribute("open")}render(){return f`
+    `];constructor(){super()}onMouseEnter(e){e.target.setAttribute("open","open")}onMouseLeave(e){e.target.removeAttribute("open")}render(){return p`
             <details class="dropdown"
                      @mouseenter="${this.onMouseEnter}"
                      @mouseleave="${this.onMouseLeave}">
@@ -1298,7 +1325,7 @@
                     <slot></slot>
                 </nav>
             </details>
-        `}}customElements.define("boson-header-dropdown",Ye);class Xe extends y{static properties={href:{type:String},external:{type:Boolean},active:{type:Boolean}};static styles=[w,b`
+        `}}customElements.define("boson-header-dropdown",Fe);class Xe extends g{static properties={href:{type:String},external:{type:Boolean},active:{type:Boolean}};static styles=[w,f`
         .link {
             font-family: var(--font-title), sans-serif;
             letter-spacing: 1px;
@@ -1319,13 +1346,13 @@
         ::slotted(img) {
             margin-right: 15px;
         }
-    `];constructor(){super(),this.href="/",this.external=!1,this.active=!1}render(){return f`
+    `];constructor(){super(),this.href="/",this.external=!1,this.active=!1}render(){return p`
             <a class="link ${this.active?"active":""}"
                href="${this.href}"
                target="${this.external?"_blank":"_self"}">
                 <slot></slot>
             </a>
-        `}}customElements.define("boson-header-link",Xe);class Ve extends y{static styles=[w,b`
+        `}}customElements.define("boson-header-link",Xe);class Ve extends g{static styles=[w,f`
         .container {
             aspect-ratio: 1 / 1;
             position: relative;
@@ -1360,7 +1387,7 @@
         .right {
             right: 0;
         }
-    `];render(){return f`
+    `];render(){return p`
             <div class="container">
                 <div class="inner">
                     <div class="top left"></div>
@@ -1369,7 +1396,7 @@
                     <div class="bottom right"></div>
                 </div>
             </div>
-        `}}customElements.define("dots-container",Ve);class Je extends y{static styles=[b`
+        `}}customElements.define("dots-container",Ve);class Je extends g{static styles=[f`
         .container {
             display: flex;
             flex-direction: column;
@@ -1515,7 +1542,7 @@
                 border-bottom: 1px solid var(--color-border);
             }
         }
-    `];render(){return f`
+    `];render(){return p`
             <footer class="container">
                 <div class="content">
                     <div class="top">
@@ -1556,7 +1583,7 @@
                     <img src="/images/credits.png" alt="credits"/>
                 </div>
             </footer>
-        `}}customElements.define("boson-footer",Je);class Ke extends y{static properties={isScrolled:{type:Boolean}};static styles=[b`
+        `}}customElements.define("boson-footer",Je);class Ke extends g{static properties={isScrolled:{type:Boolean}};static styles=[f`
         header {
             height: 100px;
             line-height: 100px;
@@ -1614,7 +1641,7 @@
                 display: none;
             }
         }
-    `];constructor(){super(),this.isScrolled=!1,this.handleScroll=this.handleScroll.bind(this)}connectedCallback(){super.connectedCallback(),window.addEventListener("scroll",this.handleScroll),this.handleScroll()}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("scroll",this.handleScroll)}handleScroll(){const e=window.pageYOffset||document.documentElement.scrollTop;this.isScrolled=e>0}render(){return f`
+    `];constructor(){super(),this.isScrolled=!1,this.handleScroll=this.handleScroll.bind(this)}connectedCallback(){super.connectedCallback(),window.addEventListener("scroll",this.handleScroll),this.handleScroll()}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("scroll",this.handleScroll)}handleScroll(){const e=window.pageYOffset||document.documentElement.scrollTop;this.isScrolled=e>0}render(){return p`
             <header class="${this.isScrolled?"scrolled":""}">
                 <div class="dots">
                     <dots-container></dots-container>
@@ -1633,7 +1660,7 @@
                 </div>
             </header>
             <div class="header-padding"></div>
-        `}}customElements.define("boson-header",Ke);class Ge extends y{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[w,b`
+        `}}customElements.define("boson-header",Ke);class Ze extends g{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[w,f`
         .accordion {
             display: flex;
             flex: 1;
@@ -1736,39 +1763,39 @@
                 opacity: 1;
             }
         }
-    `];constructor(){super(),this.content=[],this.openIndex=0}handleElementClick(e){this.openIndex=e}renderElement(e,t){const s=this.openIndex===t;return f`
+    `];constructor(){super(),this.content=[],this.openIndex=0}handleElementClick(e){this.openIndex=e}renderElement(e,t){const s=this.openIndex===t;return p`
             <div
                 class="element ${s?"elementOpen":"elementClosed"}"
                 @click=${()=>this.handleElementClick(t)}
             >
                 <div class="elementContent">
-                    ${s?f`
+                    ${s?p`
                         <div class="openTop">
                             <span class="number">0${t+1}</span>
                             <h4 class="headline">${e.headline}</h4>
                         </div>
-                    `:f`
+                    `:p`
                         <div class="closedTop">
                             <span class="number">0${t+1}</span>
                         </div>
                     `}
 
-                    ${s?f`
+                    ${s?p`
                         <div class="content">
                             <p class="text">${e.text}</p>
                         </div>
-                    `:f`
+                    `:p`
                         <div class="collapsedContent">
                             <img src="/images/icons/plus.svg" alt="plus"/>
                         </div>
                     `}
                 </div>
             </div>
-        `}render(){return f`
+        `}render(){return p`
             <div class="accordion">
                 ${this.content.map((e,t)=>this.renderElement(e,t))}
             </div>
-        `}}customElements.define("horizontal-accordion",Ge);class Ze extends y{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[w,b`
+        `}}customElements.define("horizontal-accordion",Ze);class Ge extends g{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[w,f`
         .container {
             display: flex;
             max-width: 100vw;
@@ -1879,7 +1906,7 @@
                 width: 100%;
             }
         }
-    `];constructor(){super(),this.slides=[],this.currentIndex=0,this.slidesPerView=1,this.autoplayInterval=null}connectedCallback(){super.connectedCallback(),this.updateSlidesPerView(),this.startAutoplay(),window.addEventListener("resize",this.updateSlidesPerView.bind(this))}disconnectedCallback(){super.disconnectedCallback(),this.stopAutoplay(),window.removeEventListener("resize",this.updateSlidesPerView.bind(this))}updateSlidesPerView(){this.slidesPerView=window.innerWidth>=768?3:1,this.requestUpdate()}startAutoplay(){this.stopAutoplay(),this.autoplayInterval=setInterval(()=>{this.slideNext()},3e3)}stopAutoplay(){this.autoplayInterval&&(clearInterval(this.autoplayInterval),this.autoplayInterval=null)}slidePrev(){this.currentIndex=this.currentIndex<=0?this.slides.length-this.slidesPerView:this.currentIndex-1,this.requestUpdate()}slideNext(){this.currentIndex=this.currentIndex>=this.slides.length-this.slidesPerView?0:this.currentIndex+1,this.requestUpdate()}getTransform(){const e=100/this.slidesPerView;return`translateX(-${this.currentIndex*e}%)`}renderSlide(e,t){return f`
+    `];constructor(){super(),this.slides=[],this.currentIndex=0,this.slidesPerView=1,this.autoplayInterval=null}connectedCallback(){super.connectedCallback(),this.updateSlidesPerView(),this.startAutoplay(),window.addEventListener("resize",this.updateSlidesPerView.bind(this))}disconnectedCallback(){super.disconnectedCallback(),this.stopAutoplay(),window.removeEventListener("resize",this.updateSlidesPerView.bind(this))}updateSlidesPerView(){this.slidesPerView=window.innerWidth>=768?3:1,this.requestUpdate()}startAutoplay(){this.stopAutoplay(),this.autoplayInterval=setInterval(()=>{this.slideNext()},3e3)}stopAutoplay(){this.autoplayInterval&&(clearInterval(this.autoplayInterval),this.autoplayInterval=null)}slidePrev(){this.currentIndex=this.currentIndex<=0?this.slides.length-this.slidesPerView:this.currentIndex-1,this.requestUpdate()}slideNext(){this.currentIndex=this.currentIndex>=this.slides.length-this.slidesPerView?0:this.currentIndex+1,this.requestUpdate()}getTransform(){const e=100/this.slidesPerView;return`translateX(-${this.currentIndex*e}%)`}renderSlide(e,t){return p`
             <div class="slideWrapper">
                 <div class="slide">
                     <img class="quote" src="/images/icons/quote.svg" alt="quote"/>
@@ -1893,7 +1920,7 @@
                     </div>
                 </div>
             </div>
-        `}render(){return f`
+        `}render(){return p`
             <div class="container">
                 <button class="sliderButton" @click=${this.slidePrev}>
                     <div class="dots">
@@ -1915,158 +1942,21 @@
                     <span>Next</span>
                 </button>
             </div>
-        `}}customElements.define("slider-component",Ze);class Qe extends y{static properties={name:{type:String}};static styles=[w,b`
+        `}}customElements.define("slider-component",Ge);class Qe extends g{static styles=[w,f`
         .container {
             display: flex;
             gap: 1em;
             justify-content: center;
             align-items: center;
         }
-
-    `];constructor(){super(),this.name=""}render(){return f`
+    `];render(){return p`
             <div class="container">
                 <img class="img" src="/images/icons/subtitle.svg" alt="subtitle"/>
-                <h6 class="name">${this.name}</h6>
+                <h6 class="name">
+                    <slot></slot>
+                </h6>
             </div>
-        `}}customElements.define("subtitle-component",Qe);let et=class extends y{static styles=[w,b`
-        .container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .circle-wrapper {
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            aspect-ratio: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .dot-container {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .square {
-            position: absolute;
-            transition: opacity 0.5s ease;
-            opacity: 1;
-        }
-
-        .square.outer {
-            background: #8B8B8B;
-        }
-
-        .square.inner {
-            background: #F93904;
-        }
-
-        .square.dimmed {
-            opacity: 0.1;
-        }
-
-        @media (max-aspect-ratio: 1/1) {
-            .circle-wrapper {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        @media (min-aspect-ratio: 1/1) {
-            .circle-wrapper {
-                width: auto;
-                height: 100%;
-            }
-        }
-    `];constructor(){super(),this.squares=[],this.animationIntervals=[],this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:5,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:12,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:600}}firstUpdated(){this.createSquares(),this.startAnimations()}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e))}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,i=t.height/2,o=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*o,c=this.config.squareSpacing*o,d=this.config.outerRadius*o,u=d-(this.config.outerLayers-1)*c;for(let p=0;p<this.config.outerLayers;p++){const h=d-p*c,v=2*Math.PI*h,x=Math.floor(v/c);for(let a=0;a<x;a++){const _=a/x*Math.PI*2,S=s+Math.cos(_)*h,k=i+Math.sin(_)*h,l=document.createElement("div");l.className="square outer",l.style.left=`${S}px`,l.style.top=`${k}px`,l.style.width=`${r}px`,l.style.height=`${r}px`,l.style.transform="translate(-50%, -50%)",e.appendChild(l),this.squares.push(l)}}const g=u-this.config.gapBetweenCircles*o,m=Math.min(this.config.innerRadius*o,g);for(let p=0;p<this.config.innerLayers;p++){const h=m-p*c;if(h<=0)break;if(h<c){const a=document.createElement("div");a.className="square inner",a.style.left=`${s}px`,a.style.top=`${i}px`,a.style.width=`${r}px`,a.style.height=`${r}px`,a.style.transform="translate(-50%, -50%)",e.appendChild(a),this.squares.push(a);break}const v=2*Math.PI*h,x=Math.floor(v/c);for(let a=0;a<x;a++){const _=a/x*Math.PI*2,S=s+Math.cos(_)*h,k=i+Math.sin(_)*h,l=document.createElement("div");l.className="square inner",l.style.left=`${S}px`,l.style.top=`${k}px`,l.style.width=`${r}px`,l.style.height=`${r}px`,l.style.transform="translate(-50%, -50%)",e.appendChild(l),this.squares.push(l)}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.7&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.8&&e.classList.toggle("dimmed")},1e3+Math.random()*2e3);this.animationIntervals.push(t)})}render(){return f`
-            <div class="container">
-                <div class="circle-wrapper">
-                    <div class="dot-container"></div>
-                </div>
-            </div>
-        `}};customElements.define("logo-component",et);let tt=class extends y{static styles=[w,b`
-        .container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .circle-wrapper {
-            width: 100%;
-            height: 100%;
-            max-width: 100%;
-            max-height: 100%;
-            aspect-ratio: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .dot-container {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .square {
-            position: absolute;
-            transition: opacity 0.3s ease;
-            opacity: 1;
-        }
-
-        .square.outer {
-            background: #8B8B8B;
-        }
-
-        .square.inner {
-            background: #F93904;
-        }
-
-        .square.dimmed {
-            opacity: 0.1;
-        }
-
-        .square.mouse-controlled {
-            transition: opacity 0.1s ease;
-        }
-
-        @media (max-aspect-ratio: 1/1) {
-            .circle-wrapper {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        @media (min-aspect-ratio: 1/1) {
-            .circle-wrapper {
-                width: auto;
-                height: 100%;
-            }
-        }
-    `];constructor(){super(),this.squares=[],this.animationIntervals=[],this.mouseX=-1e3,this.mouseY=-1e3,this.animationFrame=null,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:5,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:12,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:600,mouseRadius:80},this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.updateSquareStates=this.updateSquareStates.bind(this)}firstUpdated(){this.createSquares(),this.startAnimations(),this.addEventListener("mousemove",this.handleMouseMove),this.addEventListener("mouseleave",this.handleMouseLeave)}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeEventListener("mousemove",this.handleMouseMove),this.removeEventListener("mouseleave",this.handleMouseLeave),this.animationFrame&&cancelAnimationFrame(this.animationFrame)}handleMouseMove(e){const t=this.getBoundingClientRect();this.mouseX=e.clientX-t.left,this.mouseY=e.clientY-t.top,this.animationFrame||(this.animationFrame=requestAnimationFrame(this.updateSquareStates))}handleMouseLeave(){this.mouseX=-1e3,this.mouseY=-1e3,this.updateSquareStates()}updateSquareStates(){this.animationFrame=null;const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=Math.min(t.width,t.height)/this.config.baseSize,i=this.config.mouseRadius*s;this.squares.forEach(o=>{const r=o.getBoundingClientRect(),c=e.getBoundingClientRect(),d=r.left-c.left+r.width/2,u=r.top-c.top+r.height/2,g=this.mouseX-d,m=this.mouseY-u,p=Math.sqrt(g*g+m*m);if(p<i){o.classList.add("mouse-controlled"),o.classList.remove("dimmed");const h=p/i;o.style.opacity=(h*.6).toString(),o.dataset.mouseAffected="true"}else o.classList.remove("mouse-controlled"),o.dataset.mouseAffected==="true"&&(o.style.opacity="",o.dataset.mouseAffected="false",o.dataset.wasDimmed==="true"&&o.classList.add("dimmed"))})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,i=t.height/2,o=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*o,c=this.config.squareSpacing*o,d=this.config.outerRadius*o,u=d-(this.config.outerLayers-1)*c;for(let p=0;p<this.config.outerLayers;p++){const h=d-p*c,v=2*Math.PI*h,x=Math.floor(v/c);for(let a=0;a<x;a++){const _=a/x*Math.PI*2,S=s+Math.cos(_)*h,k=i+Math.sin(_)*h,l=document.createElement("div");l.className="square outer",l.style.left=`${S}px`,l.style.top=`${k}px`,l.style.width=`${r}px`,l.style.height=`${r}px`,l.style.transform="translate(-50%, -50%)",l.dataset.mouseAffected="false",l.dataset.wasDimmed="false",e.appendChild(l),this.squares.push(l)}}const g=u-this.config.gapBetweenCircles*o,m=Math.min(this.config.innerRadius*o,g);for(let p=0;p<this.config.innerLayers;p++){const h=m-p*c;if(h<=0)break;if(h<c){const a=document.createElement("div");a.className="square inner",a.style.left=`${s}px`,a.style.top=`${i}px`,a.style.width=`${r}px`,a.style.height=`${r}px`,a.style.transform="translate(-50%, -50%)",a.dataset.mouseAffected="false",a.dataset.wasDimmed="false",e.appendChild(a),this.squares.push(a);break}const v=2*Math.PI*h,x=Math.floor(v/c);for(let a=0;a<x;a++){const _=a/x*Math.PI*2,S=s+Math.cos(_)*h,k=i+Math.sin(_)*h,l=document.createElement("div");l.className="square inner",l.style.left=`${S}px`,l.style.top=`${k}px`,l.style.width=`${r}px`,l.style.height=`${r}px`,l.style.transform="translate(-50%, -50%)",l.dataset.mouseAffected="false",l.dataset.wasDimmed="false",e.appendChild(l),this.squares.push(l)}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.7&&(e.classList.add("dimmed"),e.dataset.wasDimmed="true");const t=setInterval(()=>{e.dataset.mouseAffected!=="true"&&Math.random()>.8&&(e.classList.toggle("dimmed"),e.dataset.wasDimmed=e.classList.contains("dimmed")?"true":"false")},1e3+Math.random()*2e3);this.animationIntervals.push(t)})}render(){return f`
-            <div class="container">
-                <div class="circle-wrapper">
-                    <div class="dot-container"></div>
-                </div>
-            </div>
-        `}};customElements.define("logo-animated-opacity-component",tt);class st extends y{static styles=[w,b`
+        `}}customElements.define("subtitle-component",Qe);class et extends g{static styles=[w,f`
         .container {
             width: 100%;
             height: 100%;
@@ -2129,20 +2019,20 @@
                 height: 100%;
             }
         }
-    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:5,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:12,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:600,mouseRadius:200,animationStrength:15,smoothing:.5}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top}handleMouseEnter(){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1}animate(){this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing):this.resetSquaresToOriginal(),this.isMouseOver&&this.updateSquarePositions(),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],o=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(o){const r=parseFloat(o[1])||0,c=parseFloat(o[2])||0,d=r*(1-this.config.smoothing),u=c*(1-this.config.smoothing);Math.abs(d)<.1&&Math.abs(u)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${d}px), calc(-50% + ${u}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const i=this.squares[s],o=t.originalX-this.mouseX,r=t.originalY-this.mouseY,c=o*o+r*r;if(c<e&&c>0){const d=Math.sqrt(c),u=(this.config.mouseRadius-d)/this.config.mouseRadius*this.config.animationStrength,g=1/d,m=o*g,p=r*g,h=m*u,v=p*u;i.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${v}px))`}else i.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,i=t.height/2,o=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*o,c=this.config.squareSpacing*o,d=this.config.outerRadius*o,u=d-(this.config.outerLayers-1)*c;for(let p=0;p<this.config.outerLayers;p++){const h=d-p*c,v=2*Math.PI*h,x=Math.floor(v/c);for(let a=0;a<x;a++){const _=a/x*Math.PI*2,S=s+Math.cos(_)*h,k=i+Math.sin(_)*h,l=document.createElement("div");l.className="square outer",l.style.left=`${S}px`,l.style.top=`${k}px`,l.style.width=`${r}px`,l.style.height=`${r}px`,l.style.transform="translate(-50%, -50%)",e.appendChild(l),this.squares.push(l),this.squareData.push({originalX:S,originalY:k,element:l})}}const g=u-this.config.gapBetweenCircles*o,m=Math.min(this.config.innerRadius*o,g);for(let p=0;p<this.config.innerLayers;p++){const h=m-p*c;if(h<=0)break;if(h<c){const a=document.createElement("div");a.className="square inner",a.style.left=`${s}px`,a.style.top=`${i}px`,a.style.width=`${r}px`,a.style.height=`${r}px`,a.style.transform="translate(-50%, -50%)",e.appendChild(a),this.squares.push(a),this.squareData.push({originalX:s,originalY:i,element:a});break}const v=2*Math.PI*h,x=Math.floor(v/c);for(let a=0;a<x;a++){const _=a/x*Math.PI*2,S=s+Math.cos(_)*h,k=i+Math.sin(_)*h,l=document.createElement("div");l.className="square inner",l.style.left=`${S}px`,l.style.top=`${k}px`,l.style.width=`${r}px`,l.style.height=`${r}px`,l.style.transform="translate(-50%, -50%)",e.appendChild(l),this.squares.push(l),this.squareData.push({originalX:S,originalY:k,element:l})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.9&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.9&&e.classList.toggle("dimmed")},1e3+Math.random()*2e3);this.animationIntervals.push(t)})}render(){return f`
+    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:10,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:10,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:550,mouseRadius:200,animationStrength:35,smoothing:.1}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top}handleMouseEnter(){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1,this.mouseX=-1e3,this.mouseY=-1e3,this.updateSquarePositions()}animate(){this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing,this.updateSquarePositions()):(this.mouseX=-1e3,this.mouseY=-1e3,this.resetSquaresToOriginal()),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],o=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(o){const r=parseFloat(o[1])||0,l=parseFloat(o[2])||0,a=r*(1-this.config.smoothing),c=l*(1-this.config.smoothing);Math.abs(a)<.1&&Math.abs(c)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${a}px), calc(-50% + ${c}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const i=this.squares[s],o=t.originalX-this.mouseX,r=t.originalY-this.mouseY,l=o*o+r*r;if(l<e&&l>0){const a=Math.sqrt(l),c=(this.config.mouseRadius-a)/this.config.mouseRadius*this.config.animationStrength,m=.7/a,d=o*m,v=r*m,h=d*c,y=v*c;i.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${y}px))`}else i.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,i=t.height/2,o=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*o,l=this.config.squareSpacing*o,a=this.config.outerRadius*o,c=a-(this.config.outerLayers-1)*l;for(let v=0;v<this.config.outerLayers;v++){const h=a-v*l,y=2*Math.PI*h,$=Math.floor(y/l);for(let u=0;u<$;u++){const M=u/$*Math.PI*2,B=s+Math.cos(M)*h,R=i+Math.sin(M)*h,x=document.createElement("div");x.className="square outer",x.style.left=`${B}px`,x.style.top=`${R}px`,x.style.width=`${r}px`,x.style.height=`${r}px`,x.style.transform="translate(-50%, -50%)",e.appendChild(x),this.squares.push(x),this.squareData.push({originalX:B,originalY:R,element:x})}}const m=c-this.config.gapBetweenCircles*o,d=Math.min(this.config.innerRadius*o,m);for(let v=0;v<this.config.innerLayers;v++){const h=d-v*l;if(h<=0)break;if(h<l){const u=document.createElement("div");u.className="square inner",u.style.left=`${s}px`,u.style.top=`${i}px`,u.style.width=`${r}px`,u.style.height=`${r}px`,u.style.transform="translate(-50%, -50%)",e.appendChild(u),this.squares.push(u),this.squareData.push({originalX:s,originalY:i,element:u});break}const y=2*Math.PI*h,$=Math.floor(y/l);for(let u=0;u<$;u++){const M=u/$*Math.PI*2,B=s+Math.cos(M)*h,R=i+Math.sin(M)*h,x=document.createElement("div");x.className="square inner",x.style.left=`${B}px`,x.style.top=`${R}px`,x.style.width=`${r}px`,x.style.height=`${r}px`,x.style.transform="translate(-50%, -50%)",e.appendChild(x),this.squares.push(x),this.squareData.push({originalX:B,originalY:R,element:x})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.9&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.9&&e.classList.toggle("dimmed")},1e3+Math.random()*2e3);this.animationIntervals.push(t)})}render(){return p`
             <div class="container">
                 <div class="circle-wrapper">
                     <div class="dot-container"></div>
                 </div>
             </div>
-        `}}customElements.define("logo-animated-transform-component",st);class it extends y{static styles=[b`
+        `}}customElements.define("boson-logo",et);class tt extends g{static styles=[f`
         .landing-layout {
             display: flex;
             flex-direction: column;
             gap: 8em;
         }
-    `];render(){return f`
+    `];render(){return p`
             <main class="landing-layout">
                 <slot></slot>
             </main>
-        `}}customElements.define("boson-landing-layout",it);
+        `}}customElements.define("boson-landing-layout",tt);

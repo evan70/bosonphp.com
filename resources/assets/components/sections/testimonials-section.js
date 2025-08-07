@@ -78,7 +78,10 @@ export class TestimonialsSection extends LitElement {
         return html`
             <section class="container">
                 <div class="top">
-                    <subtitle-component name="Testimonials"></subtitle-component>
+                    <subtitle-component>
+                        Testimonials
+                    </subtitle-component>
+
                     <div class="headline">
                         <h2>Developers that </br>believe in us</h2>
                     </div>
