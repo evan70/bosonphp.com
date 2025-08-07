@@ -6,6 +6,12 @@ export class BosonDropdown extends LitElement {
     static properties = {};
 
     static styles = [sharedStyles, css`
+        :host {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         details > summary {
             list-style-type: '';
         }
@@ -16,13 +22,12 @@ export class BosonDropdown extends LitElement {
         }
 
         .dropdown {
+            line-height: 56px;
             position: relative;
-            padding-right: 24px;
         }
 
         .dropdown-list {
             position: absolute;
-            line-height: 42px;
             background: var(--color-bg-layer);
             border: 2px solid var(--color-border);
             padding: 4px;
@@ -30,7 +35,6 @@ export class BosonDropdown extends LitElement {
             min-width: 200px;
             flex-direction: column;
             flex-wrap: nowrap;
-            margin-top: -21px;
         }
 
         .dropdown-list::before {

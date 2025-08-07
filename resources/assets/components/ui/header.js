@@ -6,9 +6,14 @@ export class BosonHeader extends LitElement {
     };
 
     static styles = [css`
+        :host {
+            --header-height: 100px;
+            --header-height-scrolled: 70px;
+        }
+
         header {
-            height: 100px;
-            line-height: 100px;
+            height: var(--header-height, 100px);
+            line-height: var(--header-height, 100px);
             position: fixed;
             top: 0;
             left: 0;
@@ -24,13 +29,13 @@ export class BosonHeader extends LitElement {
         }
 
         header.scrolled {
-            height: 70px;
-            line-height: 70px;
+            height: var(--header-height-scrolled, 70px);
+            line-height: var(--header-height-scrolled, 70px);
         }
 
         .header-padding {
             width: 100%;
-            height: 100px;
+            height: var(--header-height, 100px);
         }
 
         .dots,
@@ -52,19 +57,29 @@ export class BosonHeader extends LitElement {
             flex: 1;
             padding: 0 3em;
             display: flex;
-            gap: 3em;
+            gap: 1em;
             border-right: 1px solid var(--color-border);
             align-self: stretch;
             align-items: center;
+        }
+
+        .aside {
+            display: flex;
+        }
+
+        .aside ::slotted(*) {
+            border-right: 1px solid var(--color-border) !important;
         }
 
         @media (orientation: portrait) {
             .dots {
                 display: none;
             }
+
             .nav {
                 display: none;
             }
+
             .aside {
                 display: none;
             }
@@ -108,7 +123,9 @@ export class BosonHeader extends LitElement {
                     <slot></slot>
                 </div>
 
-                <slot class="aside" name="aside"></slot>
+                <aside class="aside">
+                    <slot name="aside"></slot>
+                </aside>
 
                 <div class="dots">
                     <dots-container></dots-container>

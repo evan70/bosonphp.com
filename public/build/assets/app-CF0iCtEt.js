@@ -6,7 +6,7 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:ve,defineProperty:fe,getOwnPropertyDescriptor:ye,getOwnPropertyNames:be,getOwnPropertySymbols:xe,getPrototypeOf:$e}=Object,j=globalThis,ee=j.trustedTypes,we=ee?ee.emptyScript:"",_e=j.reactiveElementPolyfillSupport,B=(n,e)=>n,W={toAttribute(n,e){switch(e){case Boolean:n=n?we:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},de=(n,e)=>!ve(n,e),te={attribute:!0,type:String,converter:W,reflect:!1,useDefault:!1,hasChanged:de};Symbol.metadata??=Symbol("metadata"),j.litPropertyMetadata??=new WeakMap;let S=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=te){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(e,s,t);o!==void 0&&fe(this.prototype,e,o)}}static getPropertyDescriptor(e,t,s){const{get:o,set:i}=ye(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:o,set(r){const l=o?.call(this);i?.call(this,r),this.requestUpdate(e,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??te}static _$Ei(){if(this.hasOwnProperty(B("elementProperties")))return;const e=$e(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(B("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(B("properties"))){const t=this.properties,s=[...be(t),...xe(t)];for(const o of s)this.createProperty(o,t[o])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,o]of t)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const o=this._$Eu(t,s);o!==void 0&&this._$Eh.set(o,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const o of s)t.unshift(Q(o))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ge(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),o=this.constructor._$Eu(e,s);if(o!==void 0&&s.reflect===!0){const i=(s.converter?.toAttribute!==void 0?s.converter:W).toAttribute(t,s.type);this._$Em=e,i==null?this.removeAttribute(o):this.setAttribute(o,i),this._$Em=null}}_$AK(e,t){const s=this.constructor,o=s._$Eh.get(e);if(o!==void 0&&this._$Em!==o){const i=s.getPropertyOptions(o),r=typeof i.converter=="function"?{fromAttribute:i.converter}:i.converter?.fromAttribute!==void 0?i.converter:W;this._$Em=o;const l=r.fromAttribute(t,i.type);this[o]=l??this._$Ej?.get(o)??l,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const o=this.constructor,i=this[e];if(s??=o.getPropertyOptions(e),!((s.hasChanged??de)(i,t)||s.useDefault&&s.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:o,wrapped:i},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),i!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),o===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,i]of this._$Ep)this[o]=i;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,i]of s){const{wrapped:r}=i,l=this[o];r!==!0||this._$AL.has(o)||l===void 0||this.C(o,void 0,i,l)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};S.elementStyles=[],S.shadowRootOptions={mode:"open"},S[B("elementProperties")]=new Map,S[B("finalized")]=new Map,_e?.({ReactiveElement:S}),(j.reactiveElementVersions??=[]).push("2.1.1");/**
+ */const{is:ve,defineProperty:fe,getOwnPropertyDescriptor:ye,getOwnPropertyNames:be,getOwnPropertySymbols:xe,getPrototypeOf:$e}=Object,U=globalThis,ee=U.trustedTypes,we=ee?ee.emptyScript:"",_e=U.reactiveElementPolyfillSupport,B=(n,e)=>n,W={toAttribute(n,e){switch(e){case Boolean:n=n?we:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},de=(n,e)=>!ve(n,e),te={attribute:!0,type:String,converter:W,reflect:!1,useDefault:!1,hasChanged:de};Symbol.metadata??=Symbol("metadata"),U.litPropertyMetadata??=new WeakMap;let S=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=te){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(e,s,t);o!==void 0&&fe(this.prototype,e,o)}}static getPropertyDescriptor(e,t,s){const{get:o,set:i}=ye(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:o,set(r){const l=o?.call(this);i?.call(this,r),this.requestUpdate(e,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??te}static _$Ei(){if(this.hasOwnProperty(B("elementProperties")))return;const e=$e(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(B("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(B("properties"))){const t=this.properties,s=[...be(t),...xe(t)];for(const o of s)this.createProperty(o,t[o])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,o]of t)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const o=this._$Eu(t,s);o!==void 0&&this._$Eh.set(o,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const o of s)t.unshift(Q(o))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ge(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),o=this.constructor._$Eu(e,s);if(o!==void 0&&s.reflect===!0){const i=(s.converter?.toAttribute!==void 0?s.converter:W).toAttribute(t,s.type);this._$Em=e,i==null?this.removeAttribute(o):this.setAttribute(o,i),this._$Em=null}}_$AK(e,t){const s=this.constructor,o=s._$Eh.get(e);if(o!==void 0&&this._$Em!==o){const i=s.getPropertyOptions(o),r=typeof i.converter=="function"?{fromAttribute:i.converter}:i.converter?.fromAttribute!==void 0?i.converter:W;this._$Em=o;const l=r.fromAttribute(t,i.type);this[o]=l??this._$Ej?.get(o)??l,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const o=this.constructor,i=this[e];if(s??=o.getPropertyOptions(e),!((s.hasChanged??de)(i,t)||s.useDefault&&s.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:o,wrapped:i},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),i!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),o===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,i]of this._$Ep)this[o]=i;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,i]of s){const{wrapped:r}=i,l=this[o];r!==!0||this._$AL.has(o)||l===void 0||this.C(o,void 0,i,l)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};S.elementStyles=[],S.shadowRootOptions={mode:"open"},S[B("elementProperties")]=new Map,S[B("finalized")]=new Map,_e?.({ReactiveElement:S}),(U.reactiveElementVersions??=[]).push("2.1.1");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -353,7 +353,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("how-it-works-section",Oe);class Ue extends v{static styles=[$,b`
+        `}}customElements.define("how-it-works-section",Oe);class je extends v{static styles=[$,b`
         .container {
             display: flex;
             justify-content: center;
@@ -431,7 +431,7 @@
                     ${this.elements.map(e=>this.renderElement(e))}
                 </div>
             </section>
-        `}}customElements.define("mobile-development-section",Ue);class G extends v{static cfg={delay:2e3};static styles=[$,b`
+        `}}customElements.define("mobile-development-section",je);class G extends v{static cfg={delay:2e3};static styles=[$,b`
         .container {
             display: flex;
             flex-direction: column;
@@ -784,7 +784,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("nativeness-section",G);class U extends v{static styles=[$,b`
+        `}}customElements.define("nativeness-section",G);class j extends v{static styles=[$,b`
         :host {
             margin-top: calc(var(--landing-layout-gap) * -1);
         }
@@ -890,7 +890,7 @@
             color: var(--color-text-secondary);
             font-family: var(--font-title), sans-serif;
         }
-    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=U.animationConfig,s=Date.now()-this.animationState.startTime,o=e.blockDuration*4+e.transitionDuration*4,i=s%o,r=e.blockDuration,l=r+e.transitionDuration,a=l+e.blockDuration,d=a+e.transitionDuration,m=d+e.blockDuration,c=m+e.transitionDuration,g=c+e.blockDuration;g+e.transitionDuration;let h=0,f=0;if(i<r)h=i/e.blockDuration*.5,f=0;else if(i<l){const u=(i-r)/e.transitionDuration;h=.5,f=u}else if(i<a)h=.5+(i-l)/e.blockDuration*.5,f=1;else if(i<d){const u=(i-a)/e.transitionDuration;h=1,f=1-u}else if(i<m)h=1-(i-d)/e.blockDuration*.5,f=0;else if(i<c){const u=(i-m)/e.transitionDuration;h=.5,f=u}else if(i<g)h=.5-(i-c)/e.blockDuration*.5,f=1;else{const u=(i-g)/e.transitionDuration;h=0,f=1-u}this.animateElements(f),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=U.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const o=e*s,i=Math.min(0,-s+e*s),r=-(e*s),l=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${o}px)`,this.elements.topRight.style.transform=`translateX(${i}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${l}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((o,i)=>{i<s?(o.classList.remove("grey"),o.classList.add("red")):(o.classList.remove("red"),o.classList.add("grey"))})}render(){return p`
+    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=j.animationConfig,s=Date.now()-this.animationState.startTime,o=e.blockDuration*4+e.transitionDuration*4,i=s%o,r=e.blockDuration,l=r+e.transitionDuration,a=l+e.blockDuration,d=a+e.transitionDuration,m=d+e.blockDuration,c=m+e.transitionDuration,g=c+e.blockDuration;g+e.transitionDuration;let h=0,f=0;if(i<r)h=i/e.blockDuration*.5,f=0;else if(i<l){const u=(i-r)/e.transitionDuration;h=.5,f=u}else if(i<a)h=.5+(i-l)/e.blockDuration*.5,f=1;else if(i<d){const u=(i-a)/e.transitionDuration;h=1,f=1-u}else if(i<m)h=1-(i-d)/e.blockDuration*.5,f=0;else if(i<c){const u=(i-m)/e.transitionDuration;h=.5,f=u}else if(i<g)h=.5-(i-c)/e.blockDuration*.5,f=1;else{const u=(i-g)/e.transitionDuration;h=0,f=1-u}this.animateElements(f),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=j.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const o=e*s,i=Math.min(0,-s+e*s),r=-(e*s),l=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${o}px)`,this.elements.topRight.style.transform=`translateX(${i}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${l}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((o,i)=>{i<s?(o.classList.remove("grey"),o.classList.add("red")):(o.classList.remove("red"),o.classList.add("grey"))})}render(){return p`
             <section class="container">
                 <div class="top">
                     <h2>
@@ -982,7 +982,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("right-choice-section",U);class je extends v{static styles=[$,b`
+        `}}customElements.define("right-choice-section",j);class Ue extends v{static styles=[$,b`
         .container {
             display: flex;
             flex-direction: column;
@@ -1085,7 +1085,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("solves-section",je);class Ne extends v{static styles=[$,b`
+        `}}customElements.define("solves-section",Ue);class Ne extends v{static styles=[$,b`
         .container {
             position: relative;
             display: flex;
@@ -1114,6 +1114,12 @@
                 </div>
             </section>
         `}}customElements.define("testimonials-section",Ne);class Ye extends v{static properties={};static styles=[$,b`
+        :host {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         details > summary {
             list-style-type: '';
         }
@@ -1124,13 +1130,12 @@
         }
 
         .dropdown {
+            line-height: 56px;
             position: relative;
-            padding-right: 24px;
         }
 
         .dropdown-list {
             position: absolute;
-            line-height: 42px;
             background: var(--color-bg-layer);
             border: 2px solid var(--color-border);
             padding: 4px;
@@ -1138,7 +1143,6 @@
             min-width: 200px;
             flex-direction: column;
             flex-wrap: nowrap;
-            margin-top: -21px;
         }
 
         .dropdown-list::before {
@@ -1506,9 +1510,14 @@
                 </div>
             </footer>
         `}}customElements.define("boson-footer",Xe);class Ve extends v{static properties={isScrolled:{type:Boolean}};static styles=[b`
+        :host {
+            --header-height: 100px;
+            --header-height-scrolled: 70px;
+        }
+
         header {
-            height: 100px;
-            line-height: 100px;
+            height: var(--header-height, 100px);
+            line-height: var(--header-height, 100px);
             position: fixed;
             top: 0;
             left: 0;
@@ -1524,13 +1533,13 @@
         }
 
         header.scrolled {
-            height: 70px;
-            line-height: 70px;
+            height: var(--header-height-scrolled, 70px);
+            line-height: var(--header-height-scrolled, 70px);
         }
 
         .header-padding {
             width: 100%;
-            height: 100px;
+            height: var(--header-height, 100px);
         }
 
         .dots,
@@ -1552,19 +1561,29 @@
             flex: 1;
             padding: 0 3em;
             display: flex;
-            gap: 3em;
+            gap: 1em;
             border-right: 1px solid var(--color-border);
             align-self: stretch;
             align-items: center;
+        }
+
+        .aside {
+            display: flex;
+        }
+
+        .aside ::slotted(*) {
+            border-right: 1px solid var(--color-border) !important;
         }
 
         @media (orientation: portrait) {
             .dots {
                 display: none;
             }
+
             .nav {
                 display: none;
             }
+
             .aside {
                 display: none;
             }
@@ -1581,7 +1600,9 @@
                     <slot></slot>
                 </div>
 
-                <slot class="aside" name="aside"></slot>
+                <aside class="aside">
+                    <slot name="aside"></slot>
+                </aside>
 
                 <div class="dots">
                     <dots-container></dots-container>
