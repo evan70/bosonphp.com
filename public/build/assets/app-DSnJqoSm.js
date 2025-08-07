@@ -2,11 +2,11 @@
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const L=globalThis,W=L.ShadowRoot&&(L.ShadyCSS===void 0||L.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,F=Symbol(),K=new WeakMap;let le=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==F)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(W&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=K.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&K.set(t,e))}return e}toString(){return this.cssText}};const ce=n=>new le(typeof n=="string"?n:n+"",void 0,F),y=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,o,i)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+n[i+1],n[0]);return new le(t,n,F)},ge=(n,e)=>{if(W)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),o=L.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=t.cssText,n.appendChild(s)}},Q=W?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return ce(t)})(n):n;/**
+ */const L=globalThis,W=L.ShadowRoot&&(L.ShadyCSS===void 0||L.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,F=Symbol(),K=new WeakMap;let le=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==F)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(W&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=K.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&K.set(t,e))}return e}toString(){return this.cssText}};const ce=n=>new le(typeof n=="string"?n:n+"",void 0,F),b=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,o,i)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+n[i+1],n[0]);return new le(t,n,F)},ge=(n,e)=>{if(W)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),o=L.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=t.cssText,n.appendChild(s)}},Q=W?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return ce(t)})(n):n;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:ve,defineProperty:fe,getOwnPropertyDescriptor:ye,getOwnPropertyNames:be,getOwnPropertySymbols:xe,getPrototypeOf:$e}=Object,U=globalThis,ee=U.trustedTypes,we=ee?ee.emptyScript:"",_e=U.reactiveElementPolyfillSupport,B=(n,e)=>n,X={toAttribute(n,e){switch(e){case Boolean:n=n?we:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},de=(n,e)=>!ve(n,e),te={attribute:!0,type:String,converter:X,reflect:!1,useDefault:!1,hasChanged:de};Symbol.metadata??=Symbol("metadata"),U.litPropertyMetadata??=new WeakMap;let S=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=te){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(e,s,t);o!==void 0&&fe(this.prototype,e,o)}}static getPropertyDescriptor(e,t,s){const{get:o,set:i}=ye(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:o,set(r){const l=o?.call(this);i?.call(this,r),this.requestUpdate(e,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??te}static _$Ei(){if(this.hasOwnProperty(B("elementProperties")))return;const e=$e(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(B("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(B("properties"))){const t=this.properties,s=[...be(t),...xe(t)];for(const o of s)this.createProperty(o,t[o])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,o]of t)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const o=this._$Eu(t,s);o!==void 0&&this._$Eh.set(o,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const o of s)t.unshift(Q(o))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ge(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),o=this.constructor._$Eu(e,s);if(o!==void 0&&s.reflect===!0){const i=(s.converter?.toAttribute!==void 0?s.converter:X).toAttribute(t,s.type);this._$Em=e,i==null?this.removeAttribute(o):this.setAttribute(o,i),this._$Em=null}}_$AK(e,t){const s=this.constructor,o=s._$Eh.get(e);if(o!==void 0&&this._$Em!==o){const i=s.getPropertyOptions(o),r=typeof i.converter=="function"?{fromAttribute:i.converter}:i.converter?.fromAttribute!==void 0?i.converter:X;this._$Em=o;const l=r.fromAttribute(t,i.type);this[o]=l??this._$Ej?.get(o)??l,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const o=this.constructor,i=this[e];if(s??=o.getPropertyOptions(e),!((s.hasChanged??de)(i,t)||s.useDefault&&s.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:o,wrapped:i},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),i!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),o===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,i]of this._$Ep)this[o]=i;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,i]of s){const{wrapped:r}=i,l=this[o];r!==!0||this._$AL.has(o)||l===void 0||this.C(o,void 0,i,l)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};S.elementStyles=[],S.shadowRootOptions={mode:"open"},S[B("elementProperties")]=new Map,S[B("finalized")]=new Map,_e?.({ReactiveElement:S}),(U.reactiveElementVersions??=[]).push("2.1.1");/**
+ */const{is:ve,defineProperty:fe,getOwnPropertyDescriptor:be,getOwnPropertyNames:ye,getOwnPropertySymbols:xe,getPrototypeOf:we}=Object,U=globalThis,ee=U.trustedTypes,$e=ee?ee.emptyScript:"",_e=U.reactiveElementPolyfillSupport,B=(n,e)=>n,X={toAttribute(n,e){switch(e){case Boolean:n=n?$e:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},de=(n,e)=>!ve(n,e),te={attribute:!0,type:String,converter:X,reflect:!1,useDefault:!1,hasChanged:de};Symbol.metadata??=Symbol("metadata"),U.litPropertyMetadata??=new WeakMap;let S=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=te){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(e,s,t);o!==void 0&&fe(this.prototype,e,o)}}static getPropertyDescriptor(e,t,s){const{get:o,set:i}=be(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:o,set(r){const l=o?.call(this);i?.call(this,r),this.requestUpdate(e,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??te}static _$Ei(){if(this.hasOwnProperty(B("elementProperties")))return;const e=we(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(B("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(B("properties"))){const t=this.properties,s=[...ye(t),...xe(t)];for(const o of s)this.createProperty(o,t[o])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,o]of t)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const o=this._$Eu(t,s);o!==void 0&&this._$Eh.set(o,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const o of s)t.unshift(Q(o))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ge(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),o=this.constructor._$Eu(e,s);if(o!==void 0&&s.reflect===!0){const i=(s.converter?.toAttribute!==void 0?s.converter:X).toAttribute(t,s.type);this._$Em=e,i==null?this.removeAttribute(o):this.setAttribute(o,i),this._$Em=null}}_$AK(e,t){const s=this.constructor,o=s._$Eh.get(e);if(o!==void 0&&this._$Em!==o){const i=s.getPropertyOptions(o),r=typeof i.converter=="function"?{fromAttribute:i.converter}:i.converter?.fromAttribute!==void 0?i.converter:X;this._$Em=o;const l=r.fromAttribute(t,i.type);this[o]=l??this._$Ej?.get(o)??l,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const o=this.constructor,i=this[e];if(s??=o.getPropertyOptions(e),!((s.hasChanged??de)(i,t)||s.useDefault&&s.reflect&&i===this._$Ej?.get(e)&&!this.hasAttribute(o._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:o,wrapped:i},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),i!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),o===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,i]of this._$Ep)this[o]=i;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,i]of s){const{wrapped:r}=i,l=this[o];r!==!0||this._$AL.has(o)||l===void 0||this.C(o,void 0,i,l)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};S.elementStyles=[],S.shadowRootOptions={mode:"open"},S[B("elementProperties")]=new Map,S[B("finalized")]=new Map,_e?.({ReactiveElement:S}),(U.reactiveElementVersions??=[]).push("2.1.1");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -16,7 +16,7 @@
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const J=globalThis;class g extends S{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Be(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return C}}g._$litElement$=!0,g.finalized=!0,J.litElementHydrateSupport?.({LitElement:g});const Ie=J.litElementPolyfillSupport;Ie?.({LitElement:g});(J.litElementVersions??=[]).push("4.2.1");const qe='h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:600}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:500}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:400}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:400}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}a:visited,a{color:inherit;text-decoration:none;position:relative}a:after{content:"";height:.1rem;width:100%;display:inline-block;background:#da2f2e;position:absolute;left:0;bottom:0;transform:scaleX(0);transition:transform .2s ease;transform-origin:100% 0}a:hover{color:var(--color-text-brand);text-decoration:none}a:hover:after{transform:scaleX(1);transform-origin:0 0;transition:transform .3s ease}.emphasis{color:var(--color-text-brand)}ul>li{margin:1.3em 0}p{margin:1em 0}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}',$=ce(qe);class He extends g{static properties={type:{type:String}};static styles=[$,y`
+ */const J=globalThis;class g extends S{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Be(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return C}}g._$litElement$=!0,g.finalized=!0,J.litElementHydrateSupport?.({LitElement:g});const Ie=J.litElementPolyfillSupport;Ie?.({LitElement:g});(J.litElementVersions??=[]).push("4.2.1");const qe='h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:600}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:500}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:400}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:400}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}a:visited,a{color:inherit;text-decoration:none;position:relative}a:after{content:"";height:.1rem;width:100%;display:inline-block;background:#da2f2e;position:absolute;left:0;bottom:0;transform:scaleX(0);transition:transform .2s ease;transform-origin:100% 0}a:hover{color:var(--color-text-brand);text-decoration:none}a:hover:after{transform:scaleX(1);transform-origin:0 0;transition:transform .3s ease}.emphasis{color:var(--color-text-brand)}ul>li{margin:1.3em 0}p{margin:1em 0}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}',w=ce(qe);class He extends g{static properties={type:{type:String}};static styles=[w,b`
         .container {
             display: flex;
             flex-direction: row;
@@ -115,7 +115,7 @@
                     <slot></slot>
                 </aside>
             </section>
-        `}}customElements.define("segment-section",He);class De extends g{static styles=[$,y`
+        `}}customElements.define("segment-section",He);class De extends g{static styles=[w,b`
         .container {
             padding-bottom: 8em;
             background-size: 900px 900px;
@@ -145,7 +145,7 @@
                     <slot name="footer"></slot>
                 </div>
             </section>
-        `}}customElements.define("call-to-action-section",De);class Le extends g{static styles=[$,y`
+        `}}customElements.define("call-to-action-section",De);class Le extends g{static styles=[w,b`
         .container {
             display: flex;
             flex-direction: column;
@@ -313,7 +313,7 @@
                     </a>
                 </aside>
             </section>
-        `}}customElements.define("hero-section",Le);class Oe extends g{static styles=[$,y`
+        `}}customElements.define("hero-section",Le);class Oe extends g{static styles=[w,b`
         .container {
             display: flex;
             flex-direction: column;
@@ -354,7 +354,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("how-it-works-section",Oe);class je extends g{static styles=[$,y`
+        `}}customElements.define("how-it-works-section",Oe);class je extends g{static styles=[w,b`
         .container {
             display: flex;
             justify-content: center;
@@ -432,7 +432,7 @@
                     ${this.elements.map(e=>this.renderElement(e))}
                 </div>
             </section>
-        `}}customElements.define("mobile-development-section",je);class G extends g{static cfg={delay:2e3};static styles=[$,y`
+        `}}customElements.define("mobile-development-section",je);class G extends g{static cfg={delay:2e3};static styles=[w,b`
         .container {
             display: flex;
             flex-direction: column;
@@ -785,7 +785,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("nativeness-section",G);class j extends g{static styles=[$,y`
+        `}}customElements.define("nativeness-section",G);class j extends g{static styles=[w,b`
         :host {
             margin-top: calc(var(--landing-layout-gap) * -1);
         }
@@ -983,7 +983,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("right-choice-section",j);class Ue extends g{static styles=[$,y`
+        `}}customElements.define("right-choice-section",j);class Ue extends g{static styles=[w,b`
         .container {
             display: flex;
             flex-direction: column;
@@ -1086,7 +1086,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("solves-section",Ue);class Ne extends g{static styles=[$,y`
+        `}}customElements.define("solves-section",Ue);class Ne extends g{static styles=[w,b`
         .container {
             position: relative;
             display: flex;
@@ -1114,23 +1114,18 @@
                     <slider-component .slides=${this.slides}></slider-component>
                 </div>
             </section>
-        `}}customElements.define("testimonials-section",Ne);class Ye extends g{static properties={};static styles=[$,y`
+        `}}customElements.define("testimonials-section",Ne);class Ye extends g{static properties={};static styles=[w,b`
         :host {
             display: inline-block;
             align-items: center;
             justify-content: center;
-        }
-
-        details > summary {
-            list-style-type: '';
-        }
-
-        details > summary::-webkit-details-marker,
-        details > summary::marker {
-            display: none;
+            margin: 0;
+            padding: 0;
         }
 
         .dropdown {
+            padding-inline-start: 0;
+            display: block;
             line-height: var(--height-ui);
             position: relative;
         }
@@ -1139,22 +1134,41 @@
             position: absolute;
             background: var(--color-bg-layer);
             border: 2px solid var(--color-border);
-            padding: 4px;
-            display: flex;
-            min-width: 200px;
-            flex-direction: column;
-            flex-wrap: nowrap;
+            pointer-events: none;
+            transition: 0s ease;
+            transform-origin: 0 0;
+            opacity: 0;
+            transform: scaleY(.5) scaleX(.5);
+            min-width: 100%;
+            z-index: 99;
         }
 
-        .dropdown-list::before {
+        .dropdown-list::after {
             position: absolute;
-            content: "";
+            display: block;
+            content: '';
             background: var(--color-border);
-            top: 10px;
-            left: 10px;
+            top: 8px;
+            left: 8px;
             z-index: -1;
             height: 100%;
             width: 100%;
+        }
+
+        .dropdown-list-content {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            padding: 4px;
+            background: var(--color-bg-layer);
+        }
+
+        .dropdown:hover .dropdown-list {
+            pointer-events: all;
+            opacity: 1;
+            transform: scaleY(1) scaleX(1);
+            transition: .1s ease;
         }
 
         .dropdown-list ::slotted(boson-button) {
@@ -1163,23 +1177,25 @@
             line-height: var(--height-ui-small);
         }
 
-        details:hover > summary ::slotted(boson-button) {
+        .dropdown:hover > .dropdown-summary ::slotted(boson-button) {
             background: var(--color-border);
         }
     `];constructor(){super()}onMouseEnter(e){e.target.setAttribute("open","open")}onMouseLeave(e){e.target.removeAttribute("open")}render(){return p`
-            <details class="dropdown"
+            <menu class="dropdown"
                      @mouseenter="${this.onMouseEnter}"
                      @mouseleave="${this.onMouseLeave}">
 
-                <summary class="dropdown-summary">
+                <hgroup class="dropdown-summary">
                     <slot name="summary"></slot>
-                </summary>
+                </hgroup>
 
                 <nav class="dropdown-list">
-                    <slot></slot>
+                    <div class="dropdown-list-content">
+                        <slot></slot>
+                    </div>
                 </nav>
-            </details>
-        `}}customElements.define("boson-dropdown",Ye);class Xe extends g{static styles=[$,y`
+            </menu>
+        `}}customElements.define("boson-dropdown",Ye);class Xe extends g{static styles=[w,b`
         :host {
             display: block;
             border-bottom: solid 1px var(--color-border);
@@ -1205,7 +1221,7 @@
             <nav class="breadcrumbs">
                 <slot></slot>
             </nav>
-        `}}customElements.define("boson-breadcrumbs",Xe);class We extends g{static properties={href:{type:String},external:{type:Boolean},type:{type:String},icon:{type:String},active:{type:Boolean}};static styles=[$,y`
+        `}}customElements.define("boson-breadcrumbs",Xe);class We extends g{static properties={href:{type:String},external:{type:Boolean},type:{type:String},icon:{type:String},active:{type:Boolean}};static styles=[w,b`
         :host {
             display: inline-block;
             line-height: var(--height-ui);
@@ -1323,7 +1339,7 @@
                     <img class="img" src="${this.icon}" alt="arrow" />
                 </span>
             </a>
-        `}}customElements.define("boson-button",We);class Fe extends g{static styles=[$,y`
+        `}}customElements.define("boson-button",We);class Fe extends g{static styles=[w,b`
         .container {
             aspect-ratio: 1 / 1;
             position: relative;
@@ -1367,7 +1383,7 @@
                     <div class="bottom right"></div>
                 </div>
             </div>
-        `}}customElements.define("dots-container",Fe);class Ve extends g{static styles=[y`
+        `}}customElements.define("dots-container",Fe);class Ve extends g{static styles=[b`
         .container {
             display: flex;
             flex-direction: column;
@@ -1556,7 +1572,7 @@
                     <img src="/images/credits.png" alt="credits"/>
                 </div>
             </footer>
-        `}}customElements.define("boson-footer",Ve);class Ze extends g{static properties={isScrolled:{type:Boolean}};static styles=[y`
+        `}}customElements.define("boson-footer",Ve);class Ze extends g{static properties={isScrolled:{type:Boolean}};static styles=[b`
         :host {
             --header-height: 100px;
             --header-height-scrolled: 70px;
@@ -1660,7 +1676,7 @@
                 </div>
             </header>
             <div class="header-padding"></div>
-        `}}customElements.define("boson-header",Ze);class Je extends g{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[$,y`
+        `}}customElements.define("boson-header",Ze);class Je extends g{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[w,b`
         .accordion {
             display: flex;
             flex: 1;
@@ -1795,7 +1811,7 @@
             <div class="accordion">
                 ${this.content.map((e,t)=>this.renderElement(e,t))}
             </div>
-        `}}customElements.define("horizontal-accordion",Je);class Ge extends g{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[$,y`
+        `}}customElements.define("horizontal-accordion",Je);class Ge extends g{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[w,b`
         .container {
             display: flex;
             max-width: 100vw;
@@ -1951,7 +1967,7 @@
                     <span>Next</span>
                 </button>
             </div>
-        `}}customElements.define("slider-component",Ge);class Ke extends g{static styles=[$,y`
+        `}}customElements.define("slider-component",Ge);class Ke extends g{static styles=[w,b`
         .container {
             display: flex;
             gap: 1em;
@@ -1971,7 +1987,7 @@
                     <slot></slot>
                 </h6>
             </div>
-        `}}customElements.define("boson-subtitle",Ke);class Qe extends g{static styles=[$,y`
+        `}}customElements.define("boson-subtitle",Ke);class Qe extends g{static styles=[w,b`
         .container {
             width: 100%;
             height: 100%;
@@ -2034,13 +2050,13 @@
                 height: 100%;
             }
         }
-    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:10,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:10,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:550,mouseRadius:150,animationStrength:25,smoothing:.5}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top+window.scrollY}handleMouseEnter(e){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1,this.mouseX=-100,this.mouseY=-100,this.updateSquarePositions()}animate(){window.scrollY<window.innerHeight&&(this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing,this.updateSquarePositions()):(this.mouseX=-1e3,this.mouseY=-1e3,this.resetSquaresToOriginal())),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],i=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(i){const r=parseFloat(i[1])||0,l=parseFloat(i[2])||0,a=r*(1-this.config.smoothing),d=l*(1-this.config.smoothing);Math.abs(a)<.1&&Math.abs(d)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${a}px), calc(-50% + ${d}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const o=this.squares[s],i=t.originalX-this.mouseX,r=t.originalY-this.mouseY,l=i*i+r*r;if(l<e&&l>0){const a=Math.sqrt(l),d=(this.config.mouseRadius-a)/this.config.mouseRadius*this.config.animationStrength,m=.7/a,c=i*m,v=r*m,h=c*d,f=v*d;o.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${f}px))`}else o.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,o=t.height/2,i=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*i,l=this.config.squareSpacing*i,a=this.config.outerRadius*i,d=a-(this.config.outerLayers-1)*l;for(let v=0;v<this.config.outerLayers;v++){const h=a-v*l,f=2*Math.PI*h,w=Math.floor(f/l);for(let u=0;u<w;u++){const M=u/w*Math.PI*2,R=s+Math.cos(M)*h,T=o+Math.sin(M)*h,b=document.createElement("div");b.className="square outer",b.style.left=`${R}px`,b.style.top=`${T}px`,b.style.width=`${r}px`,b.style.height=`${r}px`,b.style.transform="translate(-50%, -50%)",e.appendChild(b),this.squares.push(b),this.squareData.push({originalX:R,originalY:T,element:b})}}const m=d-this.config.gapBetweenCircles*i,c=Math.min(this.config.innerRadius*i,m);for(let v=0;v<this.config.innerLayers;v++){const h=c-v*l;if(h<=0)break;if(h<l){const u=document.createElement("div");u.className="square inner",u.style.left=`${s}px`,u.style.top=`${o}px`,u.style.width=`${r}px`,u.style.height=`${r}px`,u.style.transform="translate(-50%, -50%)",e.appendChild(u),this.squares.push(u),this.squareData.push({originalX:s,originalY:o,element:u});break}const f=2*Math.PI*h,w=Math.floor(f/l);for(let u=0;u<w;u++){const M=u/w*Math.PI*2,R=s+Math.cos(M)*h,T=o+Math.sin(M)*h,b=document.createElement("div");b.className="square inner",b.style.left=`${R}px`,b.style.top=`${T}px`,b.style.width=`${r}px`,b.style.height=`${r}px`,b.style.transform="translate(-50%, -50%)",e.appendChild(b),this.squares.push(b),this.squareData.push({originalX:R,originalY:T,element:b})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.96&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.3&&e.classList.toggle("dimmed")},500+Math.random()*3e3);this.animationIntervals.push(t)})}render(){return p`
+    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:10,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:10,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:550,mouseRadius:150,animationStrength:25,smoothing:.5}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top+window.scrollY}handleMouseEnter(e){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1,this.mouseX=-100,this.mouseY=-100,this.updateSquarePositions()}animate(){window.scrollY<window.innerHeight&&(this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing,this.updateSquarePositions()):(this.mouseX=-1e3,this.mouseY=-1e3,this.resetSquaresToOriginal())),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],i=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(i){const r=parseFloat(i[1])||0,l=parseFloat(i[2])||0,a=r*(1-this.config.smoothing),d=l*(1-this.config.smoothing);Math.abs(a)<.1&&Math.abs(d)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${a}px), calc(-50% + ${d}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const o=this.squares[s],i=t.originalX-this.mouseX,r=t.originalY-this.mouseY,l=i*i+r*r;if(l<e&&l>0){const a=Math.sqrt(l),d=(this.config.mouseRadius-a)/this.config.mouseRadius*this.config.animationStrength,m=.7/a,c=i*m,v=r*m,h=c*d,f=v*d;o.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${f}px))`}else o.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,o=t.height/2,i=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*i,l=this.config.squareSpacing*i,a=this.config.outerRadius*i,d=a-(this.config.outerLayers-1)*l;for(let v=0;v<this.config.outerLayers;v++){const h=a-v*l,f=2*Math.PI*h,$=Math.floor(f/l);for(let u=0;u<$;u++){const M=u/$*Math.PI*2,R=s+Math.cos(M)*h,T=o+Math.sin(M)*h,y=document.createElement("div");y.className="square outer",y.style.left=`${R}px`,y.style.top=`${T}px`,y.style.width=`${r}px`,y.style.height=`${r}px`,y.style.transform="translate(-50%, -50%)",e.appendChild(y),this.squares.push(y),this.squareData.push({originalX:R,originalY:T,element:y})}}const m=d-this.config.gapBetweenCircles*i,c=Math.min(this.config.innerRadius*i,m);for(let v=0;v<this.config.innerLayers;v++){const h=c-v*l;if(h<=0)break;if(h<l){const u=document.createElement("div");u.className="square inner",u.style.left=`${s}px`,u.style.top=`${o}px`,u.style.width=`${r}px`,u.style.height=`${r}px`,u.style.transform="translate(-50%, -50%)",e.appendChild(u),this.squares.push(u),this.squareData.push({originalX:s,originalY:o,element:u});break}const f=2*Math.PI*h,$=Math.floor(f/l);for(let u=0;u<$;u++){const M=u/$*Math.PI*2,R=s+Math.cos(M)*h,T=o+Math.sin(M)*h,y=document.createElement("div");y.className="square inner",y.style.left=`${R}px`,y.style.top=`${T}px`,y.style.width=`${r}px`,y.style.height=`${r}px`,y.style.transform="translate(-50%, -50%)",e.appendChild(y),this.squares.push(y),this.squareData.push({originalX:R,originalY:T,element:y})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.96&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.3&&e.classList.toggle("dimmed")},500+Math.random()*3e3);this.animationIntervals.push(t)})}render(){return p`
             <div class="container">
                 <div class="circle-wrapper">
                     <div class="dot-container"></div>
                 </div>
             </div>
-        `}}customElements.define("boson-logo",Qe);class et extends g{static styles=[y`
+        `}}customElements.define("boson-logo",Qe);class et extends g{static styles=[b`
         .landing-layout {
             display: flex;
             flex-direction: column;

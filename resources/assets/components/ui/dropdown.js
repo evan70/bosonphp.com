@@ -10,18 +10,13 @@ export class BosonDropdown extends LitElement {
             display: inline-block;
             align-items: center;
             justify-content: center;
-        }
-
-        details > summary {
-            list-style-type: '';
-        }
-
-        details > summary::-webkit-details-marker,
-        details > summary::marker {
-            display: none;
+            margin: 0;
+            padding: 0;
         }
 
         .dropdown {
+            padding-inline-start: 0;
+            display: block;
             line-height: var(--height-ui);
             position: relative;
         }
@@ -30,22 +25,41 @@ export class BosonDropdown extends LitElement {
             position: absolute;
             background: var(--color-bg-layer);
             border: 2px solid var(--color-border);
-            padding: 4px;
-            display: flex;
-            min-width: 200px;
-            flex-direction: column;
-            flex-wrap: nowrap;
+            pointer-events: none;
+            transition: 0s ease;
+            transform-origin: 0 0;
+            opacity: 0;
+            transform: scaleY(.5) scaleX(.5);
+            min-width: 100%;
+            z-index: 99;
         }
 
-        .dropdown-list::before {
+        .dropdown-list::after {
             position: absolute;
-            content: "";
+            display: block;
+            content: '';
             background: var(--color-border);
-            top: 10px;
-            left: 10px;
+            top: 8px;
+            left: 8px;
             z-index: -1;
             height: 100%;
             width: 100%;
+        }
+
+        .dropdown-list-content {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            padding: 4px;
+            background: var(--color-bg-layer);
+        }
+
+        .dropdown:hover .dropdown-list {
+            pointer-events: all;
+            opacity: 1;
+            transform: scaleY(1) scaleX(1);
+            transition: .1s ease;
         }
 
         .dropdown-list ::slotted(boson-button) {
@@ -54,7 +68,7 @@ export class BosonDropdown extends LitElement {
             line-height: var(--height-ui-small);
         }
 
-        details:hover > summary ::slotted(boson-button) {
+        .dropdown:hover > .dropdown-summary ::slotted(boson-button) {
             background: var(--color-border);
         }
     `];
@@ -73,18 +87,20 @@ export class BosonDropdown extends LitElement {
 
     render() {
         return html`
-            <details class="dropdown"
+            <menu class="dropdown"
                      @mouseenter="${this.onMouseEnter}"
                      @mouseleave="${this.onMouseLeave}">
 
-                <summary class="dropdown-summary">
+                <hgroup class="dropdown-summary">
                     <slot name="summary"></slot>
-                </summary>
+                </hgroup>
 
                 <nav class="dropdown-list">
-                    <slot></slot>
+                    <div class="dropdown-list-content">
+                        <slot></slot>
+                    </div>
                 </nav>
-            </details>
+            </menu>
         `;
     }
 }
