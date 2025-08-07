@@ -13,6 +13,7 @@ import './components/sections/testimonials-section.js';
 
 
 import './components/ui/dropdown.js';
+import './components/ui/breadcrumbs.js';
 import './components/ui/button.js';
 import './components/ui/dots-container.js';
 import './components/ui/footer.js';

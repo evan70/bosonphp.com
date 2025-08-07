@@ -5,21 +5,24 @@
 {% endblock %}
 
 {% block body %}
+    <boson-breadcrumbs>
+        {% apply spaceless %}
+            <div class="breadcrumb-item">
+                <boson-button type="ghost" href="{{ path('home') }}">
+                    Home
+                </boson-button>
+            </div>
 
-    <h1>Documentation</h1>
-
-    <nav>
-        <ul>
-            <li><a href="{{ path('home') }}">Home</a></li>
-            <li style="color: #5d6b89">&gt;</li>
-            <li>
+            <div class="breadcrumb-item">
                 {% include 'page/docs/partials/version_selector.html.twig' with {
                     version: version,
                     versions: versions,
                 } %}
-            </li>
-        </ul>
-    </nav>
+            </div>
+        {% endapply %}
+    </boson-breadcrumbs>
+
+    <h1>Documentation</h1>
 
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr;" class="grid">
         {% for category in version.categories %}

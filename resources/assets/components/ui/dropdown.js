@@ -7,7 +7,7 @@ export class BosonDropdown extends LitElement {
 
     static styles = [sharedStyles, css`
         :host {
-            display: flex;
+            display: inline-block;
             align-items: center;
             justify-content: center;
         }

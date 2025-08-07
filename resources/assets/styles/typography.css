@@ -48,9 +48,36 @@ pre, code {
   font-family: var(--font-mono), monospace;
 }
 
+a:visited,
 a {
   color: inherit;
   text-decoration: none;
+  position: relative;
+}
+
+a::after {
+  content: '';
+  height: 0.1rem;
+  width: 100%;
+  display: inline-block;
+  background: #da2f2e;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: scaleX(0);
+  transition: transform .2s ease;
+  transform-origin: 100% 0;
+}
+
+a:hover {
+  color: var(--color-text-brand);
+  text-decoration: none;
+}
+
+a:hover::after {
+  transform: scaleX(1);
+  transform-origin: 0 0;
+  transition: transform .3s ease;
 }
 
 .emphasis {

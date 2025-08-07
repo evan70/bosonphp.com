@@ -16,7 +16,7 @@
     </boson-button>
 
     {% if docs_categories|length > 0 %}
-        <boson-dropdown href="{{ path('doc.index') }}">
+        <boson-dropdown>
             <boson-button type="ghost" slot="summary"
                 {{ app.current_route starts with 'doc.' ? 'active' : '' }}
                 href="{{ path('doc.index') }}">
@@ -44,7 +44,7 @@
     {% endif %}
 
     {% if blog_categories|length > 0 %}
-        <boson-dropdown href="{{ path('blog.index') }}">
+        <boson-dropdown>
             <boson-button type="ghost" slot="summary"
                 {{ app.current_route starts with 'blog.' ? 'active' : '' }}
                 href="{{ path('blog.index') }}">

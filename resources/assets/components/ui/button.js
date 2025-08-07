@@ -34,10 +34,16 @@ export class Button extends LitElement {
             justify-content: inherit;
             align-items: center;
             white-space: nowrap;
+            text-decoration: none;
+        }
+
+        span.button {
+            cursor: default;
         }
 
         .button-active,
-        .button:hover {
+        a.button:hover {
+            text-decoration: none;
             transition-duration: 0s;
             background: var(--color-bg-button-hover);
         }
@@ -53,6 +59,11 @@ export class Button extends LitElement {
             user-select: none;
         }
 
+        .icon .img {
+            height: var(--font-size);
+            margin-top: -2px;
+        }
+
         /** SECONDARY */
 
         .button.button-secondary {
@@ -61,7 +72,7 @@ export class Button extends LitElement {
         }
 
         .button.button-secondary.button-active,
-        .button.button-secondary:hover {
+        a.button.button-secondary:hover {
             background: var(--color-bg-button-secondary-hover);
         }
 
@@ -81,7 +92,7 @@ export class Button extends LitElement {
         }
 
         .button.button-ghost.button-active,
-        .button.button-ghost:hover {
+        a.button.button-ghost:hover {
             background: var(--color-bg-hover);
             color: var(--color-text);
         }
@@ -91,7 +102,8 @@ export class Button extends LitElement {
         }
 
         .button.button-ghost .icon {
-            background: var(--color-text-button-secondary);
+            background: none;
+            margin: 0 -1em 0 -.5em;
         }
 
         /** OTHER */
@@ -104,7 +116,7 @@ export class Button extends LitElement {
     constructor() {
         super();
 
-        this.href = '/';
+        this.href = '';
         this.type = 'primary';
         this.icon = '';
         this.external = false;
@@ -112,6 +124,18 @@ export class Button extends LitElement {
     }
 
     render() {
+        if (this.href === '') {
+            return html`
+                <span class="button button-${this.type} ${this.active ? 'button-active' : ''}">
+                    <slot></slot>
+
+                    <span class="icon" style="${this.icon === '' ? 'display:none': ''}">
+                        <img class="img" src="${this.icon}" alt="arrow" />
+                    </span>
+                </span>
+            `;
+        }
+
         return html`
             <a href="${this.href}"
                class="button button-${this.type} ${this.active ? 'button-active' : ''}"

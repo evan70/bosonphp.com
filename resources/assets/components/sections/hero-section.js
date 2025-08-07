@@ -77,6 +77,7 @@ export class HeroSection extends LitElement {
             font-family: var(--font-title), sans-serif;
             font-size: var(--font-size-secondary);
             letter-spacing: .1em;
+            text-decoration: none;
         }
 
         .bottom .discover-container {

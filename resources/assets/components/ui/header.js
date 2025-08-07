@@ -45,6 +45,10 @@ export class BosonHeader extends LitElement {
             line-height: inherit !important;
         }
 
+        ::slotted(boson-dropdown) {
+            display: flex;
+        }
+
         ::slotted(.logo) {
             border-right: solid 1px var(--color-border);
         }
