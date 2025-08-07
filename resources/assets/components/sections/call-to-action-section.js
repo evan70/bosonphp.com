@@ -26,7 +26,6 @@ export class CallToActionSection extends LitElement {
     `];
 
     render() {
-        console.log(window.s = CallToActionSection.styles);
         return html`
             <section class="container">
                 <div class="wrapper">
