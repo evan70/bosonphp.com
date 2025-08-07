@@ -6,7 +6,7 @@ export class BosonHeader extends LitElement {
     };
 
     static styles = [css`
-        .container {
+        header {
             height: 100px;
             line-height: 100px;
             position: fixed;
@@ -23,7 +23,7 @@ export class BosonHeader extends LitElement {
             z-index: 10;
         }
 
-        .container.scrolled {
+        header.scrolled {
             height: 70px;
             line-height: 70px;
         }
@@ -91,7 +91,7 @@ export class BosonHeader extends LitElement {
 
     render() {
         return html`
-            <header class="container ${this.isScrolled ? 'scrolled' : ''}">
+            <header class="${this.isScrolled ? 'scrolled' : ''}">
                 <div class="dots">
                     <dots-container></dots-container>
                 </div>

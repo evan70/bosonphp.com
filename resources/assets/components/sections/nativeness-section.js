@@ -8,8 +8,6 @@ export class NativenessSection extends LitElement {
     };
 
     static styles = [sharedStyles, css`
-        * {
-        }
         .container {
             display: flex;
             flex-direction: column;
@@ -18,9 +16,10 @@ export class NativenessSection extends LitElement {
 
         .top {
             display: flex;
-            width: var(--width-content);
             margin: 0 auto;
             gap: 3em;
+            max-width: var(--width-max);
+            width: var(--width-content);
         }
 
         .left {
@@ -40,9 +39,7 @@ export class NativenessSection extends LitElement {
             flex: 2;
             display: flex;
             flex-direction: column;
-            font-size: clamp(1rem, 0.55vw + 0.55rem, 2rem);
             justify-content: flex-end;
-            line-height: 1.75;
         }
 
         .content {
@@ -206,9 +203,8 @@ export class NativenessSection extends LitElement {
 
         .name {
             text-transform: uppercase;
-            color: var(--color-text-secondary);
-            font-size: max(1rem, min(0.55rem + 0.55vw, 2rem));
         }
+
         .technology-edge {
             flex: 3;
         }
@@ -277,11 +273,9 @@ export class NativenessSection extends LitElement {
         .tech-name {
             text-transform: uppercase;
             color: var(--color-text);
-            font-size: max(1rem, min(0.55rem + 0.55vw, 2rem));
         }
         .tech-description {
             color: var(--color-text-secondary);
-            font-size: max(1rem, min(0.55rem + 0.55vw, 2rem));
         }
         #technology-1 > .sticky > .tech-logo {
             background-image: url("/images/icons/php.svg");

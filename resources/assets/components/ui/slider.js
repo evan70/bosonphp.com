@@ -82,11 +82,6 @@ export class Slider extends LitElement {
             align-self: flex-start;
         }
 
-        .comment {
-            font-size: max(1rem, min(0.55rem + 0.55vw, 2rem));
-            line-height: 1.75;
-        }
-
         .bottom {
             margin-top: auto;
             display: flex;
@@ -107,7 +102,6 @@ export class Slider extends LitElement {
 
         .name {
             font-weight: 500;
-            font-size: 1.2rem;
         }
 
         .role {

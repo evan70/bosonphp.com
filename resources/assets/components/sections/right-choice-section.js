@@ -99,6 +99,7 @@ export class RightChoiceSection extends LitElement {
         .progress-text {
             text-transform: uppercase;
             color: var(--color-text-secondary);
+            font-family: var(--font-title), sans-serif;
         }
     `];
 
@@ -280,15 +281,17 @@ export class RightChoiceSection extends LitElement {
                     <div class="content-bottom">
                         <div class="content-left">
                             <div class="inner">
-                                <p>No need PHP, and that's all you need. Write code oncecOS, Linux, Android, and iOd your app is available everywhere.</p>
-                                <button-secondary href="/" text="Read More"></button-secondary>
+                                <p>No need PHP, and that's all you need. Write code once and your app is available everywhere.</p>
+                                <button-secondary href="/">
+                                    Read More
+                                </button-secondary>
                             </div>
                         </div>
                         <div class="sep"></div>
                         <div class="content-right">
                             <div class="inner">
                                 <p>No need to learn other languages! You already know PHP, and that's all you need. Write code once for the Web and create native apps on Windows, macOS, Linux, Android, and iOS. The same code, and your app is available everywhere.</p>
-                                <button-primary href="/" text="Read More"></button-primary>
+                                <button-primary href="/">Read More</button-primary>
                             </div>
                         </div>
                     </div>

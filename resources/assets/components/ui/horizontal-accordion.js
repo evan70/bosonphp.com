@@ -11,8 +11,8 @@ export class HorizontalAccordion extends LitElement {
     static styles = [sharedStyles, css`
         .accordion {
             display: flex;
-            height: 24rem;
             flex: 1;
+            min-height: 400px;
         }
 
         .element {
@@ -42,6 +42,7 @@ export class HorizontalAccordion extends LitElement {
         }
 
         .elementContent {
+            box-sizing: border-box !important;
             transition-duration: 0.2s;
             height: 100%;
             display: flex;
@@ -70,14 +71,15 @@ export class HorizontalAccordion extends LitElement {
             margin-left: 4.5em;
             display: flex;
             align-items: flex-end;
-            font-size: max(1rem, min(.55vw + .55rem, 2rem));
             line-height: 1.75;
         }
 
         .number {
-            font-size: max(1.5rem, min(2rem + 1vw, 2rem));
             color: var(--color-text-brand);
             transition-duration: 0.2s;
+            font-size: var(--font-size-h4);
+            font-family: var(--font-mono), monospace;
+            font-weight: 600;
         }
 
         .elementClosed .elementContent .closedTop .number {

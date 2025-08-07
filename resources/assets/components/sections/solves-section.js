@@ -13,8 +13,9 @@ export class SolvesSection extends LitElement {
         .top {
             display: flex;
             justify-content: space-between;
-            width: var(--width-content);
             margin: 0 auto;
+            max-width: var(--width-max);
+            width: var(--width-content);
         }
 
         .left {
@@ -40,12 +41,12 @@ export class SolvesSection extends LitElement {
             display: flex;
             gap: 1em;
             align-items: flex-start;
+            margin: .4em 0;
         }
 
         .el p {
-            transform: translateY(-6px);
-            font-size: max(1rem, min(.55vw + .55rem, 2rem));
-            line-height: 1.75;
+            padding: 0;
+            margin: 0;
         }
 
         .content {

@@ -11,6 +11,8 @@ export class BosonHeaderLink extends LitElement {
 
     static styles = [sharedStyles, css`
         .link {
+            font-family: var(--font-title), sans-serif;
+            letter-spacing: 1px;
             color: var(--color-text-secondary);
             transition-duration: 0.2s;
             text-transform: uppercase;
@@ -22,7 +24,7 @@ export class BosonHeaderLink extends LitElement {
 
         .link.active,
         .link:hover {
-            background: var(--color-border-nono-transparent);
+            background: var(--color-bg-hover);
         }
 
         ::slotted(img) {

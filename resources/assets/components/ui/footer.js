@@ -90,8 +90,6 @@ export class BosonFooter extends LitElement {
             display: flex;
             align-items: center;
             margin-left: 3em;
-            font-size: max(1rem, min(.55rem + .55vw, 2rem));
-            line-height: 1.75;
             color: var(--color-text-secondary);
         }
 
@@ -105,6 +103,7 @@ export class BosonFooter extends LitElement {
         .credits img {
             height: 24px;
         }
+
         @media (orientation: portrait) {
             .dots-left, .dots-right, .holder {
                 display: none;

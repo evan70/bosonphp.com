@@ -48,7 +48,10 @@ export class ButtonSecondary extends LitElement {
     render() {
         return html`
             <a href="${this.href}" class="button">
-                <span class="text">${this.text}</span>
+                <span class="text">
+                    ${this.text}
+                    <slot></slot>
+                </span>
                 <div class="box">
                     <img class="img" src="/images/icons/arrow_secondary.svg" alt="arrow_secondary"/>
                 </div>

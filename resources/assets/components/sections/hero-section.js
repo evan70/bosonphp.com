@@ -7,8 +7,8 @@ export class HeroSection extends LitElement {
         .container {
             display: flex;
             flex-direction: column;
-            width: var(--width-content);
             margin: 0 auto;
+            min-height: calc(100vh - 100px);
         }
 
         .top {
@@ -18,7 +18,10 @@ export class HeroSection extends LitElement {
             flex: 1;
             gap: 2em;
             justify-content: space-between;
-            padding: 8em 0;
+            margin: 0 auto;
+            padding: 3em 0;
+            max-width: var(--width-max);
+            width: var(--width-content);
         }
 
         .white {
@@ -46,8 +49,6 @@ export class HeroSection extends LitElement {
 
         .description {
             width: 80%;
-            line-height: 1.75;
-            font-size: clamp(1rem, 0.55vw + 0.55rem, 2rem);
         }
 
         .buttons {
@@ -57,22 +58,38 @@ export class HeroSection extends LitElement {
         }
 
         .bottom {
-            padding: 3em 0;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid var(--color-border);
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        .bottom .discover {
+            width: 100%;
+            transition-duration: 0.2s;
+            font-family: var(--font-title), sans-serif;
+        }
+
+        .bottom .discover-container {
+            transition-duration: 0.2s;
+            max-width: var(--width-max);
+            width: var(--width-content);
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition-duration: 0.2s;
-            border-top: 1px solid var(--color-border);
+            padding: 3em 0;
         }
 
-        .bottom:hover {
-            padding: 3em 2em;
+        .bottom .discover:hover {
             background-color: var(--color-bg-hover);
         }
 
-        .bottom span {
-            text-transform: uppercase;
+        .bottom .discover:hover .discover-container {
+            padding: 3em 2em;
         }
+
         .logo-container {
             display: flex;
             aspect-ratio: 1/1;
@@ -111,8 +128,13 @@ export class HeroSection extends LitElement {
                         <p class="description">Turn your PHP project into cross-platform, compact, fast, native
                             applications for Windows, macOS, Linux, Android and iOS.</p>
                         <div class="buttons">
-                            <button-primary text="Try Boson for Free" href="/"></button-primary>
-                            <button-secondary text="Watch Presentation" href="/"></button-secondary>
+                            <button-primary href="/" icon="/images/icons/arrow_primary.svg">
+                                Try Boson for Free
+                            </button-primary>
+
+                            <button-primary type="secondary" href="/" icon="/images/icons/arrow_secondary.svg">
+                                Watch Presentation
+                            </button-primary>
                         </div>
                     </div>
                     <div class="img">
@@ -124,10 +146,14 @@ export class HeroSection extends LitElement {
                     </div>
                 </div>
 
-                <a href="#nativeness" class="bottom">
-                    <span>Discover more about boson</span>
-                    <img src="/images/icons/arrow_down.svg" alt="arrow_down"/>
-                </a>
+                <aside class="bottom">
+                    <a href="#nativeness" class="discover">
+                        <span class="discover-container">
+                            <span class="discover-text">Discover more about boson</span>
+                            <img class="discover-icon" src="/images/icons/arrow_down.svg" alt="arrow_down"/>
+                        </span>
+                    </a>
+                </aside>
             </section>
         `;
     }

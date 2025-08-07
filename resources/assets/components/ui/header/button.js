@@ -11,6 +11,8 @@ export class BosonHeaderButton extends LitElement {
     static styles = [sharedStyles, css`
         .button {
             height: inherit;
+            font-family: var(--font-title), sans-serif;
+            letter-spacing: 1px;
             border-right: 1px solid var(--color-border);
             padding: 0 3em;
             display: flex;

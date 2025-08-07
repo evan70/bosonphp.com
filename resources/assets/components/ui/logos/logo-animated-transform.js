@@ -49,6 +49,7 @@ export class Logo extends LitElement {
 
         .square.dimmed {
             opacity: 0.1;
+            border-radius: 50%;
         }
 
         @media (max-aspect-ratio: 1/1) {
@@ -101,7 +102,7 @@ export class Logo extends LitElement {
         };
     }
 
-    firstUpdated() {
+    firstUpdated(_changedProperties) {
         this.createSquares();
         this.startAnimations();
         this.setupMouseTracking();
@@ -112,6 +113,7 @@ export class Logo extends LitElement {
         this.resizeObserver = new ResizeObserver(() => {
             this.updateContainerRect();
         });
+
         this.resizeObserver.observe(this.shadowRoot.querySelector('.dot-container'));
     }
 
@@ -341,12 +343,12 @@ export class Logo extends LitElement {
 
     startAnimations() {
         this.squares.forEach((square) => {
-            if (Math.random() > 0.7) {
+            if (Math.random() > 0.9) {
                 square.classList.add('dimmed');
             }
 
             const interval = setInterval(() => {
-                if (Math.random() > 0.8) {
+                if (Math.random() > 0.9) {
                     square.classList.toggle('dimmed');
                 }
             }, 1000 + Math.random() * 2000);

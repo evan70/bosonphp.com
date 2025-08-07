@@ -12,6 +12,7 @@ export class CallToActionSection extends LitElement {
 
         .wrapper {
             width: var(--width-content);
+            max-width: var(--width-max);
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -19,24 +20,21 @@ export class CallToActionSection extends LitElement {
             align-items: flex-start;
         }
 
-        .red {
-            color: var(--color-text-brand);
+        ::slotted(.red) {
+            color: var(--color-text-brand) !important;
         }
     `];
 
     render() {
+        console.log(window.s = CallToActionSection.styles);
         return html`
             <section class="container">
                 <div class="wrapper">
                     <div class="text">
-                        <h3>
-                            If you are a PHP developer, you can already</br>
-                            make native cross-platform applications.</br>
-                            Boson PHP makes it possible!</br>
-                            <span class="red">Get started right now!</span>
-                        </h3>
+                        <slot></slot>
                     </div>
-                    <button-primary text="Try Boson For Free" href="/"></button-primary>
+
+                    <slot name="footer"></slot>
                 </div>
             </section>
         `;

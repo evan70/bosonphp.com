@@ -15,9 +15,6 @@ export class Subtitle extends LitElement {
             align-items: center;
         }
 
-        .name {
-            text-transform: uppercase;
-        }
     `];
 
     constructor() {
@@ -29,7 +26,7 @@ export class Subtitle extends LitElement {
         return html`
             <div class="container">
                 <img class="img" src="/images/icons/subtitle.svg" alt="subtitle"/>
-                <span class="name">${this.name}</span>
+                <h6 class="name">${this.name}</h6>
             </div>
         `;
     }
