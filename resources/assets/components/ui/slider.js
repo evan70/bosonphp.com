@@ -78,6 +78,10 @@ export class Slider extends LitElement {
             min-height: 400px;
         }
 
+        .comment {
+            color: var(--color-text-secondary);
+        }
+
         .quote {
             align-self: flex-start;
         }
@@ -101,12 +105,17 @@ export class Slider extends LitElement {
         }
 
         .name {
+            font-size: var(--font-size);
             font-weight: 500;
         }
 
         .role {
             color: var(--color-text-brand);
+            font-size: var(--font-size-secondary);
+            font-family: var(--font-title), sans-serif;
+            letter-spacing: 1px;
             text-transform: uppercase;
+            margin: 0;
         }
 
         @media (min-width: 768px) {

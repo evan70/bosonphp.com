@@ -11,14 +11,6 @@ export class TestimonialsSection extends LitElement {
             gap: 6em;
         }
 
-        .top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3em;
-        }
-
         .headline {
             text-align: center;
         }
@@ -77,15 +69,6 @@ export class TestimonialsSection extends LitElement {
     render() {
         return html`
             <section class="container">
-                <div class="top">
-                    <boson-subtitle>
-                        Testimonials
-                    </boson-subtitle>
-
-                    <div class="headline">
-                        <h2>Developers that </br>believe in us</h2>
-                    </div>
-                </div>
                 <div class="content">
                     <slider-component .slides=${this.slides}></slider-component>
                 </div>

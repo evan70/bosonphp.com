@@ -58,6 +58,10 @@ export class MobileDevelopmentSection extends LitElement {
         .name {
             text-transform: uppercase;
         }
+
+        .text {
+            color: var(--color-text-secondary);
+        }
     `];
 
     get elements() {

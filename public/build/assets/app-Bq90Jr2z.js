@@ -2,31 +2,27 @@
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const L=globalThis,W=L.ShadowRoot&&(L.ShadyCSS===void 0||L.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,X=Symbol(),G=new WeakMap;let le=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==X)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(W&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=G.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&G.set(t,e))}return e}toString(){return this.cssText}};const ce=n=>new le(typeof n=="string"?n:n+"",void 0,X),f=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,i,o)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+n[o+1],n[0]);return new le(t,n,X)},ge=(n,e)=>{if(W)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),i=L.litNonce;i!==void 0&&s.setAttribute("nonce",i),s.textContent=t.cssText,n.appendChild(s)}},Q=W?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return ce(t)})(n):n;/**
+ */const D=globalThis,W=D.ShadowRoot&&(D.ShadyCSS===void 0||D.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,X=Symbol(),G=new WeakMap;let le=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==X)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(W&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=G.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&G.set(t,e))}return e}toString(){return this.cssText}};const ce=n=>new le(typeof n=="string"?n:n+"",void 0,X),v=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,i,o)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+n[o+1],n[0]);return new le(t,n,X)},ge=(n,e)=>{if(W)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),i=D.litNonce;i!==void 0&&s.setAttribute("nonce",i),s.textContent=t.cssText,n.appendChild(s)}},Q=W?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return ce(t)})(n):n;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:ve,defineProperty:fe,getOwnPropertyDescriptor:ye,getOwnPropertyNames:be,getOwnPropertySymbols:xe,getPrototypeOf:$e}=Object,j=globalThis,ee=j.trustedTypes,we=ee?ee.emptyScript:"",_e=j.reactiveElementPolyfillSupport,z=(n,e)=>n,F={toAttribute(n,e){switch(e){case Boolean:n=n?we:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},de=(n,e)=>!ve(n,e),te={attribute:!0,type:String,converter:F,reflect:!1,useDefault:!1,hasChanged:de};Symbol.metadata??=Symbol("metadata"),j.litPropertyMetadata??=new WeakMap;let E=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=te){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),i=this.getPropertyDescriptor(e,s,t);i!==void 0&&fe(this.prototype,e,i)}}static getPropertyDescriptor(e,t,s){const{get:i,set:o}=ye(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:i,set(r){const l=i?.call(this);o?.call(this,r),this.requestUpdate(e,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??te}static _$Ei(){if(this.hasOwnProperty(z("elementProperties")))return;const e=$e(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(z("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(z("properties"))){const t=this.properties,s=[...be(t),...xe(t)];for(const i of s)this.createProperty(i,t[i])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,i]of t)this.elementProperties.set(s,i)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);i!==void 0&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const i of s)t.unshift(Q(i))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ge(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),i=this.constructor._$Eu(e,s);if(i!==void 0&&s.reflect===!0){const o=(s.converter?.toAttribute!==void 0?s.converter:F).toAttribute(t,s.type);this._$Em=e,o==null?this.removeAttribute(i):this.setAttribute(i,o),this._$Em=null}}_$AK(e,t){const s=this.constructor,i=s._$Eh.get(e);if(i!==void 0&&this._$Em!==i){const o=s.getPropertyOptions(i),r=typeof o.converter=="function"?{fromAttribute:o.converter}:o.converter?.fromAttribute!==void 0?o.converter:F;this._$Em=i;const l=r.fromAttribute(t,o.type);this[i]=l??this._$Ej?.get(i)??l,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const i=this.constructor,o=this[e];if(s??=i.getPropertyOptions(e),!((s.hasChanged??de)(o,t)||s.useDefault&&s.reflect&&o===this._$Ej?.get(e)&&!this.hasAttribute(i._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:i,wrapped:o},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),o!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),i===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[i,o]of this._$Ep)this[i]=o;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[i,o]of s){const{wrapped:r}=o,l=this[i];r!==!0||this._$AL.has(i)||l===void 0||this.C(i,void 0,o,l)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};E.elementStyles=[],E.shadowRootOptions={mode:"open"},E[z("elementProperties")]=new Map,E[z("finalized")]=new Map,_e?.({ReactiveElement:E}),(j.reactiveElementVersions??=[]).push("2.1.1");/**
+ */const{is:fe,defineProperty:ve,getOwnPropertyDescriptor:ye,getOwnPropertyNames:xe,getOwnPropertySymbols:be,getPrototypeOf:$e}=Object,N=globalThis,ee=N.trustedTypes,we=ee?ee.emptyScript:"",_e=N.reactiveElementPolyfillSupport,z=(n,e)=>n,F={toAttribute(n,e){switch(e){case Boolean:n=n?we:null;break;case Object:case Array:n=n==null?n:JSON.stringify(n)}return n},fromAttribute(n,e){let t=n;switch(e){case Boolean:t=n!==null;break;case Number:t=n===null?null:Number(n);break;case Object:case Array:try{t=JSON.parse(n)}catch{t=null}}return t}},de=(n,e)=>!fe(n,e),te={attribute:!0,type:String,converter:F,reflect:!1,useDefault:!1,hasChanged:de};Symbol.metadata??=Symbol("metadata"),N.litPropertyMetadata??=new WeakMap;let S=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=te){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){const s=Symbol(),i=this.getPropertyDescriptor(e,s,t);i!==void 0&&ve(this.prototype,e,i)}}static getPropertyDescriptor(e,t,s){const{get:i,set:o}=ye(this.prototype,e)??{get(){return this[t]},set(r){this[t]=r}};return{get:i,set(r){const l=i?.call(this);o?.call(this,r),this.requestUpdate(e,l,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??te}static _$Ei(){if(this.hasOwnProperty(z("elementProperties")))return;const e=$e(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(z("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(z("properties"))){const t=this.properties,s=[...xe(t),...be(t)];for(const i of s)this.createProperty(i,t[i])}const e=this[Symbol.metadata];if(e!==null){const t=litPropertyMetadata.get(e);if(t!==void 0)for(const[s,i]of t)this.elementProperties.set(s,i)}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);i!==void 0&&this._$Eh.set(i,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){const t=[];if(Array.isArray(e)){const s=new Set(e.flat(1/0).reverse());for(const i of s)t.unshift(Q(i))}else e!==void 0&&t.push(Q(e));return t}static _$Eu(e,t){const s=t.attribute;return s===!1?void 0:typeof s=="string"?s:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){const e=new Map,t=this.constructor.elementProperties;for(const s of t.keys())this.hasOwnProperty(s)&&(e.set(s,this[s]),delete this[s]);e.size>0&&(this._$Ep=e)}createRenderRoot(){const e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ge(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,s){this._$AK(e,s)}_$ET(e,t){const s=this.constructor.elementProperties.get(e),i=this.constructor._$Eu(e,s);if(i!==void 0&&s.reflect===!0){const o=(s.converter?.toAttribute!==void 0?s.converter:F).toAttribute(t,s.type);this._$Em=e,o==null?this.removeAttribute(i):this.setAttribute(i,o),this._$Em=null}}_$AK(e,t){const s=this.constructor,i=s._$Eh.get(e);if(i!==void 0&&this._$Em!==i){const o=s.getPropertyOptions(i),r=typeof o.converter=="function"?{fromAttribute:o.converter}:o.converter?.fromAttribute!==void 0?o.converter:F;this._$Em=i;const l=r.fromAttribute(t,o.type);this[i]=l??this._$Ej?.get(i)??l,this._$Em=null}}requestUpdate(e,t,s){if(e!==void 0){const i=this.constructor,o=this[e];if(s??=i.getPropertyOptions(e),!((s.hasChanged??de)(o,t)||s.useDefault&&s.reflect&&o===this._$Ej?.get(e)&&!this.hasAttribute(i._$Eu(e,s))))return;this.C(e,t,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:s,reflect:i,wrapped:o},r){s&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,r??t??this[e]),o!==!0||r!==void 0)||(this._$AL.has(e)||(this.hasUpdated||s||(t=void 0),this._$AL.set(e,t)),i===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}const e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[i,o]of this._$Ep)this[i]=o;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[i,o]of s){const{wrapped:r}=o,l=this[i];r!==!0||this._$AL.has(i)||l===void 0||this.C(i,void 0,o,l)}}let e=!1;const t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(t)):this._$EM()}catch(s){throw e=!1,this._$EM(),s}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};S.elementStyles=[],S.shadowRootOptions={mode:"open"},S[z("elementProperties")]=new Map,S[z("finalized")]=new Map,_e?.({ReactiveElement:S}),(N.reactiveElementVersions??=[]).push("2.1.1");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const V=globalThis,O=V.trustedTypes,se=O?O.createPolicy("lit-html",{createHTML:n=>n}):void 0,he="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,pe="?"+_,Ae=`<${pe}>`,S=document,I=()=>S.createComment(""),H=n=>n===null||typeof n!="object"&&typeof n!="function",Z=Array.isArray,ke=n=>Z(n)||typeof n?.[Symbol.iterator]=="function",Y=`[ 	
-\f\r]`,T=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ie=/-->/g,oe=/>/g,A=RegExp(`>|${Y}(?:([^\\s"'>=/]+)(${Y}*=${Y}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),ne=/'/g,re=/"/g,me=/^(?:script|style|textarea|title)$/i,Se=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),p=Se(1),C=Symbol.for("lit-noChange"),x=Symbol.for("lit-nothing"),ae=new WeakMap,k=S.createTreeWalker(S,129);function ue(n,e){if(!Z(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return se!==void 0?se.createHTML(e):e}const Ee=(n,e)=>{const t=n.length-1,s=[];let i,o=e===2?"<svg>":e===3?"<math>":"",r=T;for(let l=0;l<t;l++){const a=n[l];let d,m,c=-1,v=0;for(;v<a.length&&(r.lastIndex=v,m=r.exec(a),m!==null);)v=r.lastIndex,r===T?m[1]==="!--"?r=ie:m[1]!==void 0?r=oe:m[2]!==void 0?(me.test(m[2])&&(i=RegExp("</"+m[2],"g")),r=A):m[3]!==void 0&&(r=A):r===A?m[0]===">"?(r=i??T,c=-1):m[1]===void 0?c=-2:(c=r.lastIndex-m[2].length,d=m[1],r=m[3]===void 0?A:m[3]==='"'?re:ne):r===re||r===ne?r=A:r===ie||r===oe?r=T:(r=A,i=void 0);const h=r===A&&n[l+1].startsWith("/>")?" ":"";o+=r===T?a+Ae:c>=0?(s.push(d),a.slice(0,c)+he+a.slice(c)+_+h):a+_+(c===-2?l:h)}return[ue(n,o+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class q{constructor({strings:e,_$litType$:t},s){let i;this.parts=[];let o=0,r=0;const l=e.length-1,a=this.parts,[d,m]=Ee(e,t);if(this.el=q.createElement(d,s),k.currentNode=this.el.content,t===2||t===3){const c=this.el.content.firstChild;c.replaceWith(...c.childNodes)}for(;(i=k.nextNode())!==null&&a.length<l;){if(i.nodeType===1){if(i.hasAttributes())for(const c of i.getAttributeNames())if(c.endsWith(he)){const v=m[r++],h=i.getAttribute(c).split(_),y=/([.?@])?(.*)/.exec(v);a.push({type:1,index:o,name:y[2],strings:h,ctor:y[1]==="."?Pe:y[1]==="?"?Me:y[1]==="@"?Be:N}),i.removeAttribute(c)}else c.startsWith(_)&&(a.push({type:6,index:o}),i.removeAttribute(c));if(me.test(i.tagName)){const c=i.textContent.split(_),v=c.length-1;if(v>0){i.textContent=O?O.emptyScript:"";for(let h=0;h<v;h++)i.append(c[h],I()),k.nextNode(),a.push({type:2,index:++o});i.append(c[v],I())}}}else if(i.nodeType===8)if(i.data===pe)a.push({type:2,index:o});else{let c=-1;for(;(c=i.data.indexOf(_,c+1))!==-1;)a.push({type:7,index:o}),c+=_.length-1}o++}}static createElement(e,t){const s=S.createElement("template");return s.innerHTML=e,s}}function P(n,e,t=n,s){if(e===C)return e;let i=s!==void 0?t._$Co?.[s]:t._$Cl;const o=H(e)?void 0:e._$litDirective$;return i?.constructor!==o&&(i?._$AO?.(!1),o===void 0?i=void 0:(i=new o(n),i._$AT(n,t,s)),s!==void 0?(t._$Co??=[])[s]=i:t._$Cl=i),i!==void 0&&(e=P(n,i._$AS(n,e.values),i,s)),e}class Ce{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:s}=this._$AD,i=(e?.creationScope??S).importNode(t,!0);k.currentNode=i;let o=k.nextNode(),r=0,l=0,a=s[0];for(;a!==void 0;){if(r===a.index){let d;a.type===2?d=new D(o,o.nextSibling,this,e):a.type===1?d=new a.ctor(o,a.name,a.strings,this,e):a.type===6&&(d=new Re(o,this,e)),this._$AV.push(d),a=s[++l]}r!==a?.index&&(o=k.nextNode(),r++)}return k.currentNode=S,i}p(e){let t=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,t),t+=s.strings.length-2):s._$AI(e[t])),t++}}class D{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,s,i){this.type=2,this._$AH=x,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=s,this.options=i,this._$Cv=i?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=P(this,e,t),H(e)?e===x||e==null||e===""?(this._$AH!==x&&this._$AR(),this._$AH=x):e!==this._$AH&&e!==C&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ke(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==x&&H(this._$AH)?this._$AA.nextSibling.data=e:this.T(S.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:s}=e,i=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=q.createElement(ue(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===i)this._$AH.p(t);else{const o=new Ce(i,this),r=o.u(this.options);o.p(t),this.T(r),this._$AH=o}}_$AC(e){let t=ae.get(e.strings);return t===void 0&&ae.set(e.strings,t=new q(e)),t}k(e){Z(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let s,i=0;for(const o of e)i===t.length?t.push(s=new D(this.O(I()),this.O(I()),this,this.options)):s=t[i],s._$AI(o),i++;i<t.length&&(this._$AR(s&&s._$AB.nextSibling,i),t.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const s=e.nextSibling;e.remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class N{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,s,i,o){this.type=1,this._$AH=x,this._$AN=void 0,this.element=e,this.name=t,this._$AM=i,this.options=o,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=x}_$AI(e,t=this,s,i){const o=this.strings;let r=!1;if(o===void 0)e=P(this,e,t,0),r=!H(e)||e!==this._$AH&&e!==C,r&&(this._$AH=e);else{const l=e;let a,d;for(e=o[0],a=0;a<o.length-1;a++)d=P(this,l[s+a],t,a),d===C&&(d=this._$AH[a]),r||=!H(d)||d!==this._$AH[a],d===x?e=x:e!==x&&(e+=(d??"")+o[a+1]),this._$AH[a]=d}r&&!i&&this.j(e)}j(e){e===x?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class Pe extends N{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===x?void 0:e}}class Me extends N{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==x)}}class Be extends N{constructor(e,t,s,i,o){super(e,t,s,i,o),this.type=5}_$AI(e,t=this){if((e=P(this,e,t,0)??x)===C)return;const s=this._$AH,i=e===x&&s!==x||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,o=e!==x&&(s===x||i);i&&this.element.removeEventListener(this.name,this,s),o&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Re{constructor(e,t,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){P(this,e)}}const Te=V.litHtmlPolyfillSupport;Te?.(q,D),(V.litHtmlVersions??=[]).push("3.3.1");const ze=(n,e,t)=>{const s=t?.renderBefore??e;let i=s._$litPart$;if(i===void 0){const o=t?.renderBefore??null;s._$litPart$=i=new D(e.insertBefore(I(),o),o,void 0,t??{})}return i._$AI(n),i};/**
+ */const V=globalThis,O=V.trustedTypes,se=O?O.createPolicy("lit-html",{createHTML:n=>n}):void 0,he="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,pe="?"+_,Ae=`<${pe}>`,E=document,I=()=>E.createComment(""),H=n=>n===null||typeof n!="object"&&typeof n!="function",Z=Array.isArray,ke=n=>Z(n)||typeof n?.[Symbol.iterator]=="function",Y=`[ 	
+\f\r]`,B=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,ie=/-->/g,oe=/>/g,A=RegExp(`>|${Y}(?:([^\\s"'>=/]+)(${Y}*=${Y}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),ne=/'/g,re=/"/g,me=/^(?:script|style|textarea|title)$/i,Ee=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),p=Ee(1),C=Symbol.for("lit-noChange"),b=Symbol.for("lit-nothing"),ae=new WeakMap,k=E.createTreeWalker(E,129);function ue(n,e){if(!Z(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return se!==void 0?se.createHTML(e):e}const Se=(n,e)=>{const t=n.length-1,s=[];let i,o=e===2?"<svg>":e===3?"<math>":"",r=B;for(let l=0;l<t;l++){const a=n[l];let d,m,c=-1,f=0;for(;f<a.length&&(r.lastIndex=f,m=r.exec(a),m!==null);)f=r.lastIndex,r===B?m[1]==="!--"?r=ie:m[1]!==void 0?r=oe:m[2]!==void 0?(me.test(m[2])&&(i=RegExp("</"+m[2],"g")),r=A):m[3]!==void 0&&(r=A):r===A?m[0]===">"?(r=i??B,c=-1):m[1]===void 0?c=-2:(c=r.lastIndex-m[2].length,d=m[1],r=m[3]===void 0?A:m[3]==='"'?re:ne):r===re||r===ne?r=A:r===ie||r===oe?r=B:(r=A,i=void 0);const h=r===A&&n[l+1].startsWith("/>")?" ":"";o+=r===B?a+Ae:c>=0?(s.push(d),a.slice(0,c)+he+a.slice(c)+_+h):a+_+(c===-2?l:h)}return[ue(n,o+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class q{constructor({strings:e,_$litType$:t},s){let i;this.parts=[];let o=0,r=0;const l=e.length-1,a=this.parts,[d,m]=Se(e,t);if(this.el=q.createElement(d,s),k.currentNode=this.el.content,t===2||t===3){const c=this.el.content.firstChild;c.replaceWith(...c.childNodes)}for(;(i=k.nextNode())!==null&&a.length<l;){if(i.nodeType===1){if(i.hasAttributes())for(const c of i.getAttributeNames())if(c.endsWith(he)){const f=m[r++],h=i.getAttribute(c).split(_),y=/([.?@])?(.*)/.exec(f);a.push({type:1,index:o,name:y[2],strings:h,ctor:y[1]==="."?Pe:y[1]==="?"?Me:y[1]==="@"?Re:j}),i.removeAttribute(c)}else c.startsWith(_)&&(a.push({type:6,index:o}),i.removeAttribute(c));if(me.test(i.tagName)){const c=i.textContent.split(_),f=c.length-1;if(f>0){i.textContent=O?O.emptyScript:"";for(let h=0;h<f;h++)i.append(c[h],I()),k.nextNode(),a.push({type:2,index:++o});i.append(c[f],I())}}}else if(i.nodeType===8)if(i.data===pe)a.push({type:2,index:o});else{let c=-1;for(;(c=i.data.indexOf(_,c+1))!==-1;)a.push({type:7,index:o}),c+=_.length-1}o++}}static createElement(e,t){const s=E.createElement("template");return s.innerHTML=e,s}}function P(n,e,t=n,s){if(e===C)return e;let i=s!==void 0?t._$Co?.[s]:t._$Cl;const o=H(e)?void 0:e._$litDirective$;return i?.constructor!==o&&(i?._$AO?.(!1),o===void 0?i=void 0:(i=new o(n),i._$AT(n,t,s)),s!==void 0?(t._$Co??=[])[s]=i:t._$Cl=i),i!==void 0&&(e=P(n,i._$AS(n,e.values),i,s)),e}class Ce{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:s}=this._$AD,i=(e?.creationScope??E).importNode(t,!0);k.currentNode=i;let o=k.nextNode(),r=0,l=0,a=s[0];for(;a!==void 0;){if(r===a.index){let d;a.type===2?d=new L(o,o.nextSibling,this,e):a.type===1?d=new a.ctor(o,a.name,a.strings,this,e):a.type===6&&(d=new Te(o,this,e)),this._$AV.push(d),a=s[++l]}r!==a?.index&&(o=k.nextNode(),r++)}return k.currentNode=E,i}p(e){let t=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,t),t+=s.strings.length-2):s._$AI(e[t])),t++}}class L{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,s,i){this.type=2,this._$AH=b,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=s,this.options=i,this._$Cv=i?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=P(this,e,t),H(e)?e===b||e==null||e===""?(this._$AH!==b&&this._$AR(),this._$AH=b):e!==this._$AH&&e!==C&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):ke(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==b&&H(this._$AH)?this._$AA.nextSibling.data=e:this.T(E.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:s}=e,i=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=q.createElement(ue(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===i)this._$AH.p(t);else{const o=new Ce(i,this),r=o.u(this.options);o.p(t),this.T(r),this._$AH=o}}_$AC(e){let t=ae.get(e.strings);return t===void 0&&ae.set(e.strings,t=new q(e)),t}k(e){Z(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let s,i=0;for(const o of e)i===t.length?t.push(s=new L(this.O(I()),this.O(I()),this,this.options)):s=t[i],s._$AI(o),i++;i<t.length&&(this._$AR(s&&s._$AB.nextSibling,i),t.length=i)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const s=e.nextSibling;e.remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class j{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,s,i,o){this.type=1,this._$AH=b,this._$AN=void 0,this.element=e,this.name=t,this._$AM=i,this.options=o,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=b}_$AI(e,t=this,s,i){const o=this.strings;let r=!1;if(o===void 0)e=P(this,e,t,0),r=!H(e)||e!==this._$AH&&e!==C,r&&(this._$AH=e);else{const l=e;let a,d;for(e=o[0],a=0;a<o.length-1;a++)d=P(this,l[s+a],t,a),d===C&&(d=this._$AH[a]),r||=!H(d)||d!==this._$AH[a],d===b?e=b:e!==b&&(e+=(d??"")+o[a+1]),this._$AH[a]=d}r&&!i&&this.j(e)}j(e){e===b?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class Pe extends j{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===b?void 0:e}}class Me extends j{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==b)}}class Re extends j{constructor(e,t,s,i,o){super(e,t,s,i,o),this.type=5}_$AI(e,t=this){if((e=P(this,e,t,0)??b)===C)return;const s=this._$AH,i=e===b&&s!==b||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,o=e!==b&&(s===b||i);i&&this.element.removeEventListener(this.name,this,s),o&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Te{constructor(e,t,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){P(this,e)}}const Be=V.litHtmlPolyfillSupport;Be?.(q,L),(V.litHtmlVersions??=[]).push("3.3.1");const ze=(n,e,t)=>{const s=t?.renderBefore??e;let i=s._$litPart$;if(i===void 0){const o=t?.renderBefore??null;s._$litPart$=i=new L(e.insertBefore(I(),o),o,void 0,t??{})}return i._$AI(n),i};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const J=globalThis;class g extends E{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=ze(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return C}}g._$litElement$=!0,g.finalized=!0,J.litElementHydrateSupport?.({LitElement:g});const Ie=J.litElementPolyfillSupport;Ie?.({LitElement:g});(J.litElementVersions??=[]).push("4.2.1");const He="h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:600}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:500}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:400}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:400}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}a{color:inherit;text-decoration:none}.emphasis{color:var(--color-text-brand)}ul>li{margin:1.3em 0}p{margin:1em 0}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}",$=ce(He);class qe extends g{static properties={vertical:{type:Boolean}};static styles=[$,f`
+ */const J=globalThis;class g extends S{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=ze(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return C}}g._$litElement$=!0,g.finalized=!0,J.litElementHydrateSupport?.({LitElement:g});const Ie=J.litElementPolyfillSupport;Ie?.({LitElement:g});(J.litElementVersions??=[]).push("4.2.1");const He="h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:600}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:500}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:400}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:400}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}a{color:inherit;text-decoration:none}.emphasis{color:var(--color-text-brand)}ul>li{margin:1.3em 0}p{margin:1em 0}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}",$=ce(He);class qe extends g{static properties={type:{type:String}};static styles=[$,v`
         .container {
             display: flex;
             flex-direction: row;
             margin: var(--landing-layout-gap) auto 0 auto;
             gap: 3em;
             max-width: min(var(--width-max), 90vw);
-        }
-
-        .container.container-vertical {
-            flex-direction: column;
         }
 
         .segment-title {
@@ -70,8 +66,28 @@
         ::slotted(ul) {
             list-style-image: url(/images/icons/check.svg);
         }
-    `];constructor(){super(),this.vertical=!1}render(){return p`
-            <section class="container ${this.vertical?"container-vertical":""}">
+
+        /** VERTICAL TYPE */
+
+        .container.container-vertical {
+            flex-direction: column;
+        }
+
+        /** CENTER TYPE */
+
+        .container.container-center {
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container.container-center ::slotted(span),
+        .container.container-center .title,
+        .container.container-center .segment-title {
+            text-align: center;
+            align-items: center;
+        }
+    `];constructor(){super(),this.type="horizontal"}render(){return p`
+            <section class="container container-${this.type}">
                 <hgroup class="segment-title">
                     <div class="segment-subtitle">
                         <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -93,7 +109,7 @@
                     <slot></slot>
                 </aside>
             </section>
-        `}}customElements.define("segment-section",qe);class De extends g{static styles=[$,f`
+        `}}customElements.define("segment-section",qe);class Le extends g{static styles=[$,v`
         .container {
             padding-bottom: 8em;
             background-size: 900px 900px;
@@ -123,7 +139,7 @@
                     <slot name="footer"></slot>
                 </div>
             </section>
-        `}}customElements.define("call-to-action-section",De);class Le extends g{static styles=[$,f`
+        `}}customElements.define("call-to-action-section",Le);class De extends g{static styles=[$,v`
         .container {
             display: flex;
             flex-direction: column;
@@ -290,7 +306,7 @@
                     </a>
                 </aside>
             </section>
-        `}}customElements.define("hero-section",Le);class Oe extends g{static styles=[$,f`
+        `}}customElements.define("hero-section",De);class Oe extends g{static styles=[$,v`
         .container {
             display: flex;
             flex-direction: column;
@@ -331,7 +347,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("how-it-works-section",Oe);class Ue extends g{static styles=[$,f`
+        `}}customElements.define("how-it-works-section",Oe);class Ue extends g{static styles=[$,v`
         .container {
             display: flex;
             justify-content: center;
@@ -386,6 +402,10 @@
         .name {
             text-transform: uppercase;
         }
+
+        .text {
+            color: var(--color-text-secondary);
+        }
     `];get elements(){return[{text:"For many businesses, mobile devices are the main audience segment. Web applications are good. Desktop clients are great. Mobile applications are wonderful.",icon:"rocket",headline:"Reaching new audiences"},{text:"The same PHP code — but now it works on a mobile device. Budget savings and faster launch.",icon:"clients",headline:"New clients without rewriting code"},{headline:"Convenient for B2B and B2C",icon:"case",text:"Internal CRM, chat applications, offline utilities, task managers, task trackers, dashboards — you can carry everything in your pocket."},{headline:"Without pain and extra stacks",icon:"convenient",text:"One stack. One language. One project. PHP from start to launch in the App Store."}]}renderElement(e){return p`
             <div class="element">
                 <div class="top">
@@ -405,7 +425,7 @@
                     ${this.elements.map(e=>this.renderElement(e))}
                 </div>
             </section>
-        `}}customElements.define("mobile-development-section",Ue);class K extends g{static cfg={delay:2e3};static styles=[$,f`
+        `}}customElements.define("mobile-development-section",Ue);class K extends g{static cfg={delay:2e3};static styles=[$,v`
         .container {
             display: flex;
             flex-direction: column;
@@ -759,7 +779,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("nativeness-section",K);class U extends g{static styles=[$,f`
+        `}}customElements.define("nativeness-section",K);class U extends g{static styles=[$,v`
         :host {
             margin-top: calc(var(--landing-layout-gap) * -1);
         }
@@ -865,7 +885,7 @@
             color: var(--color-text-secondary);
             font-family: var(--font-title), sans-serif;
         }
-    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=U.animationConfig,s=Date.now()-this.animationState.startTime,i=e.blockDuration*4+e.transitionDuration*4,o=s%i,r=e.blockDuration,l=r+e.transitionDuration,a=l+e.blockDuration,d=a+e.transitionDuration,m=d+e.blockDuration,c=m+e.transitionDuration,v=c+e.blockDuration;v+e.transitionDuration;let h=0,y=0;if(o<r)h=o/e.blockDuration*.5,y=0;else if(o<l){const u=(o-r)/e.transitionDuration;h=.5,y=u}else if(o<a)h=.5+(o-l)/e.blockDuration*.5,y=1;else if(o<d){const u=(o-a)/e.transitionDuration;h=1,y=1-u}else if(o<m)h=1-(o-d)/e.blockDuration*.5,y=0;else if(o<c){const u=(o-m)/e.transitionDuration;h=.5,y=u}else if(o<v)h=.5-(o-c)/e.blockDuration*.5,y=1;else{const u=(o-v)/e.transitionDuration;h=0,y=1-u}this.animateElements(y),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=U.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const i=e*s,o=Math.min(0,-s+e*s),r=-(e*s),l=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${i}px)`,this.elements.topRight.style.transform=`translateX(${o}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${l}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((i,o)=>{o<s?(i.classList.remove("grey"),i.classList.add("red")):(i.classList.remove("red"),i.classList.add("grey"))})}render(){return p`
+    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=U.animationConfig,s=Date.now()-this.animationState.startTime,i=e.blockDuration*4+e.transitionDuration*4,o=s%i,r=e.blockDuration,l=r+e.transitionDuration,a=l+e.blockDuration,d=a+e.transitionDuration,m=d+e.blockDuration,c=m+e.transitionDuration,f=c+e.blockDuration;f+e.transitionDuration;let h=0,y=0;if(o<r)h=o/e.blockDuration*.5,y=0;else if(o<l){const u=(o-r)/e.transitionDuration;h=.5,y=u}else if(o<a)h=.5+(o-l)/e.blockDuration*.5,y=1;else if(o<d){const u=(o-a)/e.transitionDuration;h=1,y=1-u}else if(o<m)h=1-(o-d)/e.blockDuration*.5,y=0;else if(o<c){const u=(o-m)/e.transitionDuration;h=.5,y=u}else if(o<f)h=.5-(o-c)/e.blockDuration*.5,y=1;else{const u=(o-f)/e.transitionDuration;h=0,y=1-u}this.animateElements(y),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=U.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const i=e*s,o=Math.min(0,-s+e*s),r=-(e*s),l=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${i}px)`,this.elements.topRight.style.transform=`translateX(${o}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${l}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((i,o)=>{o<s?(i.classList.remove("grey"),i.classList.add("red")):(i.classList.remove("red"),i.classList.add("grey"))})}render(){return p`
             <section class="container">
                 <div class="top">
                     <h2>
@@ -957,7 +977,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("right-choice-section",U);class je extends g{static styles=[$,f`
+        `}}customElements.define("right-choice-section",U);class Ne extends g{static styles=[$,v`
         .container {
             display: flex;
             flex-direction: column;
@@ -1060,20 +1080,12 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("solves-section",je);class Ne extends g{static styles=[$,f`
+        `}}customElements.define("solves-section",Ne);class je extends g{static styles=[$,v`
         .container {
             position: relative;
             display: flex;
             flex-direction: column;
             gap: 6em;
-        }
-
-        .top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 3em;
         }
 
         .headline {
@@ -1092,20 +1104,11 @@
         }
     `];get slides(){return[{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building irst meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev4",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."},{name:"Alex Bondareev",pfp:"img.png",role:"Co-founder, Boson PHP",comment:"Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."}]}render(){return p`
             <section class="container">
-                <div class="top">
-                    <boson-subtitle>
-                        Testimonials
-                    </boson-subtitle>
-
-                    <div class="headline">
-                        <h2>Developers that </br>believe in us</h2>
-                    </div>
-                </div>
                 <div class="content">
                     <slider-component .slides=${this.slides}></slider-component>
                 </div>
             </section>
-        `}}customElements.define("testimonials-section",Ne);class Ye extends g{static properties={href:{type:String},external:{type:Boolean}};static styles=[$,f`
+        `}}customElements.define("testimonials-section",je);class Ye extends g{static properties={href:{type:String},external:{type:Boolean}};static styles=[$,v`
         .button {
             height: inherit;
             font-family: var(--font-title), sans-serif;
@@ -1132,7 +1135,7 @@
                target="${this.external?"_blank":"_self"}">
                 <slot></slot>
             </a>
-        `}}customElements.define("boson-header-button",Ye);class Fe extends g{static properties={};static styles=[$,f`
+        `}}customElements.define("boson-header-button",Ye);class Fe extends g{static properties={};static styles=[$,v`
         details > summary {
             list-style-type: '';
         }
@@ -1183,7 +1186,7 @@
                     <slot></slot>
                 </nav>
             </details>
-        `}}customElements.define("boson-header-dropdown",Fe);class We extends g{static properties={href:{type:String},external:{type:Boolean},active:{type:Boolean}};static styles=[$,f`
+        `}}customElements.define("boson-header-dropdown",Fe);class We extends g{static properties={href:{type:String},external:{type:Boolean},active:{type:Boolean}};static styles=[$,v`
         .link {
             font-family: var(--font-title), sans-serif;
             letter-spacing: 1px;
@@ -1210,7 +1213,7 @@
                target="${this.external?"_blank":"_self"}">
                 <slot></slot>
             </a>
-        `}}customElements.define("boson-header-link",We);class Xe extends g{static properties={href:{type:String},type:{type:String},icon:{type:String}};static styles=[$,f`
+        `}}customElements.define("boson-header-link",We);class Xe extends g{static properties={href:{type:String},type:{type:String},icon:{type:String}};static styles=[$,v`
         .button {
             font-family: var(--font-title), sans-serif;
             font-size: var(--font-size-secondary);
@@ -1274,7 +1277,7 @@
                     </span>
                 </span>
             </a>
-        `}}customElements.define("boson-button",Xe);class Ve extends g{static styles=[$,f`
+        `}}customElements.define("boson-button",Xe);class Ve extends g{static styles=[$,v`
         .container {
             aspect-ratio: 1 / 1;
             position: relative;
@@ -1318,7 +1321,7 @@
                     <div class="bottom right"></div>
                 </div>
             </div>
-        `}}customElements.define("dots-container",Ve);class Ze extends g{static styles=[f`
+        `}}customElements.define("dots-container",Ve);class Ze extends g{static styles=[v`
         .container {
             display: flex;
             flex-direction: column;
@@ -1374,6 +1377,8 @@
             width: 230px;
             border-right: 1px solid var(--color-border);
             transition-duration: 0.2s;
+            text-transform: uppercase;
+            font-family: var(--font-title), sans-serif;
         }
 
         ::slotted(a:hover) {
@@ -1505,7 +1510,7 @@
                     <img src="/images/credits.png" alt="credits"/>
                 </div>
             </footer>
-        `}}customElements.define("boson-footer",Ze);class Je extends g{static properties={isScrolled:{type:Boolean}};static styles=[f`
+        `}}customElements.define("boson-footer",Ze);class Je extends g{static properties={isScrolled:{type:Boolean}};static styles=[v`
         header {
             height: 100px;
             line-height: 100px;
@@ -1582,7 +1587,7 @@
                 </div>
             </header>
             <div class="header-padding"></div>
-        `}}customElements.define("boson-header",Je);class Ke extends g{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[$,f`
+        `}}customElements.define("boson-header",Je);class Ke extends g{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[$,v`
         .accordion {
             display: flex;
             flex: 1;
@@ -1717,7 +1722,7 @@
             <div class="accordion">
                 ${this.content.map((e,t)=>this.renderElement(e,t))}
             </div>
-        `}}customElements.define("horizontal-accordion",Ke);class Ge extends g{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[$,f`
+        `}}customElements.define("horizontal-accordion",Ke);class Ge extends g{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[$,v`
         .container {
             display: flex;
             max-width: 100vw;
@@ -1786,6 +1791,10 @@
             min-height: 400px;
         }
 
+        .comment {
+            color: var(--color-text-secondary);
+        }
+
         .quote {
             align-self: flex-start;
         }
@@ -1809,12 +1818,17 @@
         }
 
         .name {
+            font-size: var(--font-size);
             font-weight: 500;
         }
 
         .role {
             color: var(--color-text-brand);
+            font-size: var(--font-size-secondary);
+            font-family: var(--font-title), sans-serif;
+            letter-spacing: 1px;
             text-transform: uppercase;
+            margin: 0;
         }
 
         @media (min-width: 768px) {
@@ -1864,7 +1878,7 @@
                     <span>Next</span>
                 </button>
             </div>
-        `}}customElements.define("slider-component",Ge);class Qe extends g{static styles=[$,f`
+        `}}customElements.define("slider-component",Ge);class Qe extends g{static styles=[$,v`
         .container {
             display: flex;
             gap: 1em;
@@ -1884,7 +1898,7 @@
                     <slot></slot>
                 </h6>
             </div>
-        `}}customElements.define("boson-subtitle",Qe);class et extends g{static styles=[$,f`
+        `}}customElements.define("boson-subtitle",Qe);class et extends g{static styles=[$,v`
         .container {
             width: 100%;
             height: 100%;
@@ -1947,13 +1961,13 @@
                 height: 100%;
             }
         }
-    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:10,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:10,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:550,mouseRadius:150,animationStrength:25,smoothing:.5}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top+window.scrollY}handleMouseEnter(e){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1,this.mouseX=-100,this.mouseY=-100,this.updateSquarePositions()}animate(){window.scrollY<window.innerHeight&&(this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing,this.updateSquarePositions()):(this.mouseX=-1e3,this.mouseY=-1e3,this.resetSquaresToOriginal())),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],o=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(o){const r=parseFloat(o[1])||0,l=parseFloat(o[2])||0,a=r*(1-this.config.smoothing),d=l*(1-this.config.smoothing);Math.abs(a)<.1&&Math.abs(d)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${a}px), calc(-50% + ${d}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const i=this.squares[s],o=t.originalX-this.mouseX,r=t.originalY-this.mouseY,l=o*o+r*r;if(l<e&&l>0){const a=Math.sqrt(l),d=(this.config.mouseRadius-a)/this.config.mouseRadius*this.config.animationStrength,m=.7/a,c=o*m,v=r*m,h=c*d,y=v*d;i.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${y}px))`}else i.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,i=t.height/2,o=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*o,l=this.config.squareSpacing*o,a=this.config.outerRadius*o,d=a-(this.config.outerLayers-1)*l;for(let v=0;v<this.config.outerLayers;v++){const h=a-v*l,y=2*Math.PI*h,w=Math.floor(y/l);for(let u=0;u<w;u++){const M=u/w*Math.PI*2,B=s+Math.cos(M)*h,R=i+Math.sin(M)*h,b=document.createElement("div");b.className="square outer",b.style.left=`${B}px`,b.style.top=`${R}px`,b.style.width=`${r}px`,b.style.height=`${r}px`,b.style.transform="translate(-50%, -50%)",e.appendChild(b),this.squares.push(b),this.squareData.push({originalX:B,originalY:R,element:b})}}const m=d-this.config.gapBetweenCircles*o,c=Math.min(this.config.innerRadius*o,m);for(let v=0;v<this.config.innerLayers;v++){const h=c-v*l;if(h<=0)break;if(h<l){const u=document.createElement("div");u.className="square inner",u.style.left=`${s}px`,u.style.top=`${i}px`,u.style.width=`${r}px`,u.style.height=`${r}px`,u.style.transform="translate(-50%, -50%)",e.appendChild(u),this.squares.push(u),this.squareData.push({originalX:s,originalY:i,element:u});break}const y=2*Math.PI*h,w=Math.floor(y/l);for(let u=0;u<w;u++){const M=u/w*Math.PI*2,B=s+Math.cos(M)*h,R=i+Math.sin(M)*h,b=document.createElement("div");b.className="square inner",b.style.left=`${B}px`,b.style.top=`${R}px`,b.style.width=`${r}px`,b.style.height=`${r}px`,b.style.transform="translate(-50%, -50%)",e.appendChild(b),this.squares.push(b),this.squareData.push({originalX:B,originalY:R,element:b})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.96&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.3&&e.classList.toggle("dimmed")},500+Math.random()*3e3);this.animationIntervals.push(t)})}render(){return p`
+    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:10,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:10,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:550,mouseRadius:150,animationStrength:25,smoothing:.5}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top+window.scrollY}handleMouseEnter(e){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1,this.mouseX=-100,this.mouseY=-100,this.updateSquarePositions()}animate(){window.scrollY<window.innerHeight&&(this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing,this.updateSquarePositions()):(this.mouseX=-1e3,this.mouseY=-1e3,this.resetSquaresToOriginal())),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],o=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(o){const r=parseFloat(o[1])||0,l=parseFloat(o[2])||0,a=r*(1-this.config.smoothing),d=l*(1-this.config.smoothing);Math.abs(a)<.1&&Math.abs(d)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${a}px), calc(-50% + ${d}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const i=this.squares[s],o=t.originalX-this.mouseX,r=t.originalY-this.mouseY,l=o*o+r*r;if(l<e&&l>0){const a=Math.sqrt(l),d=(this.config.mouseRadius-a)/this.config.mouseRadius*this.config.animationStrength,m=.7/a,c=o*m,f=r*m,h=c*d,y=f*d;i.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${y}px))`}else i.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,i=t.height/2,o=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*o,l=this.config.squareSpacing*o,a=this.config.outerRadius*o,d=a-(this.config.outerLayers-1)*l;for(let f=0;f<this.config.outerLayers;f++){const h=a-f*l,y=2*Math.PI*h,w=Math.floor(y/l);for(let u=0;u<w;u++){const M=u/w*Math.PI*2,R=s+Math.cos(M)*h,T=i+Math.sin(M)*h,x=document.createElement("div");x.className="square outer",x.style.left=`${R}px`,x.style.top=`${T}px`,x.style.width=`${r}px`,x.style.height=`${r}px`,x.style.transform="translate(-50%, -50%)",e.appendChild(x),this.squares.push(x),this.squareData.push({originalX:R,originalY:T,element:x})}}const m=d-this.config.gapBetweenCircles*o,c=Math.min(this.config.innerRadius*o,m);for(let f=0;f<this.config.innerLayers;f++){const h=c-f*l;if(h<=0)break;if(h<l){const u=document.createElement("div");u.className="square inner",u.style.left=`${s}px`,u.style.top=`${i}px`,u.style.width=`${r}px`,u.style.height=`${r}px`,u.style.transform="translate(-50%, -50%)",e.appendChild(u),this.squares.push(u),this.squareData.push({originalX:s,originalY:i,element:u});break}const y=2*Math.PI*h,w=Math.floor(y/l);for(let u=0;u<w;u++){const M=u/w*Math.PI*2,R=s+Math.cos(M)*h,T=i+Math.sin(M)*h,x=document.createElement("div");x.className="square inner",x.style.left=`${R}px`,x.style.top=`${T}px`,x.style.width=`${r}px`,x.style.height=`${r}px`,x.style.transform="translate(-50%, -50%)",e.appendChild(x),this.squares.push(x),this.squareData.push({originalX:R,originalY:T,element:x})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.96&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.3&&e.classList.toggle("dimmed")},500+Math.random()*3e3);this.animationIntervals.push(t)})}render(){return p`
             <div class="container">
                 <div class="circle-wrapper">
                     <div class="dot-container"></div>
                 </div>
             </div>
-        `}}customElements.define("boson-logo",et);class tt extends g{static styles=[f`
+        `}}customElements.define("boson-logo",et);class tt extends g{static styles=[v`
         .landing-layout {
             display: flex;
             flex-direction: column;

@@ -4,7 +4,7 @@ import {sharedStyles} from "../../utils/sharedStyles.js";
 
 export class SegmentSection extends LitElement {
     static properties = {
-        vertical: {type: Boolean},
+        type: {type: String},
     };
 
     static styles = [sharedStyles, css`
@@ -14,10 +14,6 @@ export class SegmentSection extends LitElement {
             margin: var(--landing-layout-gap) auto 0 auto;
             gap: 3em;
             max-width: min(var(--width-max), 90vw);
-        }
-
-        .container.container-vertical {
-            flex-direction: column;
         }
 
         .segment-title {
@@ -61,17 +57,37 @@ export class SegmentSection extends LitElement {
         ::slotted(ul) {
             list-style-image: url(/images/icons/check.svg);
         }
+
+        /** VERTICAL TYPE */
+
+        .container.container-vertical {
+            flex-direction: column;
+        }
+
+        /** CENTER TYPE */
+
+        .container.container-center {
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container.container-center ::slotted(span),
+        .container.container-center .title,
+        .container.container-center .segment-title {
+            text-align: center;
+            align-items: center;
+        }
     `];
 
     constructor() {
         super();
 
-        this.vertical = false;
+        this.type = 'horizontal';
     }
 
     render() {
         return html`
-            <section class="container ${this.vertical ? 'container-vertical' : ''}">
+            <section class="container container-${this.type}">
                 <hgroup class="segment-title">
                     <div class="segment-subtitle">
                         <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">

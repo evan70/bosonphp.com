@@ -57,6 +57,8 @@ export class BosonFooter extends LitElement {
             width: 230px;
             border-right: 1px solid var(--color-border);
             transition-duration: 0.2s;
+            text-transform: uppercase;
+            font-family: var(--font-title), sans-serif;
         }
 
         ::slotted(a:hover) {
