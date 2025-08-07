@@ -46,6 +46,7 @@ export class Button extends LitElement {
             text-decoration: none;
             transition-duration: 0s;
             background: var(--color-bg-button-hover);
+            color: var(--color-text-button);
         }
 
         .icon {
