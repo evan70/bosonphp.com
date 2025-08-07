@@ -35,5 +35,11 @@ final readonly class CategoryInfo
          * @var non-empty-string|null
          */
         public ?string $icon = null,
+        /**
+         * Category order (priority)
+         *
+         * @var int<0, max>|null
+         */
+        public ?int $order = null,
     ) {}
 }

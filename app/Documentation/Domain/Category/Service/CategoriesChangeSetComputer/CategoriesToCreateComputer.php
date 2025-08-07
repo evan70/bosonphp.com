@@ -22,7 +22,7 @@ final readonly class CategoriesToCreateComputer implements CategoriesComputerInt
         $index = 0;
 
         foreach ($updated as $info) {
-            $order = \min($index++, 32767);
+            $order = \min($info->order ?? $index++, 32767);
 
             // Fetch stored entity from index
             $existingCategory = $existing[$info->name] ?? null;
