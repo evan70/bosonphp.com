@@ -96,9 +96,9 @@ export class BosonLogo extends LitElement {
 
             baseSize: 550,
 
-            mouseRadius: 200,
-            animationStrength: 35,
-            smoothing: .1
+            mouseRadius: 150,
+            animationStrength: 25,
+            smoothing: .5
         };
     }
 
@@ -167,8 +167,9 @@ export class BosonLogo extends LitElement {
         this.targetMouseY = event.clientY - this.containerRect.top;
     }
 
-    handleMouseEnter() {
+    handleMouseEnter(event) {
         this.isMouseOver = true;
+
         if (!this.containerRect) {
             this.updateContainerRect();
         }
@@ -177,8 +178,8 @@ export class BosonLogo extends LitElement {
     handleMouseLeave() {
         this.isMouseOver = false;
 
-        this.mouseX = -1000;
-        this.mouseY = -1000;
+        this.mouseX = -100;
+        this.mouseY = -100;
         this.updateSquarePositions();
     }
 
@@ -346,15 +347,15 @@ export class BosonLogo extends LitElement {
 
     startAnimations() {
         this.squares.forEach((square) => {
-            if (Math.random() > 0.9) {
+            if (Math.random() > 0.96) {
                 square.classList.add('dimmed');
             }
 
             const interval = setInterval(() => {
-                if (Math.random() > 0.9) {
+                if (Math.random() > 0.3) {
                     square.classList.toggle('dimmed');
                 }
-            }, 1000 + Math.random() * 2000);
+            }, 500 + Math.random() * 3000);
 
             this.animationIntervals.push(interval);
         });
