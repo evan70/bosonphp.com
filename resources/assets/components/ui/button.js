@@ -14,8 +14,8 @@ export class Button extends LitElement {
     static styles = [sharedStyles, css`
         :host {
             display: inline-block;
-            line-height: 56px;
-            height: 56px;
+            line-height: var(--height-ui);
+            height: var(--height-ui);
             justify-content: center;
         }
 
