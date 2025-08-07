@@ -1,8 +1,10 @@
 
 parameters:
   env(GITHUB_WEBHOOK_SECRET): 'webhook_secret_value'
+  env(GITHUB_SECRET): 'secret_value'
 
   app.github.webhook.secret: '%env(GITHUB_WEBHOOK_SECRET)%'
+  app.github.secret: '%env(GITHUB_SECRET)%'
 
 services:
   _defaults:
@@ -18,10 +20,5 @@ services:
   Github\Client:
     arguments:
       $httpClientBuilder: '@Github\HttpClient\Builder'
-  #
-  # Uncomment to enable authentication
-  # calls:
-  #   - ['authenticate', ['%env(GITHUB_USERNAME)%', '%env(GITHUB_SECRET)%', '%env(GITHUB_AUTH_METHOD)%']]
-
-  Compwright\XHubSignature\SignerInterface:
-    class: Compwright\XHubSignature\Sha256
+    calls:
+      - ['authenticate', ['%app.github.secret%', 'access_token_header']]
