@@ -184,14 +184,17 @@ export class BosonLogo extends LitElement {
     }
 
     animate() {
-        if (this.isMouseOver) {
-            this.mouseX += (this.targetMouseX - this.mouseX) * this.config.smoothing;
-            this.mouseY += (this.targetMouseY - this.mouseY) * this.config.smoothing;
-            this.updateSquarePositions();
-        } else {
-            this.mouseX = -1000;
-            this.mouseY = -1000;
-            this.resetSquaresToOriginal();
+        // In case of visible area
+        if (window.scrollY < window.innerHeight) {
+            if (this.isMouseOver) {
+                this.mouseX += (this.targetMouseX - this.mouseX) * this.config.smoothing;
+                this.mouseY += (this.targetMouseY - this.mouseY) * this.config.smoothing;
+                this.updateSquarePositions();
+            } else {
+                this.mouseX = -1000;
+                this.mouseY = -1000;
+                this.resetSquaresToOriginal();
+            }
         }
 
         this.animationFrame = requestAnimationFrame(() => this.animate());
