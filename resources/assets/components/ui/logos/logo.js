@@ -164,7 +164,7 @@ export class BosonLogo extends LitElement {
         }
 
         this.targetMouseX = event.clientX - this.containerRect.left;
-        this.targetMouseY = event.clientY - this.containerRect.top;
+        this.targetMouseY = event.clientY - this.containerRect.top + window.scrollY;
     }
 
     handleMouseEnter(event) {
