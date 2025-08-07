@@ -60,14 +60,13 @@ export class NativenessSection extends LitElement {
         }
 
         .icon::before {
-            z-index: -1;
+            z-index: 1;
             position: absolute;
             content: "";
-            width: 480px;
-            height: 320px;
-            background: radial-gradient(50% 50% at 50% 50%, #F93904 0%, #000000 100%);
-            opacity: 0.3;
-            filter: blur(140px);
+            width: 580px;
+            height: 580px;
+            background: radial-gradient(50% 50% at 50% 50%, var(--color-text-brand) 0%, var(--color-bg) 100%);
+            opacity: 0.1;
         }
 
         .border-top {
