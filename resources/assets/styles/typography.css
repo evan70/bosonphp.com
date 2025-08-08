@@ -44,8 +44,19 @@ h6 {
   font-weight: 400;
 }
 
+.heading-permalink {
+  margin-right: .2em;
+}
+
 pre, code {
   font-family: var(--font-mono), monospace;
+}
+
+pre[data-lang] {
+  padding: 1em 1.5em;
+  border: solid 1px var(--color-border);
+  background: var(--color-bg-layer);
+  margin: 1.5em 0;
 }
 
 code {
@@ -59,10 +70,16 @@ table {
 }
 
 table > thead {
-  background: var(--color-bg-hover);
+  background: var(--color-border);
   font-family: var(--font-title), sans-serif;
   text-transform: uppercase;
   text-align: left;
+}
+
+table th {
+  font-weight: 400;
+  font-size: var(--font-size-secondary);
+  color: var(--color-text-secondary);
 }
 
 table th,

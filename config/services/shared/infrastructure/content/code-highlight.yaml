@@ -4,10 +4,13 @@ services:
     autowire: true
     autoconfigure: true
 
+  # Tempest\Highlight\Theme:
+  #   class: Tempest\Highlight\Themes\InlineTheme
+  #   arguments:
+  #     $themePath: '%kernel.project_dir%/vendor/tempest/highlight/src/Themes/Css/one-dark-pro.css'
+
   Tempest\Highlight\Theme:
-    class: Tempest\Highlight\Themes\InlineTheme
-    arguments:
-      $themePath: '%kernel.project_dir%/vendor/tempest/highlight/src/Themes/Css/one-dark-pro.css'
+    class: Tempest\Highlight\Themes\CssTheme
 
   Tempest\Highlight\Highlighter:
     arguments:

@@ -1,3 +1,5 @@
+@import url("../../vendor/tempest/highlight/src/Themes/Css/one-dark-pro.css");
+
 @import url("./styles/layout.css");
 @import url("./styles/scrollbars.css");
 @import url("./styles/typography.css");
@@ -31,7 +33,7 @@
   /**
    * Layer (dropdowns, popups, etc) element background colors
    */
-  --color-bg-layer: #0d1119;
+  --color-bg-layer: #0f131c;
   --color-bg-layer-opacity: rgba(var(--color-bg-layer), .5);
   --color-bg-layer-hover: #0A0A0A;
 
