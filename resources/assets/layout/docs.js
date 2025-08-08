@@ -76,6 +76,31 @@ export class DocsLayout extends LitElement {
         [name="category"]::slotted(strong) {
             color: var(--color-text-brand);
         }
+
+        @media (max-width: 1000px) {
+            .docs-navigation-categories {
+                display: none;
+            }
+
+            .docs-layout {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .docs-navigation {
+                width: 100%;
+                min-width: 100%;
+                position: relative;
+            }
+
+            .docs-navigation-pages {
+                border-bottom: solid 1px var(--color-border);
+            }
+
+            .docs-navigation-pages::before {
+                display: none;
+            }
+        }
     `];
 
     render() {

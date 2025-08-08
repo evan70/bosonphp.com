@@ -28,6 +28,12 @@ export class BosonBreadcrumbs extends LitElement {
             color: var(--color-border);
             padding: 0 1em;
         }
+
+        @media (max-width: 700px) {
+            :host {
+                display: none;
+            }
+        }
     `];
 
     constructor() {
