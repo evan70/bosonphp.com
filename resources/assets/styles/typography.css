@@ -69,6 +69,40 @@ pre > code {
   padding: 0;
 }
 
+blockquote,
+tip, blockquote.tip,
+note, blockquote.note,
+warning, blockquote.warning {
+  color: var(--color-quote-text);
+  background: var(--color-quote);
+  border-left: solid 8px var(--color-quote-border);
+  margin: 1em 0;
+  padding: 1em 1.2em;
+  display: block;
+}
+
+tip, blockquote.tip {
+  color: var(--color-quote-tip-text);
+  background: var(--color-quote-tip);
+  border-left: solid 8px var(--color-quote-tip-border);
+}
+
+note, blockquote.note {
+  color: var(--color-quote-note-text);
+  background: var(--color-quote-note);
+  border-left: solid 8px var(--color-quote-note-border);
+}
+
+warning, blockquote.warning {
+  color: var(--color-quote-warning-text);
+  background: var(--color-quote-warning);
+  border-left: solid 8px var(--color-quote-warning-border);
+}
+
+blockquote > p {
+  margin: 0;
+}
+
 table {
   width: 100%;
   border: solid 1px var(--color-border);
