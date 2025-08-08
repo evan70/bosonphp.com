@@ -82,6 +82,10 @@ warning, blockquote.warning {
   display: block;
 }
 
+blockquote pre[data-lang] {
+  border: solid 1px var(--color-bg);
+}
+
 tip, blockquote.tip {
   color: var(--color-quote-tip-text);
   background: var(--color-quote-tip);

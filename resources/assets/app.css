@@ -55,7 +55,7 @@
    */
   --color-border: rgba(255, 255, 255, .05);
 
-  --color-quote: rgba(132, 175, 223, .1);
+  --color-quote: rgba(173, 201, 227, 0.16);
   --color-quote-text: rgba(223, 230, 234, 0.76);
   --color-quote-border: rgba(132, 175, 223, .1);
 
@@ -63,12 +63,12 @@
   --color-quote-tip-text: var(--color-quote-text);
   --color-quote-tip-border: var(--color-quote-border);
 
-  --color-quote-note: rgba(153, 223, 132, 0.1);
-  --color-quote-note-text: rgba(255, 255, 255, 0.88);
+  --color-quote-note: rgba(191, 237, 179, 0.1);
+  --color-quote-note-text: rgba(216, 223, 206, 0.88);
   --color-quote-note-border: rgba(194, 223, 132, 0.1);
 
   --color-quote-warning: rgba(223, 132, 143, 0.1);
-  --color-quote-warning-text: rgb(194, 175, 175);
+  --color-quote-warning-text: rgb(216, 200, 200);
   --color-quote-warning-border: rgba(223, 132, 143, 0.1);
 
   /**

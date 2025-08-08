@@ -15,6 +15,7 @@ services:
       $parser: '@psr18.http_client'
 
   League\CommonMark\Extension\GithubFlavoredMarkdownExtension: ~
+  League\CommonMark\Extension\Attributes\AttributesExtension: ~
   League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension: ~
   League\CommonMark\Extension\ExternalLink\ExternalLinkExtension: ~
   League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension: ~
@@ -36,6 +37,7 @@ services:
 
     calls:
       - ['addExtension', ['@League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension']]
+      - ['addExtension', ['@League\CommonMark\Extension\Attributes\AttributesExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\GithubFlavoredMarkdownExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\ExternalLink\ExternalLinkExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension']]
