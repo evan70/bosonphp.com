@@ -2,7 +2,7 @@
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const D=globalThis,W=D.ShadowRoot&&(D.ShadyCSS===void 0||D.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,F=Symbol(),K=new WeakMap;let le=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==F)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(W&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=K.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&K.set(t,e))}return e}toString(){return this.cssText}};const ce=n=>new le(typeof n=="string"?n:n+"",void 0,F),b=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,o,i)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+n[i+1],n[0]);return new le(t,n,F)},ge=(n,e)=>{if(W)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),o=D.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=t.cssText,n.appendChild(s)}},Q=W?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return ce(t)})(n):n;/**
+ */const L=globalThis,W=L.ShadowRoot&&(L.ShadyCSS===void 0||L.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,F=Symbol(),K=new WeakMap;let le=class{constructor(e,t,s){if(this._$cssResult$=!0,s!==F)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o;const t=this.t;if(W&&e===void 0){const s=t!==void 0&&t.length===1;s&&(e=K.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),s&&K.set(t,e))}return e}toString(){return this.cssText}};const ce=n=>new le(typeof n=="string"?n:n+"",void 0,F),f=(n,...e)=>{const t=n.length===1?n[0]:e.reduce((s,o,i)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+n[i+1],n[0]);return new le(t,n,F)},ge=(n,e)=>{if(W)n.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const t of e){const s=document.createElement("style"),o=L.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=t.cssText,n.appendChild(s)}},Q=W?n=>n:n=>n instanceof CSSStyleSheet?(e=>{let t="";for(const s of e.cssRules)t+=s.cssText;return ce(t)})(n):n;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
@@ -12,11 +12,11 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */const V=globalThis,O=V.trustedTypes,se=O?O.createPolicy("lit-html",{createHTML:n=>n}):void 0,he="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,pe="?"+_,ke=`<${pe}>`,E=document,I=()=>E.createComment(""),q=n=>n===null||typeof n!="object"&&typeof n!="function",Z=Array.isArray,Ae=n=>Z(n)||typeof n?.[Symbol.iterator]=="function",Y=`[ 	
 \f\r]`,z=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,oe=/-->/g,ie=/>/g,k=RegExp(`>|${Y}(?:([^\\s"'>=/]+)(${Y}*=${Y}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),ne=/'/g,re=/"/g,me=/^(?:script|style|textarea|title)$/i,Ee=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),p=Ee(1),C=Symbol.for("lit-noChange"),x=Symbol.for("lit-nothing"),ae=new WeakMap,A=E.createTreeWalker(E,129);function ue(n,e){if(!Z(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return se!==void 0?se.createHTML(e):e}const Se=(n,e)=>{const t=n.length-1,s=[];let o,i=e===2?"<svg>":e===3?"<math>":"",r=z;for(let l=0;l<t;l++){const a=n[l];let d,m,c=-1,v=0;for(;v<a.length&&(r.lastIndex=v,m=r.exec(a),m!==null);)v=r.lastIndex,r===z?m[1]==="!--"?r=oe:m[1]!==void 0?r=ie:m[2]!==void 0?(me.test(m[2])&&(o=RegExp("</"+m[2],"g")),r=k):m[3]!==void 0&&(r=k):r===k?m[0]===">"?(r=o??z,c=-1):m[1]===void 0?c=-2:(c=r.lastIndex-m[2].length,d=m[1],r=m[3]===void 0?k:m[3]==='"'?re:ne):r===re||r===ne?r=k:r===oe||r===ie?r=z:(r=k,o=void 0);const h=r===k&&n[l+1].startsWith("/>")?" ":"";i+=r===z?a+ke:c>=0?(s.push(d),a.slice(0,c)+he+a.slice(c)+_+h):a+_+(c===-2?l:h)}return[ue(n,i+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class H{constructor({strings:e,_$litType$:t},s){let o;this.parts=[];let i=0,r=0;const l=e.length-1,a=this.parts,[d,m]=Se(e,t);if(this.el=H.createElement(d,s),A.currentNode=this.el.content,t===2||t===3){const c=this.el.content.firstChild;c.replaceWith(...c.childNodes)}for(;(o=A.nextNode())!==null&&a.length<l;){if(o.nodeType===1){if(o.hasAttributes())for(const c of o.getAttributeNames())if(c.endsWith(he)){const v=m[r++],h=o.getAttribute(c).split(_),f=/([.?@])?(.*)/.exec(v);a.push({type:1,index:i,name:f[2],strings:h,ctor:f[1]==="."?Pe:f[1]==="?"?Me:f[1]==="@"?Re:N}),o.removeAttribute(c)}else c.startsWith(_)&&(a.push({type:6,index:i}),o.removeAttribute(c));if(me.test(o.tagName)){const c=o.textContent.split(_),v=c.length-1;if(v>0){o.textContent=O?O.emptyScript:"";for(let h=0;h<v;h++)o.append(c[h],I()),A.nextNode(),a.push({type:2,index:++i});o.append(c[v],I())}}}else if(o.nodeType===8)if(o.data===pe)a.push({type:2,index:i});else{let c=-1;for(;(c=o.data.indexOf(_,c+1))!==-1;)a.push({type:7,index:i}),c+=_.length-1}i++}}static createElement(e,t){const s=E.createElement("template");return s.innerHTML=e,s}}function P(n,e,t=n,s){if(e===C)return e;let o=s!==void 0?t._$Co?.[s]:t._$Cl;const i=q(e)?void 0:e._$litDirective$;return o?.constructor!==i&&(o?._$AO?.(!1),i===void 0?o=void 0:(o=new i(n),o._$AT(n,t,s)),s!==void 0?(t._$Co??=[])[s]=o:t._$Cl=o),o!==void 0&&(e=P(n,o._$AS(n,e.values),o,s)),e}class Ce{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:s}=this._$AD,o=(e?.creationScope??E).importNode(t,!0);A.currentNode=o;let i=A.nextNode(),r=0,l=0,a=s[0];for(;a!==void 0;){if(r===a.index){let d;a.type===2?d=new L(i,i.nextSibling,this,e):a.type===1?d=new a.ctor(i,a.name,a.strings,this,e):a.type===6&&(d=new Te(i,this,e)),this._$AV.push(d),a=s[++l]}r!==a?.index&&(i=A.nextNode(),r++)}return A.currentNode=E,o}p(e){let t=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,t),t+=s.strings.length-2):s._$AI(e[t])),t++}}class L{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,s,o){this.type=2,this._$AH=x,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=s,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=P(this,e,t),q(e)?e===x||e==null||e===""?(this._$AH!==x&&this._$AR(),this._$AH=x):e!==this._$AH&&e!==C&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):Ae(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==x&&q(this._$AH)?this._$AA.nextSibling.data=e:this.T(E.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:s}=e,o=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=H.createElement(ue(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===o)this._$AH.p(t);else{const i=new Ce(o,this),r=i.u(this.options);i.p(t),this.T(r),this._$AH=i}}_$AC(e){let t=ae.get(e.strings);return t===void 0&&ae.set(e.strings,t=new H(e)),t}k(e){Z(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let s,o=0;for(const i of e)o===t.length?t.push(s=new L(this.O(I()),this.O(I()),this,this.options)):s=t[o],s._$AI(i),o++;o<t.length&&(this._$AR(s&&s._$AB.nextSibling,o),t.length=o)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const s=e.nextSibling;e.remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class N{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,s,o,i){this.type=1,this._$AH=x,this._$AN=void 0,this.element=e,this.name=t,this._$AM=o,this.options=i,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=x}_$AI(e,t=this,s,o){const i=this.strings;let r=!1;if(i===void 0)e=P(this,e,t,0),r=!q(e)||e!==this._$AH&&e!==C,r&&(this._$AH=e);else{const l=e;let a,d;for(e=i[0],a=0;a<i.length-1;a++)d=P(this,l[s+a],t,a),d===C&&(d=this._$AH[a]),r||=!q(d)||d!==this._$AH[a],d===x?e=x:e!==x&&(e+=(d??"")+i[a+1]),this._$AH[a]=d}r&&!o&&this.j(e)}j(e){e===x?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class Pe extends N{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===x?void 0:e}}class Me extends N{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==x)}}class Re extends N{constructor(e,t,s,o,i){super(e,t,s,o,i),this.type=5}_$AI(e,t=this){if((e=P(this,e,t,0)??x)===C)return;const s=this._$AH,o=e===x&&s!==x||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,i=e!==x&&(s===x||o);o&&this.element.removeEventListener(this.name,this,s),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Te{constructor(e,t,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){P(this,e)}}const ze=V.litHtmlPolyfillSupport;ze?.(H,L),(V.litHtmlVersions??=[]).push("3.3.1");const Be=(n,e,t)=>{const s=t?.renderBefore??e;let o=s._$litPart$;if(o===void 0){const i=t?.renderBefore??null;s._$litPart$=o=new L(e.insertBefore(I(),i),i,void 0,t??{})}return o._$AI(n),o};/**
+\f\r"'\`<>=]|("|')|))|$)`,"g"),ne=/'/g,re=/"/g,me=/^(?:script|style|textarea|title)$/i,Ee=n=>(e,...t)=>({_$litType$:n,strings:e,values:t}),p=Ee(1),C=Symbol.for("lit-noChange"),x=Symbol.for("lit-nothing"),ae=new WeakMap,A=E.createTreeWalker(E,129);function ue(n,e){if(!Z(n)||!n.hasOwnProperty("raw"))throw Error("invalid template strings array");return se!==void 0?se.createHTML(e):e}const Se=(n,e)=>{const t=n.length-1,s=[];let o,i=e===2?"<svg>":e===3?"<math>":"",r=z;for(let l=0;l<t;l++){const a=n[l];let d,u,c=-1,v=0;for(;v<a.length&&(r.lastIndex=v,u=r.exec(a),u!==null);)v=r.lastIndex,r===z?u[1]==="!--"?r=oe:u[1]!==void 0?r=ie:u[2]!==void 0?(me.test(u[2])&&(o=RegExp("</"+u[2],"g")),r=k):u[3]!==void 0&&(r=k):r===k?u[0]===">"?(r=o??z,c=-1):u[1]===void 0?c=-2:(c=r.lastIndex-u[2].length,d=u[1],r=u[3]===void 0?k:u[3]==='"'?re:ne):r===re||r===ne?r=k:r===oe||r===ie?r=z:(r=k,o=void 0);const h=r===k&&n[l+1].startsWith("/>")?" ":"";i+=r===z?a+ke:c>=0?(s.push(d),a.slice(0,c)+he+a.slice(c)+_+h):a+_+(c===-2?l:h)}return[ue(n,i+(n[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),s]};class H{constructor({strings:e,_$litType$:t},s){let o;this.parts=[];let i=0,r=0;const l=e.length-1,a=this.parts,[d,u]=Se(e,t);if(this.el=H.createElement(d,s),A.currentNode=this.el.content,t===2||t===3){const c=this.el.content.firstChild;c.replaceWith(...c.childNodes)}for(;(o=A.nextNode())!==null&&a.length<l;){if(o.nodeType===1){if(o.hasAttributes())for(const c of o.getAttributeNames())if(c.endsWith(he)){const v=u[r++],h=o.getAttribute(c).split(_),b=/([.?@])?(.*)/.exec(v);a.push({type:1,index:i,name:b[2],strings:h,ctor:b[1]==="."?Pe:b[1]==="?"?Me:b[1]==="@"?Te:N}),o.removeAttribute(c)}else c.startsWith(_)&&(a.push({type:6,index:i}),o.removeAttribute(c));if(me.test(o.tagName)){const c=o.textContent.split(_),v=c.length-1;if(v>0){o.textContent=O?O.emptyScript:"";for(let h=0;h<v;h++)o.append(c[h],I()),A.nextNode(),a.push({type:2,index:++i});o.append(c[v],I())}}}else if(o.nodeType===8)if(o.data===pe)a.push({type:2,index:i});else{let c=-1;for(;(c=o.data.indexOf(_,c+1))!==-1;)a.push({type:7,index:i}),c+=_.length-1}i++}}static createElement(e,t){const s=E.createElement("template");return s.innerHTML=e,s}}function P(n,e,t=n,s){if(e===C)return e;let o=s!==void 0?t._$Co?.[s]:t._$Cl;const i=q(e)?void 0:e._$litDirective$;return o?.constructor!==i&&(o?._$AO?.(!1),i===void 0?o=void 0:(o=new i(n),o._$AT(n,t,s)),s!==void 0?(t._$Co??=[])[s]=o:t._$Cl=o),o!==void 0&&(e=P(n,o._$AS(n,e.values),o,s)),e}class Ce{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){const{el:{content:t},parts:s}=this._$AD,o=(e?.creationScope??E).importNode(t,!0);A.currentNode=o;let i=A.nextNode(),r=0,l=0,a=s[0];for(;a!==void 0;){if(r===a.index){let d;a.type===2?d=new D(i,i.nextSibling,this,e):a.type===1?d=new a.ctor(i,a.name,a.strings,this,e):a.type===6&&(d=new Re(i,this,e)),this._$AV.push(d),a=s[++l]}r!==a?.index&&(i=A.nextNode(),r++)}return A.currentNode=E,o}p(e){let t=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(e,s,t),t+=s.strings.length-2):s._$AI(e[t])),t++}}class D{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,s,o){this.type=2,this._$AH=x,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=s,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode;const t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=P(this,e,t),q(e)?e===x||e==null||e===""?(this._$AH!==x&&this._$AR(),this._$AH=x):e!==this._$AH&&e!==C&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):Ae(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==x&&q(this._$AH)?this._$AA.nextSibling.data=e:this.T(E.createTextNode(e)),this._$AH=e}$(e){const{values:t,_$litType$:s}=e,o=typeof s=="number"?this._$AC(e):(s.el===void 0&&(s.el=H.createElement(ue(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===o)this._$AH.p(t);else{const i=new Ce(o,this),r=i.u(this.options);i.p(t),this.T(r),this._$AH=i}}_$AC(e){let t=ae.get(e.strings);return t===void 0&&ae.set(e.strings,t=new H(e)),t}k(e){Z(this._$AH)||(this._$AH=[],this._$AR());const t=this._$AH;let s,o=0;for(const i of e)o===t.length?t.push(s=new D(this.O(I()),this.O(I()),this,this.options)):s=t[o],s._$AI(i),o++;o<t.length&&(this._$AR(s&&s._$AB.nextSibling,o),t.length=o)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){const s=e.nextSibling;e.remove(),e=s}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}}class N{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,s,o,i){this.type=1,this._$AH=x,this._$AN=void 0,this.element=e,this.name=t,this._$AM=o,this.options=i,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=x}_$AI(e,t=this,s,o){const i=this.strings;let r=!1;if(i===void 0)e=P(this,e,t,0),r=!q(e)||e!==this._$AH&&e!==C,r&&(this._$AH=e);else{const l=e;let a,d;for(e=i[0],a=0;a<i.length-1;a++)d=P(this,l[s+a],t,a),d===C&&(d=this._$AH[a]),r||=!q(d)||d!==this._$AH[a],d===x?e=x:e!==x&&(e+=(d??"")+i[a+1]),this._$AH[a]=d}r&&!o&&this.j(e)}j(e){e===x?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}}class Pe extends N{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===x?void 0:e}}class Me extends N{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==x)}}class Te extends N{constructor(e,t,s,o,i){super(e,t,s,o,i),this.type=5}_$AI(e,t=this){if((e=P(this,e,t,0)??x)===C)return;const s=this._$AH,o=e===x&&s!==x||e.capture!==s.capture||e.once!==s.once||e.passive!==s.passive,i=e!==x&&(s===x||o);o&&this.element.removeEventListener(this.name,this,s),i&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}}class Re{constructor(e,t,s){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(e){P(this,e)}}const ze=V.litHtmlPolyfillSupport;ze?.(H,D),(V.litHtmlVersions??=[]).push("3.3.1");const Be=(n,e,t)=>{const s=t?.renderBefore??e;let o=s._$litPart$;if(o===void 0){const i=t?.renderBefore??null;s._$litPart$=o=new D(e.insertBefore(I(),i),i,void 0,t??{})}return o._$AI(n),o};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const J=globalThis;class g extends S{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Be(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return C}}g._$litElement$=!0,g.finalized=!0,J.litElementHydrateSupport?.({LitElement:g});const Ie=J.litElementPolyfillSupport;Ie?.({LitElement:g});(J.litElementVersions??=[]).push("4.2.1");const qe='h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:600}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:500}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:400}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:400}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}a:visited,a{color:inherit;text-decoration:none;position:relative;display:inline-block;line-height:inherit}a:before{content:"";height:.1em;width:100%;display:inline-block;background:#da2f2e;position:absolute;left:0;bottom:0;transform:scaleX(0);transition:transform .2s ease;transform-origin:100% 0}a:not(.button):hover{color:var(--color-text-brand);text-decoration:none}a:hover:before{transform:scaleX(1);transform-origin:0 0;transition:transform .3s ease}a.external,a.external-link{margin-right:14px!important}a.external:after,a.external-link:after{content:"";width:12px;height:12px;display:block;background:url(https://intellij-icons.jetbrains.design/icons/AllIcons/expui/ide/externalLink_dark.svg) center center no-repeat;background-size:12px 12px;text-decoration:none;position:absolute;top:4px;right:-14px;transform:translate(0) scale(1);transition:transform .2s ease}a.external:hover:after,a.external-link:hover:after{transform:translate(2px,-6px) scale(1.2);transition:transform .3s ease}.emphasis{color:var(--color-text-brand)}ul>li{margin:1.3em 0}p{margin:1em 0}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}',w=ce(qe);class He extends g{static properties={type:{type:String}};static styles=[w,b`
+ */const J=globalThis;class m extends S{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){const t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Be(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return C}}m._$litElement$=!0,m.finalized=!0,J.litElementHydrateSupport?.({LitElement:m});const Ie=J.litElementPolyfillSupport;Ie?.({LitElement:m});(J.litElementVersions??=[]).push("4.2.1");const qe='h1,h2,h3,h4,h5,h6{font-family:var(--font-title),sans-serif;color:var(--color-text);margin:0;padding:0}h1{font-size:var(--font-size-h1);line-height:var(--font-line-height-h1);font-weight:600}h2{font-size:var(--font-size-h2);line-height:var(--font-line-height-h2);font-weight:500}h3{font-size:var(--font-size-h3);line-height:var(--font-line-height-h3);font-weight:400}h4{font-size:var(--font-size-h4);line-height:var(--font-line-height-h4);font-weight:400}h5{font-size:var(--font-size-h5);line-height:var(--font-line-height-h5);text-transform:uppercase;font-weight:400}h6{font-size:var(--font-size-h6);line-height:var(--font-line-height-h6);text-transform:uppercase;font-weight:400}pre,code{font-family:var(--font-mono),monospace}a:visited,a{color:inherit;text-decoration:none;position:relative;display:inline-block;line-height:inherit}a:before{content:"";height:.1em;width:100%;display:inline-block;background:#da2f2e;position:absolute;left:0;bottom:0;transform:scaleX(0);transition:transform .2s ease;transform-origin:100% 0}a:not(.button):hover{color:var(--color-text-brand);text-decoration:none}a:hover:before{transform:scaleX(1);transform-origin:0 0;transition:transform .3s ease}a.external,a.external-link{margin-right:14px!important}a.external:after,a.external-link:after{content:"";width:12px;height:12px;display:block;background:url(https://intellij-icons.jetbrains.design/icons/AllIcons/expui/ide/externalLink_dark.svg) center center no-repeat;background-size:12px 12px;text-decoration:none;position:absolute;top:4px;right:-14px;transform:translate(0) scale(1);transition:transform .2s ease}a.external:hover:after,a.external-link:hover:after{transform:translate(2px,-6px) scale(1.2);transition:transform .3s ease}.emphasis{color:var(--color-text-brand)}ul{list-style:square}ul>li{margin:1.3em 0}ul>li::marker{color:var(--color-text-brand)}p{margin:1em 0}*{box-sizing:border-box}@media (orientation: portrait){h1{font-size:5rem}h2{font-size:clamp(3rem,1vw + 3.5rem,5rem)}h3{font-size:max(2rem,min(2rem + 1vw,5rem))}h4{font-size:max(1.5rem,min(2rem + 1vw,2.25rem))}p{font-size:1.25rem}}',w=ce(qe);class He extends m{static properties={type:{type:String}};static styles=[w,f`
         .container {
             display: flex;
             flex-direction: row;
@@ -115,7 +115,7 @@
                     <slot></slot>
                 </aside>
             </section>
-        `}}customElements.define("segment-section",He);class Le extends g{static styles=[w,b`
+        `}}customElements.define("segment-section",He);class De extends m{static styles=[w,f`
         .container {
             padding-bottom: 8em;
             background-size: 900px 900px;
@@ -145,7 +145,7 @@
                     <slot name="footer"></slot>
                 </div>
             </section>
-        `}}customElements.define("call-to-action-section",Le);class De extends g{static styles=[w,b`
+        `}}customElements.define("call-to-action-section",De);class Le extends m{static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -313,7 +313,7 @@
                     </a>
                 </aside>
             </section>
-        `}}customElements.define("hero-section",De);class Oe extends g{static styles=[w,b`
+        `}}customElements.define("hero-section",Le);class Oe extends m{static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -354,7 +354,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("how-it-works-section",Oe);class je extends g{static styles=[w,b`
+        `}}customElements.define("how-it-works-section",Oe);class je extends m{static styles=[w,f`
         .container {
             display: flex;
             justify-content: center;
@@ -432,7 +432,7 @@
                     ${this.elements.map(e=>this.renderElement(e))}
                 </div>
             </section>
-        `}}customElements.define("mobile-development-section",je);class G extends g{static cfg={delay:2e3};static styles=[w,b`
+        `}}customElements.define("mobile-development-section",je);class G extends m{static cfg={delay:2e3};static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -785,7 +785,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("nativeness-section",G);class j extends g{static styles=[w,b`
+        `}}customElements.define("nativeness-section",G);class j extends m{static styles=[w,f`
         :host {
             margin-top: calc(var(--landing-layout-gap) * -1);
         }
@@ -891,7 +891,7 @@
             color: var(--color-text-secondary);
             font-family: var(--font-title), sans-serif;
         }
-    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=j.animationConfig,s=Date.now()-this.animationState.startTime,o=e.blockDuration*4+e.transitionDuration*4,i=s%o,r=e.blockDuration,l=r+e.transitionDuration,a=l+e.blockDuration,d=a+e.transitionDuration,m=d+e.blockDuration,c=m+e.transitionDuration,v=c+e.blockDuration;v+e.transitionDuration;let h=0,f=0;if(i<r)h=i/e.blockDuration*.5,f=0;else if(i<l){const u=(i-r)/e.transitionDuration;h=.5,f=u}else if(i<a)h=.5+(i-l)/e.blockDuration*.5,f=1;else if(i<d){const u=(i-a)/e.transitionDuration;h=1,f=1-u}else if(i<m)h=1-(i-d)/e.blockDuration*.5,f=0;else if(i<c){const u=(i-m)/e.transitionDuration;h=.5,f=u}else if(i<v)h=.5-(i-c)/e.blockDuration*.5,f=1;else{const u=(i-v)/e.transitionDuration;h=0,f=1-u}this.animateElements(f),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=j.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const o=e*s,i=Math.min(0,-s+e*s),r=-(e*s),l=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${o}px)`,this.elements.topRight.style.transform=`translateX(${i}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${l}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((o,i)=>{i<s?(o.classList.remove("grey"),o.classList.add("red")):(o.classList.remove("red"),o.classList.add("grey"))})}render(){return p`
+    `];static animationConfig={blockDuration:3e3,transitionDuration:500,animationDistance:800};constructor(){super(),this.animationState={currentStage:0,progressDirection:1,startTime:0,animationId:null},this.elements={topLeft:null,topRight:null,bottomLeft:null,bottomRight:null,progressDots:null}}firstUpdated(){this.elements.topLeft=this.shadowRoot.querySelector(".content-top .content-left .inner"),this.elements.topRight=this.shadowRoot.querySelector(".content-top .content-right .inner"),this.elements.bottomLeft=this.shadowRoot.querySelector(".content-bottom .content-left .inner"),this.elements.bottomRight=this.shadowRoot.querySelector(".content-bottom .content-right .inner"),this.elements.progressDots=this.shadowRoot.querySelectorAll(".dots"),this.startAnimation()}disconnectedCallback(){super.disconnectedCallback(),this.stopAnimation()}startAnimation(){this.animationState.startTime=Date.now(),this.animate()}stopAnimation(){this.animationState.animationId&&(cancelAnimationFrame(this.animationState.animationId),this.animationState.animationId=null)}animate(){const e=j.animationConfig,s=Date.now()-this.animationState.startTime,o=e.blockDuration*4+e.transitionDuration*4,i=s%o,r=e.blockDuration,l=r+e.transitionDuration,a=l+e.blockDuration,d=a+e.transitionDuration,u=d+e.blockDuration,c=u+e.transitionDuration,v=c+e.blockDuration;v+e.transitionDuration;let h=0,b=0;if(i<r)h=i/e.blockDuration*.5,b=0;else if(i<l){const g=(i-r)/e.transitionDuration;h=.5,b=g}else if(i<a)h=.5+(i-l)/e.blockDuration*.5,b=1;else if(i<d){const g=(i-a)/e.transitionDuration;h=1,b=1-g}else if(i<u)h=1-(i-d)/e.blockDuration*.5,b=0;else if(i<c){const g=(i-u)/e.transitionDuration;h=.5,b=g}else if(i<v)h=.5-(i-c)/e.blockDuration*.5,b=1;else{const g=(i-v)/e.transitionDuration;h=0,b=1-g}this.animateElements(b),this.updateProgressBar(h),this.animationState.animationId=requestAnimationFrame(()=>this.animate())}animateElements(e){const s=j.animationConfig.animationDistance;if(!this.elements.topLeft||!this.elements.topRight||!this.elements.bottomLeft||!this.elements.bottomRight)return;const o=e*s,i=Math.min(0,-s+e*s),r=-(e*s),l=Math.max(0,s-e*s);this.elements.topLeft.style.transform=`translateX(${o}px)`,this.elements.topRight.style.transform=`translateX(${i}px)`,this.elements.bottomRight.style.transform=`translateX(${r}px)`,this.elements.bottomLeft.style.transform=`translateX(${l}px)`}updateProgressBar(e){if(!this.elements.progressDots||this.elements.progressDots.length===0)return;const t=this.elements.progressDots.length,s=Math.floor(e*t);this.elements.progressDots.forEach((o,i)=>{i<s?(o.classList.remove("grey"),o.classList.add("red")):(o.classList.remove("red"),o.classList.add("grey"))})}render(){return p`
             <section class="container">
                 <div class="top">
                     <h2>
@@ -983,7 +983,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("right-choice-section",j);class Ue extends g{static styles=[w,b`
+        `}}customElements.define("right-choice-section",j);class Ue extends m{static styles=[w,f`
         .container {
             display: flex;
             flex-direction: column;
@@ -1086,7 +1086,7 @@
                     </div>
                 </div>
             </section>
-        `}}customElements.define("solves-section",Ue);class Ne extends g{static styles=[w,b`
+        `}}customElements.define("solves-section",Ue);class Ne extends m{static styles=[w,f`
         .container {
             position: relative;
             display: flex;
@@ -1114,7 +1114,83 @@
                     <slider-component .slides=${this.slides}></slider-component>
                 </div>
             </section>
-        `}}customElements.define("testimonials-section",Ne);class Ye extends g{static properties={};static styles=[w,b`
+        `}}customElements.define("testimonials-section",Ne);class Ye extends m{static styles=[w,f`
+        :host {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toc-content-container,
+        .toc-title-container {
+            width: var(--width-content);
+            max-width: var(--width-max);
+            margin: 0 auto;
+        }
+
+        .toc-title-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        ::slotted([slot="title"]) {
+            line-height: 76px !important;
+            display: inline-block;
+            background: var(--color-bg);
+            padding: 0 1em !important;
+        }
+
+        .toc-title {
+            background: url(/images/icons/dots.svg) center center repeat;
+        }
+
+        .toc-content {
+            border: solid 1px var(--color-border);
+        }
+
+        .toc-content-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .toc-content-container ::slotted(article) {
+            padding: 3em;
+        }
+
+        @media (max-width: 1440px) {
+            .toc-content-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .toc-content-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .toc-content-container {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+        }
+    `];render(){return p`
+            <hgroup class="toc-title">
+                <span class="toc-title-container">
+                    <slot name="title"></slot>
+                </span>
+            </hgroup>
+
+            <section class="toc-content">
+                <span class="toc-content-container">
+                    <slot></slot>
+                </span>
+            </section>
+        `}}customElements.define("boson-docs-toc",Ye);class Xe extends m{static properties={};static styles=[w,f`
         :host {
             display: inline-block;
             align-items: center;
@@ -1195,13 +1271,16 @@
                     </div>
                 </nav>
             </menu>
-        `}}customElements.define("boson-dropdown",Ye);class Xe extends g{static styles=[w,b`
+        `}}customElements.define("boson-dropdown",Xe);class We extends m{static styles=[w,f`
         :host {
             display: block;
             border-bottom: solid 1px var(--color-border);
         }
 
         .breadcrumbs {
+            margin: 0 auto;
+            width: var(--width-content);
+            max-width: var(--width-max);
             display: flex;
             justify-content: flex-start;
         }
@@ -1221,7 +1300,7 @@
             <nav class="breadcrumbs">
                 <slot></slot>
             </nav>
-        `}}customElements.define("boson-breadcrumbs",Xe);class We extends g{static properties={href:{type:String},external:{type:Boolean},type:{type:String},icon:{type:String},active:{type:Boolean}};static styles=[w,b`
+        `}}customElements.define("boson-breadcrumbs",We);class Fe extends m{static properties={href:{type:String},external:{type:Boolean},type:{type:String},icon:{type:String},active:{type:Boolean}};static styles=[w,f`
         :host {
             display: inline-block;
             line-height: var(--height-ui);
@@ -1340,7 +1419,7 @@
                     <img class="img" src="${this.icon}" alt="arrow" />
                 </span>
             </a>
-        `}}customElements.define("boson-button",We);class Fe extends g{static styles=[w,b`
+        `}}customElements.define("boson-button",Fe);class Ve extends m{static styles=[w,f`
         .container {
             aspect-ratio: 1 / 1;
             position: relative;
@@ -1384,7 +1463,7 @@
                     <div class="bottom right"></div>
                 </div>
             </div>
-        `}}customElements.define("dots-container",Fe);class Ve extends g{static styles=[b`
+        `}}customElements.define("dots-container",Ve);class Ze extends m{static styles=[f`
         .container {
             display: flex;
             flex-direction: column;
@@ -1434,7 +1513,7 @@
 
         ::slotted(a) {
             padding: 3.5em 0;
-            display: flex;
+            display: flex !important;
             justify-content: center;
             align-items: center;
             width: 230px;
@@ -1466,7 +1545,6 @@
             height: 100%;
             width: 100%;
             background: url("/images/icons/dots.svg");
-            background-size: cover;
         }
 
         .copyright {
@@ -1573,7 +1651,7 @@
                     <img src="/images/credits.png" alt="credits"/>
                 </div>
             </footer>
-        `}}customElements.define("boson-footer",Ve);class Ze extends g{static properties={isScrolled:{type:Boolean}};static styles=[b`
+        `}}customElements.define("boson-footer",Ze);class Je extends m{static properties={isScrolled:{type:Boolean}};static styles=[f`
         :host {
             --header-height: 100px;
             --header-height-scrolled: 70px;
@@ -1677,7 +1755,7 @@
                 </div>
             </header>
             <div class="header-padding"></div>
-        `}}customElements.define("boson-header",Ze);class Je extends g{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[w,b`
+        `}}customElements.define("boson-header",Je);class Ge extends m{static properties={content:{type:Array},openIndex:{type:Number}};static styles=[w,f`
         .accordion {
             display: flex;
             flex: 1;
@@ -1812,7 +1890,7 @@
             <div class="accordion">
                 ${this.content.map((e,t)=>this.renderElement(e,t))}
             </div>
-        `}}customElements.define("horizontal-accordion",Je);class Ge extends g{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[w,b`
+        `}}customElements.define("horizontal-accordion",Ge);class Ke extends m{static properties={slides:{type:Array},currentIndex:{type:Number},slidesPerView:{type:Number}};static styles=[w,f`
         .container {
             display: flex;
             max-width: 100vw;
@@ -1968,7 +2046,7 @@
                     <span>Next</span>
                 </button>
             </div>
-        `}}customElements.define("slider-component",Ge);class Ke extends g{static styles=[w,b`
+        `}}customElements.define("slider-component",Ke);class Qe extends m{static styles=[w,f`
         .container {
             display: flex;
             gap: 1em;
@@ -1988,7 +2066,7 @@
                     <slot></slot>
                 </h6>
             </div>
-        `}}customElements.define("boson-subtitle",Ke);class Qe extends g{static styles=[w,b`
+        `}}customElements.define("boson-subtitle",Qe);class et extends m{static styles=[w,f`
         .container {
             width: 100%;
             height: 100%;
@@ -2051,13 +2129,13 @@
                 height: 100%;
             }
         }
-    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:10,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:10,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:550,mouseRadius:150,animationStrength:25,smoothing:.5}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top+window.scrollY}handleMouseEnter(e){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1,this.mouseX=-100,this.mouseY=-100,this.updateSquarePositions()}animate(){window.scrollY<window.innerHeight&&(this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing,this.updateSquarePositions()):(this.mouseX=-1e3,this.mouseY=-1e3,this.resetSquaresToOriginal())),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],i=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(i){const r=parseFloat(i[1])||0,l=parseFloat(i[2])||0,a=r*(1-this.config.smoothing),d=l*(1-this.config.smoothing);Math.abs(a)<.1&&Math.abs(d)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${a}px), calc(-50% + ${d}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const o=this.squares[s],i=t.originalX-this.mouseX,r=t.originalY-this.mouseY,l=i*i+r*r;if(l<e&&l>0){const a=Math.sqrt(l),d=(this.config.mouseRadius-a)/this.config.mouseRadius*this.config.animationStrength,m=.7/a,c=i*m,v=r*m,h=c*d,f=v*d;o.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${f}px))`}else o.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,o=t.height/2,i=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*i,l=this.config.squareSpacing*i,a=this.config.outerRadius*i,d=a-(this.config.outerLayers-1)*l;for(let v=0;v<this.config.outerLayers;v++){const h=a-v*l,f=2*Math.PI*h,$=Math.floor(f/l);for(let u=0;u<$;u++){const M=u/$*Math.PI*2,R=s+Math.cos(M)*h,T=o+Math.sin(M)*h,y=document.createElement("div");y.className="square outer",y.style.left=`${R}px`,y.style.top=`${T}px`,y.style.width=`${r}px`,y.style.height=`${r}px`,y.style.transform="translate(-50%, -50%)",e.appendChild(y),this.squares.push(y),this.squareData.push({originalX:R,originalY:T,element:y})}}const m=d-this.config.gapBetweenCircles*i,c=Math.min(this.config.innerRadius*i,m);for(let v=0;v<this.config.innerLayers;v++){const h=c-v*l;if(h<=0)break;if(h<l){const u=document.createElement("div");u.className="square inner",u.style.left=`${s}px`,u.style.top=`${o}px`,u.style.width=`${r}px`,u.style.height=`${r}px`,u.style.transform="translate(-50%, -50%)",e.appendChild(u),this.squares.push(u),this.squareData.push({originalX:s,originalY:o,element:u});break}const f=2*Math.PI*h,$=Math.floor(f/l);for(let u=0;u<$;u++){const M=u/$*Math.PI*2,R=s+Math.cos(M)*h,T=o+Math.sin(M)*h,y=document.createElement("div");y.className="square inner",y.style.left=`${R}px`,y.style.top=`${T}px`,y.style.width=`${r}px`,y.style.height=`${r}px`,y.style.transform="translate(-50%, -50%)",e.appendChild(y),this.squares.push(y),this.squareData.push({originalX:R,originalY:T,element:y})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.96&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.3&&e.classList.toggle("dimmed")},500+Math.random()*3e3);this.animationIntervals.push(t)})}render(){return p`
+    `];constructor(){super(),this.squares=[],this.squareData=[],this.animationIntervals=[],this.mouseX=0,this.mouseY=0,this.targetMouseX=0,this.targetMouseY=0,this.containerRect=null,this.animationFrame=null,this.isMouseOver=!1,this.config={outerRadius:260,innerRadius:60,gapBetweenCircles:10,outerLayers:9,innerLayers:5,squareSize:4,squareSpacing:10,outerColor:"#8B8B8B",innerColor:"#F93904",baseSize:550,mouseRadius:150,animationStrength:25,smoothing:.5}}firstUpdated(e){this.createSquares(),this.startAnimations(),this.setupMouseTracking(),this.updateContainerRect(),this.animate(),this.resizeObserver=new ResizeObserver(()=>{this.updateContainerRect()}),this.resizeObserver.observe(this.shadowRoot.querySelector(".dot-container"))}disconnectedCallback(){super.disconnectedCallback(),this.animationIntervals.forEach(e=>clearInterval(e)),this.removeMouseTracking(),this.animationFrame&&cancelAnimationFrame(this.animationFrame),this.resizeObserver&&this.resizeObserver.disconnect()}updateContainerRect(){const e=this.shadowRoot.querySelector(".dot-container");e&&(this.containerRect=e.getBoundingClientRect())}setupMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(this.handleMouseMove=this.handleMouseMove.bind(this),this.handleMouseLeave=this.handleMouseLeave.bind(this),this.handleMouseEnter=this.handleMouseEnter.bind(this),e.addEventListener("mousemove",this.handleMouseMove),e.addEventListener("mouseleave",this.handleMouseLeave),e.addEventListener("mouseenter",this.handleMouseEnter))}removeMouseTracking(){const e=this.shadowRoot.querySelector(".container");e&&(e.removeEventListener("mousemove",this.handleMouseMove),e.removeEventListener("mouseleave",this.handleMouseLeave),e.removeEventListener("mouseenter",this.handleMouseEnter))}handleMouseMove(e){this.containerRect||this.updateContainerRect(),this.targetMouseX=e.clientX-this.containerRect.left,this.targetMouseY=e.clientY-this.containerRect.top+window.scrollY}handleMouseEnter(e){this.isMouseOver=!0,this.containerRect||this.updateContainerRect()}handleMouseLeave(){this.isMouseOver=!1,this.mouseX=-100,this.mouseY=-100,this.updateSquarePositions()}animate(){window.scrollY<window.innerHeight&&(this.isMouseOver?(this.mouseX+=(this.targetMouseX-this.mouseX)*this.config.smoothing,this.mouseY+=(this.targetMouseY-this.mouseY)*this.config.smoothing,this.updateSquarePositions()):(this.mouseX=-1e3,this.mouseY=-1e3,this.resetSquaresToOriginal())),this.animationFrame=requestAnimationFrame(()=>this.animate())}resetSquaresToOriginal(){this.squareData.forEach((e,t)=>{const s=this.squares[t],i=s.style.transform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);if(i){const r=parseFloat(i[1])||0,l=parseFloat(i[2])||0,a=r*(1-this.config.smoothing),d=l*(1-this.config.smoothing);Math.abs(a)<.1&&Math.abs(d)<.1?s.style.transform="translate(-50%, -50%)":s.style.transform=`translate(calc(-50% + ${a}px), calc(-50% + ${d}px))`}})}updateSquarePositions(){const e=this.config.mouseRadius*this.config.mouseRadius;this.squareData.forEach((t,s)=>{const o=this.squares[s],i=t.originalX-this.mouseX,r=t.originalY-this.mouseY,l=i*i+r*r;if(l<e&&l>0){const a=Math.sqrt(l),d=(this.config.mouseRadius-a)/this.config.mouseRadius*this.config.animationStrength,u=.7/a,c=i*u,v=r*u,h=c*d,b=v*d;o.style.transform=`translate(calc(-50% + ${h}px), calc(-50% + ${b}px))`}else o.style.transform="translate(-50%, -50%)"})}createSquares(){const e=this.shadowRoot.querySelector(".dot-container");if(!e)return;const t=e.getBoundingClientRect(),s=t.width/2,o=t.height/2,i=Math.min(t.width,t.height)/this.config.baseSize,r=this.config.squareSize*i,l=this.config.squareSpacing*i,a=this.config.outerRadius*i,d=a-(this.config.outerLayers-1)*l;for(let v=0;v<this.config.outerLayers;v++){const h=a-v*l,b=2*Math.PI*h,$=Math.floor(b/l);for(let g=0;g<$;g++){const M=g/$*Math.PI*2,T=s+Math.cos(M)*h,R=o+Math.sin(M)*h,y=document.createElement("div");y.className="square outer",y.style.left=`${T}px`,y.style.top=`${R}px`,y.style.width=`${r}px`,y.style.height=`${r}px`,y.style.transform="translate(-50%, -50%)",e.appendChild(y),this.squares.push(y),this.squareData.push({originalX:T,originalY:R,element:y})}}const u=d-this.config.gapBetweenCircles*i,c=Math.min(this.config.innerRadius*i,u);for(let v=0;v<this.config.innerLayers;v++){const h=c-v*l;if(h<=0)break;if(h<l){const g=document.createElement("div");g.className="square inner",g.style.left=`${s}px`,g.style.top=`${o}px`,g.style.width=`${r}px`,g.style.height=`${r}px`,g.style.transform="translate(-50%, -50%)",e.appendChild(g),this.squares.push(g),this.squareData.push({originalX:s,originalY:o,element:g});break}const b=2*Math.PI*h,$=Math.floor(b/l);for(let g=0;g<$;g++){const M=g/$*Math.PI*2,T=s+Math.cos(M)*h,R=o+Math.sin(M)*h,y=document.createElement("div");y.className="square inner",y.style.left=`${T}px`,y.style.top=`${R}px`,y.style.width=`${r}px`,y.style.height=`${r}px`,y.style.transform="translate(-50%, -50%)",e.appendChild(y),this.squares.push(y),this.squareData.push({originalX:T,originalY:R,element:y})}}}startAnimations(){this.squares.forEach(e=>{Math.random()>.96&&e.classList.add("dimmed");const t=setInterval(()=>{Math.random()>.3&&e.classList.toggle("dimmed")},500+Math.random()*3e3);this.animationIntervals.push(t)})}render(){return p`
             <div class="container">
                 <div class="circle-wrapper">
                     <div class="dot-container"></div>
                 </div>
             </div>
-        `}}customElements.define("boson-logo",Qe);class et extends g{static styles=[b`
+        `}}customElements.define("boson-logo",et);class tt extends m{static styles=[f`
         .landing-layout {
             display: flex;
             flex-direction: column;
@@ -2067,4 +2145,12 @@
             <main class="landing-layout">
                 <slot></slot>
             </main>
-        `}}customElements.define("boson-landing-layout",et);
+        `}}customElements.define("boson-landing-layout",tt);class st extends m{static styles=[f`
+        .default-layout {
+
+        }
+    `];render(){return p`
+            <main class="default-layout">
+                <slot></slot>
+            </main>
+        `}}customElements.define("boson-default-layout",st);

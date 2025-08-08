@@ -51,7 +51,7 @@ export class BosonFooter extends LitElement {
 
         ::slotted(a) {
             padding: 3.5em 0;
-            display: flex;
+            display: flex !important;
             justify-content: center;
             align-items: center;
             width: 230px;
@@ -83,7 +83,6 @@ export class BosonFooter extends LitElement {
             height: 100%;
             width: 100%;
             background: url("/images/icons/dots.svg");
-            background-size: cover;
         }
 
         .copyright {

@@ -10,6 +10,9 @@ export class BosonBreadcrumbs extends LitElement {
         }
 
         .breadcrumbs {
+            margin: 0 auto;
+            width: var(--width-content);
+            max-width: var(--width-max);
             display: flex;
             justify-content: flex-start;
         }

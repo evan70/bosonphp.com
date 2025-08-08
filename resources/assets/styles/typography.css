@@ -113,8 +113,16 @@ a.external-link:hover::after {
   color: var(--color-text-brand);
 }
 
+ul {
+  list-style: square;
+}
+
 ul > li {
   margin: 1.3em 0;
+}
+
+ul > li::marker {
+  color: var(--color-text-brand);
 }
 
 p {

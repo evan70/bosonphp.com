@@ -10,6 +10,7 @@ import './components/sections/nativeness-section.js';
 import './components/sections/right-choice-section.js';
 import './components/sections/solves-section.js';
 import './components/sections/testimonials-section.js';
+import './components/sections/docs-toc.js';
 
 
 import './components/ui/dropdown.js';
@@ -24,3 +25,4 @@ import './components/ui/subtitle.js';
 import './components/ui/logos/logo.js';
 
 import './layout/landing.js';
+import './layout/default.js';
