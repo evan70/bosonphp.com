@@ -7,6 +7,10 @@
 {% block body %}
     <boson-default-layout>
 
+        <boson-page-title>
+            <h2>Boson Documentation</h2>
+        </boson-page-title>
+
         <boson-breadcrumbs>
             {% apply spaceless %}
                 <div class="breadcrumb-item">
@@ -24,12 +28,7 @@
             {% endapply %}
         </boson-breadcrumbs>
 
-        <boson-page-title>
-            <h3>Boson Documentation</h3>
-        </boson-page-title>
-
         <boson-docs-toc>
-
             {% for category in version.categories %}
                 <article>
                     <hgroup>

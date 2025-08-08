@@ -20,10 +20,10 @@ export class BosonPageTitle extends LitElement {
         }
 
         ::slotted(*) {
-            line-height: 76px !important;
             display: inline-block;
             background: var(--color-bg);
-            padding: 0 1em !important;
+            margin: 0 !important;
+            padding: .5em 1em !important;
         }
     `];
 

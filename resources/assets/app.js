@@ -27,3 +27,4 @@ import './components/ui/logos/logo.js';
 
 import './layout/landing.js';
 import './layout/default.js';
+import './layout/docs.js';

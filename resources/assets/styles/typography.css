@@ -57,6 +57,7 @@ pre[data-lang] {
   border: solid 1px var(--color-border);
   background: var(--color-bg-layer);
   margin: 1.5em 0;
+  overflow: auto;
 }
 
 code {
@@ -190,6 +191,11 @@ a.external:hover::after,
 a.external-link:hover::after {
   transform: translate(2px, -6px) scale(1.2);
   transition: transform .3s ease;
+}
+
+a img {
+  margin-right: 8px;
+  display: inline-block;
 }
 
 .emphasis {
