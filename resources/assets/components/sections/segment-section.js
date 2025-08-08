@@ -41,6 +41,7 @@ export class SegmentSection extends LitElement {
 
         .segment-title .segment-subtitle .segment-name {
             font-size: var(--font-size-secondary);
+            margin: 0;
         }
 
         .segment-title .segment-subtitle svg {
@@ -80,6 +81,7 @@ export class SegmentSection extends LitElement {
         .container.container-center ::slotted(span),
         .container.container-center .title,
         .container.container-center .segment-title {
+            margin: 0;
             text-align: center;
             align-items: center;
         }

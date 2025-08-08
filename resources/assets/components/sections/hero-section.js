@@ -45,6 +45,7 @@ export class HeroSection extends LitElement {
 
         .headlines ::slotted(h1),
         .headlines ::slotted(h2) {
+            margin: 0 !important;
             font-size: var(--font-size-h1) !important;
         }
 
