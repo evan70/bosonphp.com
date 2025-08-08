@@ -71,8 +71,8 @@ final readonly class PagesToCreateComputer implements PagesComputerInterface
             hash: $info->hash,
         );
 
-        $document->title = $this->titleExtractor->extractTitle($document);
         $document->content = $this->getDocumentContent($category->version, $info->path);
+        $document->title = $this->titleExtractor->extractTitle($document);
 
         yield $document => new DocumentCreated(
             version: $category->version->name,
