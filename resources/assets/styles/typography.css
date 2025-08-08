@@ -64,6 +64,11 @@ code {
   padding: .15em .4em;
 }
 
+pre > code {
+  background: none;
+  padding: 0;
+}
+
 table {
   width: 100%;
   border: solid 1px var(--color-border);
