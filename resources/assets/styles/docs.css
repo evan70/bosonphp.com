@@ -1,0 +1,7 @@
+.documentation h1 {
+    margin-top: 0;
+}
+
+.documentation a:not(.heading-permalink) {
+  color: var(--color-text-brand);
+}
