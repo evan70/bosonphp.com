@@ -30,10 +30,11 @@ final readonly class CategoriesToUpdateComputer implements CategoriesComputerInt
                 continue;
             }
 
-            // Skip in case hash is equals to the updated one
-            if ($info->hash === $existingCategory->hash) {
-                continue;
-            }
+            // Category hash is equivalent to main navigation
+            // page hash, this is incorrect.
+            // if ($info->hash === $existingCategory->hash) {
+            //     continue;
+            // }
 
             $existingCategory->hash = $info->hash;
             $existingCategory->order = $order;
