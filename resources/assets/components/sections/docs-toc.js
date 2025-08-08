@@ -9,29 +9,10 @@ export class DocsToc extends LitElement {
             flex-direction: column;
         }
 
-        .toc-content-container,
-        .toc-title-container {
+        .toc-content-container {
             width: var(--width-content);
             max-width: var(--width-max);
             margin: 0 auto;
-        }
-
-        .toc-title-container {
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        ::slotted([slot="title"]) {
-            line-height: 76px !important;
-            display: inline-block;
-            background: var(--color-bg);
-            padding: 0 1em !important;
-        }
-
-        .toc-title {
-            background: url(/images/icons/dots.svg) center center repeat;
         }
 
         .toc-content {
@@ -71,12 +52,6 @@ export class DocsToc extends LitElement {
 
     render() {
         return html`
-            <hgroup class="toc-title">
-                <span class="toc-title-container">
-                    <slot name="title"></slot>
-                </span>
-            </hgroup>
-
             <section class="toc-content">
                 <span class="toc-content-container">
                     <slot></slot>

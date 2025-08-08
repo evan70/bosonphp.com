@@ -22,6 +22,7 @@ import './components/ui/header.js';
 import './components/ui/horizontal-accordion.js';
 import './components/ui/slider.js';
 import './components/ui/subtitle.js';
+import './components/ui/page-title.js';
 import './components/ui/logos/logo.js';
 
 import './layout/landing.js';
