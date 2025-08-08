@@ -48,6 +48,33 @@ pre, code {
   font-family: var(--font-mono), monospace;
 }
 
+code {
+  background: var(--color-bg-hover);
+  padding: .15em .4em;
+}
+
+table {
+  width: 100%;
+  border: solid 1px var(--color-border);
+}
+
+table > thead {
+  background: var(--color-bg-hover);
+  font-family: var(--font-title), sans-serif;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+table th,
+table td {
+  padding: 10px;
+}
+
+table tr:hover td {
+  background: var(--color-bg-hover);
+  transition: .2s ease;
+}
+
 a:visited,
 a {
   color: inherit;
