@@ -104,8 +104,13 @@ warning, blockquote.warning {
   border-left: solid 8px var(--color-quote-warning-border);
 }
 
+blockquote > ul,
 blockquote > p {
   margin: 0;
+}
+
+blockquote > ul > li {
+  margin: .1em 0;
 }
 
 table {
@@ -213,6 +218,15 @@ ul {
 
 ul > li {
   margin: 1.3em 0;
+}
+
+ul ul {
+  margin-top: .7em;
+}
+
+ul ul > li {
+  margin: .3em 0;
+  font-size: var(--font-size-secondary);
 }
 
 ul > li::marker {

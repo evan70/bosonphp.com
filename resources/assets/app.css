@@ -63,9 +63,9 @@
   --color-quote-tip-text: var(--color-quote-text);
   --color-quote-tip-border: var(--color-quote-border);
 
-  --color-quote-note: rgba(191, 237, 179, 0.1);
+  --color-quote-note: rgba(240, 242, 164, 0.15);
   --color-quote-note-text: rgba(216, 223, 206, 0.88);
-  --color-quote-note-border: rgba(194, 223, 132, 0.1);
+  --color-quote-note-border: rgba(248, 206, 94, 0.17);
 
   --color-quote-warning: rgba(223, 132, 143, 0.1);
   --color-quote-warning-text: rgb(216, 200, 200);
