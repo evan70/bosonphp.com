@@ -115,6 +115,7 @@ a.external-link:hover::after {
 
 ul {
   list-style: square;
+  padding-inline-start: 20px;
 }
 
 ul > li {
