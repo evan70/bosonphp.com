@@ -56,21 +56,21 @@
    */
   --color-border: rgba(255, 255, 255, .05);
 
-  --color-quote: rgba(173, 201, 227, 0.16);
-  --color-quote-text: rgba(223, 230, 234, 0.76);
-  --color-quote-border: rgba(132, 175, 223, .1);
+  --color-quote: rgba(158, 174, 242, .1);
+  --color-quote-text: rgba(222, 225, 241, 0.8);
+  --color-quote-border: rgba(158, 174, 242, .1);
 
   --color-quote-tip: var(--color-quote);
   --color-quote-tip-text: var(--color-quote-text);
   --color-quote-tip-border: var(--color-quote-border);
 
-  --color-quote-note: rgba(240, 242, 164, 0.15);
-  --color-quote-note-text: rgba(216, 223, 206, 0.88);
-  --color-quote-note-border: rgba(248, 206, 94, 0.17);
+  --color-quote-note: rgba(135, 223, 152, 0.15);
+  --color-quote-note-text: rgba(229, 238, 219, 0.88);
+  --color-quote-note-border: rgba(233, 248, 94, 0.17);
 
   --color-quote-warning: rgba(223, 132, 143, 0.1);
-  --color-quote-warning-text: rgb(216, 200, 200);
-  --color-quote-warning-border: rgba(223, 132, 143, 0.1);
+  --color-quote-warning-text: rgba(245, 211, 211, 0.7);
+  --color-quote-warning-border: rgba(240, 158, 169, 0.18);
 
   /**
    * Overlay Text
