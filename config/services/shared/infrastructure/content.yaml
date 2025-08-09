@@ -10,15 +10,22 @@ services:
   App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\:
     resource: '%kernel.project_dir%/app/Documentation/Infrastructure/Content/ContentRenderer/Markdown'
 
+  # ----------------------------------------------------------------------------
+  #   Extensions
+  # ----------------------------------------------------------------------------
+
   App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\NormalizeInternalLinksProcessor:
     arguments:
       $parser: '@psr18.http_client'
-
   League\CommonMark\Extension\GithubFlavoredMarkdownExtension: ~
   League\CommonMark\Extension\Attributes\AttributesExtension: ~
   League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension: ~
   League\CommonMark\Extension\ExternalLink\ExternalLinkExtension: ~
   League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension: ~
+
+  # ----------------------------------------------------------------------------
+  #   Markdown Environment
+  # ----------------------------------------------------------------------------
 
   League\CommonMark\Environment\EnvironmentInterface:
     class: League\CommonMark\Environment\Environment

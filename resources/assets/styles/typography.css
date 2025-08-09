@@ -90,6 +90,12 @@ pre[data-lang] {
   overflow: auto;
 }
 
+pre[data-lang="mermaid"] {
+  border: none;
+  background: none;
+  font-weight: 200;
+}
+
 code, kbd {
   background: var(--color-bg-hover);
   padding: .05em .4em;

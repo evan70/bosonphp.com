@@ -9,12 +9,16 @@ services:
   #   arguments:
   #     $themePath: '%kernel.project_dir%/vendor/tempest/highlight/src/Themes/Css/one-dark-pro.css'
 
+  App\Documentation\Infrastructure\Content\ContentRenderer\Language\MermaidLanguage: ~
+
   Tempest\Highlight\Theme:
     class: Tempest\Highlight\Themes\CssTheme
 
   Tempest\Highlight\Highlighter:
     arguments:
       $theme: '@Tempest\Highlight\Theme'
+    calls:
+      - ['addLanguage', ['@App\Documentation\Infrastructure\Content\ContentRenderer\Language\MermaidLanguage']]
 
   Tempest\Highlight\CommonMark\HighlightExtension:
     arguments:

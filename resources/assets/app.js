@@ -1,5 +1,6 @@
-import './app.css'
+import mermaid from 'mermaid/dist/mermaid.esm.mjs';
 
+import './app.css'
 
 import './components/sections/segment-section.js';
 import './components/sections/call-to-action-section.js';
@@ -11,7 +12,6 @@ import './components/sections/right-choice-section.js';
 import './components/sections/solves-section.js';
 import './components/sections/testimonials-section.js';
 import './components/sections/docs-toc.js';
-
 
 import './components/ui/dropdown.js';
 import './components/ui/breadcrumbs.js';
@@ -28,3 +28,15 @@ import './components/ui/logos/logo.js';
 import './layout/landing.js';
 import './layout/default.js';
 import './layout/docs.js';
+
+document.addEventListener('DOMContentLoaded', function() {
+    mermaid.init({
+        theme: 'dark',
+        themeVariables: {
+            mainBkg: '#171c28',
+            border1: '#FFFFFF0C',
+            lineColor: '#9EAEF230'
+        }
+
+    }, document.querySelectorAll('[data-lang="mermaid"]'));
+});

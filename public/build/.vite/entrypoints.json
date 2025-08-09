@@ -3,11 +3,41 @@
   "entryPoints": {
     "app": {
       "css": [
-        "/build/assets/app-D2ZAU5tJ.css"
+        "/build/assets/app-BnMCvjF7.css"
       ],
-      "dynamic": [],
+      "dynamic": [
+        "/build/assets/katex-A6QSACVP-BarAxict.js",
+        "/build/assets/dagre-ZYSAU66C-y73vPvTJ.js",
+        "/build/assets/c4Diagram-3ZOHJVWG-2u0AfjbB.js",
+        "/build/assets/flowDiagram-3GGZ5YTZ-BlzyhHor.js",
+        "/build/assets/flowDiagram-3GGZ5YTZ-BlzyhHor.js",
+        "/build/assets/erDiagram-KECVRSTY-DYmOXDz4.js",
+        "/build/assets/gitGraphDiagram-4VT6ZJRK-jtW61PIf.js",
+        "/build/assets/ganttDiagram-25HWAWCB-DJOFjZM_.js",
+        "/build/assets/infoDiagram-6LLHDRUC-YZ_w-yEu.js",
+        "/build/assets/pieDiagram-6RJ6QSB4-dTRRFW0N.js",
+        "/build/assets/quadrantDiagram-TYXCQ3M2-66_1tSc8.js",
+        "/build/assets/xychartDiagram-D6DESQJC-BgzD-xZc.js",
+        "/build/assets/requirementDiagram-2TWRQBUL-D1I5sibt.js",
+        "/build/assets/sequenceDiagram-5EM55LE7-CJ9MVCM0.js",
+        "/build/assets/classDiagram-WFXVAN7Q-Bfts04xh.js",
+        "/build/assets/classDiagram-v2-MV3MINR6-Bfts04xh.js",
+        "/build/assets/stateDiagram-RBDGHYY6-Cjb6Y5iv.js",
+        "/build/assets/stateDiagram-v2-DCU4277D-BbL3Noo7.js",
+        "/build/assets/journeyDiagram-AFTMDCLR-CP3383Il.js",
+        "/build/assets/flowDiagram-3GGZ5YTZ-BlzyhHor.js",
+        "/build/assets/timeline-definition-6AIZMOJY-DfxtunPs.js",
+        "/build/assets/mindmap-definition-APSLB344-BPlCjGzo.js",
+        "/build/assets/kanban-definition-JFQYLDOJ-B0GWoVJM.js",
+        "/build/assets/sankeyDiagram-JJCAYVX3-BQKdtMMk.js",
+        "/build/assets/diagram-O6SVR5L4-_pXyHPWB.js",
+        "/build/assets/diagram-YG6EKZKW-Bthj6QBC.js",
+        "/build/assets/blockDiagram-MSMYNMZL-C7X-UEQp.js",
+        "/build/assets/architectureDiagram-UPWDPRCB-B5eQIwZY.js",
+        "/build/assets/diagram-UNQBPC2P-BQa_j2fs.js"
+      ],
       "js": [
-        "/build/assets/app-DykCO2CA.js"
+        "/build/assets/app-BMefZb8r.js"
       ],
       "legacy": false,
       "preload": []
