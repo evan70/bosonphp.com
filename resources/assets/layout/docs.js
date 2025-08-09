@@ -1,30 +1,37 @@
 import {css, html, LitElement} from 'lit';
 
+import {sharedStyles} from "../utils/sharedStyles.js";
+
 export class DocsLayout extends LitElement {
-    static styles = [css`
+    static styles = [sharedStyles, css`
         .docs-layout {
             display: grid;
+            grid-template-columns: 1fr 4fr 1fr;
             margin: 0 auto;
             width: var(--width-content);
             max-width: var(--width-max);
-            grid-template-columns: 1fr 3fr;
         }
 
-        .docs-navigation {
+        .menu {
+            margin: 0;
             width: 300px;
             max-width: 300px;
+            min-width: 300px;
             border-right: solid 1px var(--color-border);
         }
 
-        .docs-navigation-content {
+        .menu-content {
+            flex: 1;
+            width: 100%;
             top: 70px;
             display: flex;
             flex-direction: column;
             position: sticky;
         }
 
-        .docs-navigation-pages,
-        .docs-navigation-categories {
+        .menu-pages,
+        .menu-categories {
+            width: 100%;
             padding: 2em 0;
             display: flex;
             flex-direction: column;
@@ -43,13 +50,13 @@ export class DocsLayout extends LitElement {
             font-weight: unset;
         }
 
-        .docs-navigation-pages {
+        .menu-pages {
             margin-top: -1px;
             border-top: solid 1px var(--color-border);
             background: var(--color-bg-layer);
         }
 
-        .docs-navigation-pages::before {
+        .menu-pages::before {
             content: '';
             width: 100vw;
             height: 100%;
@@ -62,13 +69,13 @@ export class DocsLayout extends LitElement {
             right: 300px;
         }
 
-        .docs-navigation-categories {
+        .menu-categories {
             position: relative;
             border-top: solid 1px var(--color-border);
             font-size: var(--font-size-secondary);
         }
 
-        .docs-content {
+        .content {
             padding: 2em;
             overflow: auto;
         }
@@ -77,8 +84,73 @@ export class DocsLayout extends LitElement {
             color: var(--color-text-brand);
         }
 
-        @media (max-width: 1000px) {
-            .docs-navigation-categories {
+        /** RIGHT COLUMN */
+
+        .navigation {
+            padding-top: 1em;
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
+            font-size: var(--font-size-secondary);
+        }
+
+        .navigation-content {
+            width: 100%;
+            position: sticky;
+            display: flex;
+            flex-direction: column;
+            top: 100px;
+            padding: 2em 0 2em 16px;
+            border-left: solid 1px var(--color-border);
+        }
+
+        .navigation-content a {
+            line-height: 1.2;
+            position: relative;
+        }
+
+        .navigation-content a::before {
+            content: '';
+            width: 2px;
+            height: 100%;
+            transform-origin: 0 100%;
+            transform: scaleY(0);
+            top: 0;
+            left: -17px;
+            position: absolute;
+        }
+
+        .navigation-content a.active::before {
+            width: 2px;
+            height: 100%;
+            background: var(--color-text-brand);
+            transform-origin: 0 0;
+            transform: scaleY(1);
+        }
+
+        .navigation-item-2 {
+            padding: .5em 0 .3em 0;
+        }
+
+        .navigation-item-3 {
+            font-size: 90%;
+            padding: .3em 0 .2em .8em;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 1200px) {
+            .docs-layout {
+                grid-template-columns: 1fr 4fr;
+            }
+
+            .navigation {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .menu-pages::before,
+            .menu-categories {
                 display: none;
             }
 
@@ -87,40 +159,107 @@ export class DocsLayout extends LitElement {
                 flex-direction: column;
             }
 
-            .docs-navigation {
+            .menu {
                 width: 100%;
                 min-width: 100%;
                 position: relative;
             }
 
-            .docs-navigation-pages {
+            .menu-pages {
                 border-bottom: solid 1px var(--color-border);
-            }
-
-            .docs-navigation-pages::before {
-                display: none;
             }
         }
     `];
 
+    constructor() {
+        super();
+
+        this.onScroll = this.onScroll.bind(this);
+    }
+
+    get headings() {
+        const content = this.querySelectorAll('h2, h3');
+        let id = 0;
+
+        return Array.from(content)
+            .map(heading => {
+                return {
+                    id: id++,
+                    level: (heading.tagName.slice(1) | 0),
+                    title: heading.innerText.slice(1),
+                    href: heading.childNodes[0]?.getAttribute('href') ?? '#',
+                    node: heading,
+                };
+            })
+    }
+
+    renderNavigationItem(data) {
+        return html`
+            <a href="${data.href}"
+               data-navigation-item="${data.id}"
+               class="navigation-item-${data.level}">${data.title}</a>
+        `;
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        window.addEventListener('scroll', this.onScroll);
+
+        setTimeout(() => this.onScroll(), 100);
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+
+        window.removeEventListener('scroll', this.onScroll);
+    }
+
+    onScroll() {
+        let breaks = false;
+        let nav = null
+
+        for (let data of this.headings.reverse()) {
+            let rect = data.node.getBoundingClientRect();
+            nav = this.shadowRoot.querySelector(`[data-navigation-item="${data.id}"]`);
+
+            if (breaks === false && rect.top - 120 < 0) {
+                nav.classList.add('active');
+                breaks = true;
+            } else {
+                nav.classList.remove('active')
+            }
+        }
+
+        if (breaks === false) {
+            nav?.classList.add('active');
+        }
+    }
+
     render() {
         return html`
             <main class="docs-layout">
-                <aside class="docs-navigation">
-                    <div class="docs-navigation-content">
-                        <nav class="docs-navigation-pages">
+                <aside class="menu">
+                    <div class="menu-content">
+                        <nav class="menu-pages">
                             <slot name="menu"></slot>
                         </nav>
 
-                        <nav class="docs-navigation-categories">
+                        <nav class="menu-categories">
                             <slot name="category"></slot>
                         </nav>
                     </div>
                 </aside>
 
-                <section class="docs-content">
+                <section class="content" data-id="content">
                     <slot></slot>
                 </section>
+
+                <aside class="navigation" style="${this.headings.length === 0 ? 'display:none' : ''}">
+                    <div class="navigation-content">
+                        ${this.headings.map(heading => this.renderNavigationItem(heading))}
+                    </div>
+                </aside>
             </main>
         `;
     }

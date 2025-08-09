@@ -274,11 +274,13 @@ a::before {
   transform-origin: 100% 0;
 }
 
+a.active,
 a:not(.button):hover {
   color: var(--color-text-brand);
   text-decoration: none;
 }
 
+a.active::before,
 a:hover::before {
   transform: scaleX(1);
   transform-origin: 0 0;
