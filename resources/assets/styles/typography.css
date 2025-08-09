@@ -94,6 +94,8 @@ pre[data-lang="mermaid"] {
   border: none;
   background: none;
   font-weight: 200;
+  display: flex;
+  justify-content: center;
 }
 
 code, kbd {
