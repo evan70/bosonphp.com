@@ -41,6 +41,11 @@ services:
           noreferrer: 'external'
         heading_permalink:
           max_heading_level: 3
+          id_prefix: ''
+          fragment_prefix: ''
+          apply_id_to_heading: true
+          symbol: '#'
+          title: ''
 
     calls:
       - ['addExtension', ['@League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension']]
