@@ -121,6 +121,7 @@ tooltip {
   position: relative;
   border-bottom: dashed 1px var(--color-text);
   cursor: default;
+  white-space: nowrap;
 }
 
 .tooltip:hover,
@@ -131,10 +132,7 @@ tooltip:hover {
 
 .tooltip::before,
 *[term]::before,
-tooltip::before,
-.tooltip::after,
-*[term]::after,
-tooltip::after {
+tooltip::before {
   display: block;
   position: absolute;
   user-select: none;
@@ -152,30 +150,17 @@ tooltip::after {
 *[term]::before,
 tooltip::before {
   content: attr(term);
-  background: var(--color-quote);
+  background: #1c212f;
+  border: solid 1px var(--color-border);
   padding: .2em 1em;
-  left: 0;
-  top: 32px;
-}
-
-.tooltip::after,
-*[term]::after,
-tooltip::after {
-  content: '';
-  width: 0;
-  height: 0;
-  border: solid 7px transparent;
-  border-bottom: solid 7px var(--color-quote);
-  left: 42%;
-  top: 19px;
+  right: 0;
+  top: 28px;
+  z-index: 99;
 }
 
 .tooltip:hover::before,
 *[term]:hover::before,
-tooltip:hover::before,
-.tooltip:hover::after,
-*[term]:hover::after,
-tooltip:hover::after {
+tooltip:hover::before {
   opacity: 1;
   transform: translateY(0);
 }
