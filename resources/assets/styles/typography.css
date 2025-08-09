@@ -114,6 +114,72 @@ pre > code {
   padding: 0;
 }
 
+.tooltip,
+*[term],
+tooltip {
+  font-style: italic;
+  position: relative;
+  border-bottom: dashed 1px var(--color-text);
+  cursor: default;
+}
+
+.tooltip:hover,
+*[term]:hover,
+tooltip:hover {
+  color: var(--color-text-brand);
+}
+
+.tooltip::before,
+*[term]::before,
+tooltip::before,
+.tooltip::after,
+*[term]::after,
+tooltip::after {
+  display: block;
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: .2s ease;
+  color: var(--color-text);
+  font-style: normal;
+  font-size: var(--font-size-secondary);
+  white-space: nowrap;
+}
+
+.tooltip::before,
+*[term]::before,
+tooltip::before {
+  content: attr(term);
+  background: var(--color-quote);
+  padding: .2em 1em;
+  left: 0;
+  top: 32px;
+}
+
+.tooltip::after,
+*[term]::after,
+tooltip::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border: solid 7px transparent;
+  border-bottom: solid 7px var(--color-quote);
+  left: 42%;
+  top: 19px;
+}
+
+.tooltip:hover::before,
+*[term]:hover::before,
+tooltip:hover::before,
+.tooltip:hover::after,
+*[term]:hover::after,
+tooltip:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 blockquote,
 tip, blockquote.tip,
 note, blockquote.note,
