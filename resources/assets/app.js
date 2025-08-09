@@ -21,6 +21,7 @@ import './components/ui/footer.js';
 import './components/ui/header.js';
 import './components/ui/horizontal-accordion.js';
 import './components/ui/slider.js';
+import './components/ui/search-input.js';
 import './components/ui/subtitle.js';
 import './components/ui/page-title.js';
 import './components/ui/logos/logo.js';
@@ -28,6 +29,7 @@ import './components/ui/logos/logo.js';
 import './layout/landing.js';
 import './layout/default.js';
 import './layout/docs.js';
+import './layout/search.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     mermaid.init({

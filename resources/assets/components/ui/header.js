@@ -49,6 +49,13 @@ export class BosonHeader extends LitElement {
             display: flex;
         }
 
+        ::slotted(boson-search-input) {
+            border: none;
+            margin-left: auto !important;
+            order: 2 !important;
+            padding: 0 !important;
+        }
+
         ::slotted(.logo) {
             border-right: solid 1px var(--color-border);
         }

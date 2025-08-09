@@ -13,6 +13,14 @@ final readonly class SearchResult implements AggregateRootInterface
         /**
          * @var non-empty-string
          */
+        public string $category,
+        /**
+         * @var non-empty-string
+         */
+        public string $version,
+        /**
+         * @var non-empty-string
+         */
         public string $title,
         /**
          * @var non-empty-string

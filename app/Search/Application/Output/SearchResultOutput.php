@@ -12,6 +12,14 @@ final readonly class SearchResultOutput
         /**
          * @var non-empty-string
          */
+        public string $category,
+        /**
+         * @var non-empty-string
+         */
+        public string $version,
+        /**
+         * @var non-empty-string
+         */
         public string $title,
         /**
          * @var non-empty-string
@@ -23,6 +31,8 @@ final readonly class SearchResultOutput
     public static function fromSearchResult(SearchResult $result): self
     {
         return new self(
+            category: $result->category,
+            version: $result->version,
             title: $result->title,
             uri: $result->uri,
             content: $result->content,

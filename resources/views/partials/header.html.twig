@@ -62,6 +62,12 @@
         </boson-dropdown>
     {% endif %}
 
+    {% if not (app.current_route starts with 'search') %}
+    <boson-search-input
+        action="{{ path('search.index') }}"
+        query="{{ app.request.get('q') }}"></boson-search-input>
+    {% endif %}
+
     <boson-button type="ghost" slot="aside" external href="https://github.com/boson-php/boson">
         <img src="/images/icons/github.svg" alt="github"/>
         GitHub
