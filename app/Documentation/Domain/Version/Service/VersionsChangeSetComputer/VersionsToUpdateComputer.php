@@ -42,9 +42,9 @@ final readonly class VersionsToUpdateComputer implements VersionsComputerInterfa
     private function processExisting(Version $version, VersionInfo $info): iterable
     {
         // Skip in case of hash is equals to stored one
-        if ($version->hash === $info->hash) {
-            return;
-        }
+        // if ($version->hash === $info->hash) {
+        //     return;
+        // }
 
         // Enable Version in case of it was hidden
         if ($version->isHidden) {

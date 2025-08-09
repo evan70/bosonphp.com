@@ -46,9 +46,9 @@ final readonly class PagesToUpdateComputer implements PagesComputerInterface
             }
 
             // Skip in case of hash is identical
-            if ($info->hash === $existingPage->hash) {
-                continue;
-            }
+            // if ($info->hash === $existingPage->hash) {
+            //     continue;
+            // }
 
             yield from match (true) {
                 $info instanceof DocumentInfo => $this->updateDocument($order, $category, $existingPage, $info),
