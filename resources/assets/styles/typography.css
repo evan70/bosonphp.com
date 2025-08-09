@@ -78,7 +78,7 @@ h6 img {
   margin-right: .2em;
 }
 
-pre, code {
+pre, code, kbd {
   font-family: var(--font-mono), monospace;
 }
 
@@ -90,9 +90,15 @@ pre[data-lang] {
   overflow: auto;
 }
 
-code {
+code, kbd {
   background: var(--color-bg-hover);
-  padding: .15em .4em;
+  padding: .05em .4em;
+}
+
+kbd {
+  font-weight: 100;
+  border: solid 1px var(--color-border);
+  background: none;
 }
 
 pre > code {
