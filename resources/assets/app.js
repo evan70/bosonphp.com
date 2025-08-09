@@ -35,7 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
         themeVariables: {
             mainBkg: '#171c28',
             border1: '#FFFFFF0C',
-            lineColor: '#9EAEF230'
+            lineColor: '#9EAEF230',
+            labelBackground: '#0d1119',
+            edgeLabelBackground: '#0d1119',
         }
 
     }, document.querySelectorAll('[data-lang="mermaid"]'));
