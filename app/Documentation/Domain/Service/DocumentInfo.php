@@ -8,6 +8,7 @@ final readonly class DocumentInfo extends PageInfo
 {
     /**
      * @param non-empty-lowercase-string $hash
+     * @param int<0, max>|null $order
      */
     public function __construct(
         string $hash,
@@ -15,7 +16,8 @@ final readonly class DocumentInfo extends PageInfo
          * @var non-empty-string
          */
         public string $path,
+        ?int $order = null,
     ) {
-        parent::__construct($hash);
+        parent::__construct($hash, $order);
     }
 }

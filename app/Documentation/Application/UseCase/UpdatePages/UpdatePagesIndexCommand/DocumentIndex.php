@@ -10,6 +10,7 @@ final readonly class DocumentIndex extends PageIndex
 {
     /**
      * @param non-empty-lowercase-string $hash
+     * @param int<0, max>|null $order
      */
     public function __construct(
         string $hash,
@@ -18,7 +19,8 @@ final readonly class DocumentIndex extends PageIndex
          */
         #[NotBlank(allowNull: false)]
         public string $path,
+        ?int $order = null,
     ) {
-        parent::__construct($hash);
+        parent::__construct($hash, $order);
     }
 }

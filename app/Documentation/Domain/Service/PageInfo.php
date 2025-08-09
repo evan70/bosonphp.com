@@ -11,5 +11,9 @@ abstract readonly class PageInfo
          * @var non-empty-lowercase-string
          */
         public string $hash,
+        /**
+         * @var int<0, max>|null
+         */
+        public ?int $order = null,
     ) {}
 }

@@ -59,15 +59,19 @@ final readonly class SyncPagesUseCase
     {
         $result = [];
 
+        $index = 0;
+
         foreach ($this->getPages($command) as $page) {
             $result[] = match (true) {
                 $page instanceof ExternalDocument => new DocumentIndex(
                     hash: $page->hash,
                     path: $page->path,
+                    order: $index++,
                 ),
                 $page instanceof ExternalLink => new LinkIndex(
                     hash: $page->hash,
                     uri: $page->uri,
+                    order: $index++,
                 ),
                 default => throw new \InvalidArgumentException(\sprintf(
                     'Unsupported external page type %s',
