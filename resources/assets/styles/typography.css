@@ -99,7 +99,7 @@ pre[data-lang="mermaid"] {
 }
 
 code, kbd {
-  background: #1c212f66;
+  background: rgba(255, 255, 255, .03);
   padding: .05em .4em;
 }
 
