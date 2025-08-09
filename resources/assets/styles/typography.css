@@ -365,3 +365,20 @@ p {
     font-size: 1.25rem;
   }
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-hover);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-text-brand);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-brand-hover);
+}

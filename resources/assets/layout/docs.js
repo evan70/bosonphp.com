@@ -27,6 +27,7 @@ export class DocsLayout extends LitElement {
             display: flex;
             flex-direction: column;
             position: sticky;
+            max-height: calc(100vh - 100px);
         }
 
         .menu-pages,
@@ -73,6 +74,8 @@ export class DocsLayout extends LitElement {
             position: relative;
             border-top: solid 1px var(--color-border);
             font-size: var(--font-size-secondary);
+            overflow-y: auto;
+            overflow-x: visible;
         }
 
         .content {
@@ -95,6 +98,8 @@ export class DocsLayout extends LitElement {
         }
 
         .navigation-content {
+            max-height: calc(100vh - 100px);
+            overflow: auto;
             width: 100%;
             position: sticky;
             display: flex;
