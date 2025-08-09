@@ -76,6 +76,7 @@ h6 img {
 
 .heading-permalink {
   margin-right: .2em;
+  user-select: none;
 }
 
 pre, code, kbd {
