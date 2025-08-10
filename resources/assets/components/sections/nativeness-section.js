@@ -237,7 +237,8 @@ export class NativenessSection extends LitElement {
             border-bottom: 1px solid var(--color-border);
         }
         .tech-logo {
-            height: 64px;
+            min-height: 64px;
+            max-height: 64px;
             min-width: 250px;
             max-width: 250px;
             background-position: center center;

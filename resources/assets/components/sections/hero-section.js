@@ -132,6 +132,10 @@ export class HeroSection extends LitElement {
             .bottom {
                 padding: 3em 1em;
             }
+            .logo-container {
+                width: 90vw;
+                height: 90vw;
+            }
         }
     `];
 

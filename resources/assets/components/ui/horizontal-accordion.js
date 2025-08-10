@@ -111,6 +111,47 @@ export class HorizontalAccordion extends LitElement {
                 opacity: 1;
             }
         }
+
+        @media (orientation: portrait) {
+            .accordion {
+                flex-direction: column;
+            }
+            .content {
+                width: unset;
+            }
+            .elementClosed {
+                width: unset;
+            }
+            .elementOpen .elementContent {
+                padding: 0;
+            }
+            .elementOpen .openTop {
+                padding: 0 1em;
+                height: unset;
+                gap: 1em;
+            }
+            .elementOpen .openTop > .headline {
+                margin: 0.25em 0;
+            }
+
+            .elementClosed .elementContent {
+                padding: 0;
+                flex-direction: row;
+                margin: 0 1em;
+                gap: 1em;
+            }
+            .collapsedContent {
+                align-items: center;
+                justify-content: flex-start;
+            }
+            .accordion > .element {
+                border-right: unset;
+                border-bottom: 1px solid var(--color-border);
+            }
+            .accordion > .element:nth-last-child(1) {
+                border: none !important;
+            }
+        }
     `];
 
     constructor() {

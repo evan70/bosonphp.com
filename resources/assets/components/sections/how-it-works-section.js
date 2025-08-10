@@ -30,6 +30,12 @@ export class HowItWorksSection extends LitElement {
             flex-direction: column;
             flex: 1;
         }
+
+        @media (orientation: portrait) {
+            .dots {
+                display: none;
+            }
+        }
     `];
 
     get content() {

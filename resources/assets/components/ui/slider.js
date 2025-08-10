@@ -129,6 +129,42 @@ export class Slider extends LitElement {
                 width: 100%;
             }
         }
+        .mobile-buttons {
+            display: none;
+        }
+        @media (orientation: portrait) {
+            .container {
+                flex-direction: column;
+            }
+            .container > .sliderButton {
+                display: none;
+            }
+            .sliderContent {
+                width: unset;
+            }
+            .mobile-buttons {
+                display: flex;
+                border-bottom: 1px solid var(--color-border);
+                border-top: 1px solid var(--color-border);
+            }
+            .sep {
+                min-width: 1px;
+                max-width: 1px;
+                align-self: stretch;
+                background: var(--color-border);
+            }
+            .sliderButton {
+                flex: 1;
+                padding: 2em 0;
+                justify-content: center;
+                align-items: center;
+                min-width: unset;
+                max-width: unset;
+                display: flex;
+                flex-direction: row;
+                border: none !important;
+            }
+        }
     `];
 
     constructor() {
@@ -226,6 +262,17 @@ export class Slider extends LitElement {
                     <img src="/images/icons/red_arrow_right.svg" alt="next"/>
                     <span>Next</span>
                 </button>
+                <div class="mobile-buttons">
+                    <button class="sliderButton" @click=${this.slidePrev}>
+                        <img src="/images/icons/red_arrow_left.svg" alt="prev"/>
+                        <span>Prev</span>
+                    </button>
+                    <div class="sep"></div>
+                    <button class="sliderButton" @click=${this.slideNext}>
+                        <img src="/images/icons/red_arrow_right.svg" alt="next"/>
+                        <span>Next</span>
+                    </button>
+                </div>
             </div>
         `;
     }

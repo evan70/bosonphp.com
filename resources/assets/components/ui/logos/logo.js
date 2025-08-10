@@ -65,6 +65,12 @@ export class BosonLogo extends LitElement {
                 height: 100%;
             }
         }
+        @media (orientation: portrait) {
+            .container {
+                height: 90vw;
+                width: 90vw;
+            }
+        }
     `];
 
     constructor() {

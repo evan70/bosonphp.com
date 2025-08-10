@@ -109,6 +109,74 @@ export class RightChoiceSection extends LitElement {
             color: var(--color-text-secondary);
             font-family: var(--font-title), sans-serif;
         }
+
+        /* Mobile styles - Portrait orientation only */
+        @media (orientation: portrait) {
+            .progress {
+                margin-top: 15em;
+            }
+            .top {
+                margin: 5em 1em;
+            }
+            .top h2 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                min-height: 100vh;
+            }
+
+            .content {
+                position: relative;
+            }
+
+            .content-top, .content-bottom {
+                position: relative;
+                min-height: 200px;
+            }
+
+            .content-left, .content-right {
+                position: absolute;
+                left: 0;
+                right: 0;
+                padding: 2em;
+                mask-image: none;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                transition: opacity 0.5s ease;
+            }
+
+            .content-top .content-left,
+            .content-top .content-right {
+                bottom: 0;
+            }
+
+            .content-bottom .content-left,
+            .content-bottom .content-right {
+                top: 0;
+            }
+
+            .inner {
+                width: 100%;
+                max-width: 400px;
+                align-items: center;
+                text-align: center;
+                transform: none !important;
+            }
+
+            .sep {
+                display: none;
+            }
+
+            .mobile-hidden {
+                opacity: 0;
+            }
+
+            .mobile-visible {
+                opacity: 1;
+            }
+        }
     `];
 
     static animationConfig = {
@@ -134,6 +202,8 @@ export class RightChoiceSection extends LitElement {
             bottomRight: null,
             progressDots: null
         };
+
+        this.isMobile = false;
     }
 
     firstUpdated() {
@@ -143,12 +213,61 @@ export class RightChoiceSection extends LitElement {
         this.elements.bottomRight = this.shadowRoot.querySelector('.content-bottom .content-right .inner');
         this.elements.progressDots = this.shadowRoot.querySelectorAll('.dots');
 
+        this.checkMobile();
         this.startAnimation();
+
+        // Listen for orientation changes
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                this.checkMobile();
+            }, 100);
+        });
+        window.addEventListener('resize', () => this.checkMobile());
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
         this.stopAnimation();
+        window.removeEventListener('orientationchange', this.checkMobile);
+        window.removeEventListener('resize', this.checkMobile);
+    }
+
+    checkMobile() {
+        const wasMobile = this.isMobile;
+        this.isMobile = window.matchMedia('(orientation: portrait)').matches;
+
+        if (wasMobile !== this.isMobile) {
+            // Reset transforms when switching modes
+            if (this.elements.topLeft && this.elements.topRight &&
+                this.elements.bottomLeft && this.elements.bottomRight) {
+
+                if (this.isMobile) {
+                    // Reset desktop transforms for mobile
+                    this.elements.topLeft.style.transform = '';
+                    this.elements.topRight.style.transform = '';
+                    this.elements.bottomLeft.style.transform = '';
+                    this.elements.bottomRight.style.transform = '';
+                } else {
+                    // Reset mobile classes for desktop
+                    this.resetMobileClasses();
+                }
+            }
+        }
+    }
+
+    resetMobileClasses() {
+        const containers = [
+            this.shadowRoot.querySelector('.content-top .content-left'),
+            this.shadowRoot.querySelector('.content-top .content-right'),
+            this.shadowRoot.querySelector('.content-bottom .content-left'),
+            this.shadowRoot.querySelector('.content-bottom .content-right')
+        ];
+
+        containers.forEach(container => {
+            if (container) {
+                container.classList.remove('mobile-hidden', 'mobile-visible');
+            }
+        });
     }
 
     startAnimation() {
@@ -182,52 +301,66 @@ export class RightChoiceSection extends LitElement {
 
         let progressValue = 0;
         let elementStage = 0;
+        let showSecond = false;
 
         if (cyclePosition < phase1End) {
             const phaseProgress = cyclePosition / config.blockDuration;
             progressValue = phaseProgress * 0.5;
             elementStage = 0;
+            showSecond = false;
         } else if (cyclePosition < phase2End) {
             const transitionElapsed = cyclePosition - phase1End;
             const transitionProgress = transitionElapsed / config.transitionDuration;
             progressValue = 0.5;
             elementStage = transitionProgress;
+            showSecond = transitionProgress > 0.5;
         } else if (cyclePosition < phase3End) {
             const phaseProgress = (cyclePosition - phase2End) / config.blockDuration;
             progressValue = 0.5 + (phaseProgress * 0.5);
             elementStage = 1;
+            showSecond = true;
         } else if (cyclePosition < phase4End) {
             const transitionElapsed = cyclePosition - phase3End;
             const transitionProgress = transitionElapsed / config.transitionDuration;
             progressValue = 1.0;
             elementStage = 1 - transitionProgress;
+            showSecond = transitionProgress < 0.5;
         } else if (cyclePosition < phase5End) {
             const phaseProgress = (cyclePosition - phase4End) / config.blockDuration;
             progressValue = 1.0 - (phaseProgress * 0.5);
             elementStage = 0;
+            showSecond = false;
         } else if (cyclePosition < phase6End) {
             const transitionElapsed = cyclePosition - phase5End;
             const transitionProgress = transitionElapsed / config.transitionDuration;
             progressValue = 0.5;
             elementStage = transitionProgress;
+            showSecond = transitionProgress > 0.5;
         } else if (cyclePosition < phase7End) {
             const phaseProgress = (cyclePosition - phase6End) / config.blockDuration;
             progressValue = 0.5 - (phaseProgress * 0.5);
             elementStage = 1;
+            showSecond = true;
         } else {
             const transitionElapsed = cyclePosition - phase7End;
             const transitionProgress = transitionElapsed / config.transitionDuration;
             progressValue = 0;
             elementStage = 1 - transitionProgress;
+            showSecond = transitionProgress < 0.5;
         }
 
-        this.animateElements(elementStage);
+        if (this.isMobile) {
+            this.animateMobileElements(showSecond);
+        } else {
+            this.animateDesktopElements(elementStage);
+        }
+
         this.updateProgressBar(progressValue);
 
         this.animationState.animationId = requestAnimationFrame(() => this.animate());
     }
 
-    animateElements(progress) {
+    animateDesktopElements(progress) {
         const config = RightChoiceSection.animationConfig;
         const maxTranslate = config.animationDistance;
 
@@ -245,6 +378,43 @@ export class RightChoiceSection extends LitElement {
         this.elements.topRight.style.transform = `translateX(${topRightTranslate}px)`;
         this.elements.bottomRight.style.transform = `translateX(${bottomRightTranslate}px)`;
         this.elements.bottomLeft.style.transform = `translateX(${bottomLeftTranslate}px)`;
+    }
+
+    animateMobileElements(showSecond) {
+        const topLeft = this.shadowRoot.querySelector('.content-top .content-left');
+        const topRight = this.shadowRoot.querySelector('.content-top .content-right');
+        const bottomLeft = this.shadowRoot.querySelector('.content-bottom .content-left');
+        const bottomRight = this.shadowRoot.querySelector('.content-bottom .content-right');
+
+        if (!topLeft || !topRight || !bottomLeft || !bottomRight) {
+            return;
+        }
+
+        // Top section: toggle between left and right
+        if (showSecond) {
+            topLeft.classList.add('mobile-hidden');
+            topLeft.classList.remove('mobile-visible');
+            topRight.classList.add('mobile-visible');
+            topRight.classList.remove('mobile-hidden');
+        } else {
+            topLeft.classList.add('mobile-visible');
+            topLeft.classList.remove('mobile-hidden');
+            topRight.classList.add('mobile-hidden');
+            topRight.classList.remove('mobile-visible');
+        }
+
+        // Bottom section: toggle between left and right
+        if (showSecond) {
+            bottomLeft.classList.add('mobile-hidden');
+            bottomLeft.classList.remove('mobile-visible');
+            bottomRight.classList.add('mobile-visible');
+            bottomRight.classList.remove('mobile-hidden');
+        } else {
+            bottomLeft.classList.add('mobile-visible');
+            bottomLeft.classList.remove('mobile-hidden');
+            bottomRight.classList.add('mobile-hidden');
+            bottomRight.classList.remove('mobile-visible');
+        }
     }
 
     updateProgressBar(progressValue) {

@@ -62,6 +62,18 @@ export class MobileDevelopmentSection extends LitElement {
         .text {
             color: var(--color-text-secondary);
         }
+        @media (orientation: portrait) {
+            .wrapper {
+                padding: 1em;
+            }
+            .container {
+                flex-direction: column;
+            }
+            .element {
+                padding: 1em;
+                gap: 0;
+            }
+        }
     `];
 
     get elements() {

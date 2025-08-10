@@ -23,6 +23,13 @@ export class CallToActionSection extends LitElement {
         ::slotted(.red) {
             color: var(--color-text-brand) !important;
         }
+
+        @media (orientation: portrait) {
+            .container {
+                padding: 5em 1em;
+                background: url("/images/hero.svg") no-repeat  -85% 350%;
+            }
+        }
     `];
 
     render() {

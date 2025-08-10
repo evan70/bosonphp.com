@@ -85,6 +85,11 @@ export class SegmentSection extends LitElement {
             text-align: center;
             align-items: center;
         }
+        @media (orientation: portrait) {
+            .container {
+                flex-direction: column;
+            }
+        }
     `];
 
     constructor() {
