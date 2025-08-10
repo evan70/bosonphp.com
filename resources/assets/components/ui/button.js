@@ -62,7 +62,7 @@ export class Button extends LitElement {
 
         .icon .img {
             height: var(--font-size);
-            margin-top: -2px;
+            margin: -2px 0 0 0;
         }
 
         /** SECONDARY */

@@ -1,5 +1,9 @@
 {% extends 'layout/master.html.twig' %}
 
+{% if docs_version is not defined %}
+    {% set docs_version = docs.currentVersion %}
+{% endif %}
+
 {% block body %}
 
     <boson-landing-layout>
@@ -9,16 +13,21 @@
 
             <span slot="description">
                 Turn your PHP project into cross-platform, compact, fast, native
-                applications for Windows, macOS, Linux, Android and iOS.
+                applications for Windows, Linux and macOS.
             </span>
 
-            <boson-button slot="buttons" href="/" icon="/images/icons/arrow_primary.svg">
+            <boson-button slot="buttons" href="{{ path('doc.show', {
+                version: docs_version.name,
+                page: 'installation'
+            }) }}" icon="/images/icons/arrow_primary.svg">
                 Try Boson for Free
             </boson-button>
 
+            {#
             <boson-button slot="buttons" type="secondary" href="/" icon="/images/icons/arrow_secondary.svg">
                 Watch Presentation
             </boson-button>
+            #}
 
             <span slot="discovery">
                 Discover more about boson
