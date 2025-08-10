@@ -107,21 +107,25 @@
         <mobile-development-section>
             <segment-section type="vertical">
                 <span slot="section">
-                    Mobile Development
+                    Rich API
                 </span>
 
                 <span slot="title">
-                    Expand Your Business Horizons: <br />
-                    <span class="emphasis">PHP Mobile Apps</span>
+                    Expanding the boundaries<br />
+                    of <span class="emphasis">standard capabilities</span>
                 </span>
 
                 <p>
-                    With Boson PHP Mobile, you can run your PHP app on Android
-                    and iOS - without learning Swift, Kotlin or React Native.
+                    Boson provides not only the ability to create desktop
+                    applications, but also a variety of rich APIs for accessing
+                    PC subsystems.
                 </p>
 
                 <p>
-                    <boson-button href="/">
+                    <boson-button href="{{ path('doc.show', {
+                        version: docs_version.name,
+                        page: 'webview'
+                    }) }}">
                         Read More
                     </boson-button>
                 </p>
@@ -143,13 +147,19 @@
 
         <call-to-action-section>
             <h3>
-                If you are a PHP developer, you can already</br>
-                make native cross-platform applications.</br>
-                Boson PHP makes it possible!</br>
+                If you are a PHP developer, you can already <br />
+                make native cross-platform applications.<br />
+                Boson PHP makes it possible!<br />
             </h3>
+
             <h4 class="red">Get started right now!</h4>
 
-            <boson-button slot="footer" href="/">Try Boson For Free</boson-button>
+            <boson-button slot="footer" href="{{ path('doc.show', {
+                version: docs_version.name,
+                page: 'installation'
+            }) }}">
+                Try Boson For Free
+            </boson-button>
         </call-to-action-section>
     </boson-landing-layout>
 
