@@ -172,7 +172,7 @@ export class NativenessSection extends LitElement {
         }
 
         #system-4 > .logo {
-            background-image: url('/images/icons/android.svg');
+            background-image: url('/images/icons/freebsd.svg');
         }
 
         .name {
@@ -382,11 +382,11 @@ export class NativenessSection extends LitElement {
                         </div>
                         <div id="system-3" class="${this._getSystemClass(3)}">
                             <div class="logo"></div>
-                            <span class="name">macOS & iOS</span>
+                            <span class="name">macOS</span>
                         </div>
                         <div id="system-4" class="${this._getSystemClass(4)}">
                             <div class="logo"></div>
-                            <span class="name">Android</span>
+                            <span class="name">BSD</span>
                         </div>
                         <div class="system-edge"></div>
                     </div>
@@ -394,16 +394,26 @@ export class NativenessSection extends LitElement {
                         <div class="technology" id="technology-1">
                             <div class="sticky">
                                 <div class="tech-logo"></div>
-                                <h6 class="tech-name">Do you write in pure PHP?</h6>
-                                <span class="tech-description">Boson loves it too!</span>
+                                <h6 class="tech-name">
+                                    Do you write in pure PHP?
+                                </h6>
+                                <span class="tech-description">
+                                    Boson loves it too!
+                                </span>
                             </div>
                         </div>
                         <div class="technology" id="technology-2">
                             <div class="dots-container"><dots-container></dots-container></div>
                             <div class="sticky">
                                 <div class="tech-logo"></div>
-                                <h6 class="tech-name">Do you work with Laravel?</h6>
-                                <span class="tech-description">Use familiar Blade, Livewire, Inertia or Eloquent for UI and logic. Your routes and controllers work just like on the web.</span>
+                                <h6 class="tech-name">
+                                    Do you work with Laravel?
+                                </h6>
+                                <span class="tech-description">
+                                    Use familiar Blade, Livewire, Inertia or
+                                    Eloquent for UI and logic. Your routes and
+                                    controllers work just like on the web.
+                                </span>
 
                             </div>
                         </div>
@@ -412,8 +422,13 @@ export class NativenessSection extends LitElement {
                             <div style="top: 150px" class="dots-container"><dots-container></dots-container></div>
                             <div class="sticky">
                                 <div class="tech-logo"></div>
-                                <h6 class="tech-name">Do you prefer Symfony or Yii?</h6>
-                                <span class="tech-description">Just plug in Boson. Your components and services are ready to work in Desktop or mobile application.</span>
+                                <h6 class="tech-name">
+                                    Do you prefer Symfony or Yii?
+                                </h6>
+                                <span class="tech-description">
+                                    Just plug in Boson. Your components and
+                                    services are ready to work in Desktop application.
+                                </span>
                             </div>
                         </div>
                     </div>
