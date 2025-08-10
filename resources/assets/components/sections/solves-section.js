@@ -30,6 +30,7 @@ export class SolvesSection extends LitElement {
         }
 
         .solves {
+            flex: 1;
             border-right: 1px solid var(--color-border);
             padding: 4em;
             gap: 1.25em;
