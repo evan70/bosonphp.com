@@ -28,42 +28,24 @@ export class TestimonialsSection extends LitElement {
     `];
 
     get slides() {
-        return [{
-            name: "Alex Bondareev",
-            pfp: "img.png",
-            role: "Co-founder, Boson PHP",
-            comment: "Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."
-        }, {
-            name: "Alex Bondareev",
-            pfp: "img.png",
-            role: "Co-founder, Boson PHP",
-            comment: "Building irst meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."
-        }, {
-            name: "Alex Bondareev",
-            pfp: "img.png",
-            role: "Co-founder, Boson PHP",
-            comment: "From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."
-        }, {
-            name: "Alex Bondareev4",
-            pfp: "img.png",
-            role: "Co-founder, Boson PHP",
-            comment: "Supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."
-        }, {
-            name: "Alex Bondareev",
-            pfp: "img.png",
-            role: "Co-founder, Boson PHP",
-            comment: "Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."
-        }, {
-            name: "Alex Bondareev",
-            pfp: "img.png",
-            role: "Co-founder, Boson PHP",
-            comment: "Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."
-        }, {
-            name: "Alex Bondareev",
-            pfp: "img.png",
-            role: "Co-founder, Boson PHP",
-            comment: "Building the future requires partners who make you feel like you're in it together. From our very first meeting, the Hartmann team has been actively involved, supporting our product development and business strategy and facilitating critical connections. Their deep understanding of gaming and spatial computing made them the ideal partner for us."
-        },];
+        return [
+            {
+                name: "Aleksei Gagarin",
+                pfp: "/images/u/roxblnfk.png",
+                role: "RoadRunner, Cycle ORM",
+                comment: "Finally, genuine native PHP - exactly as it should be."
+            },
+            {
+                name: "Sergey Panteleev",
+                pfp: "/images/u/saundefined.png",
+                role: "PHP Release Manager",
+                comment: "Every year, PHP and its ecosystem get better, partly" +
+                    "thanks to projects that bring something new to PHP.\n" +
+                    "I like how fast it is, how user-friendly it is, and its " +
+                    "huge potential for cross-platform applications.\n\n" +
+                    "I’ll be following the development of Boson."
+            },
+        ];
     }
 
     render() {

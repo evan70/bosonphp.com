@@ -80,6 +80,7 @@ export class Slider extends LitElement {
 
         .comment {
             color: var(--color-text-secondary);
+            white-space: pre-wrap;
         }
 
         .quote {
@@ -227,9 +228,9 @@ export class Slider extends LitElement {
             <div class="slideWrapper">
                 <div class="slide">
                     <img class="quote" src="/images/icons/quote.svg" alt="quote"/>
-                    <p class="comment">"${slide.comment}"</p>
+                    <p class="comment">“${slide.comment}”</p>
                     <div class="bottom">
-                        <img class="pfp" src="/images/${slide.pfp}" alt="${slide.name}"/>
+                        <img class="pfp" src="${slide.pfp}" alt="${slide.name}"/>
                         <div class="info">
                             <span class="name">${slide.name}</span>
                             <p class="role">${slide.role}</p>
