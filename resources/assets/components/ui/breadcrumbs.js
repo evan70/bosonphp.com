@@ -6,6 +6,8 @@ export class BosonBreadcrumbs extends LitElement {
     static styles = [sharedStyles, css`
         :host {
             display: block;
+            min-height: 94px;
+            line-height: 94px;
             border-bottom: solid 1px var(--color-border);
         }
 
@@ -20,7 +22,6 @@ export class BosonBreadcrumbs extends LitElement {
         ::slotted(.breadcrumb-item) {
             display: flex;
             align-items: center;
-            justify-content: center;
         }
 
         ::slotted(.breadcrumb-item:not(:last-child))::after {

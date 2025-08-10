@@ -162,12 +162,15 @@ export class DocsLayout extends LitElement {
             .docs-layout {
                 display: flex;
                 flex-direction: column;
+                margin: 0;
+                width: 100%;
             }
 
             .menu {
                 width: 100%;
                 min-width: 100%;
                 position: relative;
+                border: none;
             }
 
             .menu-pages {
