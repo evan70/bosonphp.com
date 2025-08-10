@@ -456,7 +456,7 @@ export class RightChoiceSection extends LitElement {
                         <div class="sep"></div>
                         <div class="content-right">
                             <div class="inner">
-                                <h3>Your PHP — Is meow</h3>
+                                <h3>One Line to Start With</h3>
                             </div>
                         </div>
                     </div>
@@ -464,13 +464,17 @@ export class RightChoiceSection extends LitElement {
                         <div class="content-left">
                             <div class="inner">
                                 <p>
-                                    No need PHP, and that's all you need. Write
-                                    code once and your app is available everywhere.
+                                    To launch the application, you will need
+                                    only one line of code. Without a ton of
+                                    settings and configurations.
+                                    Even a child can figure it out.
                                 </p>
 
+                                <!--
                                 <boson-button href="/">
                                     Read More
                                 </boson-button>
+                                -->
                             </div>
                         </div>
                         <div class="sep"></div>
@@ -479,14 +483,16 @@ export class RightChoiceSection extends LitElement {
                                 <p>
                                     No need to learn other languages! You already
                                     know PHP, and that's all you need. Write code
-                                    once for the Web and create native apps on Windows,
-                                    macOS, Linux, Android, and iOS. The same code,
+                                    once for the Web and create native apps on
+                                    Windows, macOS and Linux. The same code,
                                     and your app is available everywhere.
                                 </p>
 
+                                <!--
                                 <boson-button href="/">
                                     Read More
                                 </boson-button>
+                                -->
                             </div>
                         </div>
                     </div>
