@@ -41,19 +41,33 @@ export class HowItWorksSection extends LitElement {
     get content() {
         return [{
             headline: 'Saucer: The Core of Performance',
-            text: 'At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance.',
+            text: 'At the heart of Boson PHP is saucer, a fast cross-platform ' +
+                'C++ library. It allows us to create applications with minimal ' +
+                'size and resource consumption, significantly outperforming ' +
+                'Electron in terms of performance.',
         }, {
-            headline: 'Saucer: The Core of Performance',
-            text: 'At the heart of Boson PHP is saucer, a falications with minimal size and resource consumption, significantly outperforming Electron in terms of performance.',
+            headline: 'Direct OS API calls',
+            text: 'Instead of emulating behavior through multiple external ' +
+                'layers like a browser, server, and sockets, we use direct ' +
+                'access to the operating system API, just like any existing ' +
+                'system language does.',
         }, {
-            headline: 'Saucer: The Core of Performance',
-            text: 'At the heart of Boson antly outperforming Electron in terms of performance.',
+            headline: 'On the edge of PHP',
+            text: 'Boson is built on the basis of advanced architectural ' +
+                'approaches and functionality provided by the most modern ' +
+                'versions of PHP. No outdated approaches of large frameworks ' +
+                'for the sake of backward compatibility.',
         }, {
-            headline: 'Saucer: The Core of Performance',
-            text: 'At the heart of to create applications with minimal size and resource consumption, significantly outperforming Electron in terms of performance.',
+            headline: 'Kernel Optimizations',
+            text: 'The kernel is written in such a way as to provide maximum ' +
+                'performance without limitations in functionality. Numerous ' +
+                'PHP OPCode and JIT optimizations ensure that there are no ' +
+                'dubious or slow solutions.',
         }, {
-            headline: 'Saucer: The Core of Performance',
-            text: 'At the heart of Boson PHP is saucer, a fast cross-platform C++ library. It allows us to create and resource consumption, significantly outperforming Electron in terms of performance.',
+            headline: 'Fiber-Based Life Cycle',
+            text: 'Using Revolt EventLoop and painless cooperative multitasking ' +
+                'ensures high performance and ease of use. Why wait? Use the ' +
+                'green threads today!',
         }];
     }
 

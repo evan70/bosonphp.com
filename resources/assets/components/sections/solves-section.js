@@ -93,15 +93,13 @@ export class SolvesSection extends LitElement {
                         <div class="solves">
                             <img src="/images/icons/lock.svg" alt="lock"/>
                             <h5>For business</h5>
-                            <p>Desktop application – getting different variants of working applications. Mobile
-                                application – expand profits by getting a new segment of the mobile application
-                                market.</p>
+                            <p>Desktop application – getting different variants of working applications.</p>
                         </div>
                         <div class="solves">
                             <img src="/images/icons/web.svg" alt="web"/>
                             <h5>For web studios</h5>
                             <p>No need to expand your staff to make applications for different platforms, work with
-                                Bosob and increase your income.</p>
+                                Boson and increase your income.</p>
                         </div>
                     </div>
                     <div class="dots">
