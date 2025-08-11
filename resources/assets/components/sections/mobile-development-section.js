@@ -78,21 +78,30 @@ export class MobileDevelopmentSection extends LitElement {
 
     get elements() {
         return [{
-            text: 'For many businesses, mobile devices are the main audience segment. Web applications are good. Desktop clients are great. Mobile applications are wonderful.',
+            headline: 'Your own protocols',
+            text: `You can intercept any request and process it without raising
+                  the HTTP server. After all, a request is just a client event.
+                  In this case, you do not necessarily need to use the "http"
+                  or "https" protocol, create your own, to which your own
+                  application will respond.`,
             icon: 'rocket',
-            headline: 'Reaching new audiences'
         }, {
-            text: 'The same PHP code — but now it works on a mobile device. Budget savings and faster launch.',
+            headline: 'Real-time client information',
+            text: `You can instantly get information from the client directly
+                  from PHP code without any layers on JavaScript. Want to get
+                  information about the scroll area? No problem! Want
+                  information about all the DOM elements? One line of PHP code!`,
             icon: 'clients',
-            headline: 'New clients without rewriting code'
         }, {
-            headline: 'Convenient for B2B and B2C',
+            headline: 'You don\'t need React or Vue',
+            text: `You don't need javascript frameworks when you can
+                  do all this with PHP code.`,
             icon: 'case',
-            text: 'Internal CRM, chat applications, offline utilities, task managers, task trackers, dashboards — you can carry everything in your pocket.'
         }, {
-            headline: 'Without pain and extra stacks',
+            headline: 'PHP functions in HTML',
+            text: `You don't need JavaScript when you can specify which
+                  PHP function to call directly from HTML`,
             icon: 'convenient',
-            text: 'One stack. One language. One project. PHP from start to launch in the App Store.'
         }];
     }
 
