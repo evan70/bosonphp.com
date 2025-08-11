@@ -37,9 +37,9 @@ final readonly class RenderContentOnDocumentSaveListener
      */
     public function preUpdate(Document $document, PreUpdateEventArgs $event): void
     {
-        if (!$event->hasChangedField('content.value')) {
-            return;
-        }
+        // if (!$event->hasChangedField('content.value')) {
+        //     return;
+        // }
 
         $document->content->render($this->renderer);
     }
