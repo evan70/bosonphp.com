@@ -1,0 +1,18 @@
+{
+  "name": "boson-lit",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch"
+  },
+  "dependencies": {
+    "lit": "^3.3.0",
+    "mermaid": "^11.9.0"
+  },
+  "devDependencies": {
+    "vite": "^7.0.4",
+    "vite-plugin-symfony": "^8.2.0"
+  }
+}

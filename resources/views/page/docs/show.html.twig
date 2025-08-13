@@ -6,96 +6,83 @@
 
 {% block body %}
 
-    <h1>{{ category.title }}</h1>
+    <boson-page-title>
+        <h2>{{ category.title }}</h2>
+    </boson-page-title>
 
-    <style>
-        .external-link::after {
-            content: '🔗';
-            text-decoration: none;
-            font-size: 12px;
-            margin-left: 5px;
-            position: relative;
-            top: -4px
-        }
-    </style>
+    <boson-breadcrumbs>
+        {% apply spaceless %}
+            <div class="breadcrumb-item">
+                <boson-button type="ghost" href="{{ path('home') }}">
+                    Home
+                </boson-button>
+            </div>
 
-    <nav>
-        <ul>
-            <li><a href="{{ path('home') }}">Home</a></li>
-            <li style="color: #5d6b89">&gt;</li>
-            <li>
+            <div class="breadcrumb-item">
                 {% include 'page/docs/partials/version_selector.html.twig' with {
                     page: page,
                     version: version,
                     versions: versions,
                 } %}
-            </li>
-            <li style="color: #5d6b89">&gt;</li>
-            <li>
-                {% if category.icon is not null %}
-                    <img width="18" height="18"
-                        src="{{ category.icon }}" />
-                {% endif %}
-                {% if category.description is not null %}
-                    <span data-tooltip="{{ category.description }}">{{ category.title }}</span>
-                {% else %}
-                    <span>{{ category.title }}</span>
-                {% endif %}
-            </li>
-        </ul>
-    </nav>
+            </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 3fr;" class="grid">
-        <aside>
-            <ul style="padding-inline-start: 0">
-            {% for nav_page in category.pages %}
-                <li>
-                    {% if page.uri == nav_page.uri %}
-                        <strong>{{ nav_page.title }}</strong>
-                    {% else %}
-                        {% if nav_page.type.name == 'Link' %}
-                            <a href="{{ nav_page.uri }}" target="_blank">
-                                {{ nav_page.title }}
-                                <img src="https://intellij-icons.jetbrains.design/icons/AllIcons/expui/ide/externalLink_dark.svg"
-                                     width="18" height="18" />
-                                &nbsp;
-                            </a>
-                        {% else %}
-                            <a href="{{ path('doc.show', {
-                                page: nav_page.uri,
-                                version: version.name
-                            }) }}">
-                                {{ nav_page.title }}
-                            </a>
-                        {% endif %}
+            <div class="breadcrumb-item">
+                <boson-button type="ghost"
+                    {% if category.icon is not null %}
+                        icon="{{ category.icon }}"
                     {% endif %}
-                </li>
-            {% endfor %}
-            </ul>
-            <h4>Other Categories</h4>
-            <ul style="padding-inline-start: 0">
-                {% for nav_category in version.categories %}
-                    <li style="white-space: nowrap">
-                        <a href="{{ path('doc.show', {
-                            page: nav_category.page.uri,
-                            version: version.name
-                        }) }}">
-                            {% if nav_category.icon is not null %}
-                                <img src="{{ nav_category.icon }}"
-                                     width="16" height="16" />
-                            {% endif %}
-                            {{ nav_category.title }}
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </aside>
-        <section>
+                >
+                    {{ category.title }}
+                </boson-button>
+            </div>
+        {% endapply %}
+    </boson-breadcrumbs>
+
+    <boson-docs-layout>
+        {% for nav_page in category.pages %}
+
+            {% if page.uri == nav_page.uri %}
+                <strong slot="menu">{{ nav_page.title }}</strong>
+            {% else %}
+                {% if nav_page.type.name == 'Link' %}
+                    <a slot="menu" href="{{ nav_page.uri }}" target="_blank">
+                        {{ nav_page.title }}
+                        <img src="https://intellij-icons.jetbrains.design/icons/AllIcons/expui/ide/externalLink_dark.svg"
+                             width="18" height="18" />
+                        &nbsp;
+                    </a>
+                {% else %}
+                    <a slot="menu" href="{{ path('doc.show', {
+                        page: nav_page.uri,
+                        version: version.name
+                    }) }}">
+                        {{ nav_page.title }}
+                    </a>
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+
+        {% for nav_category in version.categories %}
+            <a slot="category" href="{{ path('doc.show', {
+                page: nav_category.page.uri,
+                version: version.name
+            }) }}">
+                {% if nav_category.icon is not null %}
+                    <img src="{{ nav_category.icon }}"
+                         width="16" height="16" />
+                {% endif %}
+                {{ nav_category.title }}
+            </a>
+        {% endfor %}
+
+        <section class="documentation">
             <h1>{{ page.title }}</h1>
+
             <article>
                 {{ page.content | replace({ '%25version%25': version.name }) | raw }}
             </article>
         </section>
-    </div>
+    </boson-docs-layout>
 
 {% endblock %}

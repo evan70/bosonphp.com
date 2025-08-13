@@ -44,6 +44,7 @@ final readonly class UpdateCategoriesUseCase
                 name: $index->name,
                 description: $index->description,
                 icon: $index->icon,
+                order: $index->order,
             );
         }
 

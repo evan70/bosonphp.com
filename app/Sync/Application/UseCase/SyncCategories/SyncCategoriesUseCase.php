@@ -28,12 +28,15 @@ final readonly class SyncCategoriesUseCase
     {
         $indices = [];
 
+        $index = 0;
+
         foreach ($this->categoriesListProvider->getAll($version) as $category) {
             $indices[] = new CategoryIndex(
                 hash: $category->hash,
                 name: $category->name,
                 description: $category->description,
                 icon: $category->icon,
+                order: $index++,
             );
         }
 

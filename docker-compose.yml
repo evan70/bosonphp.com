@@ -71,6 +71,13 @@ services:
     networks:
       - database
 
+  node:
+    <<: *environment
+    build: docker/node
+    container_name: boson-node
+    volumes:
+      - ./:/home/boson/bosonphp.com:rw
+
 networks:
   frontend:
     name: boson_org

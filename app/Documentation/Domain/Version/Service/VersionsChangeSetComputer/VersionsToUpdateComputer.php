@@ -46,13 +46,6 @@ final readonly class VersionsToUpdateComputer implements VersionsComputerInterfa
             return;
         }
 
-        // Enable Version in case of it was hidden
-        if ($version->isHidden) {
-            $version->enable();
-
-            yield $version => new VersionEnabled($version->name);
-        }
-
         // Actualize Version`s hash
         $version->hash = $info->hash;
 

@@ -10,19 +10,29 @@ services:
   App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\:
     resource: '%kernel.project_dir%/app/Documentation/Infrastructure/Content/ContentRenderer/Markdown'
 
+  # ----------------------------------------------------------------------------
+  #   Extensions
+  # ----------------------------------------------------------------------------
+
   App\Documentation\Infrastructure\Content\ContentRenderer\Markdown\NormalizeInternalLinksProcessor:
     arguments:
       $parser: '@psr18.http_client'
-
   League\CommonMark\Extension\GithubFlavoredMarkdownExtension: ~
+  League\CommonMark\Extension\Attributes\AttributesExtension: ~
   League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension: ~
   League\CommonMark\Extension\ExternalLink\ExternalLinkExtension: ~
   League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension: ~
+
+  # ----------------------------------------------------------------------------
+  #   Markdown Environment
+  # ----------------------------------------------------------------------------
 
   League\CommonMark\Environment\EnvironmentInterface:
     class: League\CommonMark\Environment\Environment
     arguments:
       $config:
+        attributes:
+          allow: ['id', 'class']
         external_link:
           open_in_new_window: true
           html_class: 'external-link'
@@ -31,9 +41,15 @@ services:
           noreferrer: 'external'
         heading_permalink:
           max_heading_level: 3
+          id_prefix: ''
+          fragment_prefix: ''
+          apply_id_to_heading: true
+          symbol: '#'
+          title: ''
 
     calls:
       - ['addExtension', ['@League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension']]
+      - ['addExtension', ['@League\CommonMark\Extension\Attributes\AttributesExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\GithubFlavoredMarkdownExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\ExternalLink\ExternalLinkExtension']]
       - ['addExtension', ['@League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension']]

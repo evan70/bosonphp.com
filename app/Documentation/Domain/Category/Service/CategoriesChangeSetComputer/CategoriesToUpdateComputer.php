@@ -20,7 +20,7 @@ final readonly class CategoriesToUpdateComputer implements CategoriesComputerInt
         $index = 0;
 
         foreach ($updated as $info) {
-            $order = \min($index++, 32767);
+            $order = \min($info->order ?? $index++, 32767);
 
             // Fetch stored entity from index
             $existingCategory = $existing[$info->name] ?? null;
@@ -30,10 +30,11 @@ final readonly class CategoriesToUpdateComputer implements CategoriesComputerInt
                 continue;
             }
 
-            // Skip in case hash is equals to the updated one
-            if ($info->hash === $existingCategory->hash) {
-                continue;
-            }
+            // Category hash is equivalent to main navigation
+            // page hash, this is incorrect.
+            // if ($info->hash === $existingCategory->hash) {
+            //     continue;
+            // }
 
             $existingCategory->hash = $info->hash;
             $existingCategory->order = $order;

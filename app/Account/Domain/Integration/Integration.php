@@ -30,7 +30,7 @@ class Integration implements
     #[ORM\Column(type: IntegrationId::class)]
     public private(set) IntegrationId $id;
 
-    #[ORM\ManyToOne(targetEntity: Account::class, cascade: ['ALL'], inversedBy: 'integrations')]
+    #[ORM\ManyToOne(targetEntity: Account::class, cascade: ['persist'], inversedBy: 'integrations')]
     #[ORM\JoinColumn(name: 'account_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     public readonly Account $account;
 

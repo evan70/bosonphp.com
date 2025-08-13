@@ -19,10 +19,10 @@ final readonly class CategoriesToRemoveComputer implements CategoriesComputerInt
     {
         foreach ($version->categories as $category) {
             // Fetch updated entity from index
-            $updatedCategory = $updated[$category->title] ?? null;
+            $removedCategory = $updated[$category->title] ?? null;
 
             // Skip in case of category is present
-            if ($updatedCategory !== null) {
+            if ($removedCategory !== null) {
                 continue;
             }
 

@@ -14,5 +14,9 @@ abstract readonly class PageIndex
          */
         #[NotBlank(allowNull: false)]
         public string $hash,
+        /**
+         * @var int<0, max>|null
+         */
+        public ?int $order = null,
     ) {}
 }

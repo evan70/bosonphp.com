@@ -65,10 +65,12 @@ final readonly class UpdatePagesUseCase
                 $index instanceof DocumentIndex => new DocumentInfo(
                     hash: $index->hash,
                     path: $index->path,
+                    order: $index->order,
                 ),
                 $index instanceof LinkIndex => new LinkInfo(
                     hash: $index->hash,
                     uri: $index->uri,
+                    order: $index->order,
                 ),
                 default => throw new \InvalidArgumentException(\sprintf(
                     'Unsupported page index type %s',

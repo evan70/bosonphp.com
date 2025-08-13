@@ -1,0 +1,55 @@
+{
+  "base": "/build/",
+  "entryPoints": {
+    "app": {
+      "css": [
+        "/build/assets/app-CLVU2FIm.css"
+      ],
+      "dynamic": [
+        "/build/assets/katex-A6QSACVP-DaOswpUs.js",
+        "/build/assets/dagre-ZYSAU66C-BsrCovDJ.js",
+        "/build/assets/c4Diagram-3ZOHJVWG-sbKporTU.js",
+        "/build/assets/flowDiagram-3GGZ5YTZ-pd9oagZi.js",
+        "/build/assets/flowDiagram-3GGZ5YTZ-pd9oagZi.js",
+        "/build/assets/erDiagram-KECVRSTY-DLkgw5NM.js",
+        "/build/assets/gitGraphDiagram-4VT6ZJRK-CraljlbU.js",
+        "/build/assets/ganttDiagram-25HWAWCB-D4E93YRp.js",
+        "/build/assets/infoDiagram-6LLHDRUC-BKdDCdRK.js",
+        "/build/assets/pieDiagram-6RJ6QSB4-CVvGiuJ9.js",
+        "/build/assets/quadrantDiagram-TYXCQ3M2-NVoOgm0h.js",
+        "/build/assets/xychartDiagram-D6DESQJC-CZyVf2LM.js",
+        "/build/assets/requirementDiagram-2TWRQBUL-CvnNsGvO.js",
+        "/build/assets/sequenceDiagram-5EM55LE7-Cli6Mrfe.js",
+        "/build/assets/classDiagram-WFXVAN7Q-CKJZNiaG.js",
+        "/build/assets/classDiagram-v2-MV3MINR6-CKJZNiaG.js",
+        "/build/assets/stateDiagram-RBDGHYY6-DtpmL6Rk.js",
+        "/build/assets/stateDiagram-v2-DCU4277D-CM8-vHvM.js",
+        "/build/assets/journeyDiagram-AFTMDCLR-DazB4EhH.js",
+        "/build/assets/flowDiagram-3GGZ5YTZ-pd9oagZi.js",
+        "/build/assets/timeline-definition-6AIZMOJY-PSyrlOqU.js",
+        "/build/assets/mindmap-definition-APSLB344-CnmU3R0x.js",
+        "/build/assets/kanban-definition-JFQYLDOJ-C1Vjz7jM.js",
+        "/build/assets/sankeyDiagram-JJCAYVX3-bm_P_NVQ.js",
+        "/build/assets/diagram-O6SVR5L4-CGpdHyQL.js",
+        "/build/assets/diagram-YG6EKZKW-C0JfGG6j.js",
+        "/build/assets/blockDiagram-MSMYNMZL-CfDAz9ec.js",
+        "/build/assets/architectureDiagram-UPWDPRCB-DAO1uJdj.js",
+        "/build/assets/diagram-UNQBPC2P-D513PI0Q.js"
+      ],
+      "js": [
+        "/build/assets/app-CHbIMm5Q.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "8.2.0",
+    8,
+    2,
+    0
+  ],
+  "viteServer": null
+}

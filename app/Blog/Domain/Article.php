@@ -71,7 +71,7 @@ class Article implements
     #[ORM\Column(name: 'preview', type: 'text', options: ['default' => ''])]
     public string $preview;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'articles')]
+    #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['persist'], fetch: 'EAGER', inversedBy: 'articles')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     public Category $category {
         get => $this->category;

@@ -29,5 +29,9 @@ final readonly class CategoryIndex
          */
         #[NotBlank(allowNull: true)]
         public ?string $icon = null,
+        /**
+         * @var int<0, max>|null
+         */
+        public ?int $order = null,
     ) {}
 }

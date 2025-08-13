@@ -84,7 +84,7 @@ class Category implements
         }
     }
 
-    #[ORM\ManyToOne(targetEntity: Version::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'categories')]
+    #[ORM\ManyToOne(targetEntity: Version::class, cascade: ['persist'], fetch: 'EAGER', inversedBy: 'categories')]
     #[ORM\JoinColumn(name: 'version_id', referencedColumnName: 'id', nullable: false)]
     public Version $version {
         get => $this->version;

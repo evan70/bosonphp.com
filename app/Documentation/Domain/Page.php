@@ -68,7 +68,7 @@ abstract class Page implements
     #[ORM\Column(name: 'sorting_order', type: 'smallint', options: ['default' => 0])]
     public int $order = 0;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['ALL'], fetch: 'EAGER', inversedBy: 'pages')]
+    #[ORM\ManyToOne(targetEntity: Category::class, cascade: ['persist'], fetch: 'EAGER', inversedBy: 'pages')]
     #[ORM\JoinColumn(name: 'category_id', referencedColumnName: 'id', nullable: false)]
     public Category $category {
         get => $this->category;

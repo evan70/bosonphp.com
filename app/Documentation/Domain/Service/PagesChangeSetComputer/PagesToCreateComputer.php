@@ -34,7 +34,7 @@ final readonly class PagesToCreateComputer implements PagesComputerInterface
         $index = 0;
 
         foreach ($updated as $uri => $info) {
-            $order = \min($index++, 32767);
+            $order = \min($info->order ?? $index++, 32767);
 
             // Fetch stored entity from index
             $existingPage = $existing[$uri] ?? null;
@@ -71,8 +71,8 @@ final readonly class PagesToCreateComputer implements PagesComputerInterface
             hash: $info->hash,
         );
 
-        $document->title = $this->titleExtractor->extractTitle($document);
         $document->content = $this->getDocumentContent($category->version, $info->path);
+        $document->title = $this->titleExtractor->extractTitle($document);
 
         yield $document => new DocumentCreated(
             version: $category->version->name,

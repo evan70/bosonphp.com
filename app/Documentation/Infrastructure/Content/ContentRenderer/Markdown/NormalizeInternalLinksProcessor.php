@@ -43,7 +43,7 @@ final readonly class NormalizeInternalLinksProcessor
 
         // Remove md suffix
         $uri = $uri->withPath($this->generator->generate('doc.show', [
-            'page' => \substr($uri->getPath(), 0, -3),
+            'page' => \pathinfo($uri->getPath(), \PATHINFO_FILENAME),
             'version' => '%version%',
         ]));
 

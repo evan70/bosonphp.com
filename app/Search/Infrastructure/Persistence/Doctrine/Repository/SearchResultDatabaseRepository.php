@@ -45,8 +45,11 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
             ->addSelect('doc_pages.title')
             ->addSelect('doc_pages.uri')
             ->addSelect('doc_pages.content_rendered')
+            ->addSelect('versions.name AS version')
+            ->addSelect('categories.title AS category')
             ->addSelect('ts_rank(doc_pages.search_vector, to_tsquery(\'english\', quote_literal(:query))) AS rank')
             ->leftJoin('doc_pages', 'doc_page_versions', 'versions', 'doc_pages.version_id = versions.id')
+            ->leftJoin('doc_pages', 'doc_page_categories', 'categories', 'doc_pages.category_id = categories.id')
             ->andWhere('versions.name = :version')
             ->andWhere('doc_pages.search_vector @@ to_tsquery(\'english\', quote_literal(:query))')
             ->orderBy('rank', 'DESC')
@@ -58,6 +61,8 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
         /**
          * @var array{
          *      id: non-empty-string,
+         *      version: non-empty-string,
+         *      category: non-empty-string,
          *      title: non-empty-string,
          *      uri: non-empty-string,
          *      content_rendered: string,
@@ -67,6 +72,8 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
         foreach ($builder->fetchAllAssociative() as $record) {
             yield new SearchResult(
                 id: new SearchResultId($record['id']),
+                category: $record['category'],
+                version: $record['version'],
                 title: $record['title'],
                 uri: $record['uri'],
                 content: $record['content_rendered'],
