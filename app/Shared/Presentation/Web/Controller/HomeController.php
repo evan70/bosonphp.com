@@ -18,6 +18,8 @@ final class HomeController extends AbstractController
 
     public function __invoke(): Response
     {
+        return $this->redirectToRoute('doc.index');
+
         $version = $this->versions->findLatest();
 
         return $this->render('page/home.html.twig', [
