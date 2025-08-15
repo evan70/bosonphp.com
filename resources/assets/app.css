@@ -63,13 +63,13 @@
   --color-quote-tip-text: var(--color-quote-text);
   --color-quote-tip-border: var(--color-quote-border);
 
-  --color-quote-note: rgba(135, 223, 152, 0.15);
-  --color-quote-note-text: rgba(229, 238, 219, 0.88);
-  --color-quote-note-border: rgba(233, 248, 94, 0.17);
+  --color-quote-note: rgba(135, 223, 152, .15);
+  --color-quote-note-text: rgba(229, 238, 219, .88);
+  --color-quote-note-border: rgba(233, 248, 94, .17);
 
-  --color-quote-warning: rgba(223, 132, 143, 0.1);
-  --color-quote-warning-text: rgba(245, 211, 211, 0.7);
-  --color-quote-warning-border: rgba(240, 158, 169, 0.18);
+  --color-quote-warning: rgba(215, 65, 84, 0.2);
+  --color-quote-warning-text: rgba(241, 229, 229, 0.9);
+  --color-quote-warning-border: rgba(240, 158, 169, .18);
 
   /**
    * Overlay Text

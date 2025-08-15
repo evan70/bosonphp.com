@@ -166,38 +166,76 @@ tooltip:hover::before {
   transform: translateY(0);
 }
 
-blockquote,
-tip, blockquote.tip,
-note, blockquote.note,
-warning, blockquote.warning {
+blockquote {
   color: var(--color-quote-text);
   background: var(--color-quote);
   border-left: solid 8px var(--color-quote-border);
   margin: 1em 0;
   padding: 1em 1.2em;
   display: block;
+  position: relative;
 }
 
 blockquote pre[data-lang] {
   border: solid 1px var(--color-bg);
 }
 
-tip, blockquote.tip {
+blockquote.tip {
   color: var(--color-quote-tip-text);
   background: var(--color-quote-tip);
   border-left: solid 8px var(--color-quote-tip-border);
 }
 
-note, blockquote.note {
+blockquote.note {
   color: var(--color-quote-note-text);
   background: var(--color-quote-note);
   border-left: solid 8px var(--color-quote-note-border);
 }
 
-warning, blockquote.warning {
+blockquote.mac,
+blockquote.macos,
+blockquote.linux,
+blockquote.windows,
+blockquote.warning {
   color: var(--color-quote-warning-text);
   background: var(--color-quote-warning);
   border-left: solid 8px var(--color-quote-warning-border);
+}
+
+blockquote.mac,
+blockquote.macos,
+blockquote.linux,
+blockquote.windows {
+  padding-left: 60px;
+}
+
+blockquote.mac::before,
+blockquote.macos::before,
+blockquote.linux::before,
+blockquote.windows::before {
+  content: '';
+  background: var(--color-quote-warning-border) center center no-repeat;
+  background-size: 16px 16px;
+  display: block;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  left: 14px;
+}
+
+blockquote.mac::before,
+blockquote.macos::before {
+  background-image: url(/images/icons/apple.svg);
+}
+
+blockquote.linux::before,
+blockquote.linux::before {
+  background-image: url(/images/icons/linux.svg);
+}
+
+blockquote.windows::before,
+blockquote.windows::before {
+  background-image: url(/images/icons/windows.svg);
 }
 
 blockquote > ul,
