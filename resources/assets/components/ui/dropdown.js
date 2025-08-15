@@ -68,6 +68,15 @@ export class BosonDropdown extends LitElement {
             line-height: var(--height-ui-small);
         }
 
+        .dropdown-list ::slotted(strong) {
+            display: block;
+            text-align: center;
+            font-size: 70%;
+            text-transform: uppercase;
+            font-weight: 300;
+            color: var(--color-text-secondary);
+        }
+
         .dropdown:hover > .dropdown-summary ::slotted(boson-button) {
             background: var(--color-border);
         }
