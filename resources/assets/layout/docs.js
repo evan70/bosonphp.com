@@ -101,6 +101,7 @@ export class DocsLayout extends LitElement {
             max-height: calc(100vh - 100px);
             overflow: auto;
             width: 100%;
+            max-width: 100%;
             position: sticky;
             display: flex;
             flex-direction: column;
@@ -112,6 +113,13 @@ export class DocsLayout extends LitElement {
         .navigation-content a {
             line-height: 1.2;
             position: relative;
+            display: inline-block;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         .navigation-content a::before {
@@ -205,7 +213,8 @@ export class DocsLayout extends LitElement {
         return html`
             <a href="${data.href}"
                data-navigation-item="${data.id}"
-               class="navigation-item-${data.level}">${data.title}</a>
+               class="navigation-item-${data.level}"
+               title="${data.title}">${data.title}</a>
         `;
     }
 
