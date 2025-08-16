@@ -151,4 +151,7 @@
   :root {
     --width-content: unset;
   }
+  segment-section [slot="title"] br {
+    display: none;
+  }
 }
