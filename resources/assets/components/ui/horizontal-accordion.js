@@ -14,6 +14,9 @@ export class HorizontalAccordion extends LitElement {
             flex: 1;
             min-height: 400px;
         }
+        .headline {
+            text-transform: uppercase;
+        }
 
         .element {
             border-right: 1px solid var(--color-border);
@@ -55,6 +58,10 @@ export class HorizontalAccordion extends LitElement {
             gap: 3em;
             animation: appear 1s forwards;
             height: 60px;
+        }
+
+        .openTop > .headline {
+            margin: 0;
         }
 
         .closedTop {
@@ -112,6 +119,9 @@ export class HorizontalAccordion extends LitElement {
             }
         }
 
+        .closed-headline {
+            display: none;
+        }
         @media (orientation: portrait) {
             .accordion {
                 flex-direction: column;
@@ -142,7 +152,16 @@ export class HorizontalAccordion extends LitElement {
             }
             .collapsedContent {
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: space-between;
+            }
+            .closedTop {
+                align-self: center;
+            }
+            .closed-headline {
+                display: flex;
+                text-transform: uppercase;
+                margin: 0.8em 0 0.7em 0;
+                color: var(--color-text-secondary);
             }
             .accordion > .element {
                 border-right: unset;
@@ -190,6 +209,7 @@ export class HorizontalAccordion extends LitElement {
                         </div>
                     ` : html`
                         <div class="collapsedContent">
+                            <h4 class="closed-headline">${item.headline}</h4>
                             <img src="/images/icons/plus.svg" alt="plus"/>
                         </div>
                     `}

@@ -136,6 +136,7 @@ export class Slider extends LitElement {
         @media (orientation: portrait) {
             .container {
                 flex-direction: column;
+                border-bottom: none;
             }
             .container > .sliderButton {
                 display: none;

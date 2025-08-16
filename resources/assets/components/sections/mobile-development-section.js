@@ -73,6 +73,9 @@ export class MobileDevelopmentSection extends LitElement {
                 padding: 1em;
                 gap: 0;
             }
+            .name {
+                margin: 0;
+            }
         }
     `];
 

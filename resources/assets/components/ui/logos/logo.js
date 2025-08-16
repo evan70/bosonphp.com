@@ -6,6 +6,10 @@ export class BosonLogo extends LitElement {
         .container {
             width: 100%;
             height: 100%;
+            min-width: 50px;
+            min-height: 50px;
+            max-width: 550px;
+            max-height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -14,6 +18,8 @@ export class BosonLogo extends LitElement {
         .circle-wrapper {
             width: 100%;
             height: 100%;
+            min-width: 50px;
+            min-height: 50px;
             max-width: 100%;
             max-height: 100%;
             aspect-ratio: 1;
@@ -26,6 +32,8 @@ export class BosonLogo extends LitElement {
         .dot-container {
             width: 100%;
             height: 100%;
+            min-width: 50px;
+            min-height: 50px;
             position: absolute;
             display: flex;
             align-items: center;
@@ -69,6 +77,8 @@ export class BosonLogo extends LitElement {
             .container {
                 height: 90vw;
                 width: 90vw;
+                max-width: 400px;
+                max-height: 400px;
             }
         }
     `];
@@ -190,7 +200,6 @@ export class BosonLogo extends LitElement {
     }
 
     animate() {
-        // In case of visible area
         if (window.scrollY < window.innerHeight) {
             if (this.isMouseOver) {
                 this.mouseX += (this.targetMouseX - this.mouseX) * this.config.smoothing;

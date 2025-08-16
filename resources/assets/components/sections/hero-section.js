@@ -135,6 +135,8 @@ export class HeroSection extends LitElement {
             .logo-container {
                 width: 90vw;
                 height: 90vw;
+                align-items: center;
+                justify-content: center;
             }
         }
     `];

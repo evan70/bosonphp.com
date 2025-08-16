@@ -27,7 +27,7 @@ export class CallToActionSection extends LitElement {
         @media (orientation: portrait) {
             .container {
                 padding: 5em 1em;
-                background: url("/images/hero.svg") no-repeat  -85% 350%;
+                background: url("/images/hero.svg") no-repeat 40vw 27vh;
             }
         }
     `];

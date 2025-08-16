@@ -89,6 +89,17 @@ export class SegmentSection extends LitElement {
             .container {
                 flex-direction: column;
             }
+            .title {
+                margin: 0;
+            }
+            .segment-title .segment-subtitle .segment-name {
+                font-size: var(--font-size-h5);
+                margin: 0;
+            }
+            .segment-title .segment-subtitle svg {
+                height: 16px;
+                width: 16px;
+            }
         }
     `];
 
