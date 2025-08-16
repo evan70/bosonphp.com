@@ -15,6 +15,7 @@ import './components/sections/docs-toc.js';
 
 import './components/ui/dropdown.js';
 import './components/ui/breadcrumbs.js';
+import './components/ui/mobile-header-menu.js';
 import './components/ui/button.js';
 import './components/ui/dots-container.js';
 import './components/ui/footer.js';

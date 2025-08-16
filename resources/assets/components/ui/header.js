@@ -82,16 +82,41 @@ export class BosonHeader extends LitElement {
             border-right: 1px solid var(--color-border) !important;
         }
 
+        ::slotted([mobile="true"]) {
+            display: none;
+        }
+
+        ::slotted(mobile-header-menu) {
+            display: none;
+            border-right: none !important;
+        }
+
         @media (orientation: portrait) {
+            ::slotted([pc="true"]) {
+                display: none;
+            }
+            ::slotted(.logo) {
+                flex: 1;
+            }
+            ::slotted([mobile="true"]) {
+                display: flex;
+                align-self: stretch;
+            }
+            ::slotted(mobile-header-menu) {
+                display: flex;
+                align-self: stretch;
+                min-height: var(--header-height-scrolled);
+                max-height: var(--header-height-scrolled);
+            }
+            header {
+                height: var(--header-height-scrolled, 70px);
+                line-height: var(--header-height-scrolled, 70px);
+            }
             .dots {
                 display: none;
             }
 
             .nav {
-                display: none;
-            }
-
-            .aside {
                 display: none;
             }
         }
@@ -135,7 +160,8 @@ export class BosonHeader extends LitElement {
                 </div>
 
                 <aside class="aside">
-                    <slot name="aside"></slot>
+                    <slot style="display: flex" name="aside"></slot>
+                    <slot name="mobile-menu"></slot>
                 </aside>
 
                 <div class="dots">

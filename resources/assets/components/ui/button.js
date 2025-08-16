@@ -112,6 +112,12 @@ export class Button extends LitElement {
         ::slotted(img.logo) {
             height: 50%;
         }
+
+
+        :host([inheader="true"]) {
+            align-self: stretch;
+            justify-content: flex-start;
+        }
     `];
 
     constructor() {
