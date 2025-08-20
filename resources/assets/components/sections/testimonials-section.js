@@ -80,18 +80,6 @@ export class TestimonialsSection extends LitElement {
                     "way. Love it."
             },
             {
-                name: "Roman Pronskiy",
-                pfp: "/images/u/pronskiy.png",
-                role: "PhpStorm team, The PHP Foundation founder",
-                comment: "I built a few production apps with Electron before. " +
-                    "It has a big ecosystem, but I always missed PHP. The PHP " +
-                    "wrappers around Electron felt limited and slow. When I " +
-                    "first tried Boson, I thought, wow, is this a mistake? " +
-                    "Why is it so fast? I really like the simple API and the " +
-                    "smart design under the hood. This feels like the PHP " +
-                    "way. Love it."
-            },
-            {
                 name: "Pavel Buchnev",
                 pfp: "/images/u/butschster.png",
                 role: "CTO at Intruforce, Spiral Framework Maintainer",
