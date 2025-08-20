@@ -93,6 +93,14 @@ export class TestimonialsSection extends LitElement {
                     "for it. And now—I actually have a desktop application " +
                     "running on PHP. I couldn’t be happier."
             },
+            {
+                name: "Curve (Noah)",
+                pfp: "/images/u/curve.png",
+                role: "Developer of Saucer",
+                comment: "I'm very glad to see projects based on Saucer " +
+                    "bindings, and I'm especially excited for Boson as it " +
+                    "looks very promising and professionally made, all the best!"
+            },
         ];
     }
 
