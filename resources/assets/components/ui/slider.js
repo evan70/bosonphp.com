@@ -244,7 +244,7 @@ export class Slider extends LitElement {
 
     render() {
         return html`
-            <div class="container">
+            <div class="container" @mouseenter="${this.stopAutoplay}" @mouseleave="${this.startAutoplay}">
                 <button class="sliderButton" @click=${this.slidePrev}>
                     <div class="dots">
                         <dots-container></dots-container>
