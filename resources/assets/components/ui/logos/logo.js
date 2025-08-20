@@ -6,7 +6,7 @@ export class BosonLogo extends LitElement {
         .container {
             width: 100%;
             height: 100%;
-            min-width: 50px;
+            min-width: 400px;
             min-height: 50px;
             max-width: 550px;
             max-height: 550px;

@@ -180,7 +180,7 @@ export class RightChoiceSection extends LitElement {
     `];
 
     static animationConfig = {
-        blockDuration: 3000,
+        blockDuration: 7000,
         transitionDuration: 500,
         animationDistance: 800,
     };
