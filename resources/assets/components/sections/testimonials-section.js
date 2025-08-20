@@ -32,7 +32,7 @@ export class TestimonialsSection extends LitElement {
             {
                 name: "Aleksei Gagarin",
                 pfp: "/images/u/roxblnfk.png",
-                role: "RoadRunner, Cycle ORM",
+                role: "Maintainer of Spiral, Cycle, RoadRunner PHP",
                 comment: "Finally, genuine native PHP - exactly as it should be."
             },
             {
