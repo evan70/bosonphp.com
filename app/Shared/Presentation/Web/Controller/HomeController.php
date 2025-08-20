@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/', name: 'home', methods: 'GET')]
+#[Route('/old', name: 'redirect', methods: 'GET')]
 final class HomeController extends AbstractController
 {
     public function __invoke(): Response
