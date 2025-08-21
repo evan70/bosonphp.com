@@ -105,6 +105,17 @@ export class BosonFooter extends LitElement {
             height: 24px;
         }
 
+        .credits-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition-duration: 0.2s;
+        }
+        .credits-link:hover {
+            opacity: 0.7;
+        }
+
         @media (orientation: portrait) {
             .dots-left, .dots-right, .holder {
                 display: none;
@@ -189,7 +200,9 @@ export class BosonFooter extends LitElement {
                     </div>
                 </div>
                 <div class="credits">
-                    <img src="/images/credits.png" alt="credits"/>
+                    <a target="_blank" href="https://cutcode.dev/project-making" class="credits-link">
+                        <img src="/images/credits.png" alt="credits"/>
+                    </a>
                 </div>
             </footer>
         `;
