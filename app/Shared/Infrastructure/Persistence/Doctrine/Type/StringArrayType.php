@@ -25,9 +25,7 @@ class StringArrayType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        $column['length'] ??= 255;
-
-        return $platform->getStringTypeDeclarationSQL($column) . '[]';
+        return $platform->getJsonTypeDeclarationSQL($column);
     }
 
     /**
@@ -43,17 +41,7 @@ class StringArrayType extends Type
             return null;
         }
 
-        $result = [];
-
-        foreach ($value as $item) {
-            $result[] = match (true) {
-                $item === null => 'NULL',
-                $item === '' => '""',
-                default => '"' . \addcslashes($item, '"') . '"',
-            };
-        }
-
-        return '{' . \implode(',', $result) . '}';
+        return json_encode($value);
     }
 
     /**
@@ -69,24 +57,7 @@ class StringArrayType extends Type
             return null;
         }
 
-        if ($value === '{}') {
-            return [];
-        }
-
-        $result = [];
-        $chunks = \explode(',', \trim($value, '{}'));
-
-        foreach ($chunks as $item) {
-            $item = \stripcslashes($item);
-
-            if ($item === 'NULL') {
-                $item = null;
-            }
-
-            $result[] = $item;
-        }
-
-        return $result;
+        return json_decode($value, true);
     }
 
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool

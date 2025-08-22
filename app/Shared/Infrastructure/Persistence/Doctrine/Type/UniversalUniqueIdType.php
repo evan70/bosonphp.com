@@ -31,7 +31,7 @@ abstract class UniversalUniqueIdType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
-        return 'UUID';
+        return $platform->getStringTypeDeclarationSQL(['length' => 36]);
     }
 
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
