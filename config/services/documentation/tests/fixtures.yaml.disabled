@@ -1,0 +1,11 @@
+
+when@dev: &dev
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
+    App\Documentation\Infrastructure\Persistence\Doctrine\Fixture\:
+      resource: '%kernel.project_dir%/app/Documentation/Infrastructure/Persistence/Doctrine/Fixture'
+
+when@test: *dev
