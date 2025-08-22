@@ -44,7 +44,14 @@ export class BosonLogo extends LitElement {
             position: absolute;
             transition: opacity 0.5s ease;
             opacity: 1;
+        }
+
+        .square:hover {
             will-change: transform;
+        }
+
+        .square:not(:hover) {
+            will-change: auto;
         }
 
         .square.outer {
