@@ -39,25 +39,81 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
             return [];
         }
 
-        $builder = $this->connection->createQueryBuilder()
-            ->from('doc_pages')
-            ->addSelect('doc_pages.id')
-            ->addSelect('doc_pages.title')
-            ->addSelect('doc_pages.uri')
-            ->addSelect('doc_pages.content_rendered')
-            ->addSelect('versions.name AS version')
-            ->addSelect('categories.title AS category')
-            ->addSelect('1.0 AS rank') // Simple ranking for SQLite
-            ->leftJoin('doc_pages', 'doc_page_versions', 'versions', 'doc_pages.version_id = versions.id')
-            ->leftJoin('doc_pages', 'doc_page_categories', 'categories', 'doc_pages.category_id = categories.id')
-            ->andWhere('versions.name = :version')
-            ->andWhere('(doc_pages.title LIKE :query_like OR doc_pages.content_rendered LIKE :query_like)')
-            ->orderBy('doc_pages.title', 'ASC')
-            ->setMaxResults($limit)
-            ->setParameter('version', $version)
-            ->setParameter('query', $query)
-            ->setParameter('query_like', '%' . $query . '%')
-        ;
+        // Check if we can use FTS5 (SQLite Full-Text Search)
+        $platform = $this->connection->getDatabasePlatform();
+
+        if ($platform->getName() === 'sqlite') {
+            // Try FTS5 first, fallback to LIKE if FTS table doesn't exist
+            try {
+                $builder = $this->connection->createQueryBuilder()
+                    ->from('doc_pages_fts', 'fts')
+                    ->addSelect('doc_pages.id')
+                    ->addSelect('doc_pages.title')
+                    ->addSelect('doc_pages.uri')
+                    ->addSelect('doc_pages.content_rendered')
+                    ->addSelect('versions.name AS version')
+                    ->addSelect('categories.title AS category')
+                    ->addSelect('(-fts.rank) AS rank') // FTS5 uses negative ranking, so we flip it
+                    ->leftJoin('fts', 'doc_pages', 'doc_pages', 'fts.rowid = doc_pages.rowid')
+                    ->leftJoin('doc_pages', 'doc_page_versions', 'versions', 'doc_pages.version_id = versions.id')
+                    ->leftJoin('doc_pages', 'doc_page_categories', 'categories', 'doc_pages.category_id = categories.id')
+                    ->andWhere('versions.name = :version')
+                    ->andWhere('fts.doc_pages_fts MATCH :query')
+                    ->orderBy('fts.rank', 'ASC') // ASC because FTS5 rank is negative (better = more negative)
+                    ->setMaxResults($limit)
+                    ->setParameter('version', $version)
+                    ->setParameter('query', $query)
+                ;
+
+                // Test the query to see if FTS table exists
+                $testBuilder = clone $builder;
+                $testBuilder->setMaxResults(1);
+                $testBuilder->executeQuery();
+
+            } catch (\Exception) {
+                // Fallback to LIKE search if FTS table doesn't exist
+                $builder = $this->connection->createQueryBuilder()
+                    ->from('doc_pages')
+                    ->addSelect('doc_pages.id')
+                    ->addSelect('doc_pages.title')
+                    ->addSelect('doc_pages.uri')
+                    ->addSelect('doc_pages.content_rendered')
+                    ->addSelect('versions.name AS version')
+                    ->addSelect('categories.title AS category')
+                    ->addSelect('1.0 AS rank')
+                    ->leftJoin('doc_pages', 'doc_page_versions', 'versions', 'doc_pages.version_id = versions.id')
+                    ->leftJoin('doc_pages', 'doc_page_categories', 'categories', 'doc_pages.category_id = categories.id')
+                    ->andWhere('versions.name = :version')
+                    ->andWhere('(doc_pages.title LIKE :query_like OR doc_pages.content_rendered LIKE :query_like)')
+                    ->orderBy('doc_pages.title', 'ASC')
+                    ->setMaxResults($limit)
+                    ->setParameter('version', $version)
+                    ->setParameter('query', $query)
+                    ->setParameter('query_like', '%' . $query . '%')
+                ;
+            }
+        } else {
+            // For other databases, use LIKE search
+            $builder = $this->connection->createQueryBuilder()
+                ->from('doc_pages')
+                ->addSelect('doc_pages.id')
+                ->addSelect('doc_pages.title')
+                ->addSelect('doc_pages.uri')
+                ->addSelect('doc_pages.content_rendered')
+                ->addSelect('versions.name AS version')
+                ->addSelect('categories.title AS category')
+                ->addSelect('1.0 AS rank')
+                ->leftJoin('doc_pages', 'doc_page_versions', 'versions', 'doc_pages.version_id = versions.id')
+                ->leftJoin('doc_pages', 'doc_page_categories', 'categories', 'doc_pages.category_id = categories.id')
+                ->andWhere('versions.name = :version')
+                ->andWhere('(doc_pages.title LIKE :query_like OR doc_pages.content_rendered LIKE :query_like)')
+                ->orderBy('doc_pages.title', 'ASC')
+                ->setMaxResults($limit)
+                ->setParameter('version', $version)
+                ->setParameter('query', $query)
+                ->setParameter('query_like', '%' . $query . '%')
+            ;
+        }
 
         /**
          * @var array{
