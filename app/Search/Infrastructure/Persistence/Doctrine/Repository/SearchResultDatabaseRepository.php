@@ -47,15 +47,16 @@ final readonly class SearchResultDatabaseRepository implements SearchResultRepos
             ->addSelect('doc_pages.content_rendered')
             ->addSelect('versions.name AS version')
             ->addSelect('categories.title AS category')
-            ->addSelect('ts_rank(doc_pages.search_vector, to_tsquery(\'english\', quote_literal(:query))) AS rank')
+            ->addSelect('1.0 AS rank') // Simple ranking for SQLite
             ->leftJoin('doc_pages', 'doc_page_versions', 'versions', 'doc_pages.version_id = versions.id')
             ->leftJoin('doc_pages', 'doc_page_categories', 'categories', 'doc_pages.category_id = categories.id')
             ->andWhere('versions.name = :version')
-            ->andWhere('doc_pages.search_vector @@ to_tsquery(\'english\', quote_literal(:query))')
-            ->orderBy('rank', 'DESC')
+            ->andWhere('(doc_pages.title LIKE :query_like OR doc_pages.content_rendered LIKE :query_like)')
+            ->orderBy('doc_pages.title', 'ASC')
             ->setMaxResults($limit)
             ->setParameter('version', $version)
             ->setParameter('query', $query)
+            ->setParameter('query_like', '%' . $query . '%')
         ;
 
         /**

@@ -10,6 +10,7 @@ doctrine:
       default:
         url: '%db.main.url%'
         driver: pdo_sqlite
+        server_version: '3.40'
         logging: "%kernel.debug%"
         profiling: "%kernel.debug%"
         profiling_collect_backtrace: '%kernel.debug%'

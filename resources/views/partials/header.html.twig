@@ -77,13 +77,15 @@
         <img src="/images/icons/github.svg" alt="github"/>
     </boson-button>
 
+    {% if docs.currentVersion %}
     <boson-button type="ghost" slot="aside" href="{{ path('doc.show', {
-        version: docs_version.name,
+        version: docs.currentVersion.name,
         page: 'introduction'
     }) }}">
         Get Started
         <img src="/images/icons/arrow_up_right.svg" alt="arrow_up_right" />
     </boson-button>
+    {% endif %}
 
     <mobile-header-menu slot="mobile-menu">
         {% if docs_categories|length > 0 %}
