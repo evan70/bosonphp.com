@@ -6,392 +6,154 @@ export class BosonLogo extends LitElement {
         .container {
             width: 100%;
             height: 100%;
-            min-width: 400px;
-            min-height: 50px;
-            max-width: 550px;
-            max-height: 550px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .circle-wrapper {
-            width: 100%;
-            height: 100%;
-            min-width: 50px;
-            min-height: 50px;
-            max-width: 100%;
-            max-height: 100%;
-            aspect-ratio: 1;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .dot-container {
+        .logo-text {
+            font-size: clamp(24px, 8vw, 64px);
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            white-space: nowrap;
+        }
+
+        .logo-text:hover {
+            transform: scale(1.05);
+        }
+
+        .responsive {
+            color: #F93904;
+        }
+
+        .sk {
+            color: white;
+        }
+
+        .animated-dots {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            min-width: 50px;
-            min-height: 50px;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-dot {
             position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .square {
-            position: absolute;
-            transition: opacity 0.5s ease;
-            opacity: 1;
-        }
-
-        .square:hover {
-            will-change: transform;
-        }
-
-        .square:not(:hover) {
-            will-change: auto;
-        }
-
-        .square.outer {
-            background: #8B8B8B;
-        }
-
-        .square.inner {
+            width: 3px;
+            height: 3px;
             background: #F93904;
-        }
-
-        .square.dimmed {
-            opacity: 0.1;
             border-radius: 50%;
+            opacity: 0;
+            animation: float 3s infinite ease-in-out;
         }
 
-        @media (max-aspect-ratio: 1/1) {
-            .circle-wrapper {
-                width: 100%;
-                height: auto;
+        .floating-dot:nth-child(2n) {
+            background: rgba(255, 255, 255, 0.8);
+            animation-delay: 0.5s;
+        }
+
+        .floating-dot:nth-child(3n) {
+            animation-delay: 1s;
+        }
+
+        .floating-dot:nth-child(4n) {
+            animation-delay: 1.5s;
+        }
+
+        .floating-dot:nth-child(5n) {
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-40px) scale(0.5);
             }
         }
 
-        @media (min-aspect-ratio: 1/1) {
-            .circle-wrapper {
-                width: auto;
-                height: 100%;
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: clamp(18px, 6vw, 32px);
             }
         }
-        @media (orientation: portrait) {
-            .container {
-                height: 90vw;
-                width: 90vw;
-                max-width: 400px;
-                max-height: 400px;
-            }
-        }
+
+
+
+
     `];
 
     constructor() {
         super();
-        this.squares = [];
-        this.squareData = [];
-        this.animationIntervals = [];
-        this.mouseX = 0;
-        this.mouseY = 0;
-        this.targetMouseX = 0;
-        this.targetMouseY = 0;
-        this.containerRect = null;
-        this.animationFrame = null;
-        this.isMouseOver = false;
-
-        this.config = {
-            outerRadius: 260,
-            innerRadius: 60,
-            gapBetweenCircles: 10,
-
-            outerLayers: 9,
-            innerLayers: 5,
-
-            squareSize: 4,
-            squareSpacing: 10,
-
-            outerColor: '#8B8B8B',
-            innerColor: '#F93904',
-
-            baseSize: 550,
-
-            mouseRadius: 150,
-            animationStrength: 25,
-            smoothing: .5
-        };
+        this.animationInterval = null;
     }
 
-    firstUpdated(_changedProperties) {
-        this.createSquares();
-        this.startAnimations();
-        this.setupMouseTracking();
-        this.updateContainerRect();
-
-        this.animate();
-
-        this.resizeObserver = new ResizeObserver(() => {
-            this.updateContainerRect();
-        });
-
-        this.resizeObserver.observe(this.shadowRoot.querySelector('.dot-container'));
+    firstUpdated() {
+        this.startFloatingDots();
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
-        this.animationIntervals.forEach(interval => clearInterval(interval));
-        this.removeMouseTracking();
-        if (this.animationFrame) {
-            cancelAnimationFrame(this.animationFrame);
-        }
-        if (this.resizeObserver) {
-            this.resizeObserver.disconnect();
+        if (this.animationInterval) {
+            clearInterval(this.animationInterval);
         }
     }
 
-    updateContainerRect() {
-        const container = this.shadowRoot.querySelector('.dot-container');
-        if (container) {
-            this.containerRect = container.getBoundingClientRect();
-        }
-    }
-
-    setupMouseTracking() {
-        const container = this.shadowRoot.querySelector('.container');
+    startFloatingDots() {
+        const container = this.shadowRoot.querySelector('.animated-dots');
         if (!container) return;
 
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.handleMouseLeave = this.handleMouseLeave.bind(this);
-        this.handleMouseEnter = this.handleMouseEnter.bind(this);
-
-        container.addEventListener('mousemove', this.handleMouseMove);
-        container.addEventListener('mouseleave', this.handleMouseLeave);
-        container.addEventListener('mouseenter', this.handleMouseEnter);
+        this.animationInterval = setInterval(() => {
+            this.createFloatingDot(container);
+        }, 800);
     }
 
-    removeMouseTracking() {
-        const container = this.shadowRoot.querySelector('.container');
-        if (!container) return;
+    createFloatingDot(container) {
+        const dot = document.createElement('div');
+        dot.className = 'floating-dot';
 
-        container.removeEventListener('mousemove', this.handleMouseMove);
-        container.removeEventListener('mouseleave', this.handleMouseLeave);
-        container.removeEventListener('mouseenter', this.handleMouseEnter);
-    }
+        // Random position around the logo
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
 
-    handleMouseMove(event) {
-        if (!this.containerRect) {
-            this.updateContainerRect();
-        }
+        dot.style.left = `${x}%`;
+        dot.style.top = `${y}%`;
 
-        this.targetMouseX = event.clientX - this.containerRect.left;
-        this.targetMouseY = event.clientY - this.containerRect.top + window.scrollY;
-    }
+        container.appendChild(dot);
 
-    handleMouseEnter(event) {
-        this.isMouseOver = true;
-
-        if (!this.containerRect) {
-            this.updateContainerRect();
-        }
-    }
-
-    handleMouseLeave() {
-        this.isMouseOver = false;
-
-        this.mouseX = -100;
-        this.mouseY = -100;
-        this.updateSquarePositions();
-    }
-
-    animate() {
-        if (window.scrollY < window.innerHeight) {
-            if (this.isMouseOver) {
-                this.mouseX += (this.targetMouseX - this.mouseX) * this.config.smoothing;
-                this.mouseY += (this.targetMouseY - this.mouseY) * this.config.smoothing;
-                this.updateSquarePositions();
-            } else {
-                this.mouseX = -1000;
-                this.mouseY = -1000;
-                this.resetSquaresToOriginal();
+        // Remove dot after animation
+        setTimeout(() => {
+            if (dot.parentNode) {
+                dot.parentNode.removeChild(dot);
             }
-        }
-
-        this.animationFrame = requestAnimationFrame(() => this.animate());
+        }, 3000);
     }
 
-    resetSquaresToOriginal() {
-        this.squareData.forEach((data, index) => {
-            const square = this.squares[index];
-            const currentTransform = square.style.transform;
 
-            const match = currentTransform.match(/calc\(-50% \+ ([-\d.]+)px\), calc\(-50% \+ ([-\d.]+)px\)/);
 
-            if (match) {
-                const currentX = parseFloat(match[1]) || 0;
-                const currentY = parseFloat(match[2]) || 0;
-
-                const newX = currentX * (1 - this.config.smoothing);
-                const newY = currentY * (1 - this.config.smoothing);
-
-                if (Math.abs(newX) < 0.1 && Math.abs(newY) < 0.1) {
-                    square.style.transform = 'translate(-50%, -50%)';
-                } else {
-                    square.style.transform = `translate(calc(-50% + ${newX}px), calc(-50% + ${newY}px))`;
-                }
-            }
-        });
-    }
-
-    updateSquarePositions() {
-        const mouseRadiusSq = this.config.mouseRadius * this.config.mouseRadius;
-
-        this.squareData.forEach((data, index) => {
-            const square = this.squares[index];
-
-            const dx = data.originalX - this.mouseX;
-            const dy = data.originalY - this.mouseY;
-            const distanceSq = dx * dx + dy * dy;
-
-            if (distanceSq < mouseRadiusSq && distanceSq > 0) {
-                const distance = Math.sqrt(distanceSq);
-
-                const pushStrength = ((this.config.mouseRadius - distance) / this.config.mouseRadius) * this.config.animationStrength;
-
-                const invDistance = .7 / distance;
-                const directionX = dx * invDistance;
-                const directionY = dy * invDistance;
-
-                const offsetX = directionX * pushStrength;
-                const offsetY = directionY * pushStrength;
-
-                square.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
-            } else {
-                square.style.transform = 'translate(-50%, -50%)';
-            }
-        });
-    }
-
-    createSquares() {
-        const container = this.shadowRoot.querySelector('.dot-container');
-        if (!container) return;
-
-        const rect = container.getBoundingClientRect();
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const scale = Math.min(rect.width, rect.height) / this.config.baseSize;
-
-        const squareSize = this.config.squareSize * scale;
-        const spacing = this.config.squareSpacing * scale;
-
-        const outerRadius = this.config.outerRadius * scale;
-        const outerInnerRadius = outerRadius - (this.config.outerLayers - 1) * spacing;
-
-        for (let layer = 0; layer < this.config.outerLayers; layer++) {
-            const radius = outerRadius - layer * spacing;
-            const circumference = 2 * Math.PI * radius;
-            const squaresInLayer = Math.floor(circumference / spacing);
-
-            for (let i = 0; i < squaresInLayer; i++) {
-                const angle = (i / squaresInLayer) * Math.PI * 2;
-                const x = centerX + Math.cos(angle) * radius;
-                const y = centerY + Math.sin(angle) * radius;
-
-                const square = document.createElement('div');
-                square.className = 'square outer';
-                square.style.left = `${x}px`;
-                square.style.top = `${y}px`;
-                square.style.width = `${squareSize}px`;
-                square.style.height = `${squareSize}px`;
-                square.style.transform = 'translate(-50%, -50%)';
-                container.appendChild(square);
-
-                this.squares.push(square);
-                this.squareData.push({
-                    originalX: x,
-                    originalY: y,
-                    element: square
-                });
-            }
-        }
-
-        const maxInnerRadius = outerInnerRadius - this.config.gapBetweenCircles * scale;
-        const innerRadius = Math.min(this.config.innerRadius * scale, maxInnerRadius);
-
-        for (let layer = 0; layer < this.config.innerLayers; layer++) {
-            const radius = innerRadius - layer * spacing;
-            if (radius <= 0) break;
-
-            if (radius < spacing) {
-                const square = document.createElement('div');
-                square.className = 'square inner';
-                square.style.left = `${centerX}px`;
-                square.style.top = `${centerY}px`;
-                square.style.width = `${squareSize}px`;
-                square.style.height = `${squareSize}px`;
-                square.style.transform = 'translate(-50%, -50%)';
-                container.appendChild(square);
-
-                this.squares.push(square);
-                this.squareData.push({
-                    originalX: centerX,
-                    originalY: centerY,
-                    element: square
-                });
-                break;
-            }
-
-            const circumference = 2 * Math.PI * radius;
-            const squaresInLayer = Math.floor(circumference / spacing);
-
-            for (let i = 0; i < squaresInLayer; i++) {
-                const angle = (i / squaresInLayer) * Math.PI * 2;
-                const x = centerX + Math.cos(angle) * radius;
-                const y = centerY + Math.sin(angle) * radius;
-
-                const square = document.createElement('div');
-                square.className = 'square inner';
-                square.style.left = `${x}px`;
-                square.style.top = `${y}px`;
-                square.style.width = `${squareSize}px`;
-                square.style.height = `${squareSize}px`;
-                square.style.transform = 'translate(-50%, -50%)';
-                container.appendChild(square);
-
-                this.squares.push(square);
-                this.squareData.push({
-                    originalX: x,
-                    originalY: y,
-                    element: square
-                });
-            }
-        }
-    }
-
-    startAnimations() {
-        this.squares.forEach((square) => {
-            if (Math.random() > 0.96) {
-                square.classList.add('dimmed');
-            }
-
-            const interval = setInterval(() => {
-                if (Math.random() > 0.3) {
-                    square.classList.toggle('dimmed');
-                }
-            }, 500 + Math.random() * 3000);
-
-            this.animationIntervals.push(interval);
-        });
-    }
 
     render() {
         return html`
             <div class="container">
-                <div class="circle-wrapper">
-                    <div class="dot-container"></div>
+                <div class="logo-text">
+                    <span class="responsive">responsive</span><span class="sk">.sk</span>
                 </div>
+                <div class="animated-dots"></div>
             </div>
         `;
     }
